@@ -14,7 +14,7 @@ resource "google_compute_network" "network" {
 resource "google_compute_subnetwork" "subnetwork" {
   name                     = "${var.cluster_name}-private-subnet"
   ip_cidr_range            = "10.0.0.0/18"
-  region                   = "${var.region}"
+  region                   = var.region
   network                  = google_compute_network.network.id
   private_ip_google_access = true
 
@@ -31,14 +31,14 @@ resource "google_compute_subnetwork" "subnetwork" {
 
 resource "google_compute_router" "router" {
   name    = "${var.cluster_name}-router"
-  region  = "${var.region}"
+  region  = var.region
   network = google_compute_network.network.id
 }
 
 resource "google_compute_router_nat" "router-nat" {
   name   = "${var.cluster_name}-nat"
   router = google_compute_router.router.name
-  region = "${var.region}"
+  region = var.region
 
   source_subnetwork_ip_ranges_to_nat = "LIST_OF_SUBNETWORKS"
   nat_ip_allocate_option             = "MANUAL_ONLY"

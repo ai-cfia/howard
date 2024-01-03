@@ -1,6 +1,6 @@
 resource "google_container_cluster" "cluster" {
   name                     = "${var.cluster_name}-cluster"
-  location                 = "${var.location_1}"
+  location                 = var.location_1
   remove_default_node_pool = true
   initial_node_count       = 1
   network                  = google_compute_network.network.self_link

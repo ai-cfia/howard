@@ -29,7 +29,7 @@ spec:
 
 ---
 apiVersion: v1
-kind: Service
+kind: Service 
 metadata:
   name: nginx
   namespace: nginx
@@ -48,7 +48,7 @@ metadata:
   name: nginx-ingress
   namespace: nginx
   annotations:
-    cert-manager.io/cluster-issuer: letsencrypt-prod
+    cert-manager.io/cluster-issuer: letsencrypt-http
     ingress.kubernetes.io/force-ssl-redirect: "true"
     kubernetes.io/tls-acme: "true"
 spec:
@@ -56,7 +56,7 @@ spec:
   tls:
   - hosts:
     - nginx.ninebasetwo.xyz
-    secretName: nginx-tls
+    secretName: aciacfia-tls
   rules:
   - host: nginx.ninebasetwo.xyz
     http:
@@ -68,3 +68,21 @@ spec:
             name: nginx
             port:
               number: 80
+
+# ---
+# apiVersion: gateway.networking.k8s.io/v1beta1
+# kind: HTTPRoute
+# metadata:
+#   name: nginx-http-route
+#   namespace: nginx
+# spec:
+#   parentRefs:
+#   - name: gateway-gke-l7-rilb
+#   rules:
+#   - matches:
+#     - path:
+#         type: PathPrefix
+#         value: "/"
+#     backendRefs:
+#     - name: nginx
+#       port: 80
