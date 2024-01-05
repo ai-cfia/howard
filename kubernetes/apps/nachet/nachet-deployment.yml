@@ -6,26 +6,59 @@ metadata:
     name: nachet
 
 ---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: secrets-reader
+
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nachet-deployment
+  name: nachet
   namespace: nachet
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: nginx
+      app: nachet
   template:
     metadata:
       labels:
-        app: nginx
+        app: nachet
+      annotations:
+        vault.hashicorp.com/agent-inject: 'true'
+        vault.hashicorp.com/role: 'secrets-reader'
+        vault.hashicorp.com/tls-skip-verify: 'true'
+        vault.hashicorp.com/agent-inject-template-.env: |
+          {{- with secret "apps/nachet" -}}
+          NACHET_AZURE_STORAGE_CONNECTION_STRING="{{ .Data.data.NACHET_AZURE_STORAGE_CONNECTION_STRING }}"
+          NACHET_DATA="{{ .Data.data.NACHET_DATA }}"
+          NACHET_MODEL="{{ .Data.data.NACHET_MODEL }}"
+          NACHET_MODEL_ENDPOINT_ACCESS_KEY="{{ .Data.data.NACHET_MODEL_ENDPOINT_ACCESS_KEY }}"
+          NACHET_MODEL_ENDPOINT_REST_URL="{{ .Data.data.NACHET_MODEL_ENDPOINT_REST_URL }}"
+          NACHET_RESOURCE_GROUP="{{ .Data.data.NACHET_RESOURCE_GROUP }}"
+          NACHET_SUBSCRIPTION_ID="{{ .Data.data.NACHET_SUBSCRIPTION_ID }}"
+          NACHET_WORKSPACE="{{ .Data.data.NACHET_WORKSPACE }}"
+          {{- end }}
     spec:
+      serviceAccountName: secrets-reader
       containers:
-      - name: nginx
-        image: nginx:1.14.2
+      - name: nachet-backend
+        image: gcr.io/spartan-rhino-408115/nachet-backend:latest
+        imagePullPolicy: Always
+        command: ["/bin/sh", "-c"]
+        args:
+        - >
+          cp /vault/secrets/.env . && hypercorn -b :8080 app:app 
         ports:
-        - containerPort: 80
+        - containerPort: 8080
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 60
+          periodSeconds: 10
 
 ---
 apiVersion: v1
@@ -36,16 +69,16 @@ metadata:
 spec:
   clusterIP: None
   selector:
-    app: nginx
+    app: nachet
   ports:
     - protocol: TCP
-      port: 80
+      port: 8080
 
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: nachet-ingress
+  name: nachet
   namespace: nachet
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-http
@@ -55,16 +88,16 @@ spec:
   ingressClassName: nginx
   tls:
   - hosts:
-    - nachet.ninebasetwo.xyz
+    - nachir.ninebasetwo.xyz
     secretName: aciacfia-tls
   rules:
-  - host: nachet.ninebasetwo.xyz
+  - host: nachir.ninebasetwo.xyz
     http:
       paths:
       - path: /
         pathType: Prefix
         backend:
           service:
-            name: nginx
+            name: nachet
             port:
-              number: 80
+              number: 8080
