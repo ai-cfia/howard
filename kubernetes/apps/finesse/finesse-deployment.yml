@@ -1,0 +1,111 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: finesse
+  labels:
+    name: finesse
+
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: secrets-reader
+  namespace: finesse
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: finesse
+  namespace: finesse
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: finesse
+  template:
+    metadata:
+      labels:
+        app: finesse
+      annotations:
+        vault.hashicorp.com/agent-inject: 'true'
+        vault.hashicorp.com/role: 'secrets-reader'
+        vault.hashicorp.com/tls-skip-verify: 'true'
+        vault.hashicorp.com/agent-inject-template-.env: |
+          {{- with secret "apps/finesse" -}}
+          AZURE_OPENAI_CHATGPT_DEPLOYMENT="{{ .Data.data.AZURE_OPENAI_CHATGPT_DEPLOYMENT }}"
+          AZURE_OPENAI_GPT_DEPLOYMENT="{{ .Data.data.AZURE_OPENAI_GPT_DEPLOYMENT }}"
+          FINESSE_BACKEND_AZURE_SEARCH_API_KEY="{{ .Data.data.FINESSE_BACKEND_AZURE_SEARCH_API_KEY }}"
+          FINESSE_BACKEND_AZURE_SEARCH_ENDPOINT="{{ .Data.data.FINESSE_BACKEND_AZURE_SEARCH_ENDPOINT }}"
+          FINESSE_BACKEND_AZURE_SEARCH_INDEX_NAME="{{ .Data.data.FINESSE_BACKEND_AZURE_SEARCH_INDEX_NAME }}"
+          FINESSE_BACKEND_GITHUB_STATIC_FILE_URL="{{ .Data.data.FINESSE_BACKEND_GITHUB_STATIC_FILE_URL }}"
+          FINESSE_BACKEND_DEBUG_MODE="{{ .Data.data.FINESSE_BACKEND_DEBUG_MODE }}"
+          FINESSE_WEIGHTS="{{ .Data.data.FINESSE_WEIGHTS }}"
+          LOUIS_DSN="{{ .Data.data.LOUIS_DSN }}"
+          LOUIS_SCHEMA="{{ .Data.data.LOUIS_SCHEMA }}"
+          OPENAI_API_ENGINE="{{ .Data.data.OPENAI_API_ENGINE }}"
+          OPENAI_API_KEY="{{ .Data.data.OPENAI_API_KEY }}"
+          OPENAI_API_VERSION="{{ .Data.data.OPENAI_API_VERSION }}"
+          OPENAI_ENDPOINT="{{ .Data.data.OPENAI_ENDPOINT }}"
+          {{- end }}
+    spec:
+      serviceAccountName: secrets-reader
+      containers:
+      - name: finesse-backend
+        image: gcr.io/spartan-rhino-408115/finesse-backend:latest
+        imagePullPolicy: Always
+        command: ["/bin/sh", "-c"]
+        args:
+        - >
+          cp /vault/secrets/.env . && 
+          gunicorn --bind :8080 --workers 1 --threads 8 --timeout 0 --forwarded-allow-ips "*" app:app
+        ports:
+        - containerPort: 8080
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 60
+          periodSeconds: 10
+
+---
+apiVersion: v1
+kind: Service 
+metadata:
+  name: finesse
+  namespace: finesse
+spec:
+  clusterIP: None
+  selector:
+    app: finesse
+  ports:
+    - protocol: TCP
+      port: 8080
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: finesse
+  namespace: finesse
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-http
+    ingress.kubernetes.io/force-ssl-redirect: "true"
+    kubernetes.io/tls-acme: "true"
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+    - finesse.ninebasetwo.xyz
+    secretName: aciacfia-tls
+  rules:
+  - host: finesse.ninebasetwo.xyz
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: finesse
+            port:
+              number: 8080
