@@ -39,6 +39,7 @@ spec:
           FINESSE_BACKEND_AZURE_SEARCH_ENDPOINT="{{ .Data.data.FINESSE_BACKEND_AZURE_SEARCH_ENDPOINT }}"
           FINESSE_BACKEND_AZURE_SEARCH_INDEX_NAME="{{ .Data.data.FINESSE_BACKEND_AZURE_SEARCH_INDEX_NAME }}"
           FINESSE_BACKEND_GITHUB_STATIC_FILE_URL="{{ .Data.data.FINESSE_BACKEND_GITHUB_STATIC_FILE_URL }}"
+          FINESSE_BACKEND_STATIC_FILE_URL="{{ .Data.data.FINESSE_BACKEND_STATIC_FILE_URL }}"
           FINESSE_BACKEND_DEBUG_MODE="{{ .Data.data.FINESSE_BACKEND_DEBUG_MODE }}"
           FINESSE_WEIGHTS="{{ .Data.data.FINESSE_WEIGHTS }}"
           LOUIS_DSN="{{ .Data.data.LOUIS_DSN }}"
@@ -91,6 +92,7 @@ metadata:
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-http
     ingress.kubernetes.io/force-ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "1800"
     kubernetes.io/tls-acme: "true"
 spec:
   ingressClassName: nginx
