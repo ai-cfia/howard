@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: finesse-frontend
+  namespace: finesse
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: finesse-frontend
+  template:
+    metadata:
+      labels:
+        app: finesse-frontend
+    spec:
+      serviceAccountName: secrets-reader
+      containers:
+      - name: finesse-frontend
+        image: ghcr.io/ai-cfia/finesse-frontend:2f1a36ef6f184639f301070ba3b732aeac28fb4d
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 3000
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 3000
+          initialDelaySeconds: 60
+          periodSeconds: 10
+
+---
+apiVersion: v1
+kind: Service 
+metadata:
+  name: finesse-frontend-svc
+  namespace: finesse
+spec:
+  clusterIP: None
+  selector:
+    app: finesse-frontend
+  ports:
+    - protocol: TCP
+      port: 3000

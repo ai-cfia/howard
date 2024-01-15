@@ -1,12 +1,4 @@
 apiVersion: v1
-kind: Namespace
-metadata:
-  name: finesse
-  labels:
-    name: finesse
-
----
-apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: secrets-reader
@@ -16,17 +8,17 @@ metadata:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: finesse
+  name: finesse-backend
   namespace: finesse
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: finesse
+      app: finesse-backend
   template:
     metadata:
       labels:
-        app: finesse
+        app: finesse-backend
       annotations:
         vault.hashicorp.com/agent-inject: 'true'
         vault.hashicorp.com/role: 'secrets-reader'
@@ -53,7 +45,7 @@ spec:
       serviceAccountName: secrets-reader
       containers:
       - name: finesse-backend
-        image: gcr.io/spartan-rhino-408115/finesse-backend:latest
+        image: ghcr.io/ai-cfia/finesse-backend:98f702dddef8f5d46668794b65920c9ce38b8034
         imagePullPolicy: Always
         command: ["/bin/sh", "-c"]
         args:
@@ -73,41 +65,12 @@ spec:
 apiVersion: v1
 kind: Service 
 metadata:
-  name: finesse
+  name: finesse-backend-svc
   namespace: finesse
 spec:
   clusterIP: None
   selector:
-    app: finesse
+    app: finesse-backend
   ports:
     - protocol: TCP
       port: 8080
-
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: finesse
-  namespace: finesse
-  annotations:
-    cert-manager.io/cluster-issuer: letsencrypt-http
-    ingress.kubernetes.io/force-ssl-redirect: "true"
-    nginx.ingress.kubernetes.io/proxy-read-timeout: "1800"
-    kubernetes.io/tls-acme: "true"
-spec:
-  ingressClassName: nginx
-  tls:
-  - hosts:
-    - finesse.ninebasetwo.xyz
-    secretName: aciacfia-tls
-  rules:
-  - host: finesse.ninebasetwo.xyz
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: finesse
-            port:
-              number: 8080
