@@ -1,7 +1,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: nachet-ingress-backend
+  name: nachet-backend-ingress
   namespace: nachet
   annotations:
     nginx.ingress.kubernetes.io/use-regex: "true"
@@ -32,7 +32,7 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: nachet-ingress-frontend
+  name: nachet-frontend-ingress
   namespace: nachet
   annotations:
     nginx.ingress.kubernetes.io/add-base-url: "true"
