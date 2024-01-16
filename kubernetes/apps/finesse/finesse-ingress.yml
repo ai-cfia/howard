@@ -57,4 +57,3 @@ spec:
             name: finesse-frontend-svc
             port:
               number: 3000
-

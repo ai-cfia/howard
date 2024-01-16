@@ -40,7 +40,7 @@ resource "tls_private_key" "vault_key" {
 
 # This requires that jq and openssl are installed in the runtime environment
 # It creates a certificate signing request (CSR) based on the vault-csr.conf file
-# The 2 jq at the begining and end of the pipes are used to read the input and wrap the result in json
+# The 2 jq at the beginning and end of the pipes are used to read the input and wrap the result in json
 # since this is how terraform "external" passes data.
 data "external" "k8s_cert_request" {
   program = [

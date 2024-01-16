@@ -33,5 +33,5 @@ override.tf.json
 .terraformrc
 terraform.rc
 
-# jq (used to gather information when terraform applying or plannig)
+# jq (used to gather information when terraform applying or planning)
 jq
