@@ -16,7 +16,7 @@ spec:
       serviceAccountName: secrets-reader
       containers:
       - name: finesse-frontend
-        image: ghcr.io/ai-cfia/finesse-frontend:2f1a36ef6f184639f301070ba3b732aeac28fb4d
+        image: ghcr.io/ai-cfia/finesse-frontend:0e64faf24b3254d3582745796a56858f0d5c5cec
         imagePullPolicy: Always
         ports:
         - containerPort: 3000
