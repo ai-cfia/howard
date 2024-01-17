@@ -9,7 +9,7 @@ on:
 
 jobs:
   repo-standard:
-    uses: ai-cfia/github-workflows/.github/workflows/workflow-repo-standards-validation.yml@main
+    uses: ai-cfia/github-workflows/.github/workflows/workflow-repo-standards-validation.yml@71-fix-every-workflow-inside-this-repository-and-make-sure-nachet-finesse-and-infra-have-the-right-workflow
     secrets: inherit
 
   markdown-check:
