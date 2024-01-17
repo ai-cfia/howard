@@ -1,4 +1,4 @@
-name: ai-cfia repo standard and markdown check
+name: Ai-cfia repo standard and markdown check
 
 on: 
   pull_request:
