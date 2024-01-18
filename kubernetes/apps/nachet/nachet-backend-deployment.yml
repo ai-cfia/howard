@@ -38,7 +38,7 @@ spec:
       serviceAccountName: secrets-reader
       containers:
       - name: nachet-backend
-        image: ghcr.io/ai-cfia/nachet-backend:253cc74b682be64d78b7e5951726efd3222ce2c4
+        image: ghcr.io/ai-cfia/nachet-backend:48
         imagePullPolicy: Always
         command: ["/bin/sh", "-c"]
         args:
