@@ -45,12 +45,12 @@ spec:
       serviceAccountName: secrets-reader
       containers:
       - name: finesse-backend
-        image: ghcr.io/ai-cfia/finesse-backend:98f702dddef8f5d46668794b65920c9ce38b8034
+        image: ghcr.io/ai-cfia/finesse-backend:main
         imagePullPolicy: Always
         command: ["/bin/sh", "-c"]
         args:
         - >
-          cp /vault/secrets/.env . && 
+          cp /vault/secrets/.env . &&
           gunicorn --bind :8080 --workers 1 --threads 8 --timeout 0 --forwarded-allow-ips "*" app:app
         ports:
         - containerPort: 8080
@@ -63,7 +63,7 @@ spec:
 
 ---
 apiVersion: v1
-kind: Service 
+kind: Service
 metadata:
   name: finesse-backend-svc
   namespace: finesse
