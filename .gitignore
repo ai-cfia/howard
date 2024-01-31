@@ -32,9 +32,3 @@ override.tf.json
 # Ignore CLI configuration files
 .terraformrc
 terraform.rc
-
-# jq (used to gather information when terraform applying or planning)
-jq
-
-# .vscode
-.vscode
