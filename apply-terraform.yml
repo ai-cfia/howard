@@ -24,7 +24,7 @@ steps:
     inputs:
       provider: 'azurerm'
       command: 'plan'
-      workingDirectory: $(System.DefaultWorkingDirectory)
+      workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
       environmentServiceNameAzureRM: 'CFSC-AiLabChatbot-Sub-SP'
 
   - task: TerraformTaskV1@0
@@ -32,5 +32,5 @@ steps:
     inputs:
       provider: 'azurerm'
       command: 'apply'
-      workingDirectory: $(System.DefaultWorkingDirectory)
+      workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
       environmentServiceNameAzureRM: 'CFSC-AiLabChatbot-Sub-SP'
