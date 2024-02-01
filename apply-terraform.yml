@@ -7,7 +7,7 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 steps:
-  - task: TerraformTaskV1@0
+  - task: TerraformTaskV2@2
     displayName: Terra Init
     inputs:
       provider: 'azurerm'
@@ -18,6 +18,7 @@ steps:
       backendAzureRmStorageAccountName: 'tfcfiastate'
       backendAzureRmContainerName: 'infra-terraform-state'
       backendAzureRmKey: 'tf/terraform.tfstate'
+
   - task: TerraformTaskV1@0
     displayName: Terra Plan
     inputs:
@@ -25,6 +26,7 @@ steps:
       command: 'plan'
       workingDirectory: $(System.DefaultWorkingDirectory)
       environmentServiceNameAzureRM: 'CFSC-AiLabChatbot-Sub-SP'
+
   - task: TerraformTaskV1@0
     displayName: Terra Apply
     inputs:
