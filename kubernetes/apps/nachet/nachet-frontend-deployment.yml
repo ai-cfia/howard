@@ -16,7 +16,7 @@ spec:
       serviceAccountName: secrets-reader
       containers:
       - name: nachet-frontend
-        image: ghcr.io/ai-cfia/nachet-frontend:85
+        image: ghcr.io/ai-cfia/nachet-frontend:main
         imagePullPolicy: Always
         ports:
         - containerPort: 3000
