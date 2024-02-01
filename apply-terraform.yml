@@ -1,5 +1,7 @@
 trigger:
-- 3-create-a-kubernetes-cluster-for-azure-w-the-ingress-nginx
+  branches:
+    include:
+    - 3-create-a-kubernetes-cluster-for-azure-w-the-ingress-nginx
 
 pool:
   vmImage: 'ubuntu-latest'
