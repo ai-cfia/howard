@@ -1,0 +1,31 @@
+trigger:
+- 3-create-a-kubernetes-cluster-for-azure-w-the-ingress-nginx
+
+pool:
+  vmImage: 'ubuntu-latest'
+steps:
+- task: TerraformTaskV1@0
+  displayName: Terra Init
+  inputs:
+    provider: 'azurerm'
+    command: 'init'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
+    backendServiceArm: 'CFSC-AiLabChatbot-Sub-SP'
+    backendAzureRmResourceGroupName: 'rg-ai-cfia-terraform-state'
+    backendAzureRmStorageAccountName: 'tfcfiastate'
+    backendAzureRmContainerName: 'infra-terraform-state'
+    backendAzureRmKey: 'tf/terraform.tfstate'
+- task: TerraformTaskV1@0
+  displayName: Terra Plan
+  inputs:
+    provider: 'azurerm'
+    command: 'plan'
+    workingDirectory: $(System.DefaultWorkingDirectory)
+    environmentServiceNameAzureRM: 'CFSC-AiLabChatbot-Sub-SP'
+- task: TerraformTaskV1@0
+  displayName: Terra Apply
+  inputs:
+    provider: 'azurerm'
+    command: 'apply'
+    workingDirectory: $(System.DefaultWorkingDirectory)
+    environmentServiceNameAzureRM: 'CFSC-AiLabChatbot-Sub-SP'
