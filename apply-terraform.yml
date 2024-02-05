@@ -2,35 +2,47 @@
 trigger:
   branches:
     include:
-      - 28-as-a-devops-i-would-like-to-automate-azure-infrastructure-deployment-using-terraform
+      - main
 
 pool:
   vmImage: 'ubuntu-latest'
-steps:
-  - task: TerraformTaskV2@2
-    displayName: Terra Init
-    inputs:
-      provider: 'azurerm'
-      command: 'init'
-      workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
-      backendServiceArm: 'CFSC-AiLabChatbot-Sub-SP'
-      backendAzureRmResourceGroupName: 'rg-ai-cfia-terraform-state'
-      backendAzureRmStorageAccountName: 'tfcfiastate'
-      backendAzureRmContainerName: 'infra-terraform-state'
-      backendAzureRmKey: 'tf/terraform.tfstate'
 
-  - task: TerraformTaskV1@0
-    displayName: Terra Plan
-    inputs:
-      provider: 'azurerm'
-      command: 'plan'
-      workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
-      environmentServiceNameAzureRM: 'CFSC-AiLabChatbot-Sub-SP'
+jobs:
+  - job: TerraformInitPlan
+    displayName: 'Terraform Init and Plan'
+    steps:
+      - task: TerraformTaskV2@2
+        displayName: Terra Init
+        inputs:
+          provider: 'azurerm'
+          command: 'init'
+          workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
+          backendServiceArm: 'CFSC-AiLabChatbot-Sub-SP'
+          backendAzureRmResourceGroupName: 'rg-ai-cfia-terraform-state'
+          backendAzureRmStorageAccountName: 'tfcfiastate'
+          backendAzureRmContainerName: 'infra-terraform-state'
+          backendAzureRmKey: 'tf/terraform.tfstate'
 
-  - task: TerraformTaskV1@0
-    displayName: Terra Apply
-    inputs:
-      provider: 'azurerm'
-      command: 'apply'
-      workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
-      environmentServiceNameAzureRM: 'CFSC-AiLabChatbot-Sub-SP'
+      - task: TerraformTaskV1@0
+        displayName: Terra Plan
+        inputs:
+          provider: 'azurerm'
+          command: 'plan'
+          workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
+          environmentServiceNameAzureRM: 'CFSC-AiLabChatbot-Sub-SP'
+
+  - job: TerraformApply
+    displayName: 'Terraform Apply'
+    pool:
+      vmImage: 'ubuntu-latest'
+    dependsOn: TerraformInitPlan
+    condition: succeeded()
+    environment: 'ProductionApproval'
+    steps:
+      - task: TerraformTaskV1@0
+        displayName: Terra Apply
+        inputs:
+          provider: 'azurerm'
+          command: 'apply'
+          workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
+          environmentServiceNameAzureRM: 'CFSC-AiLabChatbot-Sub-SP'
