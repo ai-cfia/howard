@@ -10,45 +10,54 @@ pool:
 variables:
   - group: terraform-backend-settings
 
-jobs:
-  - job: TerraformInitPlan
-    displayName: 'Terraform Init and Plan'
-    steps:
-      - task: TerraformTaskV2@2
-        displayName: Terra Init
-        inputs:
-          provider: 'azurerm'
-          command: 'init'
-          workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
-          backendServiceArm: '$(serviceConnectionName)'
-          backendAzureRmResourceGroupName: '$(resourceGroupName)'
-          backendAzureRmStorageAccountName: '$(storageAccountName)'
-          backendAzureRmContainerName: '$(containerName)'
-          backendAzureRmKey: '$(stateKey)'
+stages:
+  - stage: InitAndPlan
+    displayName: 'Initialize and Plan'
+    jobs:
+      - job: TerraformInitPlan
+        displayName: 'Terraform Init and Plan'
+        steps:
+          - task: TerraformTaskV2@2
+            displayName: Terra Init
+            inputs:
+              provider: 'azurerm'
+              command: 'init'
+              workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
+              backendServiceArm: '$(serviceConnectionName)'
+              backendAzureRmResourceGroupName: '$(resourceGroupName)'
+              backendAzureRmStorageAccountName: '$(storageAccountName)'
+              backendAzureRmContainerName: '$(containerName)'
+              backendAzureRmKey: '$(stateKey)'
 
-      - task: TerraformTaskV1@0
-        displayName: Terra Plan
-        inputs:
-          provider: 'azurerm'
-          command: 'plan'
-          workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
-          environmentServiceNameAzureRM: '$(serviceConnectionName)'
+          - task: TerraformTaskV1@0
+            displayName: Terra Plan
+            inputs:
+              provider: 'azurerm'
+              command: 'plan'
+              workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
+              environmentServiceNameAzureRM: '$(serviceConnectionName)'
 
-  - deployment: TerraformApply
-    displayName: 'Terraform Apply'
-    pool:
-      vmImage: 'ubuntu-latest'
-    dependsOn: TerraformInitPlan
+  - stage: Apply
+    displayName: 'Apply Terraform Plan'
+    dependsOn: InitAndPlan
     condition: succeeded()
-    environment: ProductionApproval
-    strategy:
-      runOnce:
-        deploy:
-          steps:
-            - task: TerraformTaskV1@0
-              displayName: Terra Apply
-              inputs:
-                provider: 'azurerm'
-                command: 'apply'
-                workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
-                environmentServiceNameAzureRM: '$(serviceConnectionName)'
+    jobs:
+      - deployment: TerraformApply
+        displayName: 'Terraform Apply'
+        pool:
+          vmImage: 'ubuntu-latest'
+        environment: 
+          name: 'ProductionApproval'
+          resourceType: 'virtualMachine'
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - task: TerraformTaskV1@0
+                  displayName: 'Terra Apply'
+                  inputs:
+                    provider: 'azurerm'
+                    command: 'apply'
+                    workingDirectory: 
+                      '$(System.DefaultWorkingDirectory)/terraform'
+                    environmentServiceNameAzureRM: '$(serviceConnectionName)'
