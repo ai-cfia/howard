@@ -7,6 +7,9 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
+variables:
+  - group: terraform-backend-settings
+
 jobs:
   - job: TerraformInitPlan
     displayName: 'Terraform Init and Plan'
@@ -17,11 +20,11 @@ jobs:
           provider: 'azurerm'
           command: 'init'
           workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
-          backendServiceArm: 'CFSC-AiLabChatbot-Sub-SP'
-          backendAzureRmResourceGroupName: 'rg-ai-cfia-terraform-state'
-          backendAzureRmStorageAccountName: 'tfcfiastate'
-          backendAzureRmContainerName: 'infra-terraform-state'
-          backendAzureRmKey: 'tf/terraform.tfstate'
+          backendServiceArm: '$(serviceConnectionName)'
+          backendAzureRmResourceGroupName: '$(resourceGroupName)'
+          backendAzureRmStorageAccountName: '$(storageAccountName)'
+          backendAzureRmContainerName: '$(containerName)'
+          backendAzureRmKey: '$(stateKey)'
 
       - task: TerraformTaskV1@0
         displayName: Terra Plan
@@ -29,20 +32,23 @@ jobs:
           provider: 'azurerm'
           command: 'plan'
           workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
-          environmentServiceNameAzureRM: 'CFSC-AiLabChatbot-Sub-SP'
+          environmentServiceNameAzureRM: '$(serviceConnectionName)'
 
-  - job: TerraformApply
+  - deployment: TerraformApply
     displayName: 'Terraform Apply'
     pool:
       vmImage: 'ubuntu-latest'
     dependsOn: TerraformInitPlan
     condition: succeeded()
-    environment: 'ProductionApproval'
-    steps:
-      - task: TerraformTaskV1@0
-        displayName: Terra Apply
-        inputs:
-          provider: 'azurerm'
-          command: 'apply'
-          workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
-          environmentServiceNameAzureRM: 'CFSC-AiLabChatbot-Sub-SP'
+    environment: nameOfYourEnvironment
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+            - task: TerraformTaskV1@0
+              displayName: Terra Apply
+              inputs:
+                provider: 'azurerm'
+                command: 'apply'
+                workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
+                environmentServiceNameAzureRM: '$(serviceConnectionName)'
