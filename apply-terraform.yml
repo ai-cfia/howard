@@ -40,7 +40,7 @@ jobs:
       vmImage: 'ubuntu-latest'
     dependsOn: TerraformInitPlan
     condition: succeeded()
-    environment: nameOfYourEnvironment
+    environment: ProductionApproval
     strategy:
       runOnce:
         deploy:
