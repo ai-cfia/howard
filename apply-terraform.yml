@@ -46,7 +46,7 @@ stages:
         displayName: 'Terraform Apply'
         pool:
           vmImage: 'ubuntu-latest'
-        environment: 
+        environment:
           name: 'ProductionApproval'
           resourceType: 'virtualMachine'
         strategy:
@@ -58,6 +58,29 @@ stages:
                   inputs:
                     provider: 'azurerm'
                     command: 'apply'
-                    workingDirectory: 
+                    workingDirectory:
                       '$(System.DefaultWorkingDirectory)/terraform'
                     environmentServiceNameAzureRM: '$(serviceConnectionName)'
+  - stage: Apply
+    displayName: 'Apply Terraform Plan'
+    dependsOn: InitAndPlan
+    condition: succeeded()
+  - deployment: TerraformApply
+    displayName: 'Terraform Apply'
+    pool:
+      vmImage: 'ubuntu-latest'
+    dependsOn: TerraformInitPlan
+    condition: succeeded()
+    environment: ProductionApproval
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+
+            - task: TerraformTaskV1@0
+              displayName: Terra Apply
+              inputs:
+                provider: 'azurerm'
+                command: 'apply'
+                workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
+                environmentServiceNameAzureRM: '$(serviceConnectionName)'
