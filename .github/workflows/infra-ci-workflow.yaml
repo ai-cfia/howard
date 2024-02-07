@@ -25,6 +25,6 @@ jobs:
 
   terraform-check:
     uses:
-      ai-cfia/github-workflows/.github/workflows/workflow-terraform-check.yml@87-as-a-devops-i-would-like-to-add-terraform-lint-job-to-our-ci-workflow
+      ai-cfia/github-workflows/.github/workflows/workflow-terraform-check.yml@main
     with:
       config-file-path: '.tflint.hcl'
