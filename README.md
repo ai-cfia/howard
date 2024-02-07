@@ -12,7 +12,6 @@ which contains explanations as well as diagrams:
 
 - [Global overview](docs/global_overview.md)
 - [Ingress](docs/ingress.md)
-- [Kubernetes inside a cloud provider](docs/kubernetes.md)
 
 ## Content
 
