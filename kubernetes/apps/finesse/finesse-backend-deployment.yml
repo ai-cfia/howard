@@ -45,22 +45,22 @@ spec:
     spec:
       serviceAccountName: secrets-reader
       containers:
-      - name: finesse-backend
-        image: ghcr.io/ai-cfia/finesse-backend:main
-        imagePullPolicy: Always
-        command: ["/bin/sh", "-c"]
-        args:
-        - >
-          cp /vault/secrets/.env . &&
-          gunicorn --bind :8080 --workers 1 --threads 8 --timeout 0 --forwarded-allow-ips "*" app:app
-        ports:
-        - containerPort: 8080
-        livenessProbe:
-          httpGet:
-            path: /health
-            port: 8080
-          initialDelaySeconds: 60
-          periodSeconds: 10
+        - name: finesse-backend
+          image: ghcr.io/ai-cfia/finesse-backend:main
+          imagePullPolicy: Always
+          command: ["/bin/sh", "-c"]
+          args:
+            - >
+              cp /vault/secrets/.env . &&
+              gunicorn --bind :8080 --workers 1 --threads 8 --timeout 0 --forwarded-allow-ips "*" app:app
+          ports:
+            - containerPort: 8080
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8080
+            initialDelaySeconds: 60
+            periodSeconds: 10
 
 ---
 apiVersion: v1

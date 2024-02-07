@@ -6,27 +6,27 @@ metadata:
   namespace: finesse
   annotations:
     nginx.ingress.kubernetes.io/use-regex: "true"
-    nginx.ingress.kubernetes.io/rewrite-target: /$2 # https://kubernetes.github.io/ingress-nginx/examples/rewrite/
+    nginx.ingress.kubernetes.io/rewrite-target: /$2  # https://kubernetes.github.io/ingress-nginx/examples/rewrite/
     cert-manager.io/cluster-issuer: letsencrypt-http
     ingress.kubernetes.io/force-ssl-redirect: "true"
     kubernetes.io/tls-acme: "true"
 spec:
   ingressClassName: nginx
   tls:
-  - hosts:
-    - finesse.ninebasetwo.xyz
-    secretName: aciacfia-tls
+    - hosts:
+        - finesse.ninebasetwo.xyz
+      secretName: aciacfia-tls
   rules:
-  - host: finesse.ninebasetwo.xyz
-    http:
-      paths:
-      - path: /api(/|$)(.*)
-        pathType: ImplementationSpecific
-        backend:
-          service:
-            name: finesse-backend-svc
-            port:
-              number: 8080
+    - host: finesse.ninebasetwo.xyz
+      http:
+        paths:
+          - path: /api(/|$)(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: finesse-backend-svc
+                port:
+                  number: 8080
 
 ---
 # For more information check https://github.com/nginxinc/kubernetes-ingress/issues/323
@@ -44,17 +44,17 @@ metadata:
 spec:
   ingressClassName: nginx
   tls:
-  - hosts:
-    - finesse.ninebasetwo.xyz
-    secretName: aciacfia-tls
+    - hosts:
+        - finesse.ninebasetwo.xyz
+      secretName: aciacfia-tls
   rules:
-  - host: finesse.ninebasetwo.xyz
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: finesse-frontend-svc
-            port:
-              number: 3000
+    - host: finesse.ninebasetwo.xyz
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: finesse-frontend-svc
+                port:
+                  number: 3000

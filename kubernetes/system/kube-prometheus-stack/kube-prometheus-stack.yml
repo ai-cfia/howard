@@ -2,7 +2,7 @@
 # Default values for prometheus.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
-
+---
 rbac:
   create: true
 
@@ -38,14 +38,14 @@ configmapReload:
   ## env sets environment variables to pass to the container. Can be set as name/value pairs,
   ## read from secrets or configmaps.
   env: []
-    # - name: SOMEVAR
-    #   value: somevalue
-    # - name: PASSWORD
-    #   valueFrom:
-    #     secretKeyRef:
-    #       name: mysecret
-    #       key: password
-    #       optional: false
+  # - name: SOMEVAR
+  #   value: somevalue
+  # - name: PASSWORD
+  #   valueFrom:
+  #     secretKeyRef:
+  #       name: mysecret
+  #       key: password
+  #       optional: false
 
   prometheus:
     ## If false, the configmap-reload container will not be deployed
@@ -82,11 +82,11 @@ configmapReload:
     ## Additional configmap-reload mounts
     ##
     extraConfigmapMounts: []
-      # - name: prometheus-alerts
-      #   mountPath: /etc/alerts.d
-      #   subPath: ""
-      #   configMap: prometheus-alerts
-      #   readOnly: true
+    # - name: prometheus-alerts
+    #   mountPath: /etc/alerts.d
+    #   subPath: ""
+    #   configMap: prometheus-alerts
+    #   readOnly: true
 
     ## Security context to be added to configmap-reload container
     containerSecurityContext: {}
@@ -108,8 +108,10 @@ server:
   ## Use a ClusterRole (and ClusterRoleBinding)
   ## - If set to false - we define a RoleBinding in the defined namespaces ONLY
   ##
-  ## NB: because we need a Role with nonResourceURL's ("/metrics") - you must get someone with Cluster-admin privileges to define this role for you, before running with this setting enabled.
-  ##     This makes prometheus work - for users who do not have ClusterAdmin privs, but wants prometheus to operate on their own namespaces, instead of clusterwide.
+  ## NB: because we need a Role with nonResourceURL's ("/metrics") - you must get someone with Cluster-admin privileges
+  ## to define this role for you, before running with this setting enabled.
+  ##     This makes prometheus work - for users who do not have ClusterAdmin privs, but wants prometheus to operate on
+  ##     their own namespaces, instead of clusterwide.
   ##
   ## You MUST also set namespaces to the ones you have access to and want monitored by Prometheus.
   ##
@@ -123,7 +125,8 @@ server:
   # If releaseNamespace and namespaces are both set a merged list will be monitored.
   releaseNamespace: false
 
-  ## namespaces to monitor (instead of monitoring all - clusterwide). Needed if you want to run without Cluster-admin privileges.
+  ## namespaces to monitor (instead of monitoring all - clusterwide).
+  # Needed if you want to run without Cluster-admin privileges.
   # namespaces:
   #   - yournamespace
 
@@ -255,20 +258,20 @@ server:
   ## https://prometheus.io/docs/prometheus/latest/configuration/configuration/#tsdb
   ##
   tsdb: {}
-    # out_of_order_time_window: 0s
+  # out_of_order_time_window: 0s
 
   ## https://prometheus.io/docs/prometheus/latest/configuration/configuration/#exemplars
   ## Must be enabled via --enable-feature=exemplar-storage
   ##
   exemplars: {}
-    # max_exemplars: 100000
+  # max_exemplars: 100000
 
   ## Custom HTTP headers for Liveness/Readiness/Startup Probe
   ##
   ## Useful for providing HTTP Basic Auth to healthchecks
   probeHeaders: []
-    # - name: "Authorization"
-    #   value: "Bearer ABCDEabcde12345"
+  # - name: "Authorization"
+  #   value: "Bearer ABCDEabcde12345"
 
   ## Additional Prometheus server container arguments
   ##
@@ -289,27 +292,27 @@ server:
   ## Additional Prometheus server hostPath mounts
   ##
   extraHostPathMounts: []
-    # - name: certs-dir
-    #   mountPath: /etc/kubernetes/certs
-    #   subPath: ""
-    #   hostPath: /etc/kubernetes/certs
-    #   readOnly: true
+  # - name: certs-dir
+  #   mountPath: /etc/kubernetes/certs
+  #   subPath: ""
+  #   hostPath: /etc/kubernetes/certs
+  #   readOnly: true
 
   extraConfigmapMounts: []
-    # - name: certs-configmap
-    #   mountPath: /prometheus
-    #   subPath: ""
-    #   configMap: certs-configmap
-    #   readOnly: true
+  # - name: certs-configmap
+  #   mountPath: /prometheus
+  #   subPath: ""
+  #   configMap: certs-configmap
+  #   readOnly: true
 
   ## Additional Prometheus server Secret mounts
   # Defines additional mounts with secrets. Secrets must be manually created in the namespace.
   extraSecretMounts: []
-    # - name: secret-files
-    #   mountPath: /etc/secrets
-    #   subPath: ""
-    #   secretName: prom-secret-files
-    #   readOnly: true
+  # - name: secret-files
+  #   mountPath: /etc/secrets
+  #   subPath: ""
+  #   secretName: prom-secret-files
+  #   readOnly: true
 
   ## ConfigMap override where fullname is {{.Release.Name}}-{{.Values.server.configMapOverrideName}}
   ## Defining configMapOverrideName will cause templates/server-configmap.yaml
@@ -326,7 +329,6 @@ server:
     enabled: false
 
     # For Kubernetes >= 1.18 you should specify the ingress-controller via the field ingressClassName
-    # See https://kubernetes.io/blog/2020/04/02/improvements-to-the-ingress-api-in-kubernetes-1.18/#specifying-the-class-of-an-ingress
     # ingressClassName: nginx
 
     ## Prometheus server Ingress annotations
@@ -383,10 +385,10 @@ server:
   ## Ref: https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/
   ##
   tolerations: []
-    # - key: "key"
-    #   operator: "Equal|Exists"
-    #   value: "value"
-    #   effect: "NoSchedule|PreferNoSchedule|NoExecute(1.6 only)"
+  # - key: "key"
+  #   operator: "Equal|Exists"
+  #   value: "value"
+  #   effect: "NoSchedule|PreferNoSchedule|NoExecute(1.6 only)"
 
   ## Node labels for Prometheus server pod assignment
   ## Ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/
@@ -500,7 +502,7 @@ server:
   ## Annotations to be added to Prometheus server pods
   ##
   podAnnotations: {}
-    # iam.amazonaws.com/role: prometheus
+  # iam.amazonaws.com/role: prometheus
 
   ## Labels to be added to Prometheus server pods
   ##
@@ -515,14 +517,14 @@ server:
   ##
   podSecurityPolicy:
     annotations: {}
-      ## Specify pod annotations
-      ## Ref: https://kubernetes.io/docs/concepts/policy/pod-security-policy/#apparmor
-      ## Ref: https://kubernetes.io/docs/concepts/policy/pod-security-policy/#seccomp
-      ## Ref: https://kubernetes.io/docs/concepts/policy/pod-security-policy/#sysctl
-      ##
-      # seccomp.security.alpha.kubernetes.io/allowedProfileNames: '*'
-      # seccomp.security.alpha.kubernetes.io/defaultProfileName: 'docker/default'
-      # apparmor.security.beta.kubernetes.io/defaultProfileName: 'runtime/default'
+    ## Specify pod annotations
+    ## Ref: https://kubernetes.io/docs/concepts/policy/pod-security-policy/#apparmor
+    ## Ref: https://kubernetes.io/docs/concepts/policy/pod-security-policy/#seccomp
+    ## Ref: https://kubernetes.io/docs/concepts/policy/pod-security-policy/#sysctl
+    ##
+    # seccomp.security.alpha.kubernetes.io/allowedProfileNames: '*'
+    # seccomp.security.alpha.kubernetes.io/defaultProfileName: 'docker/default'
+    # apparmor.security.beta.kubernetes.io/defaultProfileName: 'runtime/default'
 
   ## Use a StatefulSet if replicaCount needs to be greater than 1 (see below)
   ##
@@ -617,7 +619,8 @@ server:
   ## Vertical Pod Autoscaler config
   ## Ref: https://github.com/kubernetes/autoscaler/tree/master/vertical-pod-autoscaler
   verticalAutoscaler:
-    ## If true a VPA object will be created for the controller (either StatefulSet or Deployemnt, based on above configs)
+    ## If true a VPA object will be created for the controller (either StatefulSet or Deployemnt, based on above
+    ## configs)
     enabled: false
     # updateMode: "Auto"
     # containerPolicies:
@@ -625,14 +628,14 @@ server:
 
   # Custom DNS configuration to be added to prometheus server pods
   dnsConfig: {}
-    # nameservers:
-    #   - 1.2.3.4
-    # searches:
-    #   - ns1.svc.cluster-domain.example
-    #   - my.dns.search.suffix
-    # options:
-    #   - name: ndots
-    #     value: "2"
+  # nameservers:
+  #   - 1.2.3.4
+  # searches:
+  #   - ns1.svc.cluster-domain.example
+  #   - my.dns.search.suffix
+  # options:
+  #   - name: ndots
+  #     value: "2"
   #   - name: edns0
 
   ## Security context to be added to server pods
@@ -737,7 +740,7 @@ serverFiles:
     rule_files:
       - /etc/config/recording_rules.yml
       - /etc/config/alerting_rules.yml
-    ## Below two files are DEPRECATED will be removed from this default values file
+      ## Below two files are DEPRECATED will be removed from this default values file
       - /etc/config/rules
       - /etc/config/alerts
 
@@ -745,7 +748,7 @@ serverFiles:
       - job_name: prometheus
         static_configs:
           - targets:
-            - localhost:9090
+              - localhost:9090
 
       # A scrape configuration for running Prometheus on a Kubernetes cluster.
       # This uses separate scrape configs for cluster components (i.e. API server, node)
@@ -791,7 +794,8 @@ serverFiles:
         # will add targets for each API server which Kubernetes adds an endpoint to
         # the default/kubernetes service.
         relabel_configs:
-          - source_labels: [__meta_kubernetes_namespace, __meta_kubernetes_service_name, __meta_kubernetes_endpoint_port_name]
+          - source_labels: >
+              [__meta_kubernetes_namespace, __meta_kubernetes_service_name, __meta_kubernetes_endpoint_port_name]
             action: keep
             regex: default;kubernetes;https
 
@@ -873,11 +877,14 @@ serverFiles:
             target_label: __metrics_path__
             replacement: /api/v1/nodes/$1/proxy/metrics/cadvisor
 
-        # Metric relabel configs to apply to samples before ingestion.
-        # [Metric Relabeling](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#metric_relabel_configs)
-        # metric_relabel_configs:
-        # - action: labeldrop
-        #   regex: (kubernetes_io_hostname|failure_domain_beta_kubernetes_io_region|beta_kubernetes_io_os|beta_kubernetes_io_arch|beta_kubernetes_io_instance_type|failure_domain_beta_kubernetes_io_zone)
+      # Metric relabel configs to apply to samples before ingestion.
+      # [Metric Relabeling]
+      # (https://prometheus.io/docs/prometheus/latest/configuration/configuration/#metric_relabel_configs)
+      # metric_relabel_configs:
+      # - action: labeldrop
+      #   regex:
+      # (kubernetes_io_hostname|failure_domain_beta_kubernetes_io_region|beta_kubernetes_io_os|
+      #   beta_kubernetes_io_arch|beta_kubernetes_io_instance_type|failure_domain_beta_kubernetes_io_zone)
 
       # Scrape config for service endpoints.
       #
@@ -1157,28 +1164,28 @@ serverFiles:
 # must be a string so you have to add a | after extraScrapeConfigs:
 # example adds prometheus-blackbox-exporter scrape config
 extraScrapeConfigs: ""
-  # - job_name: 'prometheus-blackbox-exporter'
-  #   metrics_path: /probe
-  #   params:
-  #     module: [http_2xx]
-  #   static_configs:
-  #     - targets:
-  #       - https://example.com
-  #   relabel_configs:
-  #     - source_labels: [__address__]
-  #       target_label: __param_target
-  #     - source_labels: [__param_target]
-  #       target_label: instance
-  #     - target_label: __address__
-  #       replacement: prometheus-blackbox-exporter:9115
+# - job_name: 'prometheus-blackbox-exporter'
+#   metrics_path: /probe
+#   params:
+#     module: [http_2xx]
+#   static_configs:
+#     - targets:
+#       - https://example.com
+#   relabel_configs:
+#     - source_labels: [__address__]
+#       target_label: __param_target
+#     - source_labels: [__param_target]
+#       target_label: instance
+#     - target_label: __address__
+#       replacement: prometheus-blackbox-exporter:9115
 
 # Adds option to add alert_relabel_configs to avoid duplicate alerts in alertmanager
 # useful in H/A prometheus with different external labels but the same alerts
 alertRelabelConfigs: {}
-  # alert_relabel_configs:
-  # - source_labels: [dc]
-  #   regex: (.+)\d+
-  #   target_label: dc
+# alert_relabel_configs:
+# - source_labels: [dc]
+#   regex: (.+)\d+
+#   target_label: dc
 
 networkPolicy:
   ## Enable creation of NetworkPolicy resources.
@@ -1190,14 +1197,14 @@ forceNamespace: ""
 
 # Extra manifests to deploy as an array
 extraManifests: []
-  # - |
-  #   apiVersion: v1
-  #   kind: ConfigMap
-  #   metadata:
-  #   labels:
-  #     name: prometheus-extra
-  #   data:
-  #     extra-data: "value"
+# - |
+#   apiVersion: v1
+#   kind: ConfigMap
+#   metadata:
+#   labels:
+#     name: prometheus-extra
+#   data:
+#     extra-data: "value"
 
 # Configuration of subcharts defined in Chart.yaml
 
