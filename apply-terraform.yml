@@ -1,33 +1,61 @@
+---
 trigger:
   branches:
     include:
-    - 3-create-a-kubernetes-cluster-for-azure-w-the-ingress-nginx
+      - main
 
 pool:
   vmImage: 'ubuntu-latest'
-steps:
-- task: TerraformTaskV1@0
-  displayName: Terra Init
-  inputs:
-    provider: 'azurerm'
-    command: 'init'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
-    backendServiceArm: 'CFSC-AiLabChatbot-Sub-SP'
-    backendAzureRmResourceGroupName: 'rg-ai-cfia-terraform-state'
-    backendAzureRmStorageAccountName: 'tfcfiastate'
-    backendAzureRmContainerName: 'infra-terraform-state'
-    backendAzureRmKey: 'tf/terraform.tfstate'
-- task: TerraformTaskV1@0
-  displayName: Terra Plan
-  inputs:
-    provider: 'azurerm'
-    command: 'plan'
-    workingDirectory: $(System.DefaultWorkingDirectory)
-    environmentServiceNameAzureRM: 'CFSC-AiLabChatbot-Sub-SP'
-- task: TerraformTaskV1@0
-  displayName: Terra Apply
-  inputs:
-    provider: 'azurerm'
-    command: 'apply'
-    workingDirectory: $(System.DefaultWorkingDirectory)
-    environmentServiceNameAzureRM: 'CFSC-AiLabChatbot-Sub-SP'
+
+variables:
+  - group: terraform-backend-settings
+
+stages:
+  - stage: InitAndPlan
+    displayName: 'Initialize and Plan'
+    jobs:
+      - job: TerraformInitPlan
+        displayName: 'Terraform Init and Plan'
+        steps:
+          - task: TerraformTaskV2@2
+            displayName: Terra Init
+            inputs:
+              provider: 'azurerm'
+              command: 'init'
+              workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
+              backendServiceArm: '$(serviceConnectionName)'
+              backendAzureRmResourceGroupName: '$(resourceGroupName)'
+              backendAzureRmStorageAccountName: '$(storageAccountName)'
+              backendAzureRmContainerName: '$(containerName)'
+              backendAzureRmKey: '$(stateKey)'
+
+          - task: TerraformTaskV1@0
+            displayName: Terra Plan
+            inputs:
+              provider: 'azurerm'
+              command: 'plan'
+              workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
+              environmentServiceNameAzureRM: '$(serviceConnectionName)'
+
+  - stage: Apply
+    displayName: 'Apply Terraform Plan'
+    dependsOn: InitAndPlan
+    condition: succeeded()
+    jobs:
+      - deployment: TerraformApply
+        displayName: 'Terraform Apply'
+        pool:
+          vmImage: 'ubuntu-latest'
+        environment: 'ProductionApproval'
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - task: TerraformTaskV1@0
+                  displayName: 'Terra Apply'
+                  inputs:
+                    provider: 'azurerm'
+                    command: 'apply'
+                    workingDirectory:
+                      '$(System.DefaultWorkingDirectory)/terraform'
+                    environmentServiceNameAzureRM: '$(serviceConnectionName)'
