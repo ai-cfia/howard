@@ -104,6 +104,20 @@ flowchart
         VNet1["VNet-CC"] <--->|HA| VNet2["VNet-CE"]
         Kubernetes1["Kubernetes-CC"] <--->|1:1 redundancy| Kubernetes2["Kubernetes-CE"]
 
+        Ingress1["Ingress1"]
+        Ingress2["Ingress2"]
+        Pod1["Pod1"]
+        Pod2["Pod2"]
+        Pod3["Pod3"]
+        Pod4["Pod4"]
+        Pod5["Pod5"]
+        Pod6["Pod6"]
+        Pod7["Pod7"]
+        Pod8["Pod8"]
+        Pod9["Pod9"]
+        Pod10["Pod10"]
+        Pod11["Pod11"]
+        Pod12["Pod12"]
     end
 ```
 
