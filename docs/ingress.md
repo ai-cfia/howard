@@ -63,7 +63,7 @@ sequenceDiagram
 [Ingress NGINX - ImplementationSpecific](
 https://docs.nginx.com/nginx-ingress-controller/configuration/ingress-resources/basic-configuration/)
 
-[DNS](https://www.cloudflare.com/learning/dns/what-is-dns/)
+[DNS](https://www.fortinet.com/resources/cyberglossary/what-is-dns)
 
 [DNS - A record](
 https://support.google.com/a/answer/2576578?hl=en#zippy=%2Chow-a-records-work%2Cconfigure-a-records-now)

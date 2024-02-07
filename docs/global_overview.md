@@ -102,7 +102,7 @@ flowchart
         end
 
         VNet1["VNet-CC"] <--->|HA| VNet2["VNet-CE"]
-        Kubernetes1["Kubernetes-CC"] <--->|redundancy| Kubernetes2["Kubernetes-CE"]
+        Kubernetes1["Kubernetes-CC"] <--->|1:1 redundancy| Kubernetes2["Kubernetes-CE"]
     end
 ```
 
