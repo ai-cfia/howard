@@ -1,24 +1,31 @@
 # Infrastructure Repository for ACIA-CFIA AI-Lab
 
-This repository is dedicated to the infrastructure management of the ACIA-CFIA
-AI-Lab. It contains scripts, configurations, and documentation pertinent to
-infrastructure and DevOps practices within the lab, facilitating setup,
-deployment, and management across multiple cloud platforms including AWS, GCP,
-and Azure.
+This repository contains all the infrastructure used by the ACIA/CFIA AI Lab.
+In this repository, you can find the Kubernetes manifests that deploy each of
+the applications on the three different cloud providers: Google Cloud Platform
+(GCP), Amazon Web Services (AWS), and Azure.
 
-## Contents
+## Content
 
-Cross-Cloud Setup Scripts: Automation scripts for seamless configuration across
-AWS, GCP, and Azure, covering project initiation, billing account association,
-artifact repository orchestration, and service account setup. GitHub Repository
-Creation Guide: Detailed instructions for creating new repositories in alignment
-with ACIA-CFIA standards. Getting Started:
+- The Terraform configuration for the GCP cluster.
+- Kubernetes manifests used to deploy the following applications:
+    - [Nachet backend](https://github.com/ai-cfia/nachet-backend)
+    - [Nachet frontend](https://github.com/ai-cfia/nachet-frontend)
+    - [Finesse backend](https://github.com/ai-cfia/finesse-backend)
+    - [Finesse frontend](https://github.com/ai-cfia/finesse-frontend)
+- Configuration for Vault, Grafana, Prometheus, Alert Manager, Ingress NGINX,
+and Cert Manager to meet our requirements.
 
-## Clone this repository
+## Tooling
 
-1. Navigate to the desired script or documentation.
-2. Follow the provided instructions.
-3. Related Repositories:
+- [Hashicorp Vault](https://www.vaultproject.io/)
+- [Grafana](https://grafana.com/)
+- [Prometheus](https://prometheus.io/docs/visualization/grafana/)
+- [Alert manager](https://github.com/prometheus/alertmanager)
+- [Cert manager](https://cert-manager.io/)
+- [Ingress NGINX](https://docs.nginx.com/nginx-ingress-controller/)
+- [OTEL](https://opentelemetry.io/)
 
-Dev-Rel-Docs: Contains introductory files and documentation related to developer
-relations at ACIA-CFIA AI-Lab.
+## Liens utiles
+
+[ai-cfia github container registry](https://github.com/orgs/ai-cfia/packages)
