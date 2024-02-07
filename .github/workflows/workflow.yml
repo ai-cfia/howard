@@ -1,6 +1,6 @@
-name: Ai-cfia repo standard and markdown check
+name: Infrastructure integration workflow
 
-on: 
+on:
   pull_request:
     types:
       - opened
@@ -8,11 +8,21 @@ on:
       - synchronize
 
 jobs:
+  markdown-check:
+    uses:
+      ai-cfia/github-workflows/.github/workflows/workflow-markdown-check.yml@76-as-a-devops-i-would-like-to-fix-the-markdown-lint-workflow
+
+  yaml-check:
+    uses:
+      ai-cfia/github-workflows/.github/workflows/workflow-yaml-check.yml@main
+
   repo-standard:
-    uses: ai-cfia/github-workflows/.github/workflows/workflow-repo-standards-validation.yml@main
+    uses:
+      ai-cfia/github-workflows/.github/workflows/workflow-repo-standards-validation.yml@main
     secrets: inherit
 
-  markdown-check:
-    uses: ai-cfia/github-workflows/.github/workflows/workflow-markdown-check.yml@main
+  terraform-check:
+    uses:
+      ai-cfia/github-workflows/.github/workflows/workflow-terraform-check.yml@main
     with:
-      config-file-path: '.mlc_config.json'
+      config-file-path: '.tflint.hcl'
