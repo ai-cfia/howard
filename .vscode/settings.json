@@ -1,5 +1,8 @@
 {
-    "editor.rulers": [120],
+    "editor.rulers": [80],
+    "[yaml]": {
+        "editor.rulers": [120]
+    },
     "files.trimTrailingWhitespace": true,
     "files.trimFinalNewlines": true,
     "files.insertFinalNewline": true
