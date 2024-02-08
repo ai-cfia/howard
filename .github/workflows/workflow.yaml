@@ -1,5 +1,5 @@
 ---
-name: Infra integration workflow
+name: Howard integration workflow
 
 on:
   pull_request:
