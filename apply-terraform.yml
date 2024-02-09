@@ -28,7 +28,7 @@ stages:
               backendAzureRmContainerName: '$(containerName)'
               backendAzureRmKey: '$(stateKey)'
 
-          - task: TerraformTaskV1@0
+          - task: TerraformTaskV2@2
             displayName: Terra Plan
             inputs:
               provider: 'azurerm'
@@ -51,7 +51,7 @@ stages:
           runOnce:
             deploy:
               steps:
-                - task: TerraformTaskV1@0
+                - task: TerraformTaskV2@2
                   displayName: 'Terra Apply'
                   inputs:
                     provider: 'azurerm'
