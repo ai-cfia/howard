@@ -1,12 +1,20 @@
-# Global overview
+# Generic architecture
 
 ## Executive summary
 
-These diagrams illustrate the objective for our infrastructure within the
-ai-lab of the Canadian Food Inspection Agency (CFIA).
-The architecture is designed to ensure high availability (HA) across two
-geographic regions in Canada—Central and Eastern while also maintaining
-a one-to-one redundancy of all services.
+These diagrams in question provide a visual representation of the planned
+infrastructure strategy for the ai-lab at the Canadian Food Inspection Agency
+(CFIA). The reason for this design is to cater to the needs of users spread
+across the vast expanse of Canada, including major user groups in canada central
+and canada east. By establishing two clusters in the Central and Eastern
+geographic regions of Canada, the CFIA aims to deliver optimal service to
+all users regardless of their location. This approach not only ensures high
+availability (HA) by mitigating the risk of service disruption due to regional
+outages but also maintains a one-to-one redundancy of all services, which is
+crucial for disaster recovery and uninterrupted operations. The strategic
+placement of these clusters allows for efficient data replication and swift
+failover processes, thereby providing a robust and reliable infrastructure for
+the agency's critica operations.
 
 ## Glossary
 
@@ -147,6 +155,10 @@ flowchart
         end
     end
 ```
+
+3. Representation of the two diagrams above in one
+
+![Diagram](svg/ha_redundancy_lb.svg)
 
 ## References
 
