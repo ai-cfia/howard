@@ -1,4 +1,5 @@
-name: Infrastructure integration workflow
+---
+name: Howard integration workflow
 
 on:
   pull_request:
@@ -8,9 +9,10 @@ on:
       - synchronize
 
 jobs:
+
   markdown-check:
     uses:
-      ai-cfia/github-workflows/.github/workflows/workflow-markdown-check.yml@76-as-a-devops-i-would-like-to-fix-the-markdown-lint-workflow
+      ai-cfia/github-workflows/.github/workflows/workflow-markdown-check.yml@main
 
   yaml-check:
     uses:
