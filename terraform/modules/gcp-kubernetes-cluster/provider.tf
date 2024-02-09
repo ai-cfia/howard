@@ -1,4 +1,7 @@
 terraform {
+
+  required_version = ">= 1.7.2"
+
   required_providers {
     local = {
       source  = "hashicorp/local"
@@ -25,5 +28,5 @@ terraform {
 
 provider "google" {
   project = var.project_id
-  region = var.region
+  region  = var.region
 }
