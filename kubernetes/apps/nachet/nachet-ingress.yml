@@ -1,3 +1,4 @@
+---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -14,20 +15,20 @@ metadata:
 spec:
   ingressClassName: nginx
   tls:
-  - hosts:
-    - nachet.ninebasetwo.xyz
-    secretName: aciacfia-tls
+    - hosts:
+        - nachet.ninebasetwo.xyz
+      secretName: aciacfia-tls
   rules:
-  - host: nachet.ninebasetwo.xyz
-    http:
-      paths:
-      - path: /api(/|$)(.*)
-        pathType: ImplementationSpecific
-        backend:
-          service:
-            name: nachet-backend-svc
-            port:
-              number: 8080
+    - host: nachet.ninebasetwo.xyz
+      http:
+        paths:
+          - path: /api(/|$)(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: nachet-backend-svc
+                port:
+                  number: 8080
 
 ---
 # For more information check https://github.com/nginxinc/kubernetes-ingress/issues/323
@@ -46,17 +47,17 @@ metadata:
 spec:
   ingressClassName: nginx
   tls:
-  - hosts:
-    - nachet.ninebasetwo.xyz
-    secretName: aciacfia-tls
+    - hosts:
+        - nachet.ninebasetwo.xyz
+      secretName: aciacfia-tls
   rules:
-  - host: nachet.ninebasetwo.xyz
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: nachet-frontend-svc
-            port:
-              number: 3000
+    - host: nachet.ninebasetwo.xyz
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: nachet-frontend-svc
+                port:
+                  number: 3000

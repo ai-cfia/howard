@@ -1,6 +1,7 @@
-name: Ai-cfia repo standard and markdown check
+---
+name: Howard integration workflow
 
-on: 
+on:
   pull_request:
     types:
       - opened
@@ -8,11 +9,24 @@ on:
       - synchronize
 
 jobs:
-  repo-standard:
-    uses: ai-cfia/github-workflows/.github/workflows/workflow-repo-standards-validation.yml@main
-    secrets: inherit
 
   markdown-check:
-    uses: ai-cfia/github-workflows/.github/workflows/workflow-markdown-check.yml@main
+    uses:
+      ai-cfia/github-workflows/.github/workflows/workflow-markdown-check.yml@main
+
+  yaml-check:
+    uses:
+      ai-cfia/github-workflows/.github/workflows/workflow-yaml-check.yml@main
     with:
-      config-file-path: '.mlc_config.json'
+      config-file-path: '.yamllint.yml'
+
+  repo-standard:
+    uses:
+      ai-cfia/github-workflows/.github/workflows/workflow-repo-standards-validation.yml@main
+    secrets: inherit
+
+  terraform-check:
+    uses:
+      ai-cfia/github-workflows/.github/workflows/workflow-terraform-check.yml@main
+    with:
+      config-file-path: '.tflint.hcl'

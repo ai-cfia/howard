@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -15,21 +16,21 @@ spec:
     spec:
       serviceAccountName: secrets-reader
       containers:
-      - name: nachet-frontend
-        image: ghcr.io/ai-cfia/nachet-frontend:main
-        imagePullPolicy: Always
-        ports:
-        - containerPort: 3000
-        livenessProbe:
-          httpGet:
-            path: /
-            port: 3000
-          initialDelaySeconds: 60
-          periodSeconds: 10
+        - name: nachet-frontend
+          image: ghcr.io/ai-cfia/nachet-frontend:main
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 3000
+            initialDelaySeconds: 60
+            periodSeconds: 10
 
 ---
 apiVersion: v1
-kind: Service 
+kind: Service
 metadata:
   name: nachet-frontend-svc
   namespace: nachet

@@ -12,7 +12,7 @@ resource "google_container_cluster" "cluster" {
 
   # Optional, if you want multi-zonal cluster
   node_locations = [
-    "${var.location_2}"
+    var.location_2
   ]
 
   addons_config {
