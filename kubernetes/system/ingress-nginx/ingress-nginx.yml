@@ -8,6 +8,7 @@
 
 ## Labels to apply to all resources
 ##
+---
 commonLabels: {}
 # scmhash: abc123
 # myLabel: aakkmd
@@ -190,53 +191,53 @@ controller:
   #    effect: "NoSchedule|PreferNoSchedule|NoExecute(1.6 only)"
 
   affinity: {}
-    # # An example of preferred pod anti-affinity, weight is in the range 1-100
-    # podAntiAffinity:
-    #   preferredDuringSchedulingIgnoredDuringExecution:
-    #   - weight: 100
-    #     podAffinityTerm:
-    #       labelSelector:
-    #         matchExpressions:
-    #         - key: app.kubernetes.io/name
-    #           operator: In
-    #           values:
-    #           - ingress-nginx
-    #         - key: app.kubernetes.io/instance
-    #           operator: In
-    #           values:
-    #           - ingress-nginx
-    #         - key: app.kubernetes.io/component
-    #           operator: In
-    #           values:
-    #           - controller
-    #       topologyKey: kubernetes.io/hostname
+  # # An example of preferred pod anti-affinity, weight is in the range 1-100
+  # podAntiAffinity:
+  #   preferredDuringSchedulingIgnoredDuringExecution:
+  #   - weight: 100
+  #     podAffinityTerm:
+  #       labelSelector:
+  #         matchExpressions:
+  #         - key: app.kubernetes.io/name
+  #           operator: In
+  #           values:
+  #           - ingress-nginx
+  #         - key: app.kubernetes.io/instance
+  #           operator: In
+  #           values:
+  #           - ingress-nginx
+  #         - key: app.kubernetes.io/component
+  #           operator: In
+  #           values:
+  #           - controller
+  #       topologyKey: kubernetes.io/hostname
 
-    # # An example of required pod anti-affinity
-    # podAntiAffinity:
-    #   requiredDuringSchedulingIgnoredDuringExecution:
-    #   - labelSelector:
-    #       matchExpressions:
-    #       - key: app.kubernetes.io/name
-    #         operator: In
-    #         values:
-    #         - ingress-nginx
-    #       - key: app.kubernetes.io/instance
-    #         operator: In
-    #         values:
-    #         - ingress-nginx
-    #       - key: app.kubernetes.io/component
-    #         operator: In
-    #         values:
-    #         - controller
-    #     topologyKey: "kubernetes.io/hostname"
+  # # An example of required pod anti-affinity
+  # podAntiAffinity:
+  #   requiredDuringSchedulingIgnoredDuringExecution:
+  #   - labelSelector:
+  #       matchExpressions:
+  #       - key: app.kubernetes.io/name
+  #         operator: In
+  #         values:
+  #         - ingress-nginx
+  #       - key: app.kubernetes.io/instance
+  #         operator: In
+  #         values:
+  #         - ingress-nginx
+  #       - key: app.kubernetes.io/component
+  #         operator: In
+  #         values:
+  #         - controller
+  #     topologyKey: "kubernetes.io/hostname"
 
   topologySpreadConstraints: []
-    # - maxSkew: 1
-    #   topologyKey: failure-domain.beta.kubernetes.io/zone
-    #   whenUnsatisfiable: DoNotSchedule
-    #   labelSelector:
-    #     matchLabels:
-    #       app.kubernetes.io/instance: ingress-nginx-internal
+  # - maxSkew: 1
+  #   topologyKey: failure-domain.beta.kubernetes.io/zone
+  #   whenUnsatisfiable: DoNotSchedule
+  #   labelSelector:
+  #     matchLabels:
+  #       app.kubernetes.io/instance: ingress-nginx-internal
 
   # -- `terminationGracePeriodSeconds` to avoid killing pods before we are ready
   ## wait up to five minutes for the drain of connections
@@ -303,9 +304,9 @@ controller:
   minAvailable: 1
 
   resources:
-  ##  limits:
-  ##    cpu: 100m
-  ##    memory: 90Mi
+    ##  limits:
+    ##    cpu: 100m
+    ##    memory: 90Mi
     requests:
       cpu: 100m
       memory: 90Mi
@@ -318,18 +319,18 @@ controller:
     targetCPUUtilizationPercentage: 50
     targetMemoryUtilizationPercentage: 50
     behavior: {}
-      # scaleDown:
-      #   stabilizationWindowSeconds: 300
-      #  policies:
-      #   - type: Pods
-      #     value: 1
-      #     periodSeconds: 180
-      # scaleUp:
-      #   stabilizationWindowSeconds: 300
-      #   policies:
-      #   - type: Pods
-      #     value: 2
-      #     periodSeconds: 60
+    # scaleDown:
+    #   stabilizationWindowSeconds: 300
+    #  policies:
+    #   - type: Pods
+    #     value: 1
+    #     periodSeconds: 180
+    # scaleUp:
+    #   stabilizationWindowSeconds: 300
+    #   policies:
+    #   - type: Pods
+    #     value: 2
+    #     periodSeconds: 60
 
   autoscalingTemplate: []
   # Custom or additional autoscaling metrics
@@ -359,26 +360,26 @@ controller:
       #  annotations:
       # key: value
     triggers: []
- #     - type: prometheus
- #       metadata:
- #         serverAddress: http://<prometheus-host>:9090
- #         metricName: http_requests_total
- #         threshold: '100'
- #         query: sum(rate(http_requests_total{deployment="my-deployment"}[2m]))
+    #     - type: prometheus
+    #       metadata:
+    #         serverAddress: http://<prometheus-host>:9090
+    #         metricName: http_requests_total
+    #         threshold: '100'
+    #         query: sum(rate(http_requests_total{deployment="my-deployment"}[2m]))
 
     behavior: {}
- #     scaleDown:
- #       stabilizationWindowSeconds: 300
- #       policies:
- #       - type: Pods
- #         value: 1
- #         periodSeconds: 180
- #     scaleUp:
- #       stabilizationWindowSeconds: 300
- #       policies:
- #       - type: Pods
- #         value: 2
- #         periodSeconds: 60
+    #     scaleDown:
+    #       stabilizationWindowSeconds: 300
+    #       policies:
+    #       - type: Pods
+    #         value: 1
+    #         periodSeconds: 180
+    #     scaleUp:
+    #       stabilizationWindowSeconds: 300
+    #       policies:
+    #       - type: Pods
+    #         value: 2
+    #         periodSeconds: 60
 
   # -- Enable mimalloc as a drop-in replacement for malloc.
   ## ref: https://github.com/microsoft/mimalloc
@@ -530,12 +531,12 @@ controller:
 
     createSecretJob:
       resources: {}
-        # limits:
-        #   cpu: 10m
-        #   memory: 20Mi
-        # requests:
-        #   cpu: 10m
-        #   memory: 20Mi
+      # limits:
+      #   cpu: 10m
+      #   memory: 20Mi
+      # requests:
+      #   cpu: 10m
+      #   memory: 20Mi
 
     patchWebhookJob:
       resources: {}

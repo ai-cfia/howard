@@ -38,21 +38,21 @@ spec:
     spec:
       serviceAccountName: secrets-reader
       containers:
-      - name: nachet-backend
-        image: ghcr.io/ai-cfia/nachet-backend:48
-        imagePullPolicy: Always
-        command: ["/bin/sh", "-c"]
-        args:
-        - >
-          cp /vault/secrets/.env . && hypercorn -b :8080 app:app
-        ports:
-        - containerPort: 8080
-        livenessProbe:
-          httpGet:
-            path: /health
-            port: 8080
-          initialDelaySeconds: 60
-          periodSeconds: 10
+        - name: nachet-backend
+          image: ghcr.io/ai-cfia/nachet-backend:48
+          imagePullPolicy: Always
+          command: ["/bin/sh", "-c"]
+          args:
+            - >
+              cp /vault/secrets/.env . && hypercorn -b :8080 app:app
+          ports:
+            - containerPort: 8080
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8080
+            initialDelaySeconds: 60
+            periodSeconds: 10
 
 ---
 apiVersion: v1
