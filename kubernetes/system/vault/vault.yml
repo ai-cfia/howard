@@ -486,7 +486,6 @@ server:
     periodSeconds: 5
     successThreshold: 1
     timeoutSeconds: 3
-
   # Used to enable a livenessProbe for the pods
   livenessProbe:
     enabled: true

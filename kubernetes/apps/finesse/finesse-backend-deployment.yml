@@ -21,9 +21,9 @@ spec:
       labels:
         app: finesse-backend
       annotations:
-        vault.hashicorp.com/agent-inject: 'true'
-        vault.hashicorp.com/role: 'secrets-reader'
-        vault.hashicorp.com/tls-skip-verify: 'true'
+        vault.hashicorp.com/agent-inject: "true"
+        vault.hashicorp.com/role: "secrets-reader"
+        vault.hashicorp.com/tls-skip-verify: "true"
         vault.hashicorp.com/agent-inject-template-.env: |
           {{- with secret "apps/finesse" -}}
           AZURE_OPENAI_CHATGPT_DEPLOYMENT="{{ .Data.data.AZURE_OPENAI_CHATGPT_DEPLOYMENT }}"
