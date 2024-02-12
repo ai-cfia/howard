@@ -70,16 +70,16 @@ variable "tags" {
   type        = map(string)
 }
 
-variable "end_date" {
-  description = "The End Date which the Password is valid until, formatted as a RFC3339 date string (e.g. 2018-01-01T01:02:03Z)."
-  type        = string
-  default     = "2030-01-01T00:00:00Z"
-}
-
 variable "k8s_version" {
   description = "(Optional) Version of Kubernetes specified when creating the AKS managed cluster. If not specified, the latest recommended version will be used at provisioning time (but won't auto-upgrade)."
   type        = string
   default     = "1.23.5"
+}
+
+variable "managed" {
+  description = "(Optional) Is this a managed Kubernetes Cluster? Default is true."
+  type        = bool
+  default     = true
 }
 
 variable "rbac_enabled" {

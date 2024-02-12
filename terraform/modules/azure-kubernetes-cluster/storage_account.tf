@@ -7,5 +7,5 @@ resource "azurerm_storage_account" "st" {
   account_replication_type = var.storage_account_replication_type
   account_kind             = var.storage_account_kind
 
-  tags = local.tags
+  tags = var.tags
 }

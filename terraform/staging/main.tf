@@ -1,7 +1,5 @@
 terraform {
 
-  required_version = ">= 1.7.2"
-
   backend "azurerm" {
     resource_group_name  = "rg-ai-cfia-terraform-state"
     storage_account_name = "tfcfiastate"
@@ -13,25 +11,6 @@ terraform {
   #   bucket = "terraform-tfstate-gcp-storage"
   #   prefix = "terraform/state"
   # }
-
-  required_providers {
-    google = {
-      source  = "hashicorp/google"
-      version = "~> 5.0"
-    }
-    azurerm = {
-      source  = "hashicorp/azurerm"
-      version = "~> 3.25"
-    }
-    kubernetes = {
-      source  = "hashicorp/kubernetes"
-      version = "2.24.0"
-    }
-    # aws = {
-    #   source  = "hashicorp/aws"
-    #   version = "~> 3.0"
-    # }
-  }
 }
 
 provider "azurerm" {
@@ -99,6 +78,8 @@ module "aks-cluster-0" {
   node_min_count            = var.node_min_count
   node_max_count            = var.node_max_count
 
+  managed                    = var.managed
+  rbac_enabled               = var.rbac_enabled
   aks_admin_group_object_ids = var.aks_admin_group_object_ids
   ad_groups                  = var.ad_groups
 

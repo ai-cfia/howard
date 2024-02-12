@@ -3,7 +3,7 @@ resource "azurerm_kubernetes_cluster" "k8s" {
   name                = local.prefix
   resource_group_name = var.resource_group
   location            = var.location
-  dns_prefix          = "${local.prefix}-dns"
+  dns_prefix          = local.dns_prefix
   kubernetes_version  = var.k8s_version
 
   linux_profile {
@@ -30,9 +30,9 @@ resource "azurerm_kubernetes_cluster" "k8s" {
   }
 
   azure_active_directory_role_based_access_control {
-    managed                = true
+    managed                = var.managed
     admin_group_object_ids = var.aks_admin_group_object_ids
-    azure_rbac_enabled     = true
+    azure_rbac_enabled     = var.rbac_enabled
   }
 
   identity {
