@@ -49,15 +49,25 @@ provider "azurerm" {
 # }
 
 # module "gcp-kubernetes-cluster-0" {
-#   source = "../modules/gcp-kubernetes-cluster"
-
+#   source = "./terraform/modules/gcp-kubernetes-cluster"
 #   cluster_name = "acia-cfia"
 #   project_id   = "spartan-rhino-408115"
-
 #   region     = "northamerica-northeast1"
 #   location_1 = "northamerica-northeast1-a"
 #   location_2 = "northamerica-northeast1-b"
 # }
+
+module "azure-dns-staging" {
+  source = "./terraform/modules/azure-dns"
+
+  region = "Canada East"
+  rg-name = "rf-inspection-dns-zone"
+  dns-zone-name = "inspection-dns-zone"
+
+  created-by = "DevSecOps Team"
+  tech-contact = "sre-ai-cfia@inspection.gc.ca"
+  environment =  "staging"
+}
 
 module "cluster-network-0" {
   source              = "../modules/azure-cluster-network"
@@ -78,7 +88,6 @@ module "cluster-network-0" {
 #   resource_group_name       = var.resource_group
 #   # ..
 # }
-
 
 module "aks-cluster-0" {
 

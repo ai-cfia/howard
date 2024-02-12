@@ -25,17 +25,15 @@ resource "azurerm_kubernetes_cluster" "k8s" {
     min_count           = var.node_min_count
     max_count           = var.node_max_count
     max_pods            = var.max_pods
-
-
   }
 
-   identity {
+  identity {
     type = "SystemAssigned"
   }
 
-  azure_rbac_enabled {
-    azure_rbac_enabled    = var.rbac_enabled
-  }
+  # azure_rbac_enabled {
+  #   azure_rbac_enabled    = var.rbac_enabled
+  # }
 
   network_profile {
     network_plugin     = "kubenet"
