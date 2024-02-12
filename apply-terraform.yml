@@ -30,7 +30,6 @@ stages:
               backendAzureRmStorageAccountName: "$(storageAccountName)"
               backendAzureRmContainerName: "$(containerName)"
               backendAzureRmKey: "$(stateKey)"
-
           - task: TerraformTaskV2@2
             displayName: Terra Plan
             inputs:
@@ -44,21 +43,6 @@ stages:
     dependsOn: InitAndPlan
     condition: succeeded()
     jobs:
-      - job: TerraformInit
-        displayName: "Terraform Init"
-        steps:
-          - task: TerraformTaskV2@2
-            displayName: Terra Init
-            inputs:
-              provider: "azurerm"
-              command: "init"
-              workingDirectory: "$(System.DefaultWorkingDirectory)/terraform/staging"
-              backendServiceArm: "$(serviceConnectionName)"
-              backendAzureRmResourceGroupName: "$(resourceGroupName)"
-              backendAzureRmStorageAccountName: "$(storageAccountName)"
-              backendAzureRmContainerName: "$(containerName)"
-              backendAzureRmKey: "$(stateKey)"
-
       - deployment: TerraformApply
         displayName: "Terraform Apply"
         pool:
@@ -68,6 +52,17 @@ stages:
           runOnce:
             deploy:
               steps:
+                - task: TerraformTaskV2@2
+                  displayName: Terra Init
+                  inputs:
+                    provider: "azurerm"
+                    command: "init"
+                    workingDirectory: "$(System.DefaultWorkingDirectory)/terraform/staging"
+                    backendServiceArm: "$(serviceConnectionName)"
+                    backendAzureRmResourceGroupName: "$(resourceGroupName)"
+                    backendAzureRmStorageAccountName: "$(storageAccountName)"
+                    backendAzureRmContainerName: "$(containerName)"
+                    backendAzureRmKey: "$(stateKey)"
                 - task: TerraformTaskV2@2
                   displayName: "Terra Apply"
                   inputs:
