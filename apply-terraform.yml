@@ -52,6 +52,7 @@ stages:
           runOnce:
             deploy:
               steps:
+                - checkout: self
                 - task: TerraformTaskV2@2
                   displayName: Terra Init
                   inputs:
