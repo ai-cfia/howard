@@ -68,7 +68,7 @@ variable "tags" {
 variable "k8s_version" {
   description = "(Optional) Version of Kubernetes specified when creating the AKS managed cluster. If not specified, the latest recommended version will be used at provisioning time (but won't auto-upgrade)."
   type        = string
-  default     = "1.23.5"
+  default     = "1.28"
 }
 
 variable "managed" {
@@ -80,7 +80,7 @@ variable "managed" {
 variable "rbac_enabled" {
   description = "(Required) Is Role Based Access Control Enabled? Changing this forces a new resource to be created."
   type        = bool
-  default     = false
+  default     = true
 }
 
 variable "vm_size" {

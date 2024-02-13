@@ -5,6 +5,13 @@ In this repository, you can find the Kubernetes manifests that deploy each of
 the applications on the three different cloud providers: Google Cloud Platform
 (GCP), Amazon Web Services (AWS), and Azure.
 
+## Dependencies
+
+- [Terraform](https://www.terraform.io/downloads.html)
+- [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
+- [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli)
+- [kubelogin](https://github.com/Azure/kubelogin)
+
 ## Content
 
 - The Terraform configuration for the GCP cluster.
@@ -30,9 +37,19 @@ and Cert Manager to meet our requirements.
 
 [ai-cfia github container registry](https://github.com/orgs/ai-cfia/packages)
 
-## Local Development
+## Terraform Deployment
 
-To locally fetch the kube config, here are the steps `
+Current configuration is hosting a kubernetes cluster on Azure (AKS). We have an
+Azure Devops pipeline `apply-terraform.yml` that applies terraform's resources
+that are created on our Azure's subscription. The state is then saved to a blob
+storage in Azure.
+
+## Kubectl configuration
+
+Assuming you have [Azure's
+CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli) and
+[kubelogin](https://github.com/Azure/kubelogin) plugin installed, here is how
+you can locally fetch the kube config :
 
 ```bash
 az login

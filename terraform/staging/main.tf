@@ -1,10 +1,10 @@
 terraform {
 
   backend "azurerm" {
-    resource_group_name  = "rg-ai-cfia-terraform-state"
-    storage_account_name = "tfcfiastate"
-    container_name       = "infra-terraform-state"
-    key                  = "tf/terraform.tfstate"
+    resource_group_name  = var.terraform_state_resource_group_name
+    storage_account_name = var.terraform_state_storage_account_name
+    container_name       = var.terraform_state_container_name
+    key                  = var.terraform_state_key
   }
 
   # backend "gcs" {
