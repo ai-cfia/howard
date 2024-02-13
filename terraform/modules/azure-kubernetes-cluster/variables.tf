@@ -30,11 +30,6 @@ variable "resource_group" {
   type        = string
 }
 
-variable "admin_username" {
-  description = "(Required) The Admin Username for the Cluster. Changing this forces a new resource to be created."
-  type        = string
-}
-
 variable "network_resource_group" {
   description = "(Required) Name of the resource group that contains the virtual network"
   type        = string
@@ -127,12 +122,6 @@ variable "pod_cidr" {
   description = "(Optional) The CIDR to use for pod IP addresses. Changing this forces a new resource to be created."
   type        = string
   default     = "10.244.0.0/16"
-}
-
-variable "docker_bridge_cidr" {
-  description = "(Optional) The Network Range used by the Kubernetes service. Changing this forces a new resource to be created."
-  type        = string
-  default     = "172.17.0.1/16"
 }
 
 variable "storage_account_name" {

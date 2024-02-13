@@ -19,11 +19,6 @@ variable "aks_name" {
   type        = string
 }
 
-variable "admin_username" {
-  description = "User to access the virtual machines of the system (use lower case, no spaces and special characters ex: azureuser)"
-  type        = string
-}
-
 variable "k8s_version" {
   description = "Version of Kubernetes specified when creating the AKS managed cluster."
   type        = string
@@ -102,12 +97,6 @@ variable "pod_cidr" {
   default     = "10.244.0.0/16"
 }
 
-variable "docker_bridge_cidr" {
-  description = "The Network Range used by the Kubernetes service. Changing this forces a new resource to be created."
-  type        = string
-  default     = "172.17.0.1/16"
-}
-
 variable "additional_node_pools" {
   description = "List of additional node pools to the cluster."
   type = map(object({
@@ -122,7 +111,7 @@ variable "additional_node_pools" {
     node_labels         = map(string)
     taints              = list(string)
   }))
-  default     = {}
+  default = {}
 }
 
 variable "tags" {

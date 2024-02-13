@@ -6,15 +6,6 @@ resource "azurerm_kubernetes_cluster" "k8s" {
   dns_prefix          = local.dns_prefix
   kubernetes_version  = var.k8s_version
 
-  linux_profile {
-
-    admin_username = var.admin_username
-
-    ssh_key {
-      key_data = tls_private_key.pair.public_key_openssh
-    }
-  }
-
   default_node_pool {
     name                = "main"
     vm_size             = var.vm_size
@@ -25,8 +16,6 @@ resource "azurerm_kubernetes_cluster" "k8s" {
     min_count           = var.node_min_count
     max_count           = var.node_max_count
     max_pods            = var.max_pods
-
-
   }
 
   azure_active_directory_role_based_access_control {
@@ -40,11 +29,10 @@ resource "azurerm_kubernetes_cluster" "k8s" {
   }
 
   network_profile {
-    network_plugin     = "kubenet"
-    service_cidr       = var.service_cidr
-    dns_service_ip     = var.dns_service_ip
-    pod_cidr           = var.pod_cidr
-    docker_bridge_cidr = var.docker_bridge_cidr
+    network_plugin = "kubenet"
+    service_cidr   = var.service_cidr
+    dns_service_ip = var.dns_service_ip
+    pod_cidr       = var.pod_cidr
   }
 
   tags = var.tags

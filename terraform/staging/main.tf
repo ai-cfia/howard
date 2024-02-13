@@ -17,6 +17,8 @@ provider "azurerm" {
   features {}
 }
 
+provider "azuread" {}
+
 # provider "google" {
 #   project = "spartan-rhino-408115"
 #   region  = "northamerica-northeast1"
@@ -41,7 +43,7 @@ provider "azurerm" {
 module "cluster-network-0" {
   source              = "../modules/azure-cluster-network"
   location            = var.location_1
-  resource_group_name = var.resource_group
+  resource_group_name = azurerm_resource_group.rg.name
 
   vnet_name   = "vnet-${var.aks_name}"
   subnet_name = "subnet-${var.aks_name}"
@@ -54,19 +56,20 @@ module "cluster-network-0" {
 # module "cluster-network-1" {
 #   source                    = "../modules/azure-cluster-network"
 #   location                  = var.location_2
-#   resource_group_name       = var.resource_group
+#   resource_group_name       = azurerm_resource_group.rg.name
 #   # ..
 # }
 
 
 module "aks-cluster-0" {
 
+  depends_on = [module.cluster-network-0]
+
   source = "../modules/azure-kubernetes-cluster"
 
   prefix         = var.aks_name
   resource_group = azurerm_resource_group.rg.name
   location       = azurerm_resource_group.rg.location
-  admin_username = var.admin_username
 
   k8s_version = var.k8s_version
 
@@ -90,7 +93,6 @@ module "aks-cluster-0" {
   service_cidr         = var.service_cidr
   dns_service_ip       = var.dns_service_ip
   pod_cidr             = var.pod_cidr
-  docker_bridge_cidr   = var.docker_bridge_cidr
   storage_account_name = null
 
   additional_node_pools = var.additional_node_pools

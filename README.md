@@ -9,10 +9,10 @@ the applications on the three different cloud providers: Google Cloud Platform
 
 - The Terraform configuration for the GCP cluster.
 - Kubernetes manifests used to deploy the following applications:
-    - [Nachet backend](https://github.com/ai-cfia/nachet-backend)
-    - [Nachet frontend](https://github.com/ai-cfia/nachet-frontend)
-    - [Finesse backend](https://github.com/ai-cfia/finesse-backend)
-    - [Finesse frontend](https://github.com/ai-cfia/finesse-frontend)
+  - [Nachet backend](https://github.com/ai-cfia/nachet-backend)
+  - [Nachet frontend](https://github.com/ai-cfia/nachet-frontend)
+  - [Finesse backend](https://github.com/ai-cfia/finesse-backend)
+  - [Finesse frontend](https://github.com/ai-cfia/finesse-frontend)
 - Configuration for Vault, Grafana, Prometheus, Alert Manager, Ingress NGINX,
 and Cert Manager to meet our requirements.
 
@@ -29,3 +29,14 @@ and Cert Manager to meet our requirements.
 ## Liens utiles
 
 [ai-cfia github container registry](https://github.com/orgs/ai-cfia/packages)
+
+## Local Development
+
+To locally fetch the kube config, here are the steps `
+
+```bash
+az login
+az account set --subscription xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+az aks get-credentials --resource-group resource-group-name --name aks-name --overwrite-existing
+kubelogin convert-kubeconfig -l azurecli
+```

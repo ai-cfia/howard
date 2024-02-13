@@ -1,7 +1,7 @@
 locals {
-  prefix    = var.prefix
+  prefix     = var.prefix
   dns_prefix = "${local.prefix}-dns"
-  subnet_id = data.azurerm_subnet.subnet.id
+  subnet_id  = data.azurerm_subnet.subnet.id
 }
 
 data "azurerm_subnet" "subnet" {
@@ -13,9 +13,4 @@ data "azurerm_subnet" "subnet" {
 
 resource "tls_private_key" "pair" {
   algorithm = "RSA"
-}
-
-resource "local_file" "kubeconfig_file" {
-  content  = azurerm_kubernetes_cluster.k8s.kube_config_raw
-  filename = "${azurerm_kubernetes_cluster.k8s.name}_config"
 }
