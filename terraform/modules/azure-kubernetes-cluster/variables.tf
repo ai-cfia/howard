@@ -162,3 +162,8 @@ variable "ad_groups" {
   description = "ad groups to be used in aks rolebindings"
   type        = list(string)
 }
+
+variable "ad_members" {
+  description = "ad members to be added to ad_groups"
+  type        = list(string)
+}

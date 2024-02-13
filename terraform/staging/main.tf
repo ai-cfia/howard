@@ -85,6 +85,7 @@ module "aks-cluster-0" {
   rbac_enabled               = var.rbac_enabled
   aks_admin_group_object_ids = var.aks_admin_group_object_ids
   ad_groups                  = var.ad_groups
+  ad_members                 = var.ad_members
 
   network_resource_group = module.cluster-network-0.resource_group_name
   network_vnet           = module.cluster-network-0.virtual_network_name
