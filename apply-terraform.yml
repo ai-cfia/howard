@@ -23,12 +23,7 @@ stages:
             name: DownloadSecureVars
             displayName: 'Download staging.tfvars'
             inputs:
-              secureFile: 'staging.tfvars'  
-          - task: CopyFiles@2
-            inputs:
-              SourceFolder: '$(DownloadSecureVars.SecureFilePath)'
-              Contents: '**' 
-              TargetFolder: '$(System.DefaultWorkingDirectory)/terraform/staging'
+              secureFile: 'staging.tfvars'
           - task: TerraformTaskV2@2
             displayName: Terra Init
             inputs:
@@ -45,7 +40,7 @@ stages:
             inputs:
               provider: "azurerm"
               command: "plan"
-              commandOptions: '-var-file=$(System.DefaultWorkingDirectory)/terraform/staging/staging.tfvars'
+              commandOptions: '-var-file=$(DownloadSecureVars.SecureFilePath)'
               workingDirectory: "$(System.DefaultWorkingDirectory)/terraform/staging"
               environmentServiceNameAzureRM: "$(serviceConnectionName)"
 
@@ -68,12 +63,7 @@ stages:
                   name: DownloadSecureVars
                   displayName: 'Download staging.tfvars'
                   inputs:
-                    secureFile: 'staging.tfvars'  
-                - task: CopyFiles@2
-                  inputs:
-                    SourceFolder: '$(DownloadSecureVars.SecureFilePath)'
-                    Contents: '**' 
-                    TargetFolder: '$(System.DefaultWorkingDirectory)/terraform/staging'
+                    secureFile: 'staging.tfvars'
                 - task: TerraformTaskV2@2
                   displayName: Terra Init
                   inputs:
@@ -90,6 +80,6 @@ stages:
                   inputs:
                     provider: "azurerm"
                     command: "apply"
-                    commandOptions: '-var-file=$(System.DefaultWorkingDirectory)/terraform/staging/staging.tfvars'
+                    commandOptions: '-var-file=$(DownloadSecureVars.SecureFilePath)'
                     workingDirectory: "$(System.DefaultWorkingDirectory)/terraform/staging"
                     environmentServiceNameAzureRM: "$(serviceConnectionName)"
