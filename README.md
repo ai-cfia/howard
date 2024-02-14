@@ -10,7 +10,15 @@ the applications on the three different cloud providers: Google Cloud Platform
 - [Terraform](https://www.terraform.io/downloads.html)
 - [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
 - [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli)
-- [kubelogin](https://github.com/Azure/kubelogin)
+
+## Documentation
+
+For more information about this project, you can refer to the documentation
+which contains explanations as well as diagrams:
+
+- [Global overview](docs/generic-achitecture.md)
+- [Ingress](docs/multi-layered-application.md)
+
 
 ## Content
 
@@ -33,7 +41,7 @@ and Cert Manager to meet our requirements.
 - [Ingress NGINX](https://docs.nginx.com/nginx-ingress-controller/)
 - [OTEL](https://opentelemetry.io/)
 
-## Liens utiles
+## Useful links
 
 [ai-cfia github container registry](https://github.com/orgs/ai-cfia/packages)
 
