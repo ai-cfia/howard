@@ -1,9 +1,9 @@
-resource "azurerm_role_assignment" "admin" {
-  for_each             = toset(var.aks_admin_group_object_ids)
-  scope                = azurerm_kubernetes_cluster.k8s.id
-  role_definition_name = "Azure Kubernetes Service Cluster User Role"
-  principal_id         = each.value
-}
+# resource "azurerm_role_assignment" "admin" {
+#   for_each             = toset(var.aks_admin_group_object_ids)
+#   scope                = azurerm_kubernetes_cluster.k8s.id
+#   role_definition_name = "Azure Kubernetes Service Cluster User Role"
+#   principal_id         = each.value
+# }
 
 # resource "azurerm_role_assignment" "namespace-groups" {
 #   for_each             = toset(var.ad_groups)
