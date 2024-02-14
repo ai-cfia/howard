@@ -1,23 +1,3 @@
-variable "terraform_state_resource_group_name" {
-  description = "Name of the resource group for the Terraform state"
-  type        = string
-}
-
-variable "terraform_state_storage_account_name" {
-  description = "Name of the storage account for the Terraform state"
-  type        = string
-}
-
-variable "terraform_state_container_name" {
-  description = "Name of the container for the Terraform state"
-  type        = string
-}
-
-variable "terraform_state_key" {
-  description = "Key (filename) of the Terraform state file"
-  type        = string
-}
-
 variable "location_1" {
   description = "Azure cloud first computing region"
   type        = string
