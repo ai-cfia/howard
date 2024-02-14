@@ -158,7 +158,7 @@ flowchart
 
 3. Representation of the two diagrams above in one
 
-![Diagram](png/ha_redundancy_lb.png)
+![Diagram](png/ha-redundancy-lb.png)
 
 ## References
 
