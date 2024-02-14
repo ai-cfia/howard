@@ -19,6 +19,12 @@ stages:
       - job: TerraformInitPlan
         displayName: "Terraform Init and Plan"
         steps:
+          - task: DownloadSecureFile@1
+            name: Downloadtfvars
+            displayName: 'Download staging.tfvars'
+            inputs:
+              secureFile: 'staging.tfvars'
+              targetPath: '$(System.DefaultWorkingDirectory)/terraform/staging'
           - task: TerraformTaskV2@2
             displayName: Terra Init
             inputs:
@@ -35,6 +41,7 @@ stages:
             inputs:
               provider: "azurerm"
               command: "plan"
+              commandOptions: '-var-file=staging.tfvars'
               workingDirectory: "$(System.DefaultWorkingDirectory)/terraform/staging"
               environmentServiceNameAzureRM: "$(serviceConnectionName)"
 
@@ -53,6 +60,12 @@ stages:
             deploy:
               steps:
                 - checkout: self
+                - task: DownloadSecureFile@1
+                  name: Downloadtfvars
+                  displayName: 'Download staging.tfvars'
+                  inputs:
+                    secureFile: 'staging.tfvars' 
+                    targetPath: '$(System.DefaultWorkingDirectory)/terraform/staging' 
                 - task: TerraformTaskV2@2
                   displayName: Terra Init
                   inputs:
@@ -69,5 +82,6 @@ stages:
                   inputs:
                     provider: "azurerm"
                     command: "apply"
+                    commandOptions: '-var-file=staging.tfvars'
                     workingDirectory: "$(System.DefaultWorkingDirectory)/terraform/staging"
                     environmentServiceNameAzureRM: "$(serviceConnectionName)"
