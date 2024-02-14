@@ -10,8 +10,8 @@ the applications on the three different cloud providers: Google Cloud Platform
 For more information about this project, you can refer to the documentation
 which contains explanations as well as diagrams:
 
-- [Global overview](docs/generic_achitecture.md)
-- [Ingress](docs/ingress.md)
+- [Global overview](docs/generic-achitecture.md)
+- [Ingress](docs/multi-layered-application.md)
 
 ## Content
 
