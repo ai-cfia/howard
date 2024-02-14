@@ -20,11 +20,15 @@ stages:
         displayName: "Terraform Init and Plan"
         steps:
           - task: DownloadSecureFile@1
-            name: Downloadtfvars
+            name: DownloadSecureVars
             displayName: 'Download staging.tfvars'
             inputs:
-              secureFile: 'staging.tfvars'
-              targetPath: '$(System.DefaultWorkingDirectory)/terraform/staging'
+              secureFile: 'staging.tfvars'  
+          - task: CopyFiles@2
+            inputs:
+              SourceFolder: '$(DownloadSecureVars.SecureFilePath)'
+              Contents: '**' 
+              TargetFolder: '$(System.DefaultWorkingDirectory)/terraform/staging'
           - task: TerraformTaskV2@2
             displayName: Terra Init
             inputs:
@@ -61,11 +65,15 @@ stages:
               steps:
                 - checkout: self
                 - task: DownloadSecureFile@1
-                  name: Downloadtfvars
+                  name: DownloadSecureVars
                   displayName: 'Download staging.tfvars'
                   inputs:
-                    secureFile: 'staging.tfvars' 
-                    targetPath: '$(System.DefaultWorkingDirectory)/terraform/staging' 
+                    secureFile: 'staging.tfvars'  
+                - task: CopyFiles@2
+                  inputs:
+                    SourceFolder: '$(DownloadSecureVars.SecureFilePath)'
+                    Contents: '**' 
+                    TargetFolder: '$(System.DefaultWorkingDirectory)/terraform/staging'
                 - task: TerraformTaskV2@2
                   displayName: Terra Init
                   inputs:
