@@ -14,20 +14,15 @@ resource "azurerm_role_assignment" "namespace-groups" {
 
 data "azuread_client_config" "current" {}
 
-resource "azuread_group" "groups" {
-  display_name     = each.value
-  for_each         = toset(var.ad_groups)
-  owners           = [data.azuread_client_config.current.object_id]
-  security_enabled = true
-}
-
 data "azuread_user" "users" {
   for_each            = toset(var.ad_members)
   user_principal_name = each.value
 }
 
-resource "azuread_group_member" "add_members" {
+resource "azuread_group" "groups" {
+  display_name     = each.value
   for_each         = toset(var.ad_groups)
-  group_object_id  = azuread_group.groups[each.value].object_id
-  member_object_id = data.azuread_user.users[each.value].object_id
+  owners           = [data.azuread_client_config.current.object_id]
+  security_enabled = true
+  members          = [for user in var.ad_members : data.azuread_user.users[user].object_id]
 }
