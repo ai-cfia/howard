@@ -16,17 +16,17 @@ spec:
     spec:
       serviceAccountName: secrets-reader
       containers:
-      - name: finesse-frontend
-        image: ghcr.io/ai-cfia/finesse-frontend:main
-        imagePullPolicy: Always
-        ports:
-        - containerPort: 3000
-        livenessProbe:
-          httpGet:
-            path: /health
-            port: 3000
-          initialDelaySeconds: 60
-          periodSeconds: 10
+        - name: finesse-frontend
+          image: ghcr.io/ai-cfia/finesse-frontend:main
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            initialDelaySeconds: 60
+            periodSeconds: 10
 
 ---
 apiVersion: v1
