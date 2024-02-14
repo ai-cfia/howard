@@ -158,12 +158,12 @@ variable "aks_admin_group_object_ids" {
   type        = list(string)
 }
 
-variable "ad_groups" {
-  description = "ad groups to be used in aks rolebindings"
-  type        = list(string)
-}
+# variable "ad_groups" {
+#   description = "ad groups to be used in aks rolebindings"
+#   type        = list(string)
+# }
 
-variable "ad_members" {
-  description = "ad members to be added to ad_groups"
-  type        = list(string)
-}
+# variable "ad_members" {
+#   description = "ad members to be added to ad_groups"
+#   type        = list(string)
+# }
