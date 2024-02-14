@@ -1,6 +1,6 @@
 locals {
-  prefix     = var.prefix
-  dns_prefix = "${local.prefix}-dns"
+  prefix     = "${var.prefix}-cluster"
+  dns_prefix = "${var.prefix}-dns"
   subnet_id  = data.azurerm_subnet.subnet.id
 }
 
