@@ -52,11 +52,11 @@ spec:
           imagePullPolicy: Always
           command: ["/bin/sh", "-c"]
           args:
-          - >
-            cp /vault/secrets/.env . &&
-            gunicorn --bind :8080 --workers 1 --threads 8 --timeout 0 --forwarded-allow-ips "*" app:app
+            - >
+              cp /vault/secrets/.env . &&
+              gunicorn --bind :8080 --workers 1 --threads 8 --timeout 0 --forwarded-allow-ips "*" app:app
           ports:
-          - containerPort: 8080
+            - containerPort: 8080
           livenessProbe:
             httpGet:
               path: /health
