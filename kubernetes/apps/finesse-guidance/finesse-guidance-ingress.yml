@@ -13,20 +13,20 @@ metadata:
 spec:
   ingressClassName: nginx
   tls:
-  - hosts:
-    - finesse-guidance.ninebasetwo.xyz
-    secretName: aciacfia-tls
+    - hosts:
+        - finesse-guidance.ninebasetwo.xyz
+      secretName: aciacfia-tls
   rules:
-  - host: finesse-guidance.ninebasetwo.xyz
-    http:
-      paths:
-      - path: /api(/|$)(.*)
-        pathType: ImplementationSpecific
-        backend:
-          service:
-            name: finesse-backend-svc
-            port:
-              number: 8080
+    - host: finesse-guidance.ninebasetwo.xyz
+      http:
+        paths:
+          - path: /api(/|$)(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: finesse-backend-svc
+                port:
+                  number: 8080
 
 ---
 # For more information check https://github.com/nginxinc/kubernetes-ingress/issues/323
@@ -44,17 +44,17 @@ metadata:
 spec:
   ingressClassName: nginx
   tls:
-  - hosts:
-    - finesse-guidance.ninebasetwo.xyz
-    secretName: aciacfia-tls
+    - hosts:
+        - finesse-guidance.ninebasetwo.xyz
+      secretName: aciacfia-tls
   rules:
-  - host: finesse-guidance.ninebasetwo.xyz
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: finesse-frontend-svc
-            port:
-              number: 3000
+    - host: finesse-guidance.ninebasetwo.xyz
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: finesse-frontend-svc
+                port:
+                  number: 3000
