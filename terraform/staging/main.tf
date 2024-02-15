@@ -64,12 +64,9 @@ module "azure-dns-staging" {
   source = "../modules/azure-dns"
 
   dns_name = var.dns_name
-
-  location = azurerm_resource_group.rg.location
   rg_name = azurerm_resource_group.rg.name
 
   soa_record_tech_contact_email = var.soa_record_tech_contact_email
-
   tags = var.tags
 }
 
