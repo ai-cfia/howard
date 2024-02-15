@@ -78,9 +78,9 @@ resource "kubernetes_secret" "vault_tls" {
   }
 
   data = {
-    "tls.crt" = kubernetes_certificate_signing_request_v1.vault_kube_cert_req.certificate
-    "tls.key" = tls_private_key.pair.private_key_pem
-    "tls.ca"  = var.ca_cluster
+    "vault.crt" = kubernetes_certificate_signing_request_v1.vault_kube_cert_req.certificate
+    "vault.key" = tls_private_key.pair.private_key_pem
+    "vault.ca"  = var.ca_cluster
   }
 
   type = "kubernetes.io/tls"
