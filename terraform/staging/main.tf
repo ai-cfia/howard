@@ -64,10 +64,10 @@ module "azure-dns-staging" {
   source = "../modules/azure-dns"
 
   dns_name = var.dns_name
-  rg_name = azurerm_resource_group.rg.name
+  rg_name  = azurerm_resource_group.rg.name
 
   soa_record_tech_contact_email = var.soa_record_tech_contact_email
-  tags = var.tags
+  tags                          = var.tags
 }
 
 module "aks-cluster-0" {
