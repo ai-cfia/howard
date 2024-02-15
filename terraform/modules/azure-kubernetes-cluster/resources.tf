@@ -9,8 +9,3 @@ data "azurerm_subnet" "subnet" {
   virtual_network_name = var.network_vnet
   resource_group_name  = var.network_resource_group
 }
-
-
-resource "tls_private_key" "pair" {
-  algorithm = "RSA"
-}
