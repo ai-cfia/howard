@@ -530,16 +530,16 @@ spec:
             - --host=ingress-nginx-controller-admission,ingress-nginx-controller-admission.$(POD_NAMESPACE).svc
             - --namespace=$(POD_NAMESPACE)
             - --secret-name=ingress-nginx-admission
-        env:
-          - name: POD_NAMESPACE
-            valueFrom:
-              fieldRef:
-                fieldPath: metadata.namespace
-        image: registry.k8s.io/ingress-nginx/kube-webhook-certgen:v20230407@sha256:543c40fd093964bc9ab509d3e791f9989963021f1e9e4c9c7b6700b02bfb227b
-        imagePullPolicy: IfNotPresent
-        name: create
-        securityContext:
-          allowPrivilegeEscalation: false
+          env:
+            - name: POD_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+          image: registry.k8s.io/ingress-nginx/kube-webhook-certgen:v20230407@sha256:543c40fd093964bc9ab509d3e791f9989963021f1e9e4c9c7b6700b02bfb227b
+          imagePullPolicy: IfNotPresent
+          name: create
+          securityContext:
+            allowPrivilegeEscalation: false
       nodeSelector:
         kubernetes.io/os: linux
       restartPolicy: OnFailure
@@ -579,16 +579,16 @@ spec:
             - --patch-mutating=false
             - --secret-name=ingress-nginx-admission
             - --patch-failure-policy=Fail
-        env:
-          - name: POD_NAMESPACE
-            valueFrom:
-              fieldRef:
-                fieldPath: metadata.namespace
-        image: registry.k8s.io/ingress-nginx/kube-webhook-certgen:v20230407@sha256:543c40fd093964bc9ab509d3e791f9989963021f1e9e4c9c7b6700b02bfb227b
-        imagePullPolicy: IfNotPresent
-        name: patch
-        securityContext:
-          allowPrivilegeEscalation: false
+          env:
+            - name: POD_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+          image: registry.k8s.io/ingress-nginx/kube-webhook-certgen:v20230407@sha256:543c40fd093964bc9ab509d3e791f9989963021f1e9e4c9c7b6700b02bfb227b
+          imagePullPolicy: IfNotPresent
+          name: patch
+          securityContext:
+            allowPrivilegeEscalation: false
       nodeSelector:
         kubernetes.io/os: linux
       restartPolicy: OnFailure
@@ -632,14 +632,14 @@ webhooks:
     failurePolicy: Fail
     matchPolicy: Equivalent
     name: validate.nginx.ingress.kubernetes.io
-  rules:
-    - apiGroups:
-        - networking.k8s.io
-      apiVersions:
-        - v1
-      operations:
-        - CREATE
-        - UPDATE
-      resources:
-        - ingresses
-  sideEffects: None
+    rules:
+      - apiGroups:
+          - networking.k8s.io
+        apiVersions:
+          - v1
+        operations:
+          - CREATE
+          - UPDATE
+        resources:
+          - ingresses
+    sideEffects: None
