@@ -15,4 +15,6 @@ resource "azurerm_dns_a_record" "dns_zone_a_record" {
   resource_group_name = var.rg_name
   ttl                 = 300
   records             = var.dns_a_records
+
+  tags = var.tags
 }
