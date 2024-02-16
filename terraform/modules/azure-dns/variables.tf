@@ -3,7 +3,7 @@ variable "rg_name" {
   type        = string
 }
 
-variable "dns_name" {
+variable "dns_zone_name" {
   description = "azurerm_dns_zone name"
   type        = string
 }
@@ -16,4 +16,14 @@ variable "tags" {
 variable "soa_record_tech_contact_email" {
   description = "SOA Record tech contact email"
   type        = string
+}
+
+variable "dns_a_record_name" {
+  description = "DNS A Record name"
+  type        = string
+}
+
+variable "dns_a_records" {
+  description = "DNS A records list"
+  type        = list(string)
 }

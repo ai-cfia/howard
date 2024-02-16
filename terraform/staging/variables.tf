@@ -148,9 +148,19 @@ variable "soa_record_tech_contact_email" {
   type        = string
 }
 
-variable "dns_name" {
+variable "dns_zone_name" {
   description = "azurerm_dns_zone name"
   type        = string
+}
+
+variable "dns_a_record_name" {
+  description = "DNS A Record name"
+  type        = string
+}
+
+variable "dns_a_records" {
+  description = "DNS A records list"
+  type        = list(string)
 }
 
 # variable "ad_groups" {
