@@ -1,8 +1,20 @@
 data "azurerm_client_config" "current" {}
 
+# Needed to provide unique vault name
+resource "random_string" "azurerm_key_vault_name" {
+  length  = 5
+  numeric = true
+  special = false
+  upper   = false
+}
+
+locals {
+  suffix = random_string.azurerm_key_vault_name.result
+}
+
 # Create Azure Key Vault
 resource "azurerm_key_vault" "vault" {
-  name                       = "${var.prefix}-vault"
+  name                       = "${var.prefix}-vault-${local.suffix}"
   location                   = var.location
   resource_group_name        = var.resource_group
   tenant_id                  = data.azurerm_client_config.current.tenant_id
@@ -20,7 +32,7 @@ resource "azurerm_key_vault" "vault" {
 }
 
 resource "azurerm_key_vault_key" "vault_unseal" {
-  name         = "${var.prefix}-vault-unseal"
+  name         = "${var.prefix}-vault-unseal-${local.suffix}"
   key_vault_id = azurerm_key_vault.vault.id
   key_type     = var.key_type
   key_size     = var.key_size
@@ -28,11 +40,12 @@ resource "azurerm_key_vault_key" "vault_unseal" {
 
   # Define the rotation policy
   rotation_policy {
-    expiry_time = "1D"
-
-    automatic_rotation {
-      time_before_expiry = "1D"
+    automatic {
+      time_before_expiry = "P7D"
     }
+
+    expire_after         = "P28D"
+    notify_before_expiry = "P7D"
   }
 }
 
@@ -54,13 +67,13 @@ resource "kubernetes_certificate_signing_request_v1" "vault_kube_cert_req" {
   }
   spec {
     request     = data.external.k8s_cert_request.result["request"]
-    signer_name = "kubernetes.io/kube-apiserver-client"
+    signer_name = "kubernetes.io/kubelet-serving"
     usages      = ["digital signature", "key encipherment", "server auth"]
   }
   auto_approve = true
   lifecycle {
     ignore_changes       = [spec[0].request]
-    replace_triggered_by = [tls_private_key.vault_key]
+    replace_triggered_by = [tls_private_key.pair]
   }
 }
 
@@ -68,6 +81,9 @@ resource "kubernetes_certificate_signing_request_v1" "vault_kube_cert_req" {
 resource "kubernetes_namespace" "vault_ns" {
   metadata {
     name = "vault"
+    labels = {
+      "pod-security.kubernetes.io/enforce" = "privileged"
+    }
   }
 }
 
@@ -83,5 +99,5 @@ resource "kubernetes_secret" "vault_tls" {
     "vault.ca"  = var.ca_cluster
   }
 
-  type = "kubernetes.io/tls"
+  type = "kubernetes.io/generic"
 }

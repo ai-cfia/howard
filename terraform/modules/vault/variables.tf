@@ -60,11 +60,11 @@ variable "key_size" {
 variable "aks_key_permissions" {
   type        = list(string)
   description = "List of key permissions for aks."
-  default     = ["get", "list", "update", "create", "import", "delete", "recover", "backup", "restore", "decrypt", "encrypt", "unwrapKey", "wrapKey", "verify", "sign"]
+  default     = ["Get", "List", "Update", "Create", "Import", "Delete", "Recover", "Backup", "Restore", "Decrypt", "Encrypt", "UnwrapKey", "WrapKey", "Verify", "Sign"]
 }
 
 variable "aks_secret_permissions" {
   type        = list(string)
   description = "List of secret permissions for aks."
-  default     = ["get"]
+  default     = ["Get"]
 }

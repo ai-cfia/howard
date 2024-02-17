@@ -122,4 +122,8 @@ module "vault" {
 
   cluster_principal_id = module.aks-cluster-0.cluster_principal_id
   ca_cluster           = module.aks-cluster-0.cluster_ca_certificate
+
+  providers = {
+    kubernetes = kubernetes
+  }
 }

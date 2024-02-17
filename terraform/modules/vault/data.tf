@@ -8,6 +8,6 @@ data "external" "k8s_cert_request" {
     "curl -o jq https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64 && chmod +x jq && jq -rc '.key' | openssl req -new -noenc -config ${path.module}/vault-csr.conf -key /dev/stdin | jq -rRncs '{\"request\": inputs}'"
   ]
   query = {
-    "key" = tls_private_key.vault_key.private_key_pem
+    "key" = tls_private_key.pair.private_key_pem
   }
 }
