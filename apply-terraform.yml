@@ -35,7 +35,11 @@ stages:
               scriptType: "bash"
               scriptLocation: "inlineScript"
               inlineScript: |
-                az aks get-credentials --name $(aks-name) --resource-group $(aks-resource-group) --admin --file ~/.kube/config
+                az aks get-credentials \
+                  --name $(aks-name) \
+                  --resource-group $(aks-resource-group) \
+                  --admin \
+                  --file ~/.kube/config
                 echo "AKS credentials configured for kubectl"
 
           - task: DownloadSecureFile@1
@@ -97,7 +101,11 @@ stages:
                     scriptType: "bash"
                     scriptLocation: "inlineScript"
                     inlineScript: |
-                      az aks get-credentials --name $(aks-name) --resource-group $(aks-resource-group) --admin --file ~/.kube/config
+                      az aks get-credentials \
+                        --name $(aks-name) \
+                        --resource-group $(aks-resource-group) \
+                        --admin \
+                        --file ~/.kube/config
                       echo "AKS credentials configured for kubectl"
 
                 - task: DownloadSecureFile@1
