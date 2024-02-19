@@ -150,7 +150,7 @@ variable "aks_admin_group_object_ids" {
 }
 
 variable "soa_record_tech_contact_email" {
-  description = "SOA Record tech contact email"
+  description = "SOA Record tech contact email (no @ inside the email)"
   type        = string
 }
 
