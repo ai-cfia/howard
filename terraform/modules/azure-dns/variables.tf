@@ -19,7 +19,7 @@ variable "soa_record_tech_contact_email" {
 }
 
 variable "dns_a_record_name" {
-  description = "DNS A Record name"
+  description = "DNS A Record name (@)"
   type        = string
 }
 
