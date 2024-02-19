@@ -35,6 +35,12 @@ resource "azurerm_kubernetes_cluster" "k8s" {
     pod_cidr       = var.pod_cidr
   }
 
+  lifecycle {
+    ignore_changes = [
+      default_node_pool
+    ]
+  }
+
   tags = var.tags
 
   sku_tier = var.sku_tier

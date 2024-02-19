@@ -125,3 +125,17 @@ module "aks-cluster-0" {
 
 # #...
 # }
+
+module "vault" {
+  source         = "../modules/vault"
+  location       = var.location_1
+  resource_group = azurerm_resource_group.rg.name
+  prefix         = var.environment
+
+  cluster_principal_id = module.aks-cluster-0.cluster_principal_id
+  ca_cluster           = module.aks-cluster-0.cluster_ca_certificate
+
+  providers = {
+    kubernetes = kubernetes
+  }
+}

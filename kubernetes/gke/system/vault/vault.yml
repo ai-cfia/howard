@@ -826,15 +826,23 @@ server:
           }
         }
 
-        seal "gcpckms" {
-          project     = "spartan-rhino-408115"
-          region      = "northamerica-northeast1"
-          key_ring    = "vault-keyring-gcp"
-          crypto_key  = "vault-cryptokey-gcp"
+
+        seal "azurekeyvault" {
+          tenant_id      = "YOUR-AZURE-TENANT-ID"
+          vault_name     = "staging-vault
+          key_name       = "staging-vault-unseal"
+          resource       = "https://managedhsm.azure.net"
         }
 
         service_registration "kubernetes" {}
 
+    # unseal for gcp kms setup
+    # seal "gcpckms" {
+    #       project     = "spartan-rhino-408115"
+    #       region      = "northamerica-northeast1"
+    #       key_ring    = "vault-keyring-gcp"
+    #       crypto_key  = "vault-cryptokey-gcp"
+    # }
     # A disruption budget limits the number of pods of a replicated application
     # that are down simultaneously from voluntary disruptions
     disruptionBudget:
