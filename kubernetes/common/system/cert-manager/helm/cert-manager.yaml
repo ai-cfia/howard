@@ -188,7 +188,6 @@ containerSecurityContext:
       # readOnlyRootFilesystem: true
       # runAsNonRoot: true
 
-
 volumes: []
 
 volumeMounts: []
@@ -545,7 +544,6 @@ cainjector:
         # readOnlyRootFilesystem: true
         # runAsNonRoot: true
 
-
   # Optional additional annotations to add to the cainjector Deployment
   # deploymentAnnotations: {}
 
@@ -693,7 +691,6 @@ startupapicheck:
     # Override the image tag to deploy by setting this variable.
     # If no value is set, the chart's appVersion will be used.
     # tag: canary
-
 
     pullPolicy: IfNotPresent
 
