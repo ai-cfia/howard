@@ -149,6 +149,26 @@ variable "aks_admin_group_object_ids" {
   type        = list(string)
 }
 
+variable "soa_record_tech_contact_email" {
+  description = "SOA Record tech contact email"
+  type        = string
+}
+
+variable "dns_zone_name" {
+  description = "azurerm_dns_zone name"
+  type        = string
+}
+
+variable "dns_a_record_name" {
+  description = "DNS A Record name"
+  type        = string
+}
+
+variable "dns_a_records" {
+  description = "DNS A records list"
+  type        = list(string)
+}
+
 # variable "ad_groups" {
 #   description = "ad groups to be used in aks rolebindings"
 #   type        = list(string)

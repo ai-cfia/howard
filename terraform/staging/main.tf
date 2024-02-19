@@ -60,6 +60,18 @@ module "cluster-network-0" {
 #   # ..
 # }
 
+module "azure-dns-staging" {
+  source = "../modules/azure-dns"
+
+  rg_name = azurerm_resource_group.rg.name
+
+  dns_zone_name     = var.dns_zone_name
+  dns_a_record_name = var.dns_a_record_name
+  dns_a_records     = var.dns_a_records
+
+  tags                          = var.tags
+  soa_record_tech_contact_email = var.soa_record_tech_contact_email
+}
 
 module "aks-cluster-0" {
 
