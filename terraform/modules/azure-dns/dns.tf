@@ -18,13 +18,3 @@ resource "azurerm_dns_a_record" "dns_zone_a_record" {
 
   tags = var.tags
 }
-
-resource "azurerm_dns_cname_record" "dns_zone_cname_record" {
-  name                = "nginx"
-  zone_name           = azurerm_dns_zone.dns_zone.name
-  resource_group_name = var.rg_name
-  ttl                 = 300
-  record              = azurerm_dns_a_record.dns_zone_a_record.fqdn
-
-  tags = var.tags
-}
