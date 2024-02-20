@@ -27,3 +27,8 @@ variable "dns_a_records" {
   description = "DNS A records list"
   type        = list(string)
 }
+
+variable "cluster_name" {
+  description = "Kubernetes (AKS) cluster name"
+  type = string
+}

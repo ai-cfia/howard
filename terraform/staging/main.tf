@@ -69,6 +69,8 @@ module "azure-dns-staging" {
   dns_a_record_name = var.dns_a_record_name
   dns_a_records     = var.dns_a_records
 
+  cluster_name = module.aks-cluster-0.cluster_name
+
   tags                          = var.tags
   soa_record_tech_contact_email = var.soa_record_tech_contact_email
 }
