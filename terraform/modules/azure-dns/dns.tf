@@ -20,7 +20,7 @@ resource "azurerm_dns_a_record" "dns_zone_a_record" {
 }
 
 resource "azurerm_role_assignment" "external-dns" {
-  scope = azurerm_dns_zone.dns_zone.id
+  scope                = azurerm_dns_zone.dns_zone.id
   role_definition_name = "DNS Zone Contributor"
-  principal_id = data.azurerm_kubernetes_cluster.aks.identity[0].object_id
+  principal_id         = data.azurerm_kubernetes_cluster.aks.identity[0].object_id
 }

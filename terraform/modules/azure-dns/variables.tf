@@ -30,5 +30,5 @@ variable "dns_a_records" {
 
 variable "cluster_name" {
   description = "Kubernetes (AKS) cluster name"
-  type = string
+  type        = string
 }
