@@ -26,13 +26,54 @@ variable "resource_group" {
 variable "key_permissions" {
   type        = list(string)
   description = "List of key permissions."
-  default     = ["List", "Create", "Delete", "Get", "Purge", "Recover", "Update", "GetRotationPolicy", "SetRotationPolicy"]
+  default = [
+    "List",
+    "Create",
+    "Delete",
+    "Get",
+    "Purge",
+    "Recover",
+    "Update",
+    "GetRotationPolicy",
+    "SetRotationPolicy",
+    "WrapKey",
+    "UnwrapKey"
+  ]
 }
 
 variable "secret_permissions" {
   type        = list(string)
   description = "List of secret permissions."
-  default     = ["Set"]
+  default = [
+    "Get",
+    "List",
+    "Set",
+    "Delete",
+    "Recover",
+    "Backup",
+    "Restore",
+    "Purge"
+  ]
+}
+
+variable "certificate_permissions" {
+  type        = list(string)
+  description = "List of certificate permissions."
+  default = [
+    "Create",
+    "Delete",
+    "Get",
+    "List",
+    "Update",
+    "ManageContacts",
+    "GetIssuers",
+    "ListIssuers",
+    "SetIssuers",
+    "DeleteIssuers",
+    "ManageIssuers",
+    "Recover",
+    "Purge"
+  ]
 }
 
 variable "key_type" {
@@ -67,4 +108,9 @@ variable "aks_secret_permissions" {
   type        = list(string)
   description = "List of secret permissions for aks."
   default     = ["Get"]
+}
+
+variable "kv_identity_resource_id" {
+  description = "Client ID for the AKS managed identity"
+  type        = string
 }

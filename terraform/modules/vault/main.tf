@@ -26,8 +26,19 @@ resource "azurerm_key_vault" "vault" {
     tenant_id = data.azurerm_client_config.current.tenant_id
     object_id = data.azurerm_client_config.current.object_id
 
-    key_permissions    = var.key_permissions
-    secret_permissions = var.secret_permissions
+    key_permissions         = var.key_permissions
+    secret_permissions      = var.secret_permissions
+    certificate_permissions = var.certificate_permissions
+  }
+
+  // Additional access policy for the AKS managed identity
+  access_policy {
+    tenant_id = data.azurerm_client_config.current.tenant_id
+    object_id = var.kv_identity_resource_id
+
+    key_permissions         = var.key_permissions
+    secret_permissions      = var.secret_permissions
+    certificate_permissions = var.certificate_permissions
   }
 }
 
@@ -55,8 +66,10 @@ resource "azurerm_key_vault_access_policy" "vault" {
   tenant_id    = data.azurerm_client_config.current.tenant_id
   object_id    = var.cluster_principal_id
 
-  key_permissions    = var.aks_key_permissions
-  secret_permissions = var.aks_secret_permissions
+  key_permissions         = var.aks_key_permissions
+  secret_permissions      = var.aks_secret_permissions
+  certificate_permissions = var.certificate_permissions
+
 }
 
 # We make ask Kubernetes to sign the certificate
@@ -87,16 +100,16 @@ resource "kubernetes_namespace" "vault_ns" {
   }
 }
 
-resource "kubernetes_secret" "vault_tls" {
+resource "kubernetes_secret" "vault_ha_tls" {
   metadata {
-    name      = "vault-tls"
+    name      = "vault-ha-tls"
     namespace = kubernetes_namespace.vault_ns.metadata[0].name
   }
 
   data = {
     "vault.crt" = kubernetes_certificate_signing_request_v1.vault_kube_cert_req.certificate
     "vault.key" = tls_private_key.pair.private_key_pem
-    "vault.ca"  = var.ca_cluster
+    "vault.ca"  = base64decode(var.ca_cluster)
   }
 
   type = "kubernetes.io/generic"
