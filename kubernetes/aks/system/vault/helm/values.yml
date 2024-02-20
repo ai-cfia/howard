@@ -825,7 +825,7 @@ server:
 
         seal "azurekeyvault" {
           tenant_id      = "18b5a5ed-1d86-41d3-94a0-bc27dae32ab2"
-          client_id      = "c925cbf2-6e15-48f0-ad81-4cd06c319e70"
+          client_id      = "fa9cd720-ddc4-4dc8-9be6-5d0fc8c4a3fb"
           vault_name     = "staging-vault-6a3fp"
           key_name       = "staging-vault-unseal-6a3fp"
         }
