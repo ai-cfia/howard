@@ -28,6 +28,10 @@ resource "azurerm_kubernetes_cluster" "k8s" {
     type = "SystemAssigned"
   }
 
+  key_vault_secrets_provider {
+    secret_rotation_enabled = true
+  }
+
   network_profile {
     network_plugin = "kubenet"
     service_cidr   = var.service_cidr
