@@ -517,10 +517,6 @@ server:
   # extraEnvironmentVars is a list of extra environment variables to set with the stateful set. These could be
   # used to include variables required for auto-unseal.
   extraEnvironmentVars:
-    AZURE_TENANT_ID: 18b5a5ed-1d86-41d3-94a0-bc27dae32ab2
-    VAULT_AZURE_KEYVAULT_NAME: "staging-vault-6biac"
-    VAULT_AZURE_KEY_NAME: "staging-vault-unseal-6biac"
-    VAULT_AZURE_RESOURCE: "https://vault.azure.net"
     VAULT_CACERT: /vault/userconfig/vault-ha-tls/vault.ca
     VAULT_TLSCERT: /vault/userconfig/vault-ha-tls/vault.crt
     VAULT_TLSKEY: /vault/userconfig/vault-ha-tls/vault.key
