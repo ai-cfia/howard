@@ -20,5 +20,5 @@ output "kv_identity_resource_id" {
 
 output "cluster_kubelet_identity" {
   description = "Kubelet identity object ID"
-  value       = azurerm_kubernetes_cluster.k8s.identity[0].kubelet_identity[0].object_id
+  value       = azurerm_kubernetes_cluster.k8s.kubelet_identity[0].object_id
 }
