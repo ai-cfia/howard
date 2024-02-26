@@ -79,7 +79,8 @@ global:
   # -- Labels for the all deployed pods
   podLabels: {}
 
-  # -- Add Prometheus scrape annotations to all metrics services. This can be used as an alternative to the ServiceMonitors.
+  # -- Add Prometheus scrape annotations to all metrics services. This can be used as
+  # an alternative to the ServiceMonitors.
   addPrometheusAnnotations: false
 
   # -- Toggle and define pod-level security context.
@@ -237,11 +238,13 @@ configs:
 
     ## Server properties
     # -- Run server without TLS
-    ## NOTE: This value should be set when you generate params by other means as it changes ports used by ingress template.
-    ## See https://argo-cd.readthedocs.io/en/stable/operator-manual/ingress/#option-2-multiple-ingress-objects-and-hosts for more information
-    ## we are doing it with the ingress
+    ## NOTE: This value should be set when you generate params by other means as it changes ports
+    ## used by ingress template.
+    ## See https://argo-cd.readthedocs.io/en/stable/operator-manual/ingress/#option-2-multiple-ingress-objects-and-hosts
+    ## for more information we are doing it with the ingress
     server.insecure: true
-    # -- Value for base href in index.html. Used if Argo CD is running behind reverse proxy under subpath different from /
+    # -- Value for base href in index.html. Used if Argo CD is running behind reverse proxy under subpath different
+    ## from /
     server.basehref: /
     # -- Used if Argo CD is running behind reverse proxy under subpath different from /
     server.rootpath: ''
@@ -259,7 +262,8 @@ configs:
     reposerver.parallelism.limit: 0
 
     ## ApplicationSet Properties
-    # -- Modify how application is synced between the generator and the cluster. One of: `sync`, `create-only`, `create-update`, `create-delete`
+    # -- Modify how application is synced between the generator and the cluster.
+    # One of: `sync`, `create-only`, `create-update`, `create-delete`
     applicationsetcontroller.policy: sync
     # -- Enables use of the Progressive Syncs capability
     applicationsetcontroller.enable.progressive.syncs: false
@@ -340,7 +344,6 @@ configs:
     extraHosts: ''
 
   # Repository TLS certificates
-  # Ref: https://argo-cd.readthedocs.io/en/stable/operator-manual/declarative-setup/#repositories-using-self-signed-tls-certificates-or-are-signed-by-custom-ca
   tls:
     # -- Annotations to be added to argocd-tls-certs-cm configmap
     annotations: {}
