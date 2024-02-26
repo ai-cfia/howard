@@ -2,27 +2,28 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: argocd-server-http
-  namespace: argocd
+  name: finesse-frontend-ingress
+  namespace: finesse
   annotations:
     external-dns.alpha.kubernetes.io/target: inspection.alpha.canada.ca
     cert-manager.io/cluster-issuer: letsencrypt-prod
-    nginx.ingress.kubernetes.io/ssl-passthrough: "true"
+    nginx.ingress.kubernetes.io/add-base-url: "true"
     ingress.kubernetes.io/force-ssl-redirect: "true"
+    kubernetes.io/tls-acme: "true"
 spec:
   ingressClassName: nginx
-  rules:
-  - host: argo-cd.inspection.alpha.canada.ca
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: argocd-server
-            port:
-              name: http
   tls:
-  - hosts:
-    - argo-cd.inspection.alpha.canada.ca
-    secretName: argocd-secret
+    - hosts:
+        - argo-cd.inspection.alpha.canada.ca
+      secretName: argocd-secret
+  rules:
+    - host: argo-cd.inspection.alpha.canada.ca
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: argocd-server
+                port:
+                  name: http
