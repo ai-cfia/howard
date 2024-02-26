@@ -2,21 +2,23 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: finesse
-  namespace: argo-cd
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
   annotations:
-    argocd.argoproj.io/sync-wave: "2"
+    argocd.argoproj.io/sync-wave: "0"
 spec:
   project: default
   destination:
     server: https://kubernetes.default.svc
     namespace: finesse
   source:
-    repoURL: https://github.com/ai-cfia/howard
-    path: kubernetes/aks/apps/finesse
-    targetRevision: HEAD 
+    repoURL: https://github.com/ai-cfia/howard.git
+    path: kubernetes/aks/apps/finesse/base
+    targetRevision: HEAD
   syncPolicy:
     automated:
-        selfHeal: true
+      selfHeal: true
     syncOptions:
     - CreateNamespace=true
 
