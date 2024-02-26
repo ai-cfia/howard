@@ -1,0 +1,31 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: vault-ui
+  namespace: vault
+  labels:
+    app.kubernetes.io/name: vault-ui
+    app.kubernetes.io/instance: vault
+  annotations:
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+    cert-manager.io/issuer: "letsencrypt-prod"
+    ingress.kubernetes.io/force-ssl-redirect: "true"
+    kubernetes.io/tls-acme: "true"
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - "vault.inspection.alpha.canada.ca"
+      secretName: vault-ui
+  rules:
+    - host: "vault.inspection.alpha.canada.ca"
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: vault-ui
+                port:
+                  name: https
