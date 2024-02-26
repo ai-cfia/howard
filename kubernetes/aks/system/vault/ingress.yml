@@ -9,7 +9,7 @@ metadata:
     app.kubernetes.io/instance: vault
   annotations:
     external-dns.alpha.kubernetes.io/target: inspection.alpha.canada.ca
-    cert-manager.io/issuer: letsencrypt-prod
+    cert-manager.io/cluster-issuer: letsencrypt-prod
     nginx.ingress.kubernetes.io/rewrite-target: /
     nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
     kubernetes.io/tls-acme: "true"
