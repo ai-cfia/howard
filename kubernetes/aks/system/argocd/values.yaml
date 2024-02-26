@@ -29,7 +29,7 @@ crds:
   # -- Install and upgrade CRDs
   install: true
   # -- Keep CRDs on chart uninstall
-  keep: false
+  keep: true
   # -- Annotations to be added to all CRDs
   annotations: {}
   # -- Addtional labels to be added to all CRDs
@@ -39,7 +39,7 @@ crds:
 global:
   # -- Default domain used by all components
   ## Used for ingresses, certificates, SSO, notifications, etc.
-  domain: argocd.example.com
+  domain: argo-cd.inspection.alpha.canada.ca
 
   # -- Common labels for the all resources
   additionalLabels: {}
@@ -181,17 +181,17 @@ configs:
     timeout.hard.reconciliation: 0s
 
     # Dex configuration
-    # dex.config: |
-    #   connectors:
-    #     # GitHub example
-    #     - type: github
-    #       id: github
-    #       name: GitHub
-    #       config:
-    #         clientID: aabbccddeeff00112233
-    #         clientSecret: $dex.github.clientSecret # Alternatively $<some_K8S_secret>:dex.github.clientSecret
-    #         orgs:
-    #         - name: your-github-org
+    dex.config: |
+      connectors:
+        # GitHub example
+        - type: github
+          id: github
+          name: GitHub
+          config:
+            clientID: b9119368462256e0e956
+            clientSecret: $dex.github.clientSecret # Alternatively $<some_K8S_secret>:dex.github.clientSecret
+            orgs:
+             - name: ai-cfia
 
     # OIDC configuration as an alternative to dex (optional).
     # oidc.config: |
@@ -283,22 +283,12 @@ configs:
 
     # -- The name of the default role which Argo CD will falls back to, when authorizing API requests (optional).
     # If omitted or empty, users may be still be able to login, but will see no apps, projects, etc...
-    policy.default: ''
+    policy.default: role:readonly
 
     # -- File containing user-defined policies and role definitions.
     # @default -- `''` (See [values.yaml])
-    policy.csv: ''
-    # Policy rules are in the form:
-    #  p, subject, resource, action, object, effect
-    # Role definitions and bindings are in the form:
-    #  g, subject, inherited-subject
-    # policy.csv: |
-    #   p, role:org-admin, applications, *, */*, allow
-    #   p, role:org-admin, clusters, get, *, allow
-    #   p, role:org-admin, repositories, *, *, allow
-    #   p, role:org-admin, logs, get, *, allow
-    #   p, role:org-admin, exec, create, */*, allow
-    #   g, your-github-org:your-team, role:org-admin
+    policy.csv: |
+      g, ai-cfia:devops, role:admin
 
     # -- OIDC scopes to examine during rbac enforcement (in addition to `sub` scope).
     # The scope value can be a string, or a list of strings.
@@ -3416,4 +3406,3 @@ notifications:
     # For more information: https://argo-cd.readthedocs.io/en/stable/operator-manual/notifications/triggers/#default-triggers
     # defaultTriggers: |
     #   - on-sync-status-unknown
-

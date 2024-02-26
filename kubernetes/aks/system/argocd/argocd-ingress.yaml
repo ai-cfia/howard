@@ -2,7 +2,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: argocd-server-http
-  namespace: argo-cd
+  namespace: argocd
   annotations:
     external-dns.alpha.kubernetes.io/target: inspection.alpha.canada.ca
     cert-manager.io/cluster-issuer: letsencrypt-prod
@@ -11,17 +11,17 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host: argocd.inspection.alpha.canada.ca
+  - host: argo-cd.inspection.alpha.canada.ca
     http:
       paths:
       - path: /
         pathType: Prefix
         backend:
           service:
-            name: argo-cd-argocd-server
+            name: argocd-server
             port:
               name: http
   tls:
   - hosts:
-    - argocd.inspection.alpha.canada.ca
+    - argo-cd.inspection.alpha.canada.ca
     secretName: argocd-secret
