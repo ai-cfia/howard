@@ -1,3 +1,4 @@
+---
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
@@ -6,11 +7,11 @@ resources:
   - ../finesse/
 
   # System applications
- - ../../system/cert-manager/
- - ../../system/vault/
- - ../../system/argocd/
- - ../../system/external-dns/
- - ../../system/ingress-nginx/
+  - ../../system/cert-manager/
+  - ../../system/vault/
+  - ../../system/argocd/
+  - ../../system/external-dns/
+  - ../../system/ingress-nginx/
 
 
 patches:
@@ -27,4 +28,3 @@ patches:
           selfHeal: true
   target:
     kind: Application
-
