@@ -16,9 +16,8 @@ spec:
     repoURL: https://github.com/ai-cfia/howard.git
     path: kubernetes/aks/apps/finesse/base
     targetRevision: HEAD
-  syncPolicy:
-    automated:
-      selfHeal: true
-    syncOptions:
-    - CreateNamespace=true
-
+    syncPolicy:
+      automated:
+        selfHeal: true
+      syncOptions:
+        - CreateNamespace=true
