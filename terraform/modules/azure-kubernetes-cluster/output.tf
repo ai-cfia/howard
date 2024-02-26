@@ -18,7 +18,7 @@ output "kv_identity_resource_id" {
   value       = azurerm_kubernetes_cluster.k8s.key_vault_secrets_provider[0].secret_identity[0].object_id
 }
 
-output "cluster_kubelet_identity" {
-  description = "Kubelet identity object ID"
-  value       = azurerm_kubernetes_cluster.k8s.kubelet_identity[0].client_id
-}
+#output "cluster_kubelet_identity" {
+#  description = "Kubelet identity object ID"
+#  value       = azurerm_kubernetes_cluster.k8s.kubelet_identity[0].client_id
+#}
