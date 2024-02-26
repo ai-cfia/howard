@@ -788,7 +788,7 @@ server:
         plugin_directory = "/vault/plugins"
 
         listener "tcp" {
-          tls_disable = true
+          tls_disable = false
           address = "[::]:8200"
           cluster_address = "[::]:8201"
           tls_cert_file = "/vault/userconfig/vault-ha-tls/vault.crt"
