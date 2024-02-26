@@ -11,7 +11,7 @@ metadata:
     external-dns.alpha.kubernetes.io/target: inspection.alpha.canada.ca
     nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
     cert-manager.io/issuer: letsencrypt-prod
-    nginx.ingress.kubernetes.io/rewrite-target: /$2
+    nginx.ingress.kubernetes.io/rewrite-target: /
     ingress.kubernetes.io/force-ssl-redirect: "true"
     kubernetes.io/tls-acme: "true"
 spec:
