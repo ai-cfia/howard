@@ -17,9 +17,6 @@ spec:
         releaseName: kube-prometheus-stack
         valueFiles:
           - $values/kubernetes/aks/system/monitoring/helm/kube-prometheus-stack-values.yaml
-        parameters:
-          - name: includeCrds
-            value: "true"
       repoURL: https://prometheus-community.github.io/helm-charts
       targetRevision: 56.13.1
     - repoURL: https://github.com/ai-cfia/howard.git
