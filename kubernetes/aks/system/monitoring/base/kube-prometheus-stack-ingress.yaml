@@ -7,7 +7,6 @@ metadata:
   annotations:
     external-dns.alpha.kubernetes.io/target: inspection.alpha.canada.ca
     cert-manager.io/cluster-issuer: letsencrypt-prod
-    nginx.ingress.kubernetes.io/add-base-url: "true"
     ingress.kubernetes.io/force-ssl-redirect: "true"
     kubernetes.io/tls-acme: "true"
 spec:
@@ -24,6 +23,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: kube-prometheus-stack-grafana-headless
+                name: kube-prometheus-stack-grafana
                 port:
-                  number: 9094
+                  number: 80
