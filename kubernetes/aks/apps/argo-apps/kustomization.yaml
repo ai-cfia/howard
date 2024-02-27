@@ -26,6 +26,6 @@ patches:
       spec:
         syncPolicy:
           automated:
-          selfHeal: true
+            selfHeal: true
     target:
       kind: Application
