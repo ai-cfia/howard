@@ -28,7 +28,7 @@ variable "dns_a_records" {
   type        = list(string)
 }
 
-variable "cluster_kubelet_identity" {
-  description = "Kubernetes (AKS) cluster kubelet identity"
-  type        = string
-}
+# variable "cluster_kubelet_identity" {
+#   description = "Kubernetes (AKS) cluster kubelet identity"
+#   type        = string
+# }
