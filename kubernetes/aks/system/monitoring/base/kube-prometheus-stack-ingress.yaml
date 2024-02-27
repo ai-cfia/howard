@@ -24,6 +24,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: kube-prometheus-stack-grafana
+                name: kube-prometheus-stack-grafana-headless
                 port:
-                  name: http
+                  number: 9094
