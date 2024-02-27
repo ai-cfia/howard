@@ -9,7 +9,6 @@ on:
       - synchronize
 
 jobs:
-
   markdown-check:
     uses:
       ai-cfia/github-workflows/.github/workflows/workflow-markdown-check.yml@main
