@@ -18,7 +18,7 @@ spec:
         valueFiles:
           - $values/kubernetes/aks/system/monitoring/helm/kube-prometheus-stack-values.yaml
         parameters:
-          - name: include-crds
+          - name: includeCrds
             value: true
       repoURL: https://prometheus-community.github.io/helm-charts
       targetRevision: 56.13.1
