@@ -1,7 +1,19 @@
----
+# Based on https://github.com/kubernetes-sigs/kubespray
 extends: default
 
+ignore: |
+  .git/
+
 rules:
-  line-length:
-    max: 1000 # Some Helm charts have fixed values that cannot be modified without altering the chart itself.
-    allow-non-breakable-inline-mappings: true
+  braces:
+    min-spaces-inside: 0
+    max-spaces-inside: 1
+  brackets:
+    min-spaces-inside: 0
+    max-spaces-inside: 1
+  indentation:
+    spaces: 2
+    indent-sequences: consistent
+  line-length: disable
+  new-line-at-end-of-file: disable
+  truthy: disable
