@@ -39,7 +39,7 @@ crds:
 global:
   # -- Default domain used by all components
   ## Used for ingresses, certificates, SSO, notifications, etc.
-  domain: argo-cd.inspection.alpha.canada.ca
+  domain: argocd.inspection.alpha.canada.ca
 
   # -- Common labels for the all resources
   additionalLabels: {}
