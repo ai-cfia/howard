@@ -190,7 +190,7 @@ configs:
           name: GitHub
           config:
             clientID: b9119368462256e0e956
-            clientSecret: $dex.github.clientSecret # Alternatively $<some_K8S_secret>:dex.github.clientSecret
+            clientSecret: $dex-secret:dex.github.clientSecret
             orgs:
              - name: ai-cfia
 
