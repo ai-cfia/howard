@@ -12,7 +12,7 @@ spec:
     namespace: argocd
     server: https://kubernetes.default.svc
   sources:
-    - chart: coder-v2
+    - chart: coder
       helm:
         releaseName: coder
         valueFiles:
