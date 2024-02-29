@@ -365,4 +365,3 @@ extraTemplates:
   #      name: my-configmap
   #    data:
   #      key: {{ .Values.myCustomValue | quote }}
-
