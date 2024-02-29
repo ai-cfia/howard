@@ -269,7 +269,7 @@ coder:
   # coder.service -- The Service object to expose for Coder.
   service:
     # coder.service.enable -- Whether to create the Service object.
-    enable: true
+    enable: false
     # coder.service.type -- The type of service to expose. See:
     # https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types
     type: ClusterIP
