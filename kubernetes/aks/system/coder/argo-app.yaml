@@ -9,7 +9,7 @@ metadata:
 spec:
   project: default
   destination:
-    namespace: argocd
+    namespace: coder
     server: https://kubernetes.default.svc
   sources:
     - chart: coder
