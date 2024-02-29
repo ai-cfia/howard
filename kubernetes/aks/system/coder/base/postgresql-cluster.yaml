@@ -5,7 +5,7 @@ metadata:
   namespace: coder
 spec:
   instances: 3
-  
+
   superuserSecret:
     name: superuser-secret
 
