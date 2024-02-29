@@ -268,10 +268,10 @@ coder:
   # coder.service -- The Service object to expose for Coder.
   service:
     # coder.service.enable -- Whether to create the Service object.
-    enable: false
+    enable: true
     # coder.service.type -- The type of service to expose. See:
     # https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types
-    type: LoadBalancer
+    type: ClusterIP
     # coder.service.sessionAffinity -- Must be set to ClientIP or None
     # AWS ELB does not support session stickiness based on ClientIP, so you must set this to None.
     # The error message you might see: "Unsupported load balancer affinity: ClientIP"
@@ -305,7 +305,7 @@ coder:
     # coder.ingress.enable -- Whether to create the Ingress object. If using an
     # Ingress, we recommend not specifying coder.tls.secretNames as the Ingress
     # will handle TLS termination.
-    enable: true
+    enable: false
     # coder.ingress.className -- The name of the Ingress class to use.
     className: "nginx"
     # coder.ingress.host -- The hostname to match on.
