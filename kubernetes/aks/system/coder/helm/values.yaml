@@ -54,7 +54,7 @@ coder:
   # coder.envUseClusterAccessURL -- Determines whether the CODER_ACCESS_URL env
   # is added to coder.env if it's not already set there. Set this to false if
   # defining CODER_ACCESS_URL in coder.envFrom to avoid conflicts.
-  envUseClusterAccessURL: true
+  envUseClusterAccessURL: false
 
   # coder.image -- The image to use for Coder.
   image:
@@ -305,7 +305,7 @@ coder:
     # coder.ingress.enable -- Whether to create the Ingress object. If using an
     # Ingress, we recommend not specifying coder.tls.secretNames as the Ingress
     # will handle TLS termination.
-    enable: false
+    enable: true
     # coder.ingress.className -- The name of the Ingress class to use.
     className: "nginx"
     # coder.ingress.host -- The hostname to match on.
