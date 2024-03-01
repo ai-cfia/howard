@@ -5,7 +5,6 @@ coder:
   # for information about what environment variables can be set.
   # Note: The following environment variables are set by default and cannot be
   # overridden:
-  # - CODER_HTTP_ADDRESS: set to 0.0.0.0:8080 and cannot be changed.
   # - CODER_TLS_ADDRESS: set to 0.0.0.0:8443 if tls.secretName is not empty.
   # - CODER_TLS_ENABLE: set if tls.secretName is not empty.
   # - CODER_TLS_CERT_FILE: set if tls.secretName is not empty.
@@ -55,7 +54,11 @@ coder:
   # coder.envUseClusterAccessURL -- Determines whether the CODER_ACCESS_URL env
   # is added to coder.env if it's not already set there. Set this to false if
   # defining CODER_ACCESS_URL in coder.envFrom to avoid conflicts.
+<<<<<<< HEAD
   envUseClusterAccessURL: true
+=======
+  envUseClusterAccessURL: false
+>>>>>>> origin/main
 
   # coder.image -- The image to use for Coder.
   image:
@@ -239,6 +242,7 @@ coder:
   # coder.affinity -- Allows specifying an affinity rule for the `coder` deployment.
   # The default rule prefers to schedule coder pods on different
   # nodes, which is only applicable if coder.replicaCount is greater than 1.
+<<<<<<< HEAD
   affinity:
     podAntiAffinity:
       preferredDuringSchedulingIgnoredDuringExecution:
@@ -251,6 +255,20 @@ coder:
                     - "coder"
             topologyKey: kubernetes.io/hostname
           weight: 1
+=======
+  # affinity:
+  #   podAntiAffinity:
+  #     preferredDuringSchedulingIgnoredDuringExecution:
+  #       - podAffinityTerm:
+  #           labelSelector:
+  #             matchExpressions:
+  #               - key: app.kubernetes.io/instance
+  #                 operator: In
+  #                 values:
+  #                   - "coder"
+  #           topologyKey: kubernetes.io/hostname
+  #         weight: 1
+>>>>>>> origin/main
 
   # coder.tolerations -- Tolerations for tainted nodes.
   # See: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
