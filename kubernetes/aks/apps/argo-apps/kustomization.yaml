@@ -15,6 +15,7 @@ resources:
   - ../../system/monitoring/
   - ../../system/cloudnativepg/
   - ../../system/coder
+  - ../../system/cloudbeaver
 
 
 patches:
