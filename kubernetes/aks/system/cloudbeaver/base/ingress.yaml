@@ -9,7 +9,7 @@ metadata:
     ingress.kubernetes.io/force-ssl-redirect: "true"
     kubernetes.io/tls-acme: "true"
 spec:
-  ingressClassName: cloudbeaver
+  ingressClassName: nginx
   tls:
     - hosts:
         - cloudbeaver.inspection.alpha.canada.ca
