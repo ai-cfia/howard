@@ -1,0 +1,25 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - deployment.yaml
+  - ingress.yaml
+  - namespace.yaml 
+
+configMapGenerator:
+  - name: dbeaver-product-configmap
+    files:
+      - config/product.conf
+  - name: dbeaver-sources-user-configmap
+    files:
+      - config/data-sources.json
+  - name: dbeaver-sources-global-configmap
+    files:
+      - config/data-sources.json
+  - name: dbeaver-server-configmap
+    files:
+      - config/cloudbeaver.conf
+  - name: dbeaver-initial-data-configmap
+    files:
+      - config/initial-data.conf
