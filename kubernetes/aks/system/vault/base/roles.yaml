@@ -1,0 +1,50 @@
+apiVersion: redhatcop.redhat.io/v1alpha1
+kind: KubernetesAuthEngineRole
+metadata:
+  name: config-admin
+spec:
+  authentication:
+    path: kubernetes
+    role: config-admin
+  path: kubernetes
+  policies:
+    - config-admin
+  targetServiceAccounts:
+    - default
+  targetNamespaces:
+    targetNamespaces:
+      - vault
+---
+apiVersion: redhatcop.redhat.io/v1alpha1
+kind: KubernetesAuthEngineRole
+metadata:
+  name: secrets-writer
+spec:
+  authentication:
+    path: kubernetes
+    role: config-admin
+  path: kubernetes
+  policies:
+    - secrets-writer
+  targetServiceAccounts:
+    - "*"
+  targetNamespaces:
+    targetNamespaces:
+      - "*"
+---
+apiVersion: redhatcop.redhat.io/v1alpha1
+kind: KubernetesAuthEngineRole
+metadata:
+  name: secrets-reader
+spec:
+  authentication:
+    path: kubernetes
+    role: config-admin
+  path: kubernetes
+  policies:
+    - secrets-reader
+  targetServiceAccounts:
+    - "*"
+  targetNamespaces:
+    targetNamespaces:
+      - "*"
