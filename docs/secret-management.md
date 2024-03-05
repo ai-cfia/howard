@@ -32,7 +32,7 @@ in a Kubernetes environment.
 
 The following diagram illustrates the workflow of the Vault Agent Injector and
 how developers can manage secrets of hosted applications:
-![Developer workflow diagram](img/Vault-argoCD-workflow.svg)
+![Developer workflow diagram](img/vault-argocd-workflow.svg)
 
 ## Secret management process
 
