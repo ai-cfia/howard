@@ -787,7 +787,7 @@ grafana.ini:
      team_ids:
      allowed_organizations: ai-cfia
      client_id: 56dea63f5048a5516b71
-     client_secret: $grafana-secret:github.clientSecret
+     client_secret: $grafana-github-secret:github.clientSecret
 ## LDAP Authentication can be enabled with the following values on grafana.ini
 ## NOTE: Grafana will fail to start if the value for ldap.toml is invalid
   # auth.ldap:
