@@ -32,6 +32,38 @@ spec:
               port: 8978
             initialDelaySeconds: 40
             periodSeconds: 10
+          volumeMounts:
+            - name: dbeaver-product
+              mountPath: /opt/cloudbeaver/conf/product.conf
+              subPath: product.conf
+            - name: dbeaver-sources-user
+              mountPath: /opt/cloudbeaver/workspace/user-projects/admin.dbeaver/.dbeaver/data-sources.json
+              subPath: data-sources.json
+            - name: dbeaver-sources-global
+              mountPath: /opt/cloudbeaver/workspace/GlobalConfiguration/.dbeaver/data-sources.json
+              subPath: data-sources.json
+            - name: dbeaver-server
+              mountPath: /opt/cloudbeaver/conf/cloudbeaver.conf
+              subPath: cloudbeaver.conf
+            - name: dbeaver-initial-data
+              mountPath: /opt/cloudbeaver/conf/initial-data.conf
+              subPath: initial-data.conf
+      volumes:
+        - name: dbeaver-product
+          configMap:
+            name: dbeaver-product-configmap-76t74t24mh
+        - name: dbeaver-sources-user
+          configMap:
+            name: dbeaver-sources-user-configmap-t8m94c4gb7
+        - name: dbeaver-sources-global
+          configMap:
+            name: dbeaver-sources-global-configmap-t8m94c4gb7
+        - name: dbeaver-server
+          configMap:
+            name: dbeaver-server-configmap-9tgdffkdbb
+        - name: dbeaver-initial-data
+          configMap:
+            name: dbeaver-initial-data-configmap-t58fgmffkg
 
 ---
 apiVersion: v1

@@ -1,0 +1,29 @@
+{
+    "folders": {
+     "My DBs": {}
+    },
+    "connections": {
+        "DB-example-01": {
+        "provider": "postgresql",
+        "driver": "postgres-jdbc",
+        "name": "DB-example-01",
+        "description": "Postgre connection",
+        "save-password": false,
+        "show-system-objects": true,
+        "read-only": false,
+        "folder": "My DBs",
+        "configuration": {
+        "user": "my-db-user",
+        "host": "postgres",
+        "port": "5432",
+        "database": "my-postgre-db",
+        "url": "jdbc:postgresql://postgres:5432/my-postgre-db",
+        "type": "dev",
+        "provider-properties": {
+            "@dbeaver-show-non-default-db@": "true"
+        },
+        "auth-model": "native"
+        }
+        }
+    }
+}
