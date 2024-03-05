@@ -17,3 +17,8 @@ output "kv_identity_resource_id" {
   description = "The client ID of the managed identity used by the Azure Key Vault Secrets Provider"
   value       = azurerm_kubernetes_cluster.k8s.key_vault_secrets_provider[0].secret_identity[0].object_id
 }
+
+#output "cluster_kubelet_identity" {
+#  description = "Kubelet identity object ID"
+#  value       = azurerm_kubernetes_cluster.k8s.kubelet_identity[0].client_id
+#}

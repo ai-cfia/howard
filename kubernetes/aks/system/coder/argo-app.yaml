@@ -1,0 +1,32 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: coder
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  destination:
+    namespace: coder
+    server: https://kubernetes.default.svc
+  sources:
+    - chart: coder
+      helm:
+        releaseName: coder
+        valueFiles:
+          - $values/kubernetes/aks/system/coder/helm/values.yaml
+      repoURL: https://helm.coder.com/v2
+      targetRevision: 2.8.3
+    - repoURL: https://github.com/ai-cfia/howard.git
+      targetRevision: HEAD
+      ref: values
+    - repoURL: https://github.com/ai-cfia/howard.git
+      path: kubernetes/aks/system/coder/base
+      targetRevision: HEAD
+  syncPolicy:
+    automated:
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

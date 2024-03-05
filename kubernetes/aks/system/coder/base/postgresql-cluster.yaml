@@ -1,0 +1,21 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: coder-pgsql
+  namespace: coder
+spec:
+  instances: 3
+
+  imageName: ghcr.io/cloudnative-pg/postgresql:16.1
+
+  superuserSecret:
+    name: superuser-secret
+
+  bootstrap:
+    initdb:
+      database: coder
+      owner: coder
+      secret:
+        name: coder-pgsql-secret
+  storage:
+    size: 20Gi
