@@ -5,6 +5,7 @@ kind: Kustomization
 resources:
   # User applications
   - ../finesse/
+  - ../nachet/
 
   # System applications
   - ../../system/cert-manager/
