@@ -5,6 +5,7 @@ metadata:
   name: nachet-backend-ingress
   namespace: nachet
   annotations:
+    nginx.ingress.kubernetes.io/whitelist-source-range: 205.194.32.0/24
     external-dns.alpha.kubernetes.io/target: inspection.alpha.canada.ca
     cert-manager.io/cluster-issuer: letsencrypt-prod
     nginx.ingress.kubernetes.io/use-regex: "true"
@@ -39,6 +40,7 @@ metadata:
   name: nachet-frontend-ingress
   namespace: nachet
   annotations:
+    nginx.ingress.kubernetes.io/whitelist-source-range: 205.194.32.0/24
     external-dns.alpha.kubernetes.io/target: inspection.alpha.canada.ca
     cert-manager.io/cluster-issuer: letsencrypt-prod
     nginx.ingress.kubernetes.io/add-base-url: "true"

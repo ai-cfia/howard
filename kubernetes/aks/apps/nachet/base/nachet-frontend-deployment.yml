@@ -1,0 +1,43 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nachet-frontend
+  namespace: nachet
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nachet-frontend
+  template:
+    metadata:
+      labels:
+        app: nachet-frontend
+    spec:
+      serviceAccountName: secrets-reader
+      containers:
+        - name: nachet-frontend
+          image: ghcr.io/ai-cfia/nachet-frontend:100-TopClassifications
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 3000
+            initialDelaySeconds: 60
+            periodSeconds: 10
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nachet-frontend-svc
+  namespace: nachet
+spec:
+  clusterIP: None
+  selector:
+    app: nachet-frontend
+  ports:
+    - protocol: TCP
+      port: 3000
