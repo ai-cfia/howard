@@ -286,9 +286,9 @@ ingress:
 
 
   tls:
-    - hosts:
-        - grafana.inspection.alpha.canada.ca
-      secretName: grafana-tls-secret
+  - hosts:
+      - grafana.inspection.alpha.canada.ca
+    secretName: grafana-tls-secret
 
 resources: {}
 #  limits:
@@ -357,11 +357,11 @@ persistence:
   enabled: true
   # storageClassName: default
   accessModes:
-    - ReadWriteOnce
+  - ReadWriteOnce
   size: 20Gi
   # annotations: {}
   finalizers:
-    - kubernetes.io/pvc-protection
+  - kubernetes.io/pvc-protection
   # selectorLabels: {}
   ## Sub-directory of the PV to mount. Can be templated.
   # subPath: ""
@@ -414,7 +414,7 @@ initChownData:
       type: RuntimeDefault
     capabilities:
       add:
-        - CHOWN
+      - CHOWN
 
 # Administrator credentials when not using an existing secret (see below)
 adminUser: admin
@@ -775,19 +775,18 @@ grafana.ini:
     url: https://grafana.net
   server:
     domain: "{{ if (and .Values.ingress.enabled .Values.ingress.hosts) }}{{ .Values.ingress.hosts | first }}{{ else }}''{{ end }}"
-  server:
-     root_url: https://grafana.inspection.alpha.canada.ca
+    root_url: https://grafana.inspection.alpha.canada.ca
   auth.github:
-     enabled: true
-     allow_sign_up: false
-     scopes: user:email,read:org
-     auth_url: https://github.com/login/oauth/authorize
-     token_url: https://github.com/login/oauth/access_token
-     api_url: https://api.github.com/user
-     team_ids:
-     allowed_organizations: ai-cfia
-     client_id: 56dea63f5048a5516b71
-     client_secret: $grafana-github-secret:github.clientSecret
+    enabled: true
+    allow_sign_up: false
+    scopes: user:email,read:org
+    auth_url: https://github.com/login/oauth/authorize
+    token_url: https://github.com/login/oauth/access_token
+    api_url: https://api.github.com/user
+    team_ids:
+    allowed_organizations: ai-cfia
+    client_id: 56dea63f5048a5516b71
+    client_secret: $grafana-github-secret:github.clientSecret
 ## LDAP Authentication can be enabled with the following values on grafana.ini
 ## NOTE: Grafana will fail to start if the value for ldap.toml is invalid
   # auth.ldap:
