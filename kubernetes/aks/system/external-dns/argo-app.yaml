@@ -4,17 +4,26 @@ kind: Application
 metadata:
   name: external-dns
   namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
   destination:
-    server: https://kubernetes.default.svc
     namespace: external-dns
-  source:
-    repoURL: https://github.com/ai-cfia/howard.git
-    path: kubernetes/aks/system/external-dns/base
-    targetRevision: HEAD
+    server: https://kubernetes.default.svc
+  sources:
+    - chart: external-dns
+      helm:
+        releaseName: external-dns
+        valueFiles:
+          - $values/kubernetes/aks/system/external-dns/helm/values.yaml
+      repoURL: https://charts.bitnami.com/bitnami
+      targetRevision: 6.36.1
+    - repoURL: https://github.com/ai-cfia/howard.git
+      targetRevision: HEAD
+      ref: values
   syncPolicy:
     automated:
       selfHeal: true
