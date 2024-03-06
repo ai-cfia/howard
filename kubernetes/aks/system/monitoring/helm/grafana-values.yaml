@@ -784,9 +784,10 @@ grafana.ini:
     token_url: https://github.com/login/oauth/access_token
     api_url: https://api.github.com/user
     team_ids:
-    allowed_organizations: ai-cfia
+    allowed_organizations: ["@ai-cfia"]
     client_id: 56dea63f5048a5516b71
     client_secret: ${GITHUB_CLIENT_SECRET}
+    role_attribute_path: contains(groups[*], '@ai-cfia/devops') && 'GrafanaAdmin' ||  'Viewer'
 ## LDAP Authentication can be enabled with the following values on grafana.ini
 ## NOTE: Grafana will fail to start if the value for ldap.toml is invalid
   # auth.ldap:
