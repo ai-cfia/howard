@@ -1,10 +1,6 @@
 ---
 kratos:
   config:
-    dsn: postgres://kratos:your_password@ori-postgresql-service:5432/kratos
-    secrets:
-      default:
-        - dolore occaecat nostrud Ut
     identity:
       default_schema_id: default
       schemas:

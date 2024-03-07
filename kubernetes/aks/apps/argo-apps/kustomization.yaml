@@ -15,7 +15,7 @@ resources:
   - ../../system/monitoring/
   - ../../system/cloudnativepg/
   - ../../system/coder/
-  # - ../../system/ori/
+  - ../../system/ori/
 
 patches:
   - patch: |-

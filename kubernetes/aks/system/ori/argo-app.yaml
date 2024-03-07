@@ -18,14 +18,11 @@ spec:
       helm:
         releaseName: ori-kratos
         valueFiles:
-          - $values/kubernetes/aks/system/ori/base/kratos/values.yaml
+          - $values/kubernetes/aks/system/ori/base/kratos/helm/values.yaml
       repoURL: https://k8s.ory.sh/helm/charts
       targetRevision: 0.39.1
     - repoURL: https://github.com/ai-cfia/howard.git
       path: kubernetes/aks/system/ori/base
-      targetRevision: HEAD
-    - repoURL: https://github.com/ai-cfia/howard.git
-      path: kubernetes/aks/system/ori/kratos
       targetRevision: HEAD
   syncPolicy:
     automated:
