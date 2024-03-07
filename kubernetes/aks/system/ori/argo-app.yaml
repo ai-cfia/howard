@@ -22,6 +22,9 @@ spec:
       repoURL: https://k8s.ory.sh/helm/charts
       targetRevision: 0.39.1
     - repoURL: https://github.com/ai-cfia/howard.git
+      targetRevision: HEAD
+      ref: values
+    - repoURL: https://github.com/ai-cfia/howard.git
       path: kubernetes/aks/system/ori/base
       targetRevision: HEAD
   syncPolicy:
