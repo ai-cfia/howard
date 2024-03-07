@@ -1106,11 +1106,11 @@ serverTelemetry:
   # Enable support for the Prometheus Operator. Currently, this chart does not support
   # authenticating to Vault's metrics endpoint, so the following `telemetry{}` must be included
   # in the `listener "tcp"{}` stanza
-  telemetry {
-    unauthenticated_metrics_access = "true"
-    prometheus_retention_time = "30s"
-    disable_hostname = true
-  }
+    telemetry {
+      unauthenticated_metrics_access = "true"
+      prometheus_retention_time = "30s"
+      disable_hostname = true
+    }
   #
   # See the `standalone.config` for a more complete example of this.
   #
