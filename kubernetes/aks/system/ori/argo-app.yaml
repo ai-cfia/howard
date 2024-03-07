@@ -27,9 +27,6 @@ spec:
     - repoURL: https://github.com/ai-cfia/howard.git
       path: kubernetes/aks/system/ori/base
       targetRevision: HEAD
-    - repoURL: https://github.com/ai-cfia/howard.git
-      path: kubernetes/aks/system/ori/base/postgresql
-      targetRevision: HEAD
   syncPolicy:
     automated:
       selfHeal: true
