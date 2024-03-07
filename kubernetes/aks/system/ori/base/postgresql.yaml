@@ -3,6 +3,7 @@ apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
 metadata:
   name: ori-postgresql
+  namespace: ori
 spec:
   instances: 3
   imageName: ghcr.io/cloudnative-pg/postgresql:15.4
