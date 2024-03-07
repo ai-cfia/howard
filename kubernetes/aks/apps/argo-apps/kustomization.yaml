@@ -15,8 +15,8 @@ resources:
   - ../../system/ingress-nginx/
   - ../../system/monitoring/
   - ../../system/cloudnativepg/
-  - ../../system/coder
-
+  - ../../system/coder/
+  - ../../system/ori/
 
 patches:
   - patch: |-
