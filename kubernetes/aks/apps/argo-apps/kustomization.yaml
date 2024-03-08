@@ -12,7 +12,7 @@ resources:
   - ../../system/vault/
   - ../../system/argocd/
   - ../../system/external-dns/
-  - ../../system/ingress-nginx/
+#  - ../../system/ingress-nginx/
   - ../../system/monitoring/
   - ../../system/cloudnativepg/
   - ../../system/coder/
