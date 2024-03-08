@@ -821,6 +821,7 @@ controller:
       annotations:
         prometheus.io/scrape: "true"
         prometheus.io/port: "10254"
+        prometheus.io/scheme: "http"
       # -- Labels to be added to the metrics service resource
       labels: {}
       # clusterIP: ""
@@ -828,12 +829,12 @@ controller:
       # -- List of IP addresses at which the stats-exporter service is available
       ## Ref: https://kubernetes.io/docs/concepts/services-networking/service/#external-ips
       ##
-      externalIPs: ["4.172.120.55"]
+      externalIPs: []
       # loadBalancerIP: ""
       loadBalancerSourceRanges: []
       servicePort: 10254
       type: ClusterIP
-      externalTrafficPolicy: "Local"
+      # externalTrafficPolicy: ""
       # nodePort: ""
     serviceMonitor:
       enabled: true
