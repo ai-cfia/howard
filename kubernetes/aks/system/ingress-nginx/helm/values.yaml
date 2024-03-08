@@ -828,12 +828,12 @@ controller:
       # -- List of IP addresses at which the stats-exporter service is available
       ## Ref: https://kubernetes.io/docs/concepts/services-networking/service/#external-ips
       ##
-      externalIPs: []
-      # loadBalancerIP: ""
+      externalIPs:
+        loadBalancerIP: "4.172.120.55"
       loadBalancerSourceRanges: []
       servicePort: 10254
       type: ClusterIP
-      # externalTrafficPolicy: ""
+      externalTrafficPolicy: "Local"
       # nodePort: ""
     serviceMonitor:
       enabled: true
