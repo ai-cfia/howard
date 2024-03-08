@@ -2,28 +2,31 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: external-dns
+  name: ori
   namespace: argocd
-  annotations:
-    argocd.argoproj.io/sync-wave: "0"
   finalizers:
     - resources-finalizer.argocd.argoproj.io
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
 spec:
   project: default
   destination:
-    namespace: external-dns
     server: https://kubernetes.default.svc
+    namespace: ori
   sources:
-    - chart: external-dns
+    - chart: kratos
       helm:
-        releaseName: external-dns
+        releaseName: ori-kratos
         valueFiles:
-          - $values/kubernetes/aks/system/external-dns/helm/values.yaml
-      repoURL: https://charts.bitnami.com/bitnami
-      targetRevision: 6.36.1
+          - $values/kubernetes/aks/system/ori/base/kratos/helm/values.yaml
+      repoURL: https://k8s.ory.sh/helm/charts
+      targetRevision: 0.39.1
     - repoURL: https://github.com/ai-cfia/howard.git
       targetRevision: HEAD
       ref: values
+    - repoURL: https://github.com/ai-cfia/howard.git
+      path: kubernetes/aks/system/ori/base
+      targetRevision: HEAD
   syncPolicy:
     automated:
       selfHeal: true

@@ -5,6 +5,7 @@ kind: Kustomization
 resources:
   # User applications
   - ../finesse/
+  - ../nachet/
 
   # System applications
   - ../../system/cert-manager/
@@ -14,8 +15,8 @@ resources:
   - ../../system/ingress-nginx/
   - ../../system/monitoring/
   - ../../system/cloudnativepg/
-  - ../../system/coder
-
+  - ../../system/coder/
+  - ../../system/ori/
 
 patches:
   - patch: |-

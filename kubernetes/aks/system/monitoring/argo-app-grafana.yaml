@@ -2,25 +2,23 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: external-dns
+  name: grafana
   namespace: argocd
-  annotations:
-    argocd.argoproj.io/sync-wave: "0"
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
   destination:
-    namespace: external-dns
+    namespace: monitoring
     server: https://kubernetes.default.svc
   sources:
-    - chart: external-dns
+    - chart: grafana
       helm:
-        releaseName: external-dns
+        releaseName: grafana
         valueFiles:
-          - $values/kubernetes/aks/system/external-dns/helm/values.yaml
-      repoURL: https://charts.bitnami.com/bitnami
-      targetRevision: 6.36.1
+          - $values/kubernetes/aks/system/monitoring/helm/grafana-values.yaml
+      repoURL: https://grafana.github.io/helm-charts
+      targetRevision: 7.3.3
     - repoURL: https://github.com/ai-cfia/howard.git
       targetRevision: HEAD
       ref: values
@@ -28,4 +26,4 @@ spec:
     automated:
       selfHeal: true
     syncOptions:
-      - CreateNamespace=true
+      - CreateNamespace=false
