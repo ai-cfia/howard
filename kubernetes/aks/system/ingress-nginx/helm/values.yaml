@@ -418,7 +418,7 @@ controller:
         metadata:
           serverAddress: http://kube-prometheus-stack-prometheus.monitoring.svc.cluster.local:9090
           metricName: http_requests_total
-          threshold: '100'
+          threshold: "100"
           query: sum(rate(http_requests_total{deployment="my-deployment"}[2m]))
 
     behavior: {}
@@ -476,7 +476,7 @@ controller:
 
     # -- External traffic policy of the external controller service. Set to "Local" to preserve source IP on providers supporting it.
     # Ref: https://kubernetes.io/docs/tasks/access-application-cluster/create-external-load-balancer/#preserving-the-client-source-ip
-    externalTrafficPolicy: local
+    externalTrafficPolicy: "Local"
     # -- Session affinity of the external controller service. Must be either "None" or "ClientIP" if set. Defaults to "None".
     # Ref: https://kubernetes.io/docs/reference/networking/virtual-ips/#session-affinity
     sessionAffinity: ""
@@ -867,11 +867,11 @@ controller:
           annotations:
             description: bad ingress config - nginx config test failed
             summary: uninstall the latest ingress changes to allow config reloads to resume
-      # # By default a fake self-signed certificate is generated as default and
-      # # it is fine if it expires. If `--default-ssl-certificate` flag is used
-      # # and a valid certificate passed please do not filter for `host` label!
-      # # (i.e. delete `{host!="_"}` so also the default SSL certificate is
-      # # checked for expiration)
+        # # By default a fake self-signed certificate is generated as default and
+        # # it is fine if it expires. If `--default-ssl-certificate` flag is used
+        # # and a valid certificate passed please do not filter for `host` label!
+        # # (i.e. delete `{host!="_"}` so also the default SSL certificate is
+        # # checked for expiration)
         - alert: NGINXCertificateExpiry
           expr: (avg(nginx_ingress_controller_ssl_expire_time_seconds{host!="_"}) by (host) - time()) < 604800
           for: 1s
