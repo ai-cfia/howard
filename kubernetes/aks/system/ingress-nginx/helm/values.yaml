@@ -837,20 +837,21 @@ controller:
       # nodePort: ""
     serviceMonitor:
       enabled: true
-      additionalLabels: {}
+      additionalLabels:
+        release: kube-prometheus-stack
       annotations: {}
       ## The label to use to retrieve the job name from.
       ## jobLabel: "app.kubernetes.io/name"
       namespace: "monitoring"
-      namespaceSelector: {}
+      namespaceSelector:
+        any: true
       ## Default: scrape .Release.Namespace or namespaceOverride only
       ## To scrape all, use the following:
       ## namespaceSelector:
       ##   any: true
       scrapeInterval: 15s
       # honorLabels: true
-      targetLabels:
-        release: kube-prometheus-stack
+      targetLabels: {}
       relabelings: []
       metricRelabelings: []
     prometheusRule:
