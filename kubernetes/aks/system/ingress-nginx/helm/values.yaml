@@ -449,7 +449,8 @@ controller:
       # -- Enable the external controller service or not. Useful for internal-only deployments.
       enabled: true
     # -- Annotations to be added to the external controller service. See `controller.service.internal.annotations` for annotations to be added to the internal controller service.
-    annotations: {}
+    annotations:
+      service.beta.kubernetes.io/azure-load-balancer-internal: "true"
     # -- Labels to be added to both controller services.
     labels: {}
     # -- Type of the external controller service.
