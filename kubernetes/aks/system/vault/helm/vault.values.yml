@@ -410,7 +410,7 @@ server:
     # configure the ingress to point to the Vault active service.
     activeService: true
     hosts:
-      - host: vault.azure.sonoflope.ca
+      - host: vault.inspection.alpha.canada.ca # For future use.
         paths: []
     ## Extra paths to prepend to the host configuration. This is useful when working with annotation based services.
     extraPaths: []
@@ -423,7 +423,7 @@ server:
     tls:
       - secretName: vault-tls
         hosts:
-          - vault.azure.sonoflope.ca
+          - vault.inspection.alpha.canada.ca # For future use.
 
   # hostAliases is a list of aliases to be added to /etc/hosts. Specified as a YAML list.
   hostAliases: []
@@ -820,10 +820,10 @@ server:
 
 
         seal "azurekeyvault" {
-          tenant_id      = "912b82dc-b892-42e5-ae31-c0ab5350455e"
-          client_id      = "80bfe77e-97f0-46dd-9cc8-bd6c3b7fb050"
-          vault_name     = "staging-vault-6a3fp"
-          key_name       = "staging-vault-unseal-6a3fp"
+          tenant_id      = "18b5a5ed-1d86-41d3-94a0-bc27dae32ab2"
+          client_id      = "fa9cd720-ddc4-4dc8-9be6-5d0fc8c4a3fb"
+          vault_name     = "staging-vault-6biac"
+          key_name       = "staging-vault-unseal-6biac"
         }
 
         service_registration "kubernetes" {}
