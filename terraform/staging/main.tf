@@ -154,7 +154,7 @@ module "vms" {
   vm_virtual_network_subnet_name             = var.vm_virtual_network_subnet_name
   vm_virtual_network_subnet_address_prefixes = var.vm_virtual_network_subnet_address_prefixes
 
-  vm_network_interface_name                  = var.vm_virtual_network_name
+  vm_network_interface_name                  = var.vm_network_interface_name
   vm_network_interface_ip_configuration_name = var.vm_network_interface_ip_configuration_name
   vm_network_interface_ip_configuration_type = var.vm_network_interface_ip_configuration_type
 
