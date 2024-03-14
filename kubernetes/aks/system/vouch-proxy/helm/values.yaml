@@ -1,0 +1,47 @@
+---
+config:
+  vouch:
+    # only used for github orgs/teams. To be removed when we move to azure.
+    teamWhitelist:
+      - ai-cfia
+      # - ai-cfia/devops if we only want specific teams.
+    allowAllUsers: true
+    cookie:
+      name: jxVouchCookie
+      domain: inspection.alpha.canada.ca
+      secure: true
+      httpOnly: true
+      maxAge: 14400
+      sameSite: none
+    jwt:
+      issuer: Vouch
+      maxAge: 240
+      compress: true
+    session:
+      name: jxVouchSession
+    # these will result in two headers being passed back to nginx as the headers
+    #   X-Vouch-IdP-Claims-Groups: groupa, groupb, groupc
+    #   X-Vouch-IdP-Claims-Given-Name: Robert
+    # nginx will populate the variables
+    #   $auth_resp_x_vouch_idp_claims_groups
+    #   $auth_resp_x_vouch_idp_claims_given-name
+    # see https://github.com/vouch/vouch-proxy/issues/183 regarding claims and header naming
+  oauth:
+    # Azure
+    # scopes: [openid, email, profile]
+    # provider: azure
+    # client_id: <id>
+    # client_secret: <secret>
+    # auth_url: https://login.microsoftonline.com/<tenantID>/oauth2/v2.0/authorize
+    # token_url: https://login.microsoftonline.com/<tenantID>/oauth2/v2.0/token
+    # callback_url: https://vouch.inspection.alpha.canada.ca/auth
+    # azure_token: id_token
+
+    # GitHub // to be removed when we move to azure
+    # https://developer.github.com/apps/building-integrations/setting-up-and-registering-oauth-apps/about-authorization-options-for-oauth-apps/
+    # Done at https://github.com/settings/applications/new
+    provider: github
+    client_id: <id>
+    client_secret: <secret>
+    scopes:
+      - user

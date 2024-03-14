@@ -15,7 +15,7 @@ resources:
   - ../../system/ingress-nginx/
   - ../../system/monitoring/
   - ../../system/cloudnativepg/
-  - ../../system/ori/
+  - ../../system/vouch-proxy/
 
 patches:
   - patch: |-
