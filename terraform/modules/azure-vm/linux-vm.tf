@@ -1,5 +1,5 @@
 resource "azurerm_virtual_machine" "vm" {
-  for_each = var.vms
+  for_each = var.linux-vms
 
   name                  = each.value.name
   vm_size               = each.value.vm_size

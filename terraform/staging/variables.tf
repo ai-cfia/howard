@@ -215,7 +215,7 @@ variable "vm_network_interface_ip_configuration_type" {
   default     = "Dynamic"
 }
 
-variable "vms" {
+variable "linux-vms" {
   type = map(object({
     name                             = string
     vm_size                          = string
