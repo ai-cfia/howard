@@ -15,7 +15,7 @@ specific Azure AD tenant. This setup involves:
 
 - Creating an App Registration in Azure AD.
 - Configuring the redirect URIs for the App Registration to
-  <https://vouch.inspection.alpha.canada.ca/auth>
+  ```<https://vouch.inspection.alpha.canada.ca/auth>```
 - Using the App Registration's details (client ID, client secret, tenantID) in
   Vouch-Proxy's configuration :
 
