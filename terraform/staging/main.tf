@@ -164,5 +164,6 @@ module "vms" {
   bastion_host_name                   = var.bastion_host_name
   bastion_host_ip_configuration_name  = var.bastion_host_ip_configuration_name
 
-  linux-vms = var.linux-vms
+  linux-vms   = var.linux-vms
+  windows-vms = var.windows-vms
 }
