@@ -31,8 +31,8 @@ access secrets as files, which is a secure and efficient way to manage secrets
 in a Kubernetes environment.
 
 The following diagram illustrates the workflow of the Vault Agent Injector and
-how developers can manage secrets of hosted applications:
-![Developer workflow diagram](img/vault-argocd-workflow.svg)
+how developers can manage secrets of hosted applications: ![Developer workflow
+diagram](img/vault-argocd-workflow.svg)
 
 ## Secret management process
 
@@ -64,9 +64,9 @@ The secret management process involves the following steps:
 
 Vault provides a UI service to manage secrets. The UI service is a web-based
 user interface that allows administrators to create, read, update, and delete
-secrets. The service also provides a way to manage access control policies
-and audit logs. The service is accessible through a web browser and is
-protected by the same security mechanisms as the Vault server.
+secrets. The service also provides a way to manage access control policies and
+audit logs. The service is accessible through a web browser and is protected by
+the same security mechanisms as the Vault server.
 
 ### Steps
 
@@ -87,3 +87,15 @@ protected by the same security mechanisms as the Vault server.
 5. Once in the directory of your application secrets, simply click on 'create
     new version' and you will be able to add, update, or delete secrets as
     needed. ![Create mew secret](img/create-new-secret.png)
+
+## Argo CD Vault plugin (AVP)
+
+The [argocd-vault-plugin](https://argocd-vault-plugin.readthedocs.io/en/stable/)
+is used to manage secrets inside our deployments the Gitops way. It allows to
+use `<placeholders>` in any YAML or JSON files that have been templated and make
+use of annotations to provide the path and version of a secret inside vault.
+
+An example of usage is showcased inside the demo app sample. The official
+[documentation](https://argocd-vault-plugin.readthedocs.io/en/stable/howitworks/)
+for the plugin is well explained and can be followed according to the usecase
+needed.
