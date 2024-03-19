@@ -1,8 +1,10 @@
 resource "azurerm_linux_virtual_machine" "linux-vm" {
   for_each = var.linux-vms
 
-  name                  = each.value.name
-  size                  = each.value.size
+  name                            = each.value.name
+  size                            = each.value.size
+  disable_password_authentication = each.value.disable_password_authentication
+
   location              = azurerm_resource_group.rg.location
   resource_group_name   = azurerm_resource_group.rg.name
   network_interface_ids = [azurerm_network_interface.vm_network_interface.id]
@@ -10,6 +12,7 @@ resource "azurerm_linux_virtual_machine" "linux-vm" {
   computer_name  = each.value.name
   admin_username = each.value.admin_username
   admin_password = each.value.admin_password
+
 
   source_image_reference {
     publisher = each.value.source_image_reference.publisher
@@ -29,8 +32,9 @@ resource "azurerm_linux_virtual_machine" "linux-vm" {
 resource "azurerm_windows_virtual_machine" "windows-vm" {
   for_each = var.windows-vms
 
-  name                  = each.value.name
-  size                  = each.value.size
+  name = each.value.name
+  size = each.value.size
+
   location              = azurerm_resource_group.rg.location
   resource_group_name   = azurerm_resource_group.rg.name
   network_interface_ids = [azurerm_network_interface.vm_network_interface.id]

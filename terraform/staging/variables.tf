@@ -217,11 +217,12 @@ variable "vm_network_interface_ip_configuration_type" {
 
 variable "linux-vms" {
   type = map(object({
-    name           = string
-    size           = string
-    tags           = map(string)
-    admin_username = string
-    admin_password = string
+    name                            = string
+    size                            = string
+    tags                            = map(string)
+    disable_password_authentication = bool
+    admin_username                  = string
+    admin_password                  = string
     source_image_reference = object({
       publisher = string
       offer     = string
