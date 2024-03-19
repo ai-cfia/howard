@@ -5,15 +5,13 @@ metadata:
   name: vouch-proxy
   namespace: vouch-proxy
   labels:
-    app.kubernetes.io/name: vouch-proxy
-    app.kubernetes.io/instance: vouch-proxy
+    app.kubernetes.io/name: vouch
+    app.kubernetes.io/instance: vouch
   annotations:
     external-dns.alpha.kubernetes.io/target: inspection.alpha.canada.ca
     cert-manager.io/cluster-issuer: letsencrypt-prod
     kubernetes.io/tls-acme: "true"
     kubernetes.io/ingress.class: nginx
-    nginx.ingress.kubernetes.io/auth-url: "https://$host/oauth2/validate"
-    nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/login?url=$scheme://$http_host$request_uri"
     nginx.ingress.kubernetes.io/proxy-buffer-size: 64k
 spec:
   ingressClassName: nginx
@@ -28,7 +26,7 @@ spec:
           - path: /
             backend:
               service:
-                name: vouch-proxy
+                name: vouch
                 port:
                   name: http
             pathType: Prefix

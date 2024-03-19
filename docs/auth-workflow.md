@@ -41,8 +41,8 @@ ingress hostname `vouch.inspection.alpha.canada.ca`:
 
 ```yaml
 annotations:
-  nginx.ingress.kubernetes.io/auth-signin: "https://vouch.azure.sonoflope.ca/login?url=$scheme://$http_host$request_uri&vouch-failcount=$auth_resp_failcount&X-Vouch-Token=$auth_resp_jwt&error=$auth_resp_err"
-  nginx.ingress.kubernetes.io/auth-url: https://vouch.azure.sonoflope.ca/validate
+  nginx.ingress.kubernetes.io/auth-signin: "https://vouch.inspection.alpha.canada.ca/login?url=$scheme://$http_host$request_uri&vouch-failcount=$auth_resp_failcount&X-Vouch-Token=$auth_resp_jwt&error=$auth_resp_err"
+  nginx.ingress.kubernetes.io/auth-url: https://vouch.inspection.alpha.canada.ca/validate
   nginx.ingress.kubernetes.io/auth-response-headers: X-Vouch-User
   nginx.ingress.kubernetes.io/auth-snippet: |
     # these return values are used by the @error401 call
