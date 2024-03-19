@@ -143,27 +143,30 @@ module "vault" {
   }
 }
 
-module "vms" {
-  source = "../modules/azure-vm"
+# module "vms" {
+#   source = "../modules/azure-vm"
 
-  vm_rg_name  = var.vm_rg_name
-  vm_location = var.vm_location
+#   vm_rg_name  = var.vm_rg_name
+#   vm_location = var.vm_location
 
-  vm_virtual_network_name                    = var.vm_virtual_network_name
-  vm_virtual_network_address_space           = var.vm_virtual_network_address_space
-  vm_virtual_network_subnet_name             = var.vm_virtual_network_subnet_name
-  vm_virtual_network_subnet_address_prefixes = var.vm_virtual_network_subnet_address_prefixes
+#   vm_virtual_network_name                    = var.vm_virtual_network_name
+#   vm_virtual_network_address_space           = var.vm_virtual_network_address_space
+#   vm_virtual_network_subnet_name             = var.vm_virtual_network_subnet_name
+#   vm_virtual_network_subnet_address_prefixes = var.vm_virtual_network_subnet_address_prefixes
 
-  vm_network_interface_name                  = var.vm_network_interface_name
-  vm_network_interface_ip_configuration_name = var.vm_network_interface_ip_configuration_name
-  vm_network_interface_ip_configuration_type = var.vm_network_interface_ip_configuration_type
+#   bastion_virtual_network_subnet_name = var.bastion_virtual_network_subnet_name
+#   bastion_virtual_network_subnet_address_prefixes = var.bastion_virtual_network_subnet_address_prefixes
 
-  bastion_public_ip_name              = var.bastion_public_ip_name
-  bastion_public_ip_allocation_method = var.bastion_public_ip_allocation_method
-  bastion_public_ip_sku               = var.bastion_public_ip_sku
-  bastion_host_name                   = var.bastion_host_name
-  bastion_host_ip_configuration_name  = var.bastion_host_ip_configuration_name
+#   vm_network_interface_name                  = var.vm_network_interface_name
+#   vm_network_interface_ip_configuration_name = var.vm_network_interface_ip_configuration_name
+#   vm_network_interface_ip_configuration_type = var.vm_network_interface_ip_configuration_type
 
-  linux-vms   = var.linux-vms
-  windows-vms = var.windows-vms
-}
+#   bastion_public_ip_name              = var.bastion_public_ip_name
+#   bastion_public_ip_allocation_method = var.bastion_public_ip_allocation_method
+#   bastion_public_ip_sku               = var.bastion_public_ip_sku
+#   bastion_host_name                   = var.bastion_host_name
+#   bastion_host_ip_configuration_name  = var.bastion_host_ip_configuration_name
+
+#   linux-vms   = var.linux-vms
+#   windows-vms = var.windows-vms
+# }

@@ -199,6 +199,16 @@ variable "vm_virtual_network_subnet_address_prefixes" {
   description = "VM virtual network subnet address prefixed"
 }
 
+variable "bastion_virtual_network_subnet_name" {
+  type        = string
+  description = "VM virtual network subnet name"
+}
+
+variable "bastion_virtual_network_subnet_address_prefixes" {
+  type        = list(string)
+  description = "VM virtual network subnet address prefixed"
+}
+
 variable "vm_network_interface_name" {
   type        = string
   description = "VM virtual network interface name"

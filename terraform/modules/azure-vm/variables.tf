@@ -28,6 +28,16 @@ variable "vm_virtual_network_subnet_address_prefixes" {
   description = "VM virtual network subnet address prefixed"
 }
 
+variable "bastion_virtual_network_subnet_name" {
+  type        = string
+  description = "Bastion virtual network subnet name"
+}
+
+variable "bastion_virtual_network_subnet_address_prefixes" {
+  type        = list(string)
+  description = "Bastion virtual network subnet address prefixed"
+}
+
 variable "vm_network_interface_name" {
   type        = string
   description = "VM virtual network interface name"
@@ -46,11 +56,10 @@ variable "vm_network_interface_ip_configuration_type" {
 
 variable "linux-vms" {
   type = map(object({
-    name                            = string
-    size                            = string
-    tags                            = map(string)
+    name           = string
+    size           = string
+    tags           = map(string)
     disable_password_authentication = bool
-
     admin_username = string
     admin_password = string
     source_image_reference = object({
