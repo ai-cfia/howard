@@ -12,15 +12,15 @@ resource "azurerm_linux_virtual_machine" "linux-vm" {
   admin_password = each.value.admin_password
 
   source_image_reference {
-    publisher = each.value.storage_image_reference.publisher
-    offer     = each.value.storage_image_reference.offer
-    sku       = each.value.storage_image_reference.sku
-    version   = each.value.storage_image_reference.version
+    publisher = each.value.source_image_reference.publisher
+    offer     = each.value.source_image_reference.offer
+    sku       = each.value.source_image_reference.sku
+    version   = each.value.source_image_reference.version
   }
 
   os_disk {
-    caching              = each.value.storage_os_disk.caching
-    storage_account_type = each.value.storage_os_disk.managed_disk_type
+    caching              = each.value.os_disk.caching
+    storage_account_type = each.value.os_disk.storage_account_type
   }
 
   tags = each.value.tags
@@ -40,15 +40,15 @@ resource "azurerm_windows_virtual_machine" "windows-vm" {
   admin_password = each.value.admin_password
 
   source_image_reference {
-    publisher = each.value.storage_image_reference.publisher
-    offer     = each.value.storage_image_reference.offer
-    sku       = each.value.storage_image_reference.sku
-    version   = each.value.storage_image_reference.version
+    publisher = each.value.source_image_reference.publisher
+    offer     = each.value.source_image_reference.offer
+    sku       = each.value.source_image_reference.sku
+    version   = each.value.source_image_reference.version
   }
 
   os_disk {
-    caching              = each.value.storage_os_disk.caching
-    storage_account_type = each.value.storage_os_disk.managed_disk_type
+    caching              = each.value.os_disk.caching
+    storage_account_type = each.value.os_disk.storage_account_type
   }
 
   tags = each.value.tags
