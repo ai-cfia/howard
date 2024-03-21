@@ -2273,6 +2273,16 @@ repoServer:
           subPath: argocd-vault-plugin
           mountPath: /usr/local/bin/argocd-vault-plugin
 
+        - name: vault-ha-tls-ca
+          mountPath: /home/argocd/vault/tls/vault.ca
+          subPath: vault.ca
+        - name: vault-ha-tls-crt
+          mountPath: /home/argocd/vault/tls/vault.crt
+          subPath: vault.crt
+        - name: vault-ha-tls-key
+          mountPath: /home/argocd/vault/tls/vault.key
+          subPath: vault.key
+
     - name: avp-helm
       command: [/var/run/argocd/argocd-cmp-server]
       image: quay.io/argoproj/argocd:v2.5.3
@@ -2292,6 +2302,15 @@ repoServer:
         - name: custom-tools
           subPath: argocd-vault-plugin
           mountPath: /usr/local/bin/argocd-vault-plugin
+        - name: vault-ha-tls-ca
+          mountPath: /home/argocd/vault/tls/vault.ca
+          subPath: vault.ca
+        - name: vault-ha-tls-crt
+          mountPath: /home/argocd/vault/tls/vault.crt
+          subPath: vault.crt
+        - name: vault-ha-tls-key
+          mountPath: /home/argocd/vault/tls/vault.key
+          subPath: vault.key
     # - name: cmp-my-plugin
     #   command:
     #     - "/var/run/argocd/argocd-cmp-server"
@@ -2352,9 +2371,15 @@ repoServer:
 
   # -- Additional volumeMounts to the repo server main container
   volumeMounts:
-    - name: vault-ha-tls
-      mountPath: /vault/tls
-      readOnly: true
+    - name: vault-ha-tls-ca
+      mountPath: /home/argocd/vault/tls/vault.ca
+      subPath: vault.ca
+    - name: vault-ha-tls-crt
+      mountPath: /home/argocd/vault/tls/vault.crt
+      subPath: vault.crt
+    - name: vault-ha-tls-key
+      mountPath: /home/argocd/vault/tls/vault.key
+      subPath: vault.key
 
   # -- Additional volumes to the repo server pod
   volumes:
@@ -2366,8 +2391,9 @@ repoServer:
     - name: tmp-dir
       emptyDir: {}
     - name: vault-ha-tls
-      secret:
-        secretName: vault-ha-tls
+      configMap:
+        name: vault-ha-tls
+
   #  - name: argocd-cmp-cm
   #    configMap:
   #      name: argocd-cmp-cm
