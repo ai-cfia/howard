@@ -2792,8 +2792,8 @@ applicationSet:
     runAsNonRoot: true
     readOnlyRootFilesystem: true
     allowPrivilegeEscalation: false
-    seccompProfile:
-      type: RuntimeDefault
+    # seccompProfile:
+    #   type: RuntimeDefault
     capabilities:
       drop:
         - ALL
