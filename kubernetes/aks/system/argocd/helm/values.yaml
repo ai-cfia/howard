@@ -2273,13 +2273,13 @@ repoServer:
           subPath: argocd-vault-plugin
           mountPath: /usr/local/bin/argocd-vault-plugin
 
-        - name: vault-ha-tls-ca
+        - name: vault-ha-tls
           mountPath: /home/argocd/vault/tls/vault.ca
           subPath: vault.ca
-        - name: vault-ha-tls-crt
+        - name: vault-ha-tls
           mountPath: /home/argocd/vault/tls/vault.crt
           subPath: vault.crt
-        - name: vault-ha-tls-key
+        - name: vault-ha-tls
           mountPath: /home/argocd/vault/tls/vault.key
           subPath: vault.key
 
@@ -2302,13 +2302,13 @@ repoServer:
         - name: custom-tools
           subPath: argocd-vault-plugin
           mountPath: /usr/local/bin/argocd-vault-plugin
-        - name: vault-ha-tls-ca
+        - name: vault-ha-tls
           mountPath: /home/argocd/vault/tls/vault.ca
           subPath: vault.ca
-        - name: vault-ha-tls-crt
+        - name: vault-ha-tls
           mountPath: /home/argocd/vault/tls/vault.crt
           subPath: vault.crt
-        - name: vault-ha-tls-key
+        - name: vault-ha-tls
           mountPath: /home/argocd/vault/tls/vault.key
           subPath: vault.key
     # - name: cmp-my-plugin
@@ -2371,13 +2371,13 @@ repoServer:
 
   # -- Additional volumeMounts to the repo server main container
   volumeMounts:
-    - name: vault-ha-tls-ca
+    - name: vault-ha-tls
       mountPath: /home/argocd/vault/tls/vault.ca
       subPath: vault.ca
-    - name: vault-ha-tls-crt
+    - name: vault-ha-tls
       mountPath: /home/argocd/vault/tls/vault.crt
       subPath: vault.crt
-    - name: vault-ha-tls-key
+    - name: vault-ha-tls
       mountPath: /home/argocd/vault/tls/vault.key
       subPath: vault.key
 
