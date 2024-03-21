@@ -17,8 +17,6 @@ spec:
     repoURL: https://github.com/ai-cfia/howard.git
     path: kubernetes/aks/apps/demo/base
     targetRevision: HEAD
-    plugin:
-      name: argocd-vault-plugin
   syncPolicy:
     automated:
       selfHeal: true
