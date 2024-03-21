@@ -2238,7 +2238,9 @@ repoServer:
 
   # -- envFrom to pass to repo server
   # @default -- `[]` (See [values.yaml])
-  envFrom: []
+  envFrom:
+    - secretRef:
+        name: vault-configuration
   # - configMapRef:
   #     name: config-map-name
   # - secretRef:
@@ -2591,7 +2593,16 @@ repoServer:
     automountServiceAccountToken: true
 
   # -- Repo server rbac rules
-  rbac: []
+  rbac:
+    - verbs:
+        - get
+        - list
+        - watch
+      apiGroups:
+        - ''
+      resources:
+        - secrets
+        - configmaps
   #   - apiGroups:
   #     - argoproj.io
   #     resources:
