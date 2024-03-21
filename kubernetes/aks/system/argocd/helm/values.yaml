@@ -2273,8 +2273,17 @@ repoServer:
           subPath: argocd-vault-plugin
           mountPath: /usr/local/bin/argocd-vault-plugin
 
-        - name: vault-ha-tls
-          mountPath: /vault/tls
+        - name: vault-ha-tls-ca
+          mountPath: /vault/tls/vault.ca
+          subPath: vault.ca
+          readOnly: true
+        - name: vault-ha-tls-crt
+          mountPath: /vault/tls/vault.crt
+          subPath: vault.crt
+          readOnly: true
+        - name: vault-ha-tls-key
+          mountPath: /vault/tls/vault.key
+          subPath: vault.key
           readOnly: true
 
     - name: avp-helm
@@ -2296,8 +2305,17 @@ repoServer:
         - name: custom-tools
           subPath: argocd-vault-plugin
           mountPath: /usr/local/bin/argocd-vault-plugin
-        - name: vault-ha-tls
-          mountPath: /vault/tls
+        - name: vault-ha-tls-ca
+          mountPath: /vault/tls/vault.ca
+          subPath: vault.ca
+          readOnly: true
+        - name: vault-ha-tls-crt
+          mountPath: /vault/tls/vault.crt
+          subPath: vault.crt
+          readOnly: true
+        - name: vault-ha-tls-key
+          mountPath: /vault/tls/vault.key
+          subPath: vault.key
           readOnly: true
     # - name: cmp-my-plugin
     #   command:
@@ -2358,7 +2376,19 @@ repoServer:
           name: custom-tools
 
   # -- Additional volumeMounts to the repo server main container
-  volumeMounts: []
+  volumeMounts:
+    - name: vault-ha-tls-ca
+      mountPath: /vault/tls/vault.ca
+      subPath: vault.ca
+      readOnly: true
+    - name: vault-ha-tls-crt
+      mountPath: /vault/tls/vault.crt
+      subPath: vault.crt
+      readOnly: true
+    - name: vault-ha-tls-key
+      mountPath: /vault/tls/vault.key
+      subPath: vault.key
+      readOnly: true
 
   # -- Additional volumes to the repo server pod
   volumes:
@@ -2370,8 +2400,9 @@ repoServer:
     - name: tmp-dir
       emptyDir: {}
     - name: vault-ha-tls
-      secret:
-        secretName: vault-ha-tls
+      configMap:
+        name: vault-ha-tls
+
   #  - name: argocd-cmp-cm
   #    configMap:
   #      name: argocd-cmp-cm
