@@ -2351,16 +2351,10 @@ repoServer:
           name: custom-tools
 
   # -- Additional volumeMounts to the repo server main container
-  volumeMounts: []
-    # - name: VAULT_CACERT
-    #   mountPath: /vault/userconfig/vault-ha-tls/vault.ca
-    #   readOnly: true
-    # - name: VAULT_CLIENT_CERT
-    #   mountPath: /vault/userconfig/vault-ha-tls/vault.crt
-    #   readOnly: true
-    # - name: VAULT_CLIENT_KEY
-    #   mountPath: /vault/userconfig/vault-ha-tls/vault.key
-    #   readOnly: true
+  volumeMounts:
+    - name: vault-ha-tls
+      mountPath: /vault/tls
+      readOnly: true
 
   # -- Additional volumes to the repo server pod
   volumes:
@@ -2371,15 +2365,9 @@ repoServer:
       emptyDir: {}
     - name: tmp-dir
       emptyDir: {}
-    # - name: VAULT_CACERT
-    #   secret:
-    #     secretName: vault-configuration
-    # - name: VAULT_CLIENT_CERT
-    #   secret:
-    #     secretName: vault-configuration
-    # - name: VAULT_CLIENT_KEY
-    #   secret:
-    #     secretName: vault-configuration
+    - name: vault-ha-tls
+      secret:
+        secretName: vault-ha-tls
   #  - name: argocd-cmp-cm
   #    configMap:
   #      name: argocd-cmp-cm
