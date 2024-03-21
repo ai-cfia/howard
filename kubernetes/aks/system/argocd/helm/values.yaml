@@ -2251,9 +2251,9 @@ repoServer:
   ## Ref: https://argo-cd.readthedocs.io/en/stable/user-guide/config-management-plugins/
   ## Note: Supports use of custom Helm templates
   extraContainers:
-    - name: avp-helm
+    - name: avp
       command: [/var/run/argocd/argocd-cmp-server]
-      image: quay.io/argoproj/argocd:v2.4.8
+      image: quay.io/argoproj/argocd:v2.4.0
       securityContext:
         runAsNonRoot: true
         runAsUser: 999
@@ -2263,8 +2263,31 @@ repoServer:
         - mountPath: /home/argocd/cmp-server/plugins
           name: plugins
         - mountPath: /tmp
-          name: tmp-dir
-        - mountPath: /home/argocd/cmp-server/config
+          name: tmp
+          
+        - mountPath: /home/argocd/cmp-server/config/plugin.yaml
+          subPath: avp-helm.yaml
+          name: cmp-plugin
+          
+        - name: custom-tools
+          subPath: argocd-vault-plugin
+          mountPath: /usr/local/bin/argocd-vault-plugin
+          
+    - name: avp-helm
+      command: [/var/run/argocd/argocd-cmp-server]
+      image: quay.io/argoproj/argocd:v2.5.3
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 999
+      volumeMounts:
+        - mountPath: /var/run/argocd
+          name: var-files
+        - mountPath: /home/argocd/cmp-server/plugins
+          name: plugins
+        - mountPath: /tmp
+          name: tmp
+        - mountPath: /home/argocd/cmp-server/config/plugin.yaml
+          subPath: avp-helm.yaml
           name: cmp-plugin
         - name: custom-tools
           subPath: argocd-vault-plugin
