@@ -2274,17 +2274,14 @@ repoServer:
           mountPath: /usr/local/bin/argocd-vault-plugin
 
         - name: vault-ha-tls-ca
-          mountPath: /vault/tls/vault.ca
+          mountPath: /home/argocd/vault/tls/vault.ca
           subPath: vault.ca
-          readOnly: true
         - name: vault-ha-tls-crt
-          mountPath: /vault/tls/vault.crt
+          mountPath: /home/argocd/vault/tls/vault.crt
           subPath: vault.crt
-          readOnly: true
         - name: vault-ha-tls-key
-          mountPath: /vault/tls/vault.key
+          mountPath: /home/argocd/vault/tls/vault.key
           subPath: vault.key
-          readOnly: true
 
     - name: avp-helm
       command: [/var/run/argocd/argocd-cmp-server]
@@ -2306,17 +2303,14 @@ repoServer:
           subPath: argocd-vault-plugin
           mountPath: /usr/local/bin/argocd-vault-plugin
         - name: vault-ha-tls-ca
-          mountPath: /vault/tls/vault.ca
+          mountPath: /home/argocd/vault/tls/vault.ca
           subPath: vault.ca
-          readOnly: true
         - name: vault-ha-tls-crt
-          mountPath: /vault/tls/vault.crt
+          mountPath: /home/argocd/vault/tls/vault.crt
           subPath: vault.crt
-          readOnly: true
         - name: vault-ha-tls-key
-          mountPath: /vault/tls/vault.key
+          mountPath: /home/argocd/vault/tls/vault.key
           subPath: vault.key
-          readOnly: true
     # - name: cmp-my-plugin
     #   command:
     #     - "/var/run/argocd/argocd-cmp-server"
@@ -2378,17 +2372,14 @@ repoServer:
   # -- Additional volumeMounts to the repo server main container
   volumeMounts:
     - name: vault-ha-tls-ca
-      mountPath: /vault/tls/vault.ca
+      mountPath: /home/argocd/vault/tls/vault.ca
       subPath: vault.ca
-      readOnly: true
     - name: vault-ha-tls-crt
-      mountPath: /vault/tls/vault.crt
+      mountPath: /home/argocd/vault/tls/vault.crt
       subPath: vault.crt
-      readOnly: true
     - name: vault-ha-tls-key
-      mountPath: /vault/tls/vault.key
+      mountPath: /home/argocd/vault/tls/vault.key
       subPath: vault.key
-      readOnly: true
 
   # -- Additional volumes to the repo server pod
   volumes:
