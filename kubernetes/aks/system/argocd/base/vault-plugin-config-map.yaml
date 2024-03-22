@@ -27,6 +27,7 @@ data:
             argocd-vault-plugin generate -s vault-configuration -
       lockRepo: false
   avp.yaml: |
+    ---
     apiVersion: argoproj.io/v1alpha1
     kind: ConfigManagementPlugin
     metadata:
