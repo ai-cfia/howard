@@ -2318,37 +2318,37 @@ repoServer:
           mountPath: /vault/tls/vault.key
           subPath: vault.key
 
-    - name: avp-helm
-      command: [/var/run/argocd/argocd-cmp-server]
-      image: quay.io/argoproj/argocd:v2.10.4
-      securityContext:
-        runAsNonRoot: true
-        runAsUser: 999
-      volumeMounts:
-        - mountPath: /var/run/argocd
-          name: var-files
-        - mountPath: /home/argocd/cmp-server/plugins
-          name: plugins
-        - mountPath: /tmp
-          name: tmp
+    # - name: avp-helm
+    #   command: [/var/run/argocd/argocd-cmp-server]
+    #   image: quay.io/argoproj/argocd:v2.10.4
+    #   securityContext:
+    #     runAsNonRoot: true
+    #     runAsUser: 999
+    #   volumeMounts:
+    #     - mountPath: /var/run/argocd
+    #       name: var-files
+    #     - mountPath: /home/argocd/cmp-server/plugins
+    #       name: plugins
+    #     - mountPath: /tmp
+    #       name: tmp
 
-        - mountPath: /home/argocd/cmp-server/config/plugin.yaml
-          subPath: avp-helm.yaml
-          name: cmp-plugin
+    #     - mountPath: /home/argocd/cmp-server/config/plugin.yaml
+    #       subPath: avp-helm.yaml
+    #       name: cmp-plugin
 
-        - name: custom-tools
-          subPath: argocd-vault-plugin
-          mountPath: /usr/local/bin/argocd-vault-plugin
+    #     - name: custom-tools
+    #       subPath: argocd-vault-plugin
+    #       mountPath: /usr/local/bin/argocd-vault-plugin
 
-        - name: vault-ha-tls
-          mountPath: /vault/tls/vault.ca
-          subPath: vault.ca
-        - name: vault-ha-tls
-          mountPath: /vault/tls/vault.crt
-          subPath: vault.crt
-        - name: vault-ha-tls
-          mountPath: /vault/tls/vault.key
-          subPath: vault.key
+    #     - name: vault-ha-tls
+    #       mountPath: /vault/tls/vault.ca
+    #       subPath: vault.ca
+    #     - name: vault-ha-tls
+    #       mountPath: /vault/tls/vault.crt
+    #       subPath: vault.crt
+    #     - name: vault-ha-tls
+    #       mountPath: /vault/tls/vault.key
+    #       subPath: vault.key
     # - name: cmp-my-plugin
     #   command:
     #     - "/var/run/argocd/argocd-cmp-server"
