@@ -2288,7 +2288,7 @@ repoServer:
   extraContainers:
     - name: avp
       command: [/var/run/argocd/argocd-cmp-server]
-      image: quay.io/argoproj/argocd:v2.4.0
+      image: quay.io/argoproj/argocd:v2.5.3
       securityContext:
         runAsNonRoot: true
         runAsUser: 999
@@ -2331,12 +2331,15 @@ repoServer:
           name: plugins
         - mountPath: /tmp
           name: tmp
+
         - mountPath: /home/argocd/cmp-server/config/plugin.yaml
           subPath: avp-helm.yaml
           name: cmp-plugin
+
         - name: custom-tools
           subPath: argocd-vault-plugin
           mountPath: /usr/local/bin/argocd-vault-plugin
+
         - name: vault-ha-tls
           mountPath: /vault/tls/vault.ca
           subPath: vault.ca
@@ -2662,15 +2665,16 @@ repoServer:
     automountServiceAccountToken: true
 
   # -- Repo server rbac rules
-  rbac: []
-  #   - apiGroups:
-  #     - argoproj.io
-  #     resources:
-  #     - applications
-  #     verbs:
-  #     - get
-  #     - list
-  #     - watch
+  rbac:
+    - verbs:
+        - get
+        - list
+        - watch
+      apiGroups:
+        - ""
+      resources:
+        - secrets
+        - configmaps
 
 ## ApplicationSet controller
 applicationSet:
