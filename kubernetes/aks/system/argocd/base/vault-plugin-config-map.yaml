@@ -38,7 +38,7 @@ data:
           command:
             - sh
             - "-c"
-            - "find ../../../apps/ -type f -name '*.yaml' -o -name '*.yml' | xargs -I {} grep \"<path\\|avp\\.kubernetes\\.io\" {} | grep ."
+            - "find ../../../ -type f -name '*.yaml' -o -name '*.yml' | xargs -I {} grep "<path\\|avp\\.kubernetes\\.io" {} | grep ."
       generate:
         command:
           - argocd-vault-plugin
