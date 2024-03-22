@@ -17,7 +17,7 @@ data:
           command:
             - sh
             - "-c"
-            - "find ../../ -type f -name '*.values.yaml' -o -name '*.values.yml' -o -name 'values.yaml' -o -name 'values.yml'"
+            - "find . -type f -name '*.values.yaml' -o -name '*.values.yml' -o -name 'values.yaml' -o -name 'values.yml'"
       generate:
         command:
           - bash
@@ -39,7 +39,7 @@ data:
           command:
             - sh
             - "-c"
-            - "find ../../../ -type f -name '*.yaml' -o -name '*.yml' | xargs -I {} grep "<path\\|avp\\.kubernetes\\.io" {} | grep ."
+            - "find . -type f -name '*.yaml' -o -name '*.yml' | xargs -I {} grep "<path\\|avp\\.kubernetes\\.io" {} | grep ."
       generate:
         command:
           - argocd-vault-plugin
