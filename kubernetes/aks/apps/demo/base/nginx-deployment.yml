@@ -82,7 +82,7 @@ apiVersion: v1
 metadata:
   name: nginx-example-secret
   annotations:
-    avp.kubernetes.io/path: "kv/nginx/avp-demo"
+    avp.kubernetes.io/path: "kv/data/nginx/avp-demo"
     avp.kubernetes.io/secret-version: "1"
 stringData:
   super-secret: <super-secret>
