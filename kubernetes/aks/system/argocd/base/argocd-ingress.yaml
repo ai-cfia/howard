@@ -14,10 +14,10 @@ spec:
   ingressClassName: nginx
   tls:
     - hosts:
-        - argocdd.inspection.alpha.canada.ca
+        - argocddd.inspection.alpha.canada.ca
       secretName: argocd-secret
   rules:
-    - host: argocdd.inspection.alpha.canada.ca
+    - host: argocddd.inspection.alpha.canada.ca
       http:
         paths:
           - path: /
