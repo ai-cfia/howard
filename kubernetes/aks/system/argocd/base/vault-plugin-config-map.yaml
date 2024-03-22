@@ -17,7 +17,7 @@ data:
           command:
             - sh
             - "-c"
-            - "find . -type f -name '*.values.yaml' -o -name '*.values.yml' -o -name 'values.yaml' -o -name 'values.yml'"
+            - "find . -name 'Chart.yaml' && find . -name 'values.yaml'"
       generate:
         command:
           - bash
