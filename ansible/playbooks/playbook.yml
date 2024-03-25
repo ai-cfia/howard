@@ -44,5 +44,5 @@
     - name: Running verbose cmd
       command:
         cmd: >
-          ls
+          ls -lah
       changed_when: false
