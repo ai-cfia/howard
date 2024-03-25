@@ -10,12 +10,15 @@
     - name: Testing vars.tf
       ansible.builtin.command:
         cmd: "echo {{ test }}"
-      changed_when: false
+      register: test_var
+      changed_when: test_var.rc != 0
 
   handlers:
     - name: A task was made
       ansible.builtin.command:
         cmd: "echo a task was made"
+      register: task_made
+      changed_when: task_made.rc != 0
 
   tasks:
     - name: Ensure chrony (for time synchronization) is installed.
@@ -45,4 +48,5 @@
       ansible.builtin.command:
         cmd: >
           ls -lah
-      changed_when: false
+      register: vb_cmd
+      changed_when: vb_cmd.rc != 0
