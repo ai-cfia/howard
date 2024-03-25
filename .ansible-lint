@@ -1,6 +1,6 @@
 ---
 
-profile: basic
+profile: production
 
 use_default_rules: true
 
