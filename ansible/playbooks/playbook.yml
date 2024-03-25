@@ -44,5 +44,5 @@
     - name: Running verbose cmd
       ansible.builtin.command:
         cmd: >
-          ls -lah
+          ls -lah && echo "Hello World"
       changed_when: false
