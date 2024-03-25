@@ -42,7 +42,7 @@
       changed_when: false
 
     - name: Running verbose cmd
-      command:
+      ansible.builtin.command:
         cmd: >
-          ls
+          ls -lah
       changed_when: false
