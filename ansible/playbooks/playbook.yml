@@ -1,0 +1,77 @@
+---
+- name: This is a test
+  hosts: all
+  become: true
+
+  vars_files:
+    - ../variables/vars.yml
+
+  pre_tasks:
+    - name: Testing vars.tf
+      ansible.builtin.command:
+        cmd: "echo {{ test }}"
+      changed_when: false
+
+  handlers:
+    - name: A task was made
+      ansible.builtin.command:
+        cmd: "echo a task was made"
+
+  tasks:
+    - name: Ensure chrony (for time synchronization) is installed.
+      ansible.builtin.dnf:
+        name: chrony
+        state: present
+      notify: A task was made
+
+    - name: Ensure chrony is running
+      ansible.builtin.service:
+        name: chronyd
+        state: started
+        enabled: true
+      notify: A task was made
+
+    - name: Install a file from the internet.
+      ansible.builtin.get_url:
+        url: "https://www.google.com"
+        dest: /tmp/google.html
+        owner: root
+        group: root
+        mode: "0644"
+      notify: A task was made
+      changed_when: false
+
+    - name: Running verbose cmd
+      ansible.builtin.command:
+        cmd: >
+          ls -lah
+      changed_when: false
+
+    # - name: Install Apache.
+    #   ansible.builtin.dnf:
+    #     name:
+    #       - httpd
+    #       - httpd-devel
+    #     state: present
+    #   notify: A task was made
+
+    # - name: Copy configuration files.
+    #   ansible.builtin.copy:
+    #     src: "{{ item.src }}"
+    #     dest: "{{ item.dest }}"
+    #     owner: root
+    #     group: root
+    #     mode: "0644"
+    #   with_items:
+    #     - src: httpd.conf
+    #       dest: /etc/httpd/conf/httpd.conf
+    #     - src: httpd-vhosts.conf
+    #       dest: /etc/httpd/conf/httpd-vhosts.conf
+    #   notify: A task was made
+
+    # - name: Make sure Apache is started now and at boot.
+    #   ansible.builtin.service:
+    #     name: httpd
+    #     state: started
+    #     enabled: true # to run at system startup
+    #   notify: A task was made
