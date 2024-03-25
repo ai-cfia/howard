@@ -34,4 +34,4 @@ jobs:
     uses:
       ai-cfia/github-workflows/.github/workflows/workflow-lint-ansible.yml@116-create-a-github-workflow-to-lint-any-ansible-playbooks
     with:
-      ansible-lint-file: 'ansible-lint-configuration.yml'
+      ansible-lint-config: 'ansible-lint-config.yml'
