@@ -10,3 +10,5 @@ exclude_paths:
   - terraform/
   - docs/
   - kubernetes/
+  - .yamllint.yml
+  - .apply-terraform.yml
