@@ -4,6 +4,9 @@
   become: true
 
   tasks:
+    - name: Include variables
+      ansible.builtin.include_vars: ../variables.yml
+
     - name: Get the azure-cli script
       ansible.builtin.get_url:
         url: https://aka.ms/InstallAzureCLIDeb
@@ -30,7 +33,6 @@
       ansible.builtin.command:
         cmd: >
           az account set --subscription {{ azure_subscription }}
-      ansible.builtin.include_vars: ../variables.yml
       register: azure_subscription
       changed_when: azure_subscription.rc != 0
 
@@ -38,7 +40,6 @@
       ansible.builtin.command:
         cmd: >
           az aks get-credentials --resource-group {{ azure_aks_rg }} --name {{ azure_aks_name }} --overwrite-existing
-      ansible.builtin.include_vars: ../variables.yml
       register: azure_aks_get_credentials
       changed_when: azure_aks_get_credentials.rc != 0
 
