@@ -27,6 +27,12 @@ spec:
           image: nginx:1.14.2
           ports:
             - containerPort: 80
+          env:
+            - name: SECRET_ENV_VAR
+              valueFrom:
+                secretKeyRef:
+                  name: nginx-example-secret
+                  key: super-secret
 
 ---
 apiVersion: v1
@@ -70,3 +76,13 @@ spec:
                 name: nginx
                 port:
                   number: 80
+---
+kind: Secret
+apiVersion: v1
+metadata:
+  name: nginx-example-secret
+  annotations:
+    avp.kubernetes.io/path: "kv/data/nginx/avp-demo"
+    avp.kubernetes.io/secret-version: "1"
+stringData:
+  super-secret: <super-secret>

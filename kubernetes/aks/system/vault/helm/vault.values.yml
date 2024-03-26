@@ -404,7 +404,7 @@ server:
     # As of Kubernetes 1.19, all Ingress Paths must have a pathType configured. The default value below should be
     # sufficient in most cases.
     # See: https://kubernetes.io/docs/concepts/services-networking/ingress/#path-types for other possible values.
-    pathType: Prefix
+    pathType: ImplementationSpecific
 
     # When HA mode is enabled and K8s service registration is being used,
     # configure the ingress to point to the Vault active service.
@@ -423,7 +423,7 @@ server:
     tls:
       - secretName: vault-tls
         hosts:
-          - vault.inspection.alpha.canada.ca
+          - vault.inspection.alpha.canada.ca # For future use.
 
   # hostAliases is a list of aliases to be added to /etc/hosts. Specified as a YAML list.
   hostAliases: []
@@ -788,7 +788,7 @@ server:
         plugin_directory = "/vault/plugins"
 
         listener "tcp" {
-          tls_disable = true
+          tls_disable = false
           address = "[::]:8200"
           cluster_address = "[::]:8201"
           tls_cert_file = "/vault/userconfig/vault-ha-tls/vault.crt"

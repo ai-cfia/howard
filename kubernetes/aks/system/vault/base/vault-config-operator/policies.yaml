@@ -1,0 +1,43 @@
+apiVersion: redhatcop.redhat.io/v1alpha1
+kind: Policy
+metadata:
+  name: secrets-writer
+spec:
+  authentication:
+    path: kubernetes
+    role: config-admin
+  policy: |
+    # create secrets
+    path "kv/data/{{identity.entity.aliases.${auth/kubernetes/@accessor}.metadata.service_account_namespace}}" {
+      capabilities = [ "create", "update", "delete" ]
+    }
+---
+apiVersion: redhatcop.redhat.io/v1alpha1
+kind: Policy
+metadata:
+  name: secrets-reader
+spec:
+  authentication:
+    path: kubernetes
+    role: config-admin
+  policy: |
+    path "kv/data/{{identity.entity.aliases.${auth/kubernetes/@accessor}.metadata.service_account_namespace}}" {
+      capabilities = [ "read" ]
+    }
+---
+apiVersion: redhatcop.redhat.io/v1alpha1
+kind: Policy
+metadata:
+  name: config-admin
+spec:
+  authentication:
+    path: kubernetes
+    role: config-admin
+  policy: |
+    path "sys/*" {
+      capabilities =  ["create", "read", "update", "delete", "list", "sudo"]
+    }
+
+    path "auth/*" {
+      capabilities =  ["create", "read", "update", "delete", "list", "sudo"]
+    }

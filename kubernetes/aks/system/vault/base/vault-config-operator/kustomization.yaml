@@ -1,0 +1,6 @@
+namespace: vault
+
+resources:
+  - policies.yaml
+  - roles.yaml
+  - kv-secret-engine.yaml

@@ -6,6 +6,7 @@ resources:
   # User applications
   - ../finesse/
   - ../nachet/
+  - ../demo/
 
   # System applications
   - ../../system/cert-manager/
