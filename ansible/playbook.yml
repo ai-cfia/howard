@@ -1,10 +1,6 @@
 ---
-- name: Execute playbooks
-  hosts: all
+- name: Execute azure playbook
+  ansible.builtin.import_playbook: playbooks/azure.yml
 
-  vars_files:
-    - variables.yml
-
-  tasks:
-    - import_playbook: playbooks/linux/azure.yml
-    - import_playbook: playbooks/linux/kubectl_plugins.yml
+- name: Execute kubectl plugins playbook
+  ansible.builtin.import_playbook: playbooks/kubectl_plugins.yml
