@@ -1,6 +1,6 @@
 ---
 - name: Install kubectl plugins
-  hosts: linux_azure_vms
+  hosts: all
   become: true
 
   tasks:

@@ -1,6 +1,6 @@
 ---
 - name: Install azure-cli and login to the AKS cluster
-  hosts: linux_azure_vms
+  hosts: all
   become: true
 
   tasks:
