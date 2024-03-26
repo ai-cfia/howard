@@ -153,6 +153,8 @@ module "vms" {
   vm_virtual_network_address_space           = var.vm_virtual_network_address_space
   vm_virtual_network_subnet_name             = var.vm_virtual_network_subnet_name
   vm_virtual_network_subnet_address_prefixes = var.vm_virtual_network_subnet_address_prefixes
+  vm_public_ip_name                          = var.vm_public_ip_name
+  vm_public_ip_allocation_method             = var.vm_public_ip_allocation_method
 
   bastion_virtual_network_subnet_name             = var.bastion_virtual_network_subnet_name
   bastion_virtual_network_subnet_address_prefixes = var.bastion_virtual_network_subnet_address_prefixes

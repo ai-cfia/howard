@@ -13,6 +13,17 @@ variable "vm_virtual_network_name" {
   description = "VM virtual network name"
 }
 
+variable "vm_public_ip_name" {
+  type        = string
+  description = "VM public ip name"
+}
+
+variable "vm_public_ip_allocation_method" {
+  type        = string
+  description = "VM public ip allocation method"
+  default     = "Static"
+}
+
 variable "vm_virtual_network_address_space" {
   type        = list(string)
   description = "VM virtual network name address space"
