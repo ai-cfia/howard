@@ -6,8 +6,5 @@
     - variables.yml
 
   tasks:
-    - name: Execute azure playbook
-      ansible.builtin.import_playbook: playbooks/linux/azure.yml
-
-    - name: Execute kubectl playbook
-      ansible.builtin.import_playbook: playbooks/linux/kubectl_plugins.yml
+    - import_playbook: playbooks/linux/azure.yml
+    - import_playbook: playbooks/linux/kubectl_plugins.yml
