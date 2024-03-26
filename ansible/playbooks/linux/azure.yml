@@ -3,9 +3,6 @@
   hosts: linux_azure_vms
   become: true
 
-  vars_files:
-    - ../../variables.yml
-
   tasks:
     - name: Get the azure-cli script
       ansible.builtin.get_url:

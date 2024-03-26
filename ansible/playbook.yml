@@ -2,9 +2,12 @@
 - name: Execute playbooks
   hosts: linux_azure_vms
 
+  vars_files:
+    - variables.yml
+
   tasks:
-    - name: Execute azure playbook
+    - name: Execute azure playbook (linux)
       ansible.builtin.include_playbook: playbooks/linux/azure.yml
 
-    - name: Execute kubectl playbook
+    - name: Execute kubectl playbook (linux)
       ansible.builtin.include_playbook: playbooks/linux/kubectl_plugins.yml
