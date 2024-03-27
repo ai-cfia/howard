@@ -31,7 +31,7 @@
         line: 'export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"'
         insertafter: EOF
 
-    - name: Source .bashrc
+    - name: Run Source .bashrc
       ansible.builtin.command:
         cmd: >
           source .bashrc
