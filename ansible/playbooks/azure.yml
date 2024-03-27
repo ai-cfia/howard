@@ -4,7 +4,7 @@
   become: true
 
   tasks:
-    - name: Include variables
+    - name: Include variables (variables.yml)
       ansible.builtin.include_vars: ../variables.yml
 
     - name: Get the azure-cli script
