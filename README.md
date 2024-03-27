@@ -18,7 +18,7 @@ which contains explanations as well as diagrams:
 
 - [Global overview](docs/generic-achitecture.md)
 - [Ingress](docs/multi-layered-application.md)
-
+- [Secrets management](docs/secrets-management.md)
 
 ## Content
 
