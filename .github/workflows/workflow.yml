@@ -30,11 +30,12 @@ jobs:
     with:
       config-file-path: '.tflint.hcl'
 
-  ansible-lint:
+  ansible-lint-and-apply:
     uses:
       ai-cfia/github-workflows/.github/workflows/workflow-lint-ansible.yml@116-create-a-github-workflow-to-lint-any-ansible-playbooks
     with:
       ansible-lint-config: '.ansible-lint'
       ansible-variable-file: 'ansible/variables.yml'
       ansible-inventory-file: 'ansible/inventory'
+      ansible-playbook-file: 'ansible/playbook.yml'
     secrets: inherit
