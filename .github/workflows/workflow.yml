@@ -35,3 +35,6 @@ jobs:
       ai-cfia/github-workflows/.github/workflows/workflow-lint-ansible.yml@116-create-a-github-workflow-to-lint-any-ansible-playbooks
     with:
       ansible-lint-config: '.ansible-lint'
+      ansible-variable-file: 'ansible/variables.yml'
+      ansible-inventory-file: 'ansible/inventory'
+    secrets: inherit
