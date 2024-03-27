@@ -32,7 +32,7 @@ jobs:
 
   ansible-lint-and-apply:
     uses:
-      ai-cfia/github-workflows/.github/workflows/workflow-lint-ansible.yml@116-create-a-github-workflow-to-lint-any-ansible-playbooks
+      ai-cfia/github-workflows/.github/workflows/workflow-lint-and-apply-ansible.yml@116-create-a-github-workflow-to-lint-any-ansible-playbooks
     with:
       ansible-lint-config: '.ansible-lint'
       ansible-variable-file: 'ansible/variables.yml'
