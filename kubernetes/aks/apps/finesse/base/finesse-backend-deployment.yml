@@ -21,6 +21,9 @@ spec:
           envFrom:
             - secretRef:
                 name: finesse-secrets
+          env:
+            - name: PORT
+              value: "8080"
           ports:
             - containerPort: 8080
           livenessProbe:
