@@ -1,0 +1,58 @@
+---
+- name: Install azure-cli and login to the AKS cluster
+  hosts: all
+  become: true
+
+  tasks:
+    - name: Include variables (variables.yml)
+      ansible.builtin.include_vars: ../variables.yml
+
+    - name: Get the azure-cli script
+      ansible.builtin.get_url:
+        url: https://aka.ms/InstallAzureCLIDeb
+        dest: /tmp/azure_cli.sh
+        owner: root
+        group: root
+        mode: "0755"
+
+    - name: Install azure-cli
+      ansible.builtin.shell:
+        cmd: >
+          sudo ./tmp/azure_cli.sh
+      register: azure_cli
+      changed_when: azure_cli.rc != 0
+
+    - name: Login to azure
+      ansible.builtin.command:
+        cmd: >
+          az login -i
+      register: az_login
+      changed_when: az_login.rc != 0
+
+    - name: Set azure subscription
+      ansible.builtin.command:
+        cmd: >
+          az account set --subscription {{ azure_subscription }}
+      register: azure_subscription
+      changed_when: azure_subscription.rc != 0
+
+    - name: Get AKS credentials
+      ansible.builtin.command:
+        cmd: >
+          az aks get-credentials --resource-group {{ azure_aks_rg }} --name {{ azure_aks_name }} --overwrite-existing
+      register: azure_aks_get_credentials
+      changed_when: azure_aks_get_credentials.rc != 0
+
+    - name: Install kubectl and kubelogin with az
+      ansible.builtin.command:
+        cmd: >
+          az aks install-cli
+      register: az_aks_cli
+      changed_when: az_aks_cli.rc != 0
+
+    - name: Login to the AKS using kubelogin
+      ansible.builtin.command:
+        cmd: >
+          kubelogin convert-kubeconfig -l azurecli
+      register: kubelogin
+      changed_when: kubelogin.rc != 0

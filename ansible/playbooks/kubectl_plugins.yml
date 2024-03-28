@@ -1,0 +1,46 @@
+---
+- name: Install kubectl plugins
+  hosts: all
+  become: true
+
+  tasks:
+    - name: Install git
+      ansible.builtin.apt:
+        name: git
+        state: present
+
+    - name: Install krew
+      ansible.builtin.shell:
+        cmd: >
+          (
+            set -eo pipefail;
+            set -x; cd "$(mktemp -d)" &&
+            OS="$(uname | tr '[:upper:]' '[:lower:]')" &&
+            ARCH="$(uname -m | sed -e 's/x86_64/amd64/' -e 's/\(arm\)\(64\)\?.*/\1\2/' -e 's/aarch64$/arm64/')" &&
+            KREW="krew-${OS}_${ARCH}" &&
+            curl -fsSLO "https://github.com/kubernetes-sigs/krew/releases/latest/download/${KREW}.tar.gz" &&
+            tar zxvf "${KREW}.tar.gz" &&
+            ./"${KREW}" install krew
+          )
+      register: krew
+      changed_when: krew.rc != 0
+
+    - name: Export krew to .bashrc
+      ansible.builtin.lineinfile:
+        path: ~/.bashrc
+        line: 'export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"'
+        insertafter: EOF
+
+    - name: Run Source .bashrc
+      ansible.builtin.command:
+        cmd: >
+          source .bashrc
+      register: source_bashrc
+      changed_when: source_bashrc.rc != 0
+
+    - name: Install ns and ctx krew plugins
+      ansible.builtin.shell:
+        cmd: >
+          kubectl krew install ns && kubectl krew install ctx
+      register: krew_install
+      changed_when: krew_install.rc != 0

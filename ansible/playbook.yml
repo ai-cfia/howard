@@ -1,0 +1,6 @@
+---
+- name: Execute azure playbook
+  ansible.builtin.import_playbook: playbooks/azure.yml
+
+- name: Execute kubectl plugins playbook
+  ansible.builtin.import_playbook: playbooks/kubectl_plugins.yml
