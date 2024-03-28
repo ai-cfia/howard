@@ -1,0 +1,24 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: postgresml
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: postgresml
+  source:
+    repoURL: https://github.com/ai-cfia/howard.git
+    path: kubernetes/aks/apps/postgresml/base
+    targetRevision: HEAD
+    plugin:
+      name: argocd-vault-plugin
+  syncPolicy:
+    automated:
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

@@ -1,0 +1,23 @@
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: postgresml
+  namespace: postgresml
+spec:
+  instances: 1
+  imageName: ghcr.io/ai-cfia/postgresml:15.0-postgresml-2.8.2
+  superuserSecret:
+    name: superuser-secret
+
+  bootstrap:
+    initdb:
+      database: pgsql-ml-01
+      owner: cfia-admin
+      secret:
+        name: postgresml-secret
+      postInitTemplateSQL:
+        - CREATE EXTENSION vector;
+        - CREATE EXTENSION pgml;
+  storage:
+    size: 20Gi

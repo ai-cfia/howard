@@ -1,0 +1,13 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgresml-ui-svc
+  namespace: postgresml
+spec:
+  clusterIP: None
+  selector:
+    app: postgresml
+  ports:
+    - protocol: TCP
+      port: 8000
