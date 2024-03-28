@@ -2,7 +2,6 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
-    nginx.ingress.kubernetes.io/whitelist-source-range: 205.194.32.0/24
     external-dns.alpha.kubernetes.io/target: inspection.alpha.canada.ca
     # https://kubernetes.github.io/ingress-nginx/user-guide/miscellaneous/#websockets
     nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
