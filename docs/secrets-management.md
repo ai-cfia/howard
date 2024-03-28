@@ -63,7 +63,7 @@ sequenceDiagram
     ArgoRepoServer->>+ArgoVaultPlugin: triggers refresh on finesse namespace,<br> sync secrets from Vault
     ArgoVaultPlugin->>+Vault: Fetch specific version of secrets
     ArgoVaultPlugin->>+FinessePod: Injects secrets
-    Developer->>+FinessePod: Trigger hard refresh through argoCD
+    Developer->>+FinessePod: 4. Trigger hard refresh through argoCD
 ```
 
 Take note that the developer needs to trigger a hard refresh on the pod to
