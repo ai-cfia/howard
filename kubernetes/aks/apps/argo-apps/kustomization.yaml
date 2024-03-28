@@ -7,6 +7,7 @@ resources:
   - ../finesse/
   - ../nachet/
   - ../demo/
+  - ../bytebase/
 
   # System applications
   - ../../system/cert-manager/
