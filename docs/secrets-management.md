@@ -55,7 +55,8 @@ sequenceDiagram
     GHWorkflow->>+ContainerReg: Builds and pushes new semantic version
     GHWorkflow->>+ArgoRepoServer: Triggers webhook
     ArgoRepoServer->>+FinessePod: Triggers synchronisation to pod
-    FinessePod->>+FinessePod: Refreshes deployment with new deployment
+    FinessePod->>+ContainerReg: Fetches image with new version tag
+    FinessePod->>+FinessePod: Refreshes deployment with new version
     Developer->>+VaultUI: 2. Accesses UI to update/create secrets
     VaultUI->>+Vault: Commit update/creation of secrets
     Developer->>+HowardRepo: 3. Commits new/updated secrets
