@@ -7,11 +7,10 @@ spec:
   instances: 1
   superuserSecret:
     name: superuser-secret
-
   bootstrap:
     initdb:
       database: bytebase-pgsql
-      owner: cfia-admin
+      owner: bytebase
       secret:
         name: bytebase-pgsql-secret
   storage:
