@@ -1,0 +1,29 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    external-dns.alpha.kubernetes.io/target: inspection.alpha.canada.ca
+    # https://kubernetes.github.io/ingress-nginx/user-guide/miscellaneous/#websockets
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
+    ingress.kubernetes.io/force-ssl-redirect: "true"
+    kubernetes.io/tls-acme: "true"
+  name: bytebase-ingress
+  namespace: bytebase
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - bytebase.inspection.alpha.canada.ca
+      secretName: aciacfia-tls
+  rules:
+    - host: bytebase.inspection.alpha.canada.ca
+      http:
+        paths:
+          - backend:
+              service:
+                name: bytebase-entrypoint
+                port:
+                  number: 80
+            path: /
+            pathType: ImplementationSpecific

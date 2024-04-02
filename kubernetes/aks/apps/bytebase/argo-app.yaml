@@ -1,0 +1,32 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: bytebase
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: bytebase
+  source:
+    - chart: bytebase
+      helm:
+        releaseName: bytebase
+        valueFiles:
+          - $values/kubernetes/aks/apps/bytebase/helm/values.yaml
+      repoURL: https://bytebase.github.io/bytebase
+      targetRevision: 1.1.1
+    - repoURL: https://github.com/ai-cfia/howard.git
+      targetRevision: HEAD
+      ref: values
+    - repoURL: https://github.com/ai-cfia/howard.git
+      path: kubernetes/aks/apps/bytebase/base
+      targetRevision: HEAD
+  syncPolicy:
+    automated:
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
