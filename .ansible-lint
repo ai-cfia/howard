@@ -1,0 +1,14 @@
+---
+
+profile: production
+
+use_default_rules: true
+
+offline: true
+
+exclude_paths:
+  - terraform/
+  - docs/
+  - kubernetes/
+  - .yamllint.yml
+  - .apply-terraform.yml
