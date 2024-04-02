@@ -11,7 +11,7 @@ spec:
   destination:
     server: https://kubernetes.default.svc
     namespace: bytebase
-  source:
+  sources:
     - chart: bytebase
       helm:
         releaseName: bytebase
