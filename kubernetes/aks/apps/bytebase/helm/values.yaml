@@ -11,7 +11,7 @@ bytebase:
       # If users need to read the pgURL from a secret, they can specify the secret name and key here.
       # Bytebase will ignore the bytebase.option.externalPg.url if this is specified.
       existingPgURLSecret: "bytebase-pgurl"
-      existingPgURLSecretKey: "PgURL"
+      existingPgURLSecretKey: "pgurl"
       # escapePassword controls whether to escape the password in the connection string,
       # this is useful when the password contains special characters and it is read from a secret.
       # It's only be applied in pgPassword or existingPgPasswordSecret.
