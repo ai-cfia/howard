@@ -2,31 +2,33 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: ori
+  name: vouch-proxy
   namespace: argocd
-  finalizers:
-    - resources-finalizer.argocd.argoproj.io
   annotations:
     argocd.argoproj.io/sync-wave: "0"
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
   destination:
+    namespace: vouch-proxy
     server: https://kubernetes.default.svc
-    namespace: ori
   sources:
-    - chart: kratos
+    - chart: vouch
       helm:
-        releaseName: ori-kratos
+        releaseName: vouch
         valueFiles:
-          - $values/kubernetes/aks/system/ori/base/kratos/helm/values.yaml
-      repoURL: https://k8s.ory.sh/helm/charts
-      targetRevision: 0.39.1
+          - $values/kubernetes/aks/system/vouch-proxy/helm/values.yaml
+      repoURL: https://charts.bitnami.com/bitnami
+      targetRevision: 3.2.0
     - repoURL: https://github.com/ai-cfia/howard.git
       targetRevision: HEAD
       ref: values
     - repoURL: https://github.com/ai-cfia/howard.git
-      path: kubernetes/aks/system/ori/base
+      path: kubernetes/aks/system/vouch-proxy/base
       targetRevision: HEAD
+      plugin:
+        name: argocd-vault-plugin
   syncPolicy:
     automated:
       selfHeal: true
