@@ -16,13 +16,62 @@ spec:
     - chart: vouch
       helm:
         releaseName: vouch
-        valueFiles:
-          - $values/kubernetes/aks/system/vouch-proxy/helm/values.yaml
       repoURL: https://vouch.github.io/helm-charts
       targetRevision: 3.2.0
-    - repoURL: https://github.com/ai-cfia/howard.git
-      targetRevision: HEAD
-      ref: values
+      plugin:
+        env:
+          - name: HELM_VALUES
+            value: |
+              config:
+                vouch:
+                  # only used for github orgs/teams. To be removed when we move to azure.
+                  teamWhitelist:
+                    - ai-cfia
+                    # - ai-cfia/devops if we only want specific teams.
+                  allowAllUsers: true
+                  cookie:
+                    name: jxVouchCookie
+                    domain: inspection.alpha.canada.ca
+                    secure: true
+                    httpOnly: true
+                    maxAge: 14400
+                    sameSite: none
+                  jwt:
+                    issuer: Vouch
+                    maxAge: 240
+                    compress: true
+                  session:
+                    name: jxVouchSession
+                  headers:
+                    jwt: X-Vouch-Token
+                    querystring: access_token
+                    accesstoken: X-Vouch-IdP-AccessToken
+                    idtoken: X-Vouch-IdP-IdToken
+                    claims:
+                      - name
+                      - email
+                      - groups
+                oauth:
+                  # Azure
+                  # scopes: [openid, email, profile]
+                  # provider: azure
+                  # client_id: <id>
+                  # client_secret: <secret>
+                  # auth_url: https://login.microsoftonline.com/<tenantID>/oauth2/v2.0/authorize
+                  # token_url: https://login.microsoftonline.com/<tenantID>/oauth2/v2.0/token
+                  # callback_url: https://vouch.inspection.alpha.canada.ca/auth
+                  # azure_token: id_token
+
+                  # GitHub // to be removed when we move to azure
+                  # https://developer.github.com/apps/building-integrations/setting-up-and-registering-oauth-apps/about-authorization-options-for-oauth-apps/
+                  # Done at https://github.com/settings/applications/new
+                  provider: github
+                  client_id: <path:kv/data/system/vouch-proxy#github-client-id#1>
+                  client_secret: <path:kv/data/system/vouch-proxy#github-client-secret#1>
+                  scopes:
+                    - read:user
+                    - user:email
+                    - read:org
     - repoURL: https://github.com/ai-cfia/howard.git
       path: kubernetes/aks/system/vouch-proxy/base
       targetRevision: HEAD
