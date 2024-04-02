@@ -15,10 +15,7 @@ To set up virtual machines in the cloud, using Ansible was very useful to enable
 
 ## Diagrams
 
-## Training
-
-
-
+![Ansible](img/ansible.svg)
 
 ## References
 
