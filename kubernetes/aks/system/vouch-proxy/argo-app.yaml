@@ -26,8 +26,6 @@ spec:
     - repoURL: https://github.com/ai-cfia/howard.git
       path: kubernetes/aks/system/vouch-proxy/base
       targetRevision: HEAD
-      plugin:
-        name: argocd-vault-plugin
   syncPolicy:
     automated:
       selfHeal: true
