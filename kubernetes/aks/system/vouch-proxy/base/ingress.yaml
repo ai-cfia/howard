@@ -1,12 +1,11 @@
----
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: vouch-proxy
   namespace: vouch-proxy
   labels:
-    app.kubernetes.io/name: vouch
-    app.kubernetes.io/instance: vouch
+    app.kubernetes.io/name: vouch-proxy
+    app.kubernetes.io/instance: vouch-proxy
   annotations:
     external-dns.alpha.kubernetes.io/target: inspection.alpha.canada.ca
     cert-manager.io/cluster-issuer: letsencrypt-prod
@@ -27,7 +26,7 @@ spec:
           - path: /
             backend:
               service:
-                name: vouch
+                name: vouch-proxy
                 port:
                   name: http
             pathType: Prefix
