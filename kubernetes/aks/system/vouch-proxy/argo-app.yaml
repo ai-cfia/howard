@@ -14,8 +14,6 @@ spec:
     server: https://kubernetes.default.svc
   sources:
     - chart: vouch
-      helm:
-        releaseName: vouch
       repoURL: https://vouch.github.io/helm-charts
       targetRevision: 3.2.0
       plugin:
