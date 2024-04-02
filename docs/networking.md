@@ -21,5 +21,5 @@ Here's how a request is routed to our Kubernetes cluster. Once the image respond
 ## References
 - [Cert manager](https://cert-manager.io/)
 - [Ingress NGINX](https://github.com/kubernetes/ingress-nginx)
-- [DNS](https://www.cloudflare.com/learning/dns/what-is-dns/)
+- [DNS](https://www.fortinet.com/resources/cyberglossary/what-is-dns)
 - [Kubernetes](https://kubernetes.io/)
