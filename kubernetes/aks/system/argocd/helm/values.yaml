@@ -296,8 +296,6 @@ configs:
     # -- File containing user-defined policies and role definitions.
     # @default -- `''` (See [values.yaml])
     policy.csv: |
-      p, role:admin, applications, *, */, allow
-
       p, role:finesse, applications, create, finesse/*, allow
       p, role:finesse, applications, update, finesse/*, allow
       p, role:finesse, applications, delete, finesse/*, allow
