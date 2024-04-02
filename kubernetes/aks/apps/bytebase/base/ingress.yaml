@@ -3,6 +3,7 @@ kind: Ingress
 metadata:
   annotations:
     external-dns.alpha.kubernetes.io/target: inspection.alpha.canada.ca
+    cert-manager.io/cluster-issuer: letsencrypt-prod
     # https://kubernetes.github.io/ingress-nginx/user-guide/miscellaneous/#websockets
     nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
     nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
