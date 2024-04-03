@@ -296,7 +296,21 @@ configs:
     # -- File containing user-defined policies and role definitions.
     # @default -- `''` (See [values.yaml])
     policy.csv: |
-      g, ai-cfia:devops, role:admin
+      p, role:finesse, applications, create, finesse/*, allow
+      p, role:finesse, applications, update, finesse/*, allow
+      p, role:finesse, applications, delete, finesse/*, allow
+      p, role:finesse, applications, sync, finesse/*, allow
+      p, role:finesse, applications, override, finesse/*, allow
+
+      p, role:nachet, applications, create, nachet/*, allow
+      p, role:nachet, applications, update, nachet/*, allow
+      p, role:nachet, applications, delete, nachet/*, allow
+      p, role:nachet, applications, sync, nachet/*, allow
+      p, role:nachet, applications, override, nachet/*, allow
+
+      g, ai-cfia:devsecops, role:admin
+      g, ai-cfia:finesse, role:finesse
+      g, ai-cfia:nachet, role:nachet
 
     # -- OIDC scopes to examine during rbac enforcement (in addition to `sub` scope).
     # The scope value can be a string, or a list of strings.
