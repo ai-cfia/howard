@@ -23,16 +23,53 @@ access to secrets, and providing encryption and decryption services. The server
 is also responsible for generating dynamic secrets on demand, which are
 short-lived and are automatically revoked after a certain period of time.
 
-Current configuration allows vault to inject secrets into pods using a sidecar
-container that runs the Vault Agent Injector. The Vault Agent Injector is a
-mutating webhook that intercepts requests to create or update pods and injects
-secrets into the pod's file system. This allows clients (hosted applications) to
-access secrets as files, which is a secure and efficient way to manage secrets
-in a Kubernetes environment.
+Current configuration allows vault to inject secrets into pods secrets using the
+ArgoCD Vault plugin. The plugin reads placeholders in the YAML files and
+replaces them with the actual secret values from Vault. This provides a secure
+way to manage secrets in the Kubernetes cluster and ensures that sensitive data
+is protected from unauthorized access.
 
-The following diagram illustrates the workflow of the Vault Agent Injector and
-how developers can manage secrets of hosted applications: ![Developer workflow
-diagram](img/vault-argocd-workflow.svg)
+The following diagram illustrates the structure of the Vault architecture within
+howard : ![Vault architecture diagram](img/vault-argocd-architecture.svg)
+
+The following sequence diagram describes the process of how a developer can
+update secrets using the Vault UI service and how the secrets are injected into
+pods :
+
+```mermaid
+sequenceDiagram
+    participant Developer
+    participant FinesseRepo as Finesse Repository
+    participant GHWorkflow as GitHub Workflow
+    participant ContainerReg as GitHub Container Registry
+    participant HowardRepo as Howard Repository
+    participant ArgoRepoServer as ArgoCD Repo Server
+    participant ArgoVaultPlugin as Argo Vault Plugin
+    participant FinessePod as Finesse Pod
+
+    participant VaultUI as Vault UI
+    participant Vault as Vault Server
+
+    Developer->>+FinesseRepo: 1. Pushes commits
+    FinesseRepo->>+GHWorkflow: Triggers workflow
+    GHWorkflow->>+ContainerReg: Builds and pushes new semantic version
+    GHWorkflow->>+ArgoRepoServer: Triggers webhook
+    ArgoRepoServer->>+FinessePod: Triggers synchronisation to pod
+    FinessePod->>+ContainerReg: Fetches image with new version tag
+    FinessePod->>+FinessePod: Refreshes deployment with new version
+    Developer->>+VaultUI: 2. Accesses UI to update/create secrets
+    VaultUI->>+Vault: Commit update/creation of secrets
+    Developer->>+HowardRepo: 3. Commits new/updated secrets
+    HowardRepo->>+ArgoRepoServer: Triggers sync via webhook
+    ArgoRepoServer->>+ArgoVaultPlugin: triggers refresh on finesse namespace,<br> sync secrets from Vault
+    ArgoVaultPlugin->>+Vault: Fetch specific version of secrets
+    ArgoVaultPlugin->>+FinessePod: Injects secrets
+    Developer->>+FinessePod: 4. Trigger hard refresh through argoCD
+```
+
+Take note that the developer needs to trigger a hard refresh on the pod to
+reflect the changes in the secrets. This is done in the ArgoCD UI, but we
+are working on a way to automate this process.
 
 ## Secret management process
 
@@ -95,8 +132,11 @@ secret manifest for the application. The secret manifest is a YAML file that
 defines the secrets that are injected into the pod's as environment variables.
 We will use Finesse as an example.
 
-1. Open `/kubernetes/aks/apps/finesse/base/finesse-secrets.yaml`.
-2. Update the secrets key references as needed. For example, to add a new
+1. Open an issue with the following template : [Secrets update
+   template](url to be provided when the template is created). You can then
+   create a working branch from the issue.
+2. Open `/kubernetes/aks/apps/finesse/base/finesse-secrets.yaml`.
+3. Update the secrets key references as needed. For example, to add a new
    secret, you can add a new key-value pair to the `data` section of the secret
   manifest :
 
@@ -108,7 +148,7 @@ The key represents the environment variable name that will be injected into the
 pod, and the value represents the secret key in Vault that will be used to fetch
 the secret value.
 
-3. Update the version annotation of  the secrets being fetch from vault :
+4. Update the version annotation of  the secrets being fetch from vault :
 
     ```yaml
     # Bump the version of the secret from
@@ -117,8 +157,13 @@ the secret value.
     avp.kubernetes.io/secret-version: "5"
     ```
 
-     This is the new version that we
-create in step 5 of the previous section.
+     This is the new version that we create in step 5 of the previous section.
+
+As additional example, here is an issue and a pull request that showcases the
+process of updating secrets in the Nachet application :
+
+- [Issue](https://github.com/ai-cfia/howard/issues/133)
+- [Pull request](https://github.com/ai-cfia/howard/pull/131)
 
 ## Argo CD Vault plugin (AVP)
 
