@@ -18,7 +18,7 @@
     - name: Install azure-cli
       ansible.builtin.shell:
         cmd: >
-          sudo ./tmp/azure_cli.sh
+          sudo /tmp/azure_cli.sh
       register: azure_cli
       changed_when: azure_cli.rc != 0
 
@@ -46,7 +46,7 @@
     - name: Install kubectl and kubelogin with az
       ansible.builtin.command:
         cmd: >
-          az aks install-cli
+          sudo az aks install-cli
       register: az_aks_cli
       changed_when: az_aks_cli.rc != 0
 
