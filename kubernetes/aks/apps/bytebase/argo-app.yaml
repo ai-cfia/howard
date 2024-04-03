@@ -2,30 +2,28 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: ori
+  name: bytebase
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
-  annotations:
-    argocd.argoproj.io/sync-wave: "0"
 spec:
   project: default
   destination:
     server: https://kubernetes.default.svc
-    namespace: ori
+    namespace: bytebase
   sources:
-    - chart: kratos
+    - chart: bytebase
       helm:
-        releaseName: ori-kratos
+        releaseName: bytebase
         valueFiles:
-          - $values/kubernetes/aks/system/ori/base/kratos/helm/values.yaml
-      repoURL: https://k8s.ory.sh/helm/charts
-      targetRevision: 0.39.1
+          - $values/kubernetes/aks/apps/bytebase/helm/values.yaml
+      repoURL: https://bytebase.github.io/bytebase
+      targetRevision: 1.1.1
     - repoURL: https://github.com/ai-cfia/howard.git
       targetRevision: HEAD
       ref: values
     - repoURL: https://github.com/ai-cfia/howard.git
-      path: kubernetes/aks/system/ori/base
+      path: kubernetes/aks/apps/bytebase/base
       targetRevision: HEAD
   syncPolicy:
     automated:

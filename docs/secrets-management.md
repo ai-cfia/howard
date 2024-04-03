@@ -68,7 +68,7 @@ secrets. The service also provides a way to manage access control policies and
 audit logs. The service is accessible through a web browser and is protected by
 the same security mechanisms as the Vault server.
 
-### Steps
+### Steps to update secrets values using the Vault UI
 
 1. In order to gain access to the Vault UI service, you need to have the
    appropriate permissions and access to the Vault URL. It is currently
@@ -87,6 +87,38 @@ the same security mechanisms as the Vault server.
 5. Once in the directory of your application secrets, simply click on 'create
     new version' and you will be able to add, update, or delete secrets as
     needed. ![Create mew secret](img/create-new-secret.png)
+
+### Steps to update secrets injected into pods
+
+In order to update secrets that are injected into pods, you need to update the
+secret manifest for the application. The secret manifest is a YAML file that
+defines the secrets that are injected into the pod's as environment variables.
+We will use Finesse as an example.
+
+1. Open `/kubernetes/aks/apps/finesse/base/finesse-secrets.yaml`.
+2. Update the secrets key references as needed. For example, to add a new
+   secret, you can add a new key-value pair to the `data` section of the secret
+  manifest :
+
+  ```yaml
+  FINESSE_BACKEND_AZURE_SEARCH_TRANSFORM_MAP: <FINESSE_BACKEND_AZURE_SEARCH_TRANSFORM_MAP>
+```
+
+The key represents the environment variable name that will be injected into the
+pod, and the value represents the secret key in Vault that will be used to fetch
+the secret value.
+
+3. Update the version annotation of  the secrets being fetch from vault :
+
+    ```yaml
+    # Bump the version of the secret from
+    avp.kubernetes.io/secret-version: "4"
+    # To
+    avp.kubernetes.io/secret-version: "5"
+    ```
+
+     This is the new version that we
+create in step 5 of the previous section.
 
 ## Argo CD Vault plugin (AVP)
 

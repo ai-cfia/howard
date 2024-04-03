@@ -1,11 +1,4 @@
 ---
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: secrets-reader
-  namespace: nachet
-
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -20,32 +13,16 @@ spec:
     metadata:
       labels:
         app: nachet-backend
-      annotations:
-        vault.hashicorp.com/agent-inject: 'true'
-        vault.hashicorp.com/role: 'secrets-reader'
-        vault.hashicorp.com/tls-skip-verify: 'true'
-        vault.hashicorp.com/agent-inject-template-.env: |
-          {{- with secret "kv/nachet" -}}
-          NACHET_AZURE_STORAGE_CONNECTION_STRING="{{ .Data.data.NACHET_AZURE_STORAGE_CONNECTION_STRING }}"
-          NACHET_DATA={{ .Data.data.NACHET_DATA }}
-          NACHET_RESOURCE_GROUP="{{ .Data.data.NACHET_RESOURCE_GROUP }}"
-          NACHET_SUBSCRIPTION_ID="{{ .Data.data.NACHET_SUBSCRIPTION_ID }}"
-          NACHET_WORKSPACE="{{ .Data.data.NACHET_WORKSPACE }}"
-          NACHET_MODEL={{ .Data.data.NACHET_MODEL }}
-          NACHET_BLOB_PIPELINE_NAME={{ .Data.data.NACHET_BLOB_PIPELINE_NAME }}
-          NACHET_BLOB_PIPELINE_VERSION={{ .Data.data.NACHET_BLOB_PIPELINE_VERSION }}
-          NACHET_BLOB_PIPELINE_DECRYPTION_KEY="{{ .Data.data.NACHET_BLOB_PIPELINE_DECRYPTION_KEY }}"
-          {{- end }}
     spec:
-      serviceAccountName: secrets-reader
       containers:
         - name: nachet-backend
           image: ghcr.io/ai-cfia/nachet-backend:51-implementing-2-models
           imagePullPolicy: Always
           command: ["/bin/sh", "-c"]
-          args:
-            - >
-              cp /vault/secrets/.env . && hypercorn -b :8080 app:app
+          args: [hypercorn -b :8080 app:app]
+          envFrom:
+            - secretRef:
+                name: nachet-secrets
           ports:
             - containerPort: 8080
           livenessProbe:
