@@ -308,7 +308,7 @@ configs:
       p, role:nachet, applications, sync, nachet/*, allow
       p, role:nachet, applications, override, nachet/*, allow
 
-      g, ai-cfia:devsecops, role:admin
+      g, ai-cfia:devops, role:admin
       g, ai-cfia:finesse, role:finesse
       g, ai-cfia:nachet, role:nachet
 
