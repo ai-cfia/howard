@@ -767,9 +767,9 @@ grafana.ini:
     domain: "{{ if (and .Values.ingress.enabled .Values.ingress.hosts) }}{{ .Values.ingress.hosts | first }}{{ else }}''{{ end }}"
     root_url: https://grafana.inspection.alpha.canada.ca
   auth:
-    disable_login_form: false
+    disable_login_form: true
   auth.basic:
-    enabled: true
+    enabled: false
   auth.github:
     enabled: true
     allow_sign_up: true
