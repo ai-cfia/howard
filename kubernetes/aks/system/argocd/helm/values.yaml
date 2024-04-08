@@ -296,17 +296,17 @@ configs:
     # -- File containing user-defined policies and role definitions.
     # @default -- `''` (See [values.yaml])
     policy.csv: |
-      p, role:finesse, applications, create, finesse/*, allow
-      p, role:finesse, applications, update, finesse/*, allow
-      p, role:finesse, applications, delete, finesse/*, allow
-      p, role:finesse, applications, sync, finesse/*, allow
-      p, role:finesse, applications, override, finesse/*, allow
+      p, role:finesse, applications, create, default/finesse, allow
+      p, role:finesse, applications, update, default/finesse, allow
+      p, role:finesse, applications, delete, default/finesse, allow
+      p, role:finesse, applications, sync, default/finesse, allow
+      p, role:finesse, applications, override, default/finesse, allow
 
-      p, role:nachet, applications, create, nachet/*, allow
-      p, role:nachet, applications, update, nachet/*, allow
-      p, role:nachet, applications, delete, nachet/*, allow
-      p, role:nachet, applications, sync, nachet/*, allow
-      p, role:nachet, applications, override, nachet/*, allow
+      p, role:nachet, applications, create, default/nachet, allow
+      p, role:nachet, applications, update, default/nachet, allow
+      p, role:nachet, applications, delete, default/nachet, allow
+      p, role:nachet, applications, sync, default/nachet, allow
+      p, role:nachet, applications, override, default/nachet, allow
 
       g, ai-cfia:devops, role:admin
       g, ai-cfia:finesse, role:finesse
