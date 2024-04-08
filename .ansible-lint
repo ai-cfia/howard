@@ -12,3 +12,4 @@ exclude_paths:
   - kubernetes/
   - .yamllint.yml
   - .apply-terraform.yml
+  - .github/
