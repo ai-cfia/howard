@@ -13,7 +13,6 @@ spec:
       labels:
         app: nachet-frontend
     spec:
-      serviceAccountName: secrets-reader
       containers:
         - name: nachet-frontend
           image: ghcr.io/ai-cfia/nachet-frontend:main
