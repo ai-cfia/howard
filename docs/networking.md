@@ -8,7 +8,7 @@ the results to the user.
 
 ## Glossary
 
-**DNS:** Translates domain names (like https://www.google.com)
+**DNS:** Translates domain names (like google.com)
 into IP addresses (like 172.217.14.238).
 
 **Ingress NGINX:** A controller that uses NGINX as a web server

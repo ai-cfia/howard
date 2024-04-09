@@ -72,7 +72,7 @@ traditional network.
 
 ## Diagrams
 
-1. Describe the operation of our implementation for high availability (HA)
+Describe the operation of our implementation for high availability (HA)
 as well as the redundancy of services within Azure using Kubernetes
 
 ```mermaid
@@ -114,8 +114,9 @@ flowchart
     end
 ```
 
-2. Represents the process of sending a request to our infrastructure
+Represents the process of sending a request to our infrastructure
 within Azure
+
 ```mermaid
 flowchart
     Client["Client"] -->|request| LB
@@ -156,7 +157,7 @@ flowchart
     end
 ```
 
-3. Representation of the two diagrams above in one
+Representation of the two diagrams above in one
 
 ![Diagram](img/ha-redundancy-lb.png)
 
