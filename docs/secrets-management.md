@@ -143,7 +143,7 @@ We will use Finesse as an example.
    ```yaml
    FINESSE_BACKEND_AZURE_SEARCH_TRANSFORM_MAP: <FINESSE_BACKEND_AZURE_SEARCH_TRANSFORM_MAP>
    ```
-   
+
    The key represents the environment variable name that will be injected into the
    pod, and the value represents the secret key in Vault that will be used to fetch
    the secret value.
