@@ -23,7 +23,6 @@ tasks such as building, testing, and deploying software directly within
 the GitHub platform, providing a powerful way to streamline development
 workflows.
 
-
 ## Explanation of the diagram
 
 The diagram illustrates a workflow for building and pushing an image to the

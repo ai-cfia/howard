@@ -68,8 +68,8 @@ sequenceDiagram
 ```
 
 Take note that the developer needs to trigger a hard refresh on the pod to
-reflect the changes in the secrets. This is done in the ArgoCD UI, but we
-are working on a way to automate this process.
+reflect the changes in the secrets. This is done in the ArgoCD UI, but we are
+working on a way to automate this process.
 
 ## Secret management process
 
@@ -132,38 +132,38 @@ secret manifest for the application. The secret manifest is a YAML file that
 defines the secrets that are injected into the pod's as environment variables.
 We will use Finesse as an example.
 
-1. Open an issue with the following template : [Secrets update
-   template](url to be provided when the template is created). You can then
-   create a working branch from the issue.
+1. Open an issue with the following template : [Secrets update template](url to
+   be provided when the template is created). You can then create a working
+   branch from the issue.
 2. Open `/kubernetes/aks/apps/finesse/base/finesse-secrets.yaml`.
 3. Update the secrets key references as needed. For example, to add a new
    secret, you can add a new key-value pair to the `data` section of the secret
   manifest :
 
-```yaml
-    FINESSE_BACKEND_AZURE_SEARCH_TRANSFORM_MAP: <FINESSE_BACKEND_AZURE_SEARCH_TRANSFORM_MAP>
-```
+   ```yaml
+   FINESSE_BACKEND_AZURE_SEARCH_TRANSFORM_MAP: <FINESSE_BACKEND_AZURE_SEARCH_TRANSFORM_MAP>
+   ```
 
-The key represents the environment variable name that will be injected into the
-pod, and the value represents the secret key in Vault that will be used to fetch
-the secret value.
+   The key represents the environment variable name that will be injected into the
+   pod, and the value represents the secret key in Vault that will be used to fetch
+   the secret value.
 
-Finally, update the version annotation of  the secrets being fetch from vault :
+4. Update the version annotation of  the secrets being fetch from vault :
 
-```yaml
-# Bump the version of the secret from
-avp.kubernetes.io/secret-version: "4"
-# To
-avp.kubernetes.io/secret-version: "5"
-```
+   ```yaml
+   # Bump the version of the secret from
+   avp.kubernetes.io/secret-version: "4"
+   # To
+   avp.kubernetes.io/secret-version: "5"
+   ```
 
-This is the new version that we create in step 5 of the previous section.
+   This is the new version that we create in step 5 of the previous section.
 
-As additional example, here is an issue and a pull request that showcases the
-process of updating secrets in the Nachet application :
+   As additional example, here is an issue and a pull request that showcases the
+   process of updating secrets in the Nachet application :
 
-- [Issue](https://github.com/ai-cfia/howard/issues/133)
-- [Pull request](https://github.com/ai-cfia/howard/pull/131)
+   - [Issue](https://github.com/ai-cfia/howard/issues/133)
+   - [Pull request](https://github.com/ai-cfia/howard/pull/131)
 
 ## Argo CD Vault plugin (AVP)
 

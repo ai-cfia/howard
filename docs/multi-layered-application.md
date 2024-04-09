@@ -26,8 +26,8 @@ requests and perform the core functional operations of the system.
 accessed electronically, designed to manage, query, and retrieve information
 efficiently.
 
-**Ingress:** Ingress refers to the act of entering or the ability to enter.
-n the context of networking and computing, it typically denotes incoming traffic
+**Ingress:** Ingress refers to the act of entering or the ability to enter. n
+the context of networking and computing, it typically denotes incoming traffic
 to a network or service from an external source.
 
 **Browser:** A browser, also known as a web browser, is a software application
