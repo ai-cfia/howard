@@ -19,6 +19,10 @@ which contains explanations as well as diagrams:
 - [Global overview](docs/generic-achitecture.md)
 - [Ingress](docs/multi-layered-application.md)
 - [Secrets management](docs/secrets-management.md)
+- [Ansible](docs/ansible.md)
+- [Networking](docs/networking.md)
+- [Authentication](docs/auth-workflow.md)
+- [Terraform](docs/terraform-workflow.md)
 
 ## Content
 
