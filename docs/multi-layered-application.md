@@ -37,9 +37,9 @@ web technologies to present information in an accessible format.
 
 ## Diagram
 
-This diagram shows the communication between the `frontend`, the `backend
-(/api)`, the `browser (client)`, and the `ingress (ingress nginx)` for an
-application.
+This diagram shows the communication between the `frontend`, the
+`backend (/api)`, the `browser (client)`, and the `ingress (ingress nginx)`
+for an application.
 
 ```mermaid
 sequenceDiagram
