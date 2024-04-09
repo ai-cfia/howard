@@ -140,24 +140,24 @@ We will use Finesse as an example.
    secret, you can add a new key-value pair to the `data` section of the secret
   manifest :
 
-  ```yaml
-  FINESSE_BACKEND_AZURE_SEARCH_TRANSFORM_MAP: <FINESSE_BACKEND_AZURE_SEARCH_TRANSFORM_MAP>
+```yaml
+    FINESSE_BACKEND_AZURE_SEARCH_TRANSFORM_MAP: <FINESSE_BACKEND_AZURE_SEARCH_TRANSFORM_MAP>
 ```
 
 The key represents the environment variable name that will be injected into the
 pod, and the value represents the secret key in Vault that will be used to fetch
 the secret value.
 
-4. Update the version annotation of  the secrets being fetch from vault :
+Finally, update the version annotation of  the secrets being fetch from vault :
 
-    ```yaml
-    # Bump the version of the secret from
-    avp.kubernetes.io/secret-version: "4"
-    # To
-    avp.kubernetes.io/secret-version: "5"
-    ```
+```yaml
+# Bump the version of the secret from
+avp.kubernetes.io/secret-version: "4"
+# To
+avp.kubernetes.io/secret-version: "5"
+```
 
-     This is the new version that we create in step 5 of the previous section.
+This is the new version that we create in step 5 of the previous section.
 
 As additional example, here is an issue and a pull request that showcases the
 process of updating secrets in the Nachet application :
