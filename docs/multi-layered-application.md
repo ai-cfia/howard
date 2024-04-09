@@ -26,8 +26,8 @@ requests and perform the core functional operations of the system.
 accessed electronically, designed to manage, query, and retrieve information
 efficiently.
 
-**Ingress:** Ingress refers to the act of entering or the ability to enter.
-n the context of networking and computing, it typically denotes incoming traffic
+**Ingress:** Ingress refers to the act of entering or the ability to enter. n
+the context of networking and computing, it typically denotes incoming traffic
 to a network or service from an external source.
 
 **Browser:** A browser, also known as a web browser, is a software application
@@ -37,9 +37,10 @@ web technologies to present information in an accessible format.
 
 ## Diagram
 
-This diagram shows the communication between the `frontend`, the
-`backend (/api)`, the `browser (client)`, and the `ingress (ingress nginx)`
-for an application.
+This diagram shows the communication between the `frontend`, the `backend
+(/api)`, the `browser (client)`, and the `ingress (ingress nginx)` for an
+application.
+
 ```mermaid
 sequenceDiagram
     participant Browser
