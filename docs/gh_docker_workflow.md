@@ -19,7 +19,7 @@ The diagram illustrates a workflow for building and pushing an image to the GitH
 
 ## Diagram
 
-![Github image workflow](img/gh_docker_workflow.png)
+![Github image workflow](img/ghcr_docker_workflow.svg)
 
 ## References
 
