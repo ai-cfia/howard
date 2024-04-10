@@ -6,7 +6,7 @@ resources:
   # User applications
   - ../finesse/
   - ../nachet/
-  - ../demo/
+  # - ../demo/
   - ../bytebase/
 
   # System applications
