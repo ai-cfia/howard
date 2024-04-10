@@ -1,0 +1,28 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: oneuptime
+  annotations:
+    # https://oneuptime.com/docs/probe/ip-address
+    nginx.ingress.kubernetes.io/whitelist-source-range: 205.194.32.0/24,51.159.99.250,62.210.173.51,51.159.101.36,172.174.206.132,57.151.99.117
+    external-dns.alpha.kubernetes.io/target: inspection.alpha.canada.ca
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    ingress.kubernetes.io/force-ssl-redirect: "true"
+    kubernetes.io/tls-acme: "true"
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - status.inspection.alpha.canada.ca
+      secretName: status-https-cert
+  rules:
+    - host: status.inspection.alpha.canada.ca
+      http:
+        paths:
+          - path: /
+            backend:
+              service:
+                name: oneuptime-nginx
+                port:
+                  number: 80
+            pathType: Prefix
