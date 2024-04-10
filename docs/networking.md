@@ -40,7 +40,7 @@ complies with the following guidelines:
 https://www.canada.ca/en/government/system/digital-government/government-canada-digital-standards.html)
 
 For more information, please refer to this pull request (PR) submitted to
-cds-snc so that they can subdelegate `inspection.alpha.canada.ca to us`:
+cds-snc so that they can subdelegate `inspection.alpha.canada.ca`:
 
 - [The pull request made to cds-snc (status: merged)](
 https://github.com/cds-snc/dns/pull/370)
