@@ -16,3 +16,6 @@ rules:
   new-line-at-end-of-file: disable
   truthy: disable
   document-start: false
+  comments:
+    min-spaces-from-content: 2
+    level: error
