@@ -8,23 +8,23 @@ metadata:
     external-dns.alpha.kubernetes.io/target: inspection.alpha.canada.ca
     cert-manager.io/cluster-issuer: letsencrypt-prod
     nginx.ingress.kubernetes.io/use-regex: "true"
-    nginx.ingress.kubernetes.io/rewrite-target: /$2 # https://kubernetes.github.io/ingress-nginx/examples/rewrite/
+    nginx.ingress.kubernetes.io/rewrite-target: /$2  # https://kubernetes.github.io/ingress-nginx/examples/rewrite/
     nginx.ingress.kubernetes.io/client_max_body_size: "200m"
     nginx.ingress.kubernetes.io/proxy-read-timeout: "120"
     ingress.kubernetes.io/force-ssl-redirect: "true"
     kubernetes.io/tls-acme: "true"
-    nginx.ingress.kubernetes.io/auth-signin: "https://vouch.inspection.alpha.canada.ca/login?url=$scheme://$http_host$request_uri&vouch-failcount=$auth_resp_failcount&X-Vouch-Token=$auth_resp_jwt&error=$auth_resp_err"
-    nginx.ingress.kubernetes.io/auth-url: https://vouch.inspection.alpha.canada.ca/validate
-    nginx.ingress.kubernetes.io/auth-snippet: |
-      # these return values are used by the @error401 call
-      auth_request_set $auth_resp_jwt $upstream_http_x_vouch_jwt;
-      auth_request_set $auth_resp_err $upstream_http_x_vouch_err;
-      auth_request_set $auth_resp_failcount $upstream_http_x_vouch_failcount;
-    nginx.ingress.kubernetes.io/enable-cors: "true"
-    nginx.ingress.kubernetes.io/cors-allow-credentials: "true"
-    nginx.ingress.kubernetes.io/cors-allow-methods: "*"
-    nginx.ingress.kubernetes.io/cors-allow-origin: "*"
-    nginx.ingress.kubernetes.io/cors-allow-headers: "*"
+    # nginx.ingress.kubernetes.io/auth-signin: "https://vouch.inspection.alpha.canada.ca/login?url=$scheme://$http_host$request_uri&vouch-failcount=$auth_resp_failcount&X-Vouch-Token=$auth_resp_jwt&error=$auth_resp_err"
+    # nginx.ingress.kubernetes.io/auth-url: https://vouch.inspection.alpha.canada.ca/validate
+    # nginx.ingress.kubernetes.io/auth-snippet: |
+    #   # these return values are used by the @error401 call
+    #   auth_request_set $auth_resp_jwt $upstream_http_x_vouch_jwt;
+    #   auth_request_set $auth_resp_err $upstream_http_x_vouch_err;
+    #   auth_request_set $auth_resp_failcount $upstream_http_x_vouch_failcount;
+    # nginx.ingress.kubernetes.io/enable-cors: "true"
+    # nginx.ingress.kubernetes.io/cors-allow-credentials: "true"
+    # nginx.ingress.kubernetes.io/cors-allow-methods: "*"
+    # nginx.ingress.kubernetes.io/cors-allow-origin: "*"
+    # nginx.ingress.kubernetes.io/cors-allow-headers: "*"
 spec:
   ingressClassName: nginx
   tls:
