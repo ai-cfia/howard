@@ -22,9 +22,9 @@ metadata:
       auth_request_set $auth_resp_failcount $upstream_http_x_vouch_failcount;
     nginx.ingress.kubernetes.io/enable-cors: "true"
     nginx.ingress.kubernetes.io/cors-allow-credentials: "true"
-    nginx.ingress.kubernetes.io/cors-allow-methods: "GET, POST, PUT, PATCH, DELETE, OPTIONS"
-    nginx.ingress.kubernetes.io/cors-allow-origin: "https://openwebui.inspection.alpha.canada.ca, https://vouch.inspection.alpha.canada.ca"
-    nginx.ingress.kubernetes.io/cors-allow-headers: "Authorization, Content-Type, Origin, X-Requested-With, Accept"
+    nginx.ingress.kubernetes.io/cors-allow-methods: "*"
+    nginx.ingress.kubernetes.io/cors-allow-origin: "*"
+    nginx.ingress.kubernetes.io/cors-allow-headers: "*"
 spec:
   ingressClassName: nginx
   tls:
