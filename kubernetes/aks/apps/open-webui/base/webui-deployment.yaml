@@ -27,7 +27,7 @@ spec:
               memory: "6Gi"
           env:
             - name: OLLAMA_BASE_URL
-              value: "http://ollama-service.open-webui.svc.cluster.local:11434"
+              value: "http://10.0.230.199:11434"
           tty: true
           volumeMounts:
             - name: webui-volume
