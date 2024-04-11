@@ -18,11 +18,6 @@ metadata:
       auth_request_set $auth_resp_jwt $upstream_http_x_vouch_jwt;
       auth_request_set $auth_resp_err $upstream_http_x_vouch_err;
       auth_request_set $auth_resp_failcount $upstream_http_x_vouch_failcount;
-    # nginx.ingress.kubernetes.io/enable-cors: "true"
-    # nginx.ingress.kubernetes.io/cors-allow-credentials: "true"
-    # nginx.ingress.kubernetes.io/cors-allow-methods: "*"
-    # nginx.ingress.kubernetes.io/cors-allow-origin: "*"
-    # nginx.ingress.kubernetes.io/cors-allow-headers: "*"
 spec:
   ingressClassName: nginx
   tls:
