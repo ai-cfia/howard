@@ -20,11 +20,11 @@ spec:
             - containerPort: 8080
           resources:
             requests:
-              cpu: "4000m"
-              memory: "14Gi"
+              cpu: "2000m"
+              memory: "8Gi"
             limits:
-              cpu: "12000m"
-              memory: "14Gi"
+              cpu: "3000m"
+              memory: "12Gi"
           env:
             - name: OLLAMA_BASE_URL
               value: "http://ollama-service.open-webui.svc.cluster.local:11434"
