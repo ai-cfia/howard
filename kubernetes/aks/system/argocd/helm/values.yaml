@@ -308,9 +308,16 @@ configs:
       p, role:nachet, applications, sync, default/nachet, allow
       p, role:nachet, applications, override, default/nachet, allow
 
+      p, role:data, applications, create, default/bytebase, allow
+      p, role:data, applications, update, default/bytebase, allow
+      p, role:data, applications, delete, default/bytebase, allow
+      p, role:data, applications, sync, default/bytebase, allow
+      p, role:data, applications, override, default/bytebase, allow
+
       g, ai-cfia:devops, role:admin
       g, ai-cfia:finesse, role:finesse
       g, ai-cfia:nachet, role:nachet
+      g, ai-cfia:data, role:data
 
     # -- OIDC scopes to examine during rbac enforcement (in addition to `sub` scope).
     # The scope value can be a string, or a list of strings.
@@ -820,7 +827,7 @@ controller:
       # -- Prometheus ServiceMonitor tlsConfig
       tlsConfig: {}
       # -- Prometheus ServiceMonitor namespace
-      namespace: "monitoring" # "monitoring"
+      namespace: "monitoring"  # "monitoring"
       # -- Prometheus ServiceMonitor labels
       additionalLabels:
         release: kube-prometheus-stack
@@ -830,7 +837,7 @@ controller:
       # -- Deploy a PrometheusRule for the application controller
       enabled: false
       # -- PrometheusRule namespace
-      namespace: "" # "monitoring"
+      namespace: ""  # "monitoring"
       # -- PrometheusRule selector
       selector:
         {}
@@ -916,7 +923,7 @@ dex:
       # -- Prometheus ServiceMonitor tlsConfig
       tlsConfig: {}
       # -- Prometheus ServiceMonitor namespace
-      namespace: "monitoring" # "monitoring"
+      namespace: "monitoring"  # "monitoring"
       # -- Prometheus ServiceMonitor labels
       additionalLabels:
         release: kube-prometheus-stack
@@ -1452,7 +1459,7 @@ redis:
       # -- Prometheus ServiceMonitor tlsConfig
       tlsConfig: {}
       # -- Prometheus ServiceMonitor namespace
-      namespace: "monitoring" # "monitoring"
+      namespace: "monitoring"  # "monitoring"
       # -- Prometheus ServiceMonitor labels
       additionalLabels:
         release: kube-prometheus-stack
@@ -1618,13 +1625,13 @@ server:
   image:
     # -- Repository to use for the Argo CD server
     # @default -- `""` (defaults to global.image.repository)
-    repository: "" # defaults to global.image.repository
+    repository: ""  # defaults to global.image.repository
     # -- Tag to use for the Argo CD server
     # @default -- `""` (defaults to global.image.tag)
-    tag: "" # defaults to global.image.tag
+    tag: ""  # defaults to global.image.tag
     # -- Image pull policy for the Argo CD server
     # @default -- `""` (defaults to global.image.imagePullPolicy)
-    imagePullPolicy: "" # IfNotPresent
+    imagePullPolicy: ""  # IfNotPresent
 
   # -- Secrets with credentials to pull images from a private registry
   # @default -- `[]` (defaults to global.imagePullSecrets)
@@ -1987,7 +1994,7 @@ server:
       # -- Prometheus ServiceMonitor tlsConfig
       tlsConfig: {}
       # -- Prometheus ServiceMonitor namespace
-      namespace: "monitoring" # monitoring
+      namespace: "monitoring"  # monitoring
       # -- Prometheus ServiceMonitor labels
       additionalLabels:
         release: kube-prometheus-stack
@@ -2648,7 +2655,7 @@ repoServer:
       # -- Prometheus ServiceMonitor tlsConfig
       tlsConfig: {}
       # -- Prometheus ServiceMonitor namespace
-      namespace: "monitoring" # "monitoring"
+      namespace: "monitoring"  # "monitoring"
       # -- Prometheus ServiceMonitor labels
       additionalLabels:
         release: kube-prometheus-stack
@@ -2670,7 +2677,7 @@ repoServer:
     # -- Create repo server service account
     create: true
     # -- Repo server service account name
-    name: "" # "argocd-repo-server"
+    name: ""  # "argocd-repo-server"
     # -- Annotations applied to created service account
     annotations: {}
     # -- Labels applied to created service account
@@ -2803,7 +2810,7 @@ applicationSet:
       # -- Prometheus ServiceMonitor tlsConfig
       tlsConfig: {}
       # -- Prometheus ServiceMonitor namespace
-      namespace: "monitoring" # monitoring
+      namespace: "monitoring"  # monitoring
       # -- Prometheus ServiceMonitor labels
       additionalLabels:
         release: kube-prometheus-stack
