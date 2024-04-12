@@ -8,6 +8,7 @@ resources:
   - ../nachet/
   # - ../demo/
   - ../bytebase/
+  - ../open-webui
 
   # System applications
   - ../../system/cert-manager/
