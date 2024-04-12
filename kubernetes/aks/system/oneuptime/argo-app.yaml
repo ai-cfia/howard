@@ -15,7 +15,7 @@ spec:
       helm:
         releaseName: oneuptime
         valueFiles:
-          - $values/kubernetes/aks/system/monitoring/helm/values.yaml
+          - $values/kubernetes/aks/system/oneuptime/helm/values.yaml
       repoURL: https://helm-chart.oneuptime.com
       targetRevision: 7.0.1978
     - repoURL: https://github.com/ai-cfia/howard.git
