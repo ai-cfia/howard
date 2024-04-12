@@ -19,6 +19,7 @@ resources:
   - ../../system/monitoring/
   - ../../system/cloudnativepg/
   - ../../system/vouch-proxy/
+  - ../../system/oneuptime/
 
 patches:
   - patch: |-

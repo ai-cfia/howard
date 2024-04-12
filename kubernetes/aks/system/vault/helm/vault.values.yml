@@ -410,7 +410,7 @@ server:
     # configure the ingress to point to the Vault active service.
     activeService: true
     hosts:
-      - host: vault.inspection.alpha.canada.ca # For future use.
+      - host: vault.inspection.alpha.canada.ca  # For future use.
         paths: []
     ## Extra paths to prepend to the host configuration. This is useful when working with annotation based services.
     extraPaths: []
@@ -423,7 +423,7 @@ server:
     tls:
       - secretName: vault-tls
         hosts:
-          - vault.inspection.alpha.canada.ca # For future use.
+          - vault.inspection.alpha.canada.ca  # For future use.
 
   # hostAliases is a list of aliases to be added to /etc/hosts. Specified as a YAML list.
   hostAliases: []
