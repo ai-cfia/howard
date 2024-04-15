@@ -22,10 +22,10 @@ spec:
   ingressClassName: nginx
   tls:
     - hosts:
-        - openwebui.inspection.alpha.canada.ca
+        - assist.inspection.alpha.canada.ca
       secretName: aciacfia-tls
   rules:
-    - host: openwebui.inspection.alpha.canada.ca
+    - host: assist.inspection.alpha.canada.ca
       http:
         paths:
           - path: /
