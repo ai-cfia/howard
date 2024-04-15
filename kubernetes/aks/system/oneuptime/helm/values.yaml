@@ -1,5 +1,5 @@
 global:
-  storageClass:
+  storageClass: managed-csi
   clusterDomain: &global-cluster-domain cluster.local
 # Please change this to the domain name / IP where OneUptime server is hosted on.
 host: status.inspection.alpha.canada.ca
