@@ -45,7 +45,7 @@ kind: Secret
 metadata:
   name: oneuptime-probe-secrets
   annotations:
-    avp.kubernetes.io/path: "kv/data/oneuptime/probe-0"
+    avp.kubernetes.io/path: "kv/data/system/oneuptime/probe-0"
     avp.kubernetes.io/secret-version: "1"
 stringData:
   PROBE_KEY: <PROBE_KEY>
