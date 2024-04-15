@@ -17,7 +17,7 @@ spec:
         valueFiles:
           - $values/kubernetes/aks/system/oneuptime/helm/values.yaml
       repoURL: https://helm-chart.oneuptime.com
-      targetRevision: 7.0.1978
+      targetRevision: 7.0.1989
     - repoURL: https://github.com/ai-cfia/howard.git
       targetRevision: HEAD
       ref: values
