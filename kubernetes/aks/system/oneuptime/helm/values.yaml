@@ -26,7 +26,7 @@ ingress:
 postgresql:
   clusterDomain: *global-cluster-domain
   auth:
-    username: oneuptime
+    username: postgres
     database: oneuptimedb
   architecture: standalone
   primary:
