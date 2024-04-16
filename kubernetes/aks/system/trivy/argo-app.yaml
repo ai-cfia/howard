@@ -1,0 +1,29 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: trivy
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: trivy
+  sources:
+    - chart: trivy
+      repoURL: https://aquasecurity.github.io/helm-charts/
+      targetRevision: 0.19.4
+      helm:
+        releaseName: trivy
+        valueFiles:
+          - $values/kubernetes/aks/system/trivy/helm/values.yaml
+    - repoURL: https://github.com/ai-cfia/howard.git
+      targetRevision: HEAD
+      ref: values
+  syncPolicy:
+    automated:
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
