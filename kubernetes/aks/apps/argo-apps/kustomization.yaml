@@ -1,5 +1,7 @@
+---
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
+
 resources:
   # User applications
   - ../finesse/
@@ -7,7 +9,7 @@ resources:
   # - ../demo/
   - ../bytebase/
   - ../open-webui
-  
+
   # System applications
   - ../../system/cert-manager/
   - ../../system/vault/
@@ -17,6 +19,7 @@ resources:
   - ../../system/monitoring/
   - ../../system/cloudnativepg/
   - ../../system/vouch-proxy/
+  - ../../system/oneuptime/
   - ../../system/trivy/
 
 patches:
