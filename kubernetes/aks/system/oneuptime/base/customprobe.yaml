@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: oneuptime-probe-0
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: oneuptime-probe-0
+  template:
+    metadata:
+      labels:
+        app: oneuptime-probe-0
+    spec:
+      containers:
+        - name: oneuptime-probe
+          image: oneuptime/probe:release
+          env:
+            - name: PROBE_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: oneuptime-probe-secrets
+                  key: PROBE_KEY
+            - name: PROBE_ID
+              valueFrom:
+                secretKeyRef:
+                  name: oneuptime-probe-secrets
+                  key: PROBE_ID
+            - name: ONEUPTIME_URL
+              value: "https://status.inspection.alpha.canada.ca"
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "100m"
+            limits:
+              memory: "128Mi"
+              cpu: "200m"
+          securityContext:
+            capabilities:
+              add: ["NET_ADMIN"]
+      hostNetwork: true
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: oneuptime-probe-secrets
+  annotations:
+    avp.kubernetes.io/path: "kv/data/system/oneuptime/probe-0"
+    avp.kubernetes.io/secret-version: "2"
+stringData:
+  PROBE_KEY: <PROBE_KEY>
+  PROBE_ID: <PROBE_ID>
