@@ -20,7 +20,7 @@ resources:
   - ../../system/cloudnativepg/
   - ../../system/vouch-proxy/
   - ../../system/trivy/
-    - ../../system/oneuptime/custom-probe/
+  - ../../system/oneuptime/custom-probe/
 
 patches:
   - patch: |-
