@@ -27,7 +27,7 @@ spec:
                   name: oneuptime-probe-secrets
                   key: PROBE_ID
             - name: ONEUPTIME_URL
-              value: "https://status.inspection.alpha.canada.ca"
+              value: "http://oneuptime-app:3002"
           resources:
             requests:
               memory: "256Mi"
