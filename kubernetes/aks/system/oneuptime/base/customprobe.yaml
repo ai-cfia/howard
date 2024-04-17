@@ -1,16 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: oneuptime-probe-0
+  name: oneuptime-custom-probe-0
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: oneuptime-probe-0
+      app: oneuptime-custom-probe-0
   template:
     metadata:
       labels:
-        app: oneuptime-probe-0
+        app: oneuptime-custom-probe-0
     spec:
       containers:
         - name: oneuptime-probe
@@ -30,11 +30,11 @@ spec:
               value: "https://status.inspection.alpha.canada.ca"
           resources:
             requests:
-              memory: "64Mi"
-              cpu: "100m"
-            limits:
-              memory: "128Mi"
+              memory: "256Mi"
               cpu: "200m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
           securityContext:
             capabilities:
               add: ["NET_ADMIN"]
