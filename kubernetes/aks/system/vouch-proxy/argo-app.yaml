@@ -26,7 +26,7 @@ spec:
                   teamWhitelist:
                     - ai-cfia
                     # - ai-cfia/devops if we only want specific teams.
-                  allowAllUsers: true
+                  allowAllUsers: false
                   cookie:
                     name: jxVouchCookie
                     domain: inspection.alpha.canada.ca
