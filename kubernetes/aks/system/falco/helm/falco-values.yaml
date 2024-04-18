@@ -413,8 +413,8 @@ falcoctl:
     # -- List of indexes that falcoctl downloads and uses to locate and download artiafcts. For more info see:
     # https://github.com/falcosecurity/falcoctl/blob/main/proposals/20220916-rules-and-plugin-distribution.md#index-file-overview
     indexes:
-    - name: falcosecurity
-      url: https://falcosecurity.github.io/falcoctl/index.yaml
+      - name: falcosecurity
+        url: https://falcosecurity.github.io/falcoctl/index.yaml
     # -- Configuration used by the artifact commands.
     artifact:
       # -- List of artifact types that falcoctl will handle. If the configured refs resolves to an artifact whose type is not contained
