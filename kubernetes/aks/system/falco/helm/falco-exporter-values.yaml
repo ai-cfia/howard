@@ -175,11 +175,11 @@ serviceMonitor:
 # -- grafanaDashboard contains the configuration related to grafana dashboards.
 grafanaDashboard:
   # -- enabled specifies whether the dashboard should be deployed.
-  enabled: false
+  enabled: true
   # -- folder where the dashboard is stored by grafana.
-  folder: ""
+  folder: "DevSecOps"
   # -- namespace specifies the namespace for the configmap.
-  namespace: default
+  namespace: monitoring
   # -- prometheusDatasourceName name of the data source.
   prometheusDatasourceName: Prometheus
 
@@ -190,7 +190,7 @@ scc:
 # prometheusRules holds the configuration for alerting on priority events.
 prometheusRules:
   # -- enabled specifies whether the prometheus rules should be deployed.
-  enabled: false
+  enabled: true
   alerts:
     warning:
       enabled: true

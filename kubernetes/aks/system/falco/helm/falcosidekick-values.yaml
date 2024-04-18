@@ -62,7 +62,7 @@ serviceMonitor:
 
 prometheusRules:
   # -- enable the creation of PrometheusRules for alerting
-  enabled: false
+  enabled: true
   alerts:
     warning:
       # -- enable the high rate rule for the warning events
