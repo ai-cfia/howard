@@ -27,7 +27,7 @@ spec:
                   name: oneuptime-probe-secrets
                   key: PROBE_ID
             - name: ONEUPTIME_URL
-              value: "https://oneuptime-nginx:443"
+              value: "https://status.inspection.alpha.canada.ca"
           resources:
             requests:
               memory: "256Mi"

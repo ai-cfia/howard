@@ -1,15 +1,14 @@
----
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: nachet-backend-ingress
   namespace: nachet
   annotations:
-    nginx.ingress.kubernetes.io/whitelist-source-range: 205.194.32.0/24
+    nginx.ingress.kubernetes.io/whitelist-source-range: 205.194.32.0/24,10.244.0.0/16
     external-dns.alpha.kubernetes.io/target: inspection.alpha.canada.ca
     cert-manager.io/cluster-issuer: letsencrypt-prod
     nginx.ingress.kubernetes.io/use-regex: "true"
-    nginx.ingress.kubernetes.io/rewrite-target: /$2  # https://kubernetes.github.io/ingress-nginx/examples/rewrite/
+    nginx.ingress.kubernetes.io/rewrite-target: /$2 # https://kubernetes.github.io/ingress-nginx/examples/rewrite/
     nginx.ingress.kubernetes.io/client_max_body_size: "200m"
     nginx.ingress.kubernetes.io/proxy-read-timeout: "120"
     ingress.kubernetes.io/force-ssl-redirect: "true"
@@ -38,7 +37,6 @@ spec:
                 name: nachet-backend-svc
                 port:
                   number: 8080
-
 ---
 # For more information check https://github.com/nginxinc/kubernetes-ingress/issues/323
 apiVersion: networking.k8s.io/v1
@@ -47,7 +45,7 @@ metadata:
   name: nachet-frontend-ingress
   namespace: nachet
   annotations:
-    nginx.ingress.kubernetes.io/whitelist-source-range: 205.194.32.0/24
+    nginx.ingress.kubernetes.io/whitelist-source-range: 205.194.32.0/24,10.244.0.0/16
     external-dns.alpha.kubernetes.io/target: inspection.alpha.canada.ca
     cert-manager.io/cluster-issuer: letsencrypt-prod
     nginx.ingress.kubernetes.io/add-base-url: "true"
