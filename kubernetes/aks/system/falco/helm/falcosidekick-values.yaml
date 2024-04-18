@@ -1075,7 +1075,7 @@ webui:
     hosts:
       - host: falcosidekick-ui.local
         paths:
-        - path: /
+          - path: /
     # --  Web UI ingress TLS configuration
     tls: []
     #  - secretName: chart-example-tls
