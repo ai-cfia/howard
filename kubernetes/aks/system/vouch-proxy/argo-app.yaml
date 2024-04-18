@@ -27,6 +27,16 @@ spec:
                     - ai-cfia
                     # - ai-cfia/devops if we only want specific teams.
                   allowAllUsers: false
+                  # domains - VOUCH_DOMAINS
+                  # each of these domains must serve the url https://vouch.$domains[0] https://vouch.$domains[1] ...
+                  # so that the cookie which stores the JWT can be set in the relevant domain
+                  # you usually *don't* want to list every individual website that will be protected
+                  # if you have siteA.internal.yourdomain.com and siteB.internal.yourdomain.com
+                  # then your domains should be set as yourdomain.com or perhaps internal.yourdomain.com
+                  # usually you'll just have one.
+                  # Comment `domains:` out if you set allowAllUser:true
+                  domains:
+                  - inspection.alpha.canada.ca
                   cookie:
                     name: jxVouchCookie
                     domain: inspection.alpha.canada.ca
