@@ -2,9 +2,9 @@ config:
   vouch:
     # only used for github orgs/teams. To be removed when we move to azure.
     teamWhitelist:
-      - ai-cfia
+      - ai-cfia/
       # - ai-cfia/devops if we only want specific teams.
-    allowAllUsers: true
+    allowAllUsers: false
     cookie:
       name: jxVouchCookie
       domain: inspection.alpha.canada.ca
