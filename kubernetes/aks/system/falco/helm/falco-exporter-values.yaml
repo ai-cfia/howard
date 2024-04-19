@@ -29,7 +29,7 @@ healthChecks:
   # -- livenessProbe is a diagnostic mechanism used to determine weather a container within a Pod is still running and healthy.
   livenessProbe:
     # -- probesPort is liveness probes port.
-    probesPort: 19376
+    probesPort: 9376
     # -- initialDelaySeconds tells the kubelet that it should wait X seconds before performing the first probe.
     initialDelaySeconds: 60
     # -- timeoutSeconds number of seconds after which the probe times out.
@@ -39,9 +39,9 @@ healthChecks:
   # -- readinessProbe is a mechanism used to determine whether a container within a Pod is ready to serve traffic.
   readinessProbe:
     # probesPort is readiness probes port
-    probesPort: 19376
+    probesPort: 9376
     # -- initialDelaySeconds tells the kubelet that it should wait X seconds before performing the first probe.
-    initialDelaySeconds: 30
+    initialDelaySeconds: 60
     # -- timeoutSeconds is the number of seconds after which the probe times out.
     timeoutSeconds: 5
     # -- periodSeconds specifies the interval at which the readiness probe will be repeated.
@@ -154,7 +154,6 @@ tolerations:
 
 # -- affinity allows pod placement based on node characteristics, or any other custom labels assigned to nodes.
 affinity: {}
-
 
 # -- serviceMonitor holds the configuration for the ServiceMonitor CRD.
 # A ServiceMonitor is a custom resource definition (CRD) used to configure how Prometheus should
