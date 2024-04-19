@@ -1,0 +1,85 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: falco
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  destination:
+    namespace: falco
+    server: https://kubernetes.default.svc
+  sources:
+    - chart: falco
+      helm:
+        releaseName: falco
+        valueFiles:
+          - $values/kubernetes/aks/system/falco/helm/falco-values.yaml
+      repoURL: https://falcosecurity.github.io/charts
+      targetRevision: 4.2.5
+    - repoURL: https://github.com/ai-cfia/howard.git
+      targetRevision: HEAD
+      ref: values
+  syncPolicy:
+    automated:
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: falcosidekick
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  destination:
+    namespace: falco
+    server: https://kubernetes.default.svc
+  sources:
+    - chart: falcosidekick
+      helm:
+        releaseName: falcosidekick
+        valueFiles:
+          - $values/kubernetes/aks/system/falco/helm/falcosidekick-values.yaml
+      repoURL: https://falcosecurity.github.io/charts
+      targetRevision: 0.7.16
+    - repoURL: https://github.com/ai-cfia/howard.git
+      targetRevision: HEAD
+      ref: values
+  syncPolicy:
+    automated:
+      selfHeal: true
+
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: falco-exporter
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  destination:
+    namespace: falco
+    server: https://kubernetes.default.svc
+  sources:
+    - chart: falco-exporter
+      helm:
+        releaseName: falco-exporter
+        valueFiles:
+          - $values/kubernetes/aks/system/falco/helm/falco-exporter-values.yaml
+      repoURL: https://falcosecurity.github.io/charts
+      targetRevision: 0.9.11
+    - repoURL: https://github.com/ai-cfia/howard.git
+      targetRevision: HEAD
+      ref: values
+  syncPolicy:
+    automated:
+      selfHeal: true
