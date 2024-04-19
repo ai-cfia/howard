@@ -29,7 +29,7 @@ healthChecks:
   # -- livenessProbe is a diagnostic mechanism used to determine weather a container within a Pod is still running and healthy.
   livenessProbe:
     # -- probesPort is liveness probes port.
-    probesPort: 9376
+    probesPort: 19376
     # -- initialDelaySeconds tells the kubelet that it should wait X seconds before performing the first probe.
     initialDelaySeconds: 60
     # -- timeoutSeconds number of seconds after which the probe times out.
@@ -39,7 +39,7 @@ healthChecks:
   # -- readinessProbe is a mechanism used to determine whether a container within a Pod is ready to serve traffic.
   readinessProbe:
     # probesPort is readiness probes port
-    probesPort: 9376
+    probesPort: 19376
     # -- initialDelaySeconds tells the kubelet that it should wait X seconds before performing the first probe.
     initialDelaySeconds: 30
     # -- timeoutSeconds is the number of seconds after which the probe times out.
@@ -190,7 +190,7 @@ scc:
 # prometheusRules holds the configuration for alerting on priority events.
 prometheusRules:
   # -- enabled specifies whether the prometheus rules should be deployed.
-  enabled: true
+  enabled: false
   alerts:
     warning:
       enabled: true
