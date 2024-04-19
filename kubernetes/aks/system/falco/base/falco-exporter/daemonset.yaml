@@ -38,12 +38,12 @@ spec:
               protocol: TCP
           livenessProbe:
             httpGet:
-              path: /liveness
-              port: 19376
+              path: /metrics
+              port: 9376
           readinessProbe:
             httpGet:
-              path: /readiness
-              port: 19376
+              path: /metrics
+              port: 9376
           resources:
             {}
           volumeMounts:
