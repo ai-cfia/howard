@@ -21,6 +21,7 @@ resources:
   - ../../system/vouch-proxy/
   - ../../system/trivy/
   - ../../system/oneuptime/custom-probe/
+  - ../../system/falco/
 
 patches:
   - patch: |-
