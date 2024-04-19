@@ -324,7 +324,7 @@ config:
 
   prometheus:
     # -- comma separated list of fields to use as labels additionally to rule, source, priority, tags and custom_fields
-    extralabels: "kube-prometheus-stack"
+    extralabels: ""
 
   nats:
     # -- NATS "nats://host:port", if not `empty`, NATS is *enabled*

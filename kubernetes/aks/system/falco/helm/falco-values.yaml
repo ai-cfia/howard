@@ -778,7 +778,7 @@ falco:
   # output events in memory until they are consumed by a gRPC client. Ensure that
   # you have a consumer for the output events or leave it disabled.
   grpc_output:
-    enabled: false
+    enabled: true
 
   ##########################
   # Falco exposed services #
@@ -819,7 +819,7 @@ falco:
 
   # -- gRPC server using a local unix socket
   grpc:
-    enabled: false
+    enabled: true
     bind_address: "unix:///run/falco/falco.sock"
     # -- When the `threadiness` value is set to 0, Falco will automatically determine
     # the appropriate number of threads based on the number of online cores in the system.

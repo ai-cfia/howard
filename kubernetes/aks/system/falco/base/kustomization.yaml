@@ -1,9 +1,0 @@
----
-apiVersion: kustomize.config.k8s.io/v1beta1
-kind: Kustomization
-
-resources:
-  - falco-exporter/serviceaccount.yaml
-  - falco-exporter/service.yaml
-  - falco-exporter/daemonset.yaml
-  - falco-exporter/servicemonitor.yaml

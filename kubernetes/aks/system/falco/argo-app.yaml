@@ -70,9 +70,16 @@ spec:
     namespace: falco
     server: https://kubernetes.default.svc
   sources:
+    - chart: falco-exporter
+      helm:
+        releaseName: falco-exporter
+        valueFiles:
+          - $values/kubernetes/aks/system/falco/helm/falco-exporter-values.yaml
+      repoURL: https://falcosecurity.github.io/charts
+      targetRevision: 0.9.11
     - repoURL: https://github.com/ai-cfia/howard.git
-      path: kubernetes/aks/system/falco/base
       targetRevision: HEAD
+      ref: values
   syncPolicy:
     automated:
       selfHeal: true
