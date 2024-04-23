@@ -96,6 +96,18 @@ variable "subnet_address" {
   default     = "10.241.0.0/16" # Subnet resides within RFC1918-compliant VNet range
 }
 
+variable "second_virtual_network_address" {
+  description = "Second virtual network address"
+  type        = string
+  default     = "10.0.0.0/16" # RFC1918-compliant private address space
+}
+
+variable "second_subnet_address" {
+  description = "Second subnet address"
+  type        = string
+  default     = "10.241.0.0/16" # Subnet resides within RFC1918-compliant VNet range
+}
+
 variable "service_cidr" {
   description = "The Network Range used by the Kubernetes service.Changing this forces a new resource to be created."
   type        = string
@@ -147,11 +159,6 @@ variable "managed" {
   description = "(Optional) Is this a managed Kubernetes Cluster? Default is true."
   type        = bool
   default     = true
-}
-
-variable "managed_gpu" {
-  description = "(Optional) Is this a managed Kubernetes Cluster? Default is true."
-  type        = bool
 }
 
 variable "rbac_enabled" {
@@ -320,21 +327,6 @@ variable "bastion_host_name" {
 variable "bastion_host_ip_configuration_name" {
   type        = string
   description = "Bastion host IP configuration name"
-}
-
-variable "subscription_id" {
-  type        = string
-  description = "Subscription ID for the Azure resources"
-}
-
-variable "route_table_resource_group_name" {
-  type        = string
-  description = "Resource group name in which the route table is located"
-}
-
-variable "route_table_name" {
-  type        = string
-  description = "Name of the route table"
 }
 
 # variable "ad_groups" {

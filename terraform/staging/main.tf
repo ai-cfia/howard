@@ -6,11 +6,6 @@ terraform {
     container_name       = "infra-terraform-state"
     key                  = "tf/terraform.tfstate"
   }
-
-  # backend "gcs" {
-  #   bucket = "terraform-tfstate-gcp-storage"
-  #   prefix = "terraform/state"
-  # }
 }
 
 provider "azurerm" {
@@ -18,27 +13,6 @@ provider "azurerm" {
 }
 
 provider "azuread" {}
-
-# provider "google" {
-#   project = "spartan-rhino-408115"
-#   region  = "northamerica-northeast1"
-# }
-
-# provider "kubernetes" {
-#   config_path    = "~/.kube/config"
-#   config_context = var.kube_ctx
-# }
-
-# module "gcp-kubernetes-cluster-0" {
-#   source = "../modules/gcp-kubernetes-cluster"
-
-#   cluster_name = "acia-cfia"
-#   project_id   = "spartan-rhino-408115"
-
-#   region     = "northamerica-northeast1"
-#   location_1 = "northamerica-northeast1-a"
-#   location_2 = "northamerica-northeast1-b"
-# }
 
 module "cluster-network-0" {
   source              = "../modules/azure-cluster-network"
@@ -53,7 +27,20 @@ module "cluster-network-0" {
   tags                    = var.tags
 }
 
-# module "cluster-network-1" {
+module "cluster-network-1" {
+  source              = "../modules/azure-cluster-network"
+  location            = var.location_1
+  resource_group_name = azurerm_resource_group.rg.name
+
+  vnet_name   = "vnet-${var.aks_gpu_name}"
+  subnet_name = "subnet-${var.aks_gpu_name}"
+
+  address_space           = [var.second_virtual_network_address]
+  subnet_address_prefixes = [var.second_subnet_address]
+  tags                    = var.tags
+}
+
+# module "cluster-network-2" {
 #   source                    = "../modules/azure-cluster-network"
 #   location                  = var.location_2
 #   resource_group_name       = azurerm_resource_group.rg.name
@@ -117,20 +104,16 @@ module "aks-cluster-0" {
   sku_tier = var.sku_tier
 }
 
-module "aks-cluster-1-gpus" {
-  depends_on = [module.cluster-network-0]
+module "aks-cluster-1" {
+  depends_on = [module.cluster-network-1]
 
-  source = "../modules/azure-kubernetes-gpu-cluster"
+  source = "../modules/azure-kubernetes-cluster"
 
   prefix         = var.aks_gpu_name
   resource_group = azurerm_resource_group.rg.name
   location       = azurerm_resource_group.rg.location
 
   k8s_version = var.k8s_version
-
-  subscription_id                 = var.subscription_id
-  route_table_resource_group_name = var.route_table_resource_group_name
-  route_table_name                = var.route_table_name
 
   auto_scaling_default_node = var.auto_scaling_default_node
   zones                     = var.zones
@@ -146,9 +129,9 @@ module "aks-cluster-1-gpus" {
   # ad_groups                  = var.ad_groups
   # ad_members                 = var.ad_members
 
-  network_resource_group = module.cluster-network-0.resource_group_name
-  network_vnet           = module.cluster-network-0.virtual_network_name
-  network_subnet         = module.cluster-network-0.subnet_name
+  network_resource_group = module.cluster-network-1.resource_group_name
+  network_vnet           = module.cluster-network-1.virtual_network_name
+  network_subnet         = module.cluster-network-1.subnet_name
 
   service_cidr         = var.service_cidr
   dns_service_ip       = var.dns_service_ip
