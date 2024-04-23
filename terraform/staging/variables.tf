@@ -78,6 +78,24 @@ variable "node_max_count" {
   default     = 10
 }
 
+variable "gpu_node_count" {
+  description = "Number of Cluster Nodes"
+  type        = number
+  default     = 1
+}
+
+variable "gpu_node_min_count" {
+  description = "Minimum number of nodes in the cluster"
+  type        = number
+  default     = 1
+}
+
+variable "gpu_node_max_count" {
+  description = "Maximum number of nodes in the cluster"
+  type        = number
+  default     = 10
+}
+
 variable "max_pods" {
   description = "Total number of pods that can be started on a kubernetes node "
   type        = number

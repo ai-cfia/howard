@@ -119,9 +119,9 @@ module "aks-cluster-1" {
   zones                     = var.zones
   vm_size                   = var.default_gpu_node_vm_size
   max_pods                  = var.max_pods
-  node_count                = var.node_count
-  node_min_count            = var.node_min_count
-  node_max_count            = var.node_max_count
+  node_count                = var.gpu_node_count
+  node_min_count            = var.gpu_node_min_count
+  node_max_count            = var.gpu_node_max_count
 
   managed                    = var.managed
   rbac_enabled               = var.rbac_enabled
