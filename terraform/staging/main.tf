@@ -128,6 +128,10 @@ module "aks-cluster-1-gpus" {
 
   k8s_version = var.k8s_version
 
+  subscription_id                 = var.subscription_id
+  route_table_resource_group_name = var.route_table_resource_group_name
+  route_table_name                = var.route_table_name
+
   auto_scaling_default_node = var.auto_scaling_default_node
   zones                     = var.zones
   vm_size                   = var.default_gpu_node_vm_size

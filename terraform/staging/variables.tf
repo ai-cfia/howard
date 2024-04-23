@@ -322,6 +322,21 @@ variable "bastion_host_ip_configuration_name" {
   description = "Bastion host IP configuration name"
 }
 
+variable "subscription_id" {
+  type        = string
+  description = "Subscription ID for the Azure resources"
+}
+
+variable "route_table_resource_group_name" {
+  type        = string
+  description = "Resource group name in which the route table is located"
+}
+
+variable "route_table_name" {
+  type        = string
+  description = "Name of the route table"
+}
+
 # variable "ad_groups" {
 #   description = "ad groups to be used in aks rolebindings"
 #   type        = list(string)
