@@ -158,6 +158,12 @@ variable "aks_admin_group_object_ids" {
   type        = list(string)
 }
 
+variable "aks_service_mesh_profile" {
+  description = "AKS Service mesh profile"
+  default     = "Istio"
+  type        = string
+}
+
 # variable "ad_groups" {
 #   description = "ad groups to be used in aks rolebindings"
 #   type        = list(string)
