@@ -2,7 +2,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "aks" {
 
   for_each = var.additional_node_pools
 
-  kubernetes_cluster_id = azurerm_kubernetes_cluster.k8s.id
+  kubernetes_cluster_id = azurerm_kubernetes_cluster.k8s-gpu.id
   vnet_subnet_id        = local.subnet_id
   name                  = substr(each.key, 0, 12)
   vm_size               = each.value.vm_size
