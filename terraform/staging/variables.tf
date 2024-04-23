@@ -25,6 +25,11 @@ variable "aks_name" {
   type        = string
 }
 
+variable "aks_gpu_name" {
+  description = "AKS GPU cluster name"
+  type        = string
+}
+
 variable "k8s_version" {
   description = "Version of Kubernetes specified when creating the AKS managed cluster."
   type        = string
@@ -35,6 +40,12 @@ variable "default_node_vm_size" {
   description = "Size of the main nodepool VM"
   type        = string
   default     = "Standard_E8as_v4"
+}
+
+variable "default_gpu_node_vm_size" {
+  description = "Size on the main nodepool VM (GPU)"
+  type        = string
+  default     = "Standard_NC6s_v3"
 }
 
 variable "auto_scaling_default_node" {
