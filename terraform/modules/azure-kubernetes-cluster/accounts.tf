@@ -26,3 +26,10 @@
 #   security_enabled = true
 #   members          = [for user in var.ad_members : data.azuread_user.users[user].object_id]
 # }
+
+
+resource "azurerm_user_assigned_identity" "example_identity" {
+  resource_group_name = var.resource_group
+  location            = var.location
+  name                = "${local.prefix}-identity"
+}
