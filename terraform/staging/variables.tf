@@ -149,6 +149,11 @@ variable "managed" {
   default     = true
 }
 
+variable "managed_gpu" {
+  description = "(Optional) Is this a managed Kubernetes Cluster? Default is true."
+  type        = bool
+}
+
 variable "rbac_enabled" {
   description = "(Required) Is Role Based Access Control Enabled? Changing this forces a new resource to be created."
   type        = bool
