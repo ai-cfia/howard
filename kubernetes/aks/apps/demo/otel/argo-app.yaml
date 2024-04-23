@@ -1,0 +1,32 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: otel-demo
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  destination:
+    namespace: otel-demo
+    server: https://kubernetes.default.svc
+  sources:
+    - chart: open-telemetry
+      helm:
+        releaseName: opentelemetry-demo
+        valueFiles:
+          - $values/kubernetes/aks/apps/demo/otel/values.yaml
+      repoURL: https://open-telemetry.github.io/opentelemetry-helm-charts
+      targetRevision: 1.9.0
+    - repoURL: https://github.com/ai-cfia/howard.git
+      targetRevision: HEAD
+      ref: values
+    - repoURL: https://github.com/ai-cfia/howard.git
+      path: kubernetes/aks/apps/demo/otel/base
+      targetRevision: HEAD
+  syncPolicy:
+    automated:
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

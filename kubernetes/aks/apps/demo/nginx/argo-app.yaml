@@ -15,7 +15,7 @@ spec:
     namespace: nginx
   source:
     repoURL: https://github.com/ai-cfia/howard.git
-    path: kubernetes/aks/apps/demo/base
+    path: kubernetes/aks/apps/demo/nginx/base
     targetRevision: HEAD
   syncPolicy:
     automated:
