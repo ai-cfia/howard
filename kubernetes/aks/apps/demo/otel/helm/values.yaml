@@ -636,9 +636,9 @@ opentelemetry-collector:
     processors:
       resource:
         attributes:
-        - key: service.instance.id
-          from_attribute: k8s.pod.uid
-          action: insert
+          - key: service.instance.id
+            from_attribute: k8s.pod.uid
+            action: insert
 
     connectors:
       spanmetrics: {}
