@@ -258,9 +258,10 @@ service:
   labels: {}
 
 serviceMonitor:
-  enabled: false
+  enabled: true
   interval: ""
-  additionalLabels: {}
+  additionalLabels:
+    release: kube-prometheus-stack
   annotations: {}
   # scrapeTimeout: 10s
 
