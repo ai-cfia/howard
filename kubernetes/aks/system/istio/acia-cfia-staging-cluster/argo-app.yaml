@@ -1,0 +1,20 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: istio
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: aks-istio-system
+  source:
+    repoURL: https://github.com/ai-cfia/howard.git
+    path: kubernetes/aks/system/istio/acia-cfia-stating-cluster/base
+    targetRevision: HEAD
+  syncPolicy:
+    automated:
+      selfHeal: true
