@@ -26,7 +26,7 @@ spec:
               memory: "6Gi"
           env:
             - name: OLLAMA_BASE_URL
-              value: "http://10.0.175.153:11434"
+              value: "http://ollama-service.louis:11434"
           tty: true
           volumeMounts:
             - name: webui-volume
