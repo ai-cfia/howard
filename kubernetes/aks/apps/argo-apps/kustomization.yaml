@@ -9,6 +9,7 @@ resources:
   # - ../demo/
   - ../bytebase/
   - ../open-webui
+  - ../louis
 
   # System applications
   - ../../system/cert-manager/
