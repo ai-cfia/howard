@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: istio
+  name: istio-acia-cfia-staging-cluster
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
