@@ -10,7 +10,7 @@ spec:
   project: default
   destination:
     server: https://kubernetes.default.svc
-    namespace: aks-istio-system
+    namespace: istio-system
   source:
     repoURL: https://github.com/ai-cfia/howard.git
     path: kubernetes/aks/system/istio/acia-cfia-staging-cluster/base
@@ -18,3 +18,5 @@ spec:
   syncPolicy:
     automated:
       selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
