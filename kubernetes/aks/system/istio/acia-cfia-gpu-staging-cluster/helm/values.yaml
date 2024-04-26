@@ -419,7 +419,7 @@ defaults:
     # If the mesh admin does not specify a value, Istio will use the value of the
     # mesh's Trust Domain. The best practice is to select a proper Trust Domain
     # value.
-    meshID: "acia-cfia-gpu-staging-cluster-mesh"
+    meshID: "acia-cfia-mesh"
 
     # Configure the mesh networks to be used by the Split Horizon EDS.
     #
