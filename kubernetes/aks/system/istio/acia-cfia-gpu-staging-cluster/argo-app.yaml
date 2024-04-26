@@ -12,9 +12,9 @@ spec:
     server: https://acia-cfia-gpu-staging-dns-wazsxt3w.hcp.canadacentral.azmk8s.io:443
     namespace: istio-system
   sources:
-    - chart: istio
+    - chart: istiod
       helm:
-        releaseName: istio
+        releaseName: istiod
         valueFiles:
           - $values/kubernetes/aks/system/istio/acia-cfia-gpu-staging-cluster/helm/values.yaml
       repoURL: https://istio-release.storage.googleapis.com/charts

@@ -12,9 +12,9 @@ spec:
     server: https://kubernetes.default.svc
     namespace: istio-system
   sources:
-    - chart: istio
+    - chart: istiod
       helm:
-        releaseName: istio
+        releaseName: istiod
         valueFiles:
           - $values/kubernetes/aks/system/istio/acia-cfia-staging-cluster/helm/values.yaml
       repoURL: https://istio-release.storage.googleapis.com/charts
