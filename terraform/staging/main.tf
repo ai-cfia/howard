@@ -40,12 +40,17 @@ module "cluster-network-1" {
   tags                    = var.tags
 }
 
-# module "cluster-network-2" {
-#   source                    = "../modules/azure-cluster-network"
-#   location                  = var.location_2
-#   resource_group_name       = azurerm_resource_group.rg.name
-#   # ..
-# }
+module "peering-cluster-network-0-to-cluster-network-1" {
+  source = "../modules/azure-vnet-peering"
+
+  vnet_id_1   = module.cluster-network-0.virtual_network_id
+  vnet_name_1 = module.cluster-network-0.virtual_network_name
+  rg_vnet_1   = module.cluster-network-0.resource_group_name
+
+  vnet_id_2   = module.cluster-network-1.virtual_network_id
+  vnet_name_2 = module.cluster-network-1.virtual_network_name
+  rg_vnet_2   = module.cluster-network-1.resource_group_name
+}
 
 module "azure-dns-staging" {
   source = "../modules/azure-dns"
