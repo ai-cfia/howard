@@ -12,9 +12,16 @@ spec:
     server: https://acia-cfia-gpu-staging-dns-wazsxt3w.hcp.canadacentral.azmk8s.io:443
     namespace: istio-system
   source:
-    repoURL: https://github.com/ai-cfia/howard.git
-    path: kubernetes/aks/system/istio/acia-cfia-gpu-staging-cluster/base
-    targetRevision: HEAD
+    - chart: istio
+      helm:
+        releaseName: istio
+        valueFiles:
+          - $values/kubernetes/aks/system/istio/acia-cfia-gpu-staging-cluster/helm/values.yaml
+      repoURL: https://istio-release.storage.googleapis.com/charts
+      targetRevision: 1.22.0-beta.0
+    - repoURL: https://github.com/ai-cfia/howard.git
+      targetRevision: HEAD
+      ref: values
   syncPolicy:
     automated:
       selfHeal: true

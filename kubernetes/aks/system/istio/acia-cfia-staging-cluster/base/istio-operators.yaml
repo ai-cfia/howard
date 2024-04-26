@@ -1,9 +1,0 @@
-apiVersion: install.istio.io/v1alpha1
-kind: IstioOperator
-spec:
-  values:
-    global:
-      meshID: acia-cfia-staging-cluster-mesh
-      multiCluster:
-        clusterName: acia-cfia-staging-cluster
-      network: network1
