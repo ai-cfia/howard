@@ -11,7 +11,7 @@ spec:
   destination:
     server: https://acia-cfia-gpu-staging-dns-wazsxt3w.hcp.canadacentral.azmk8s.io:443
     namespace: istio-system
-  source:
+  sources:
     - chart: istio
       helm:
         releaseName: istio
