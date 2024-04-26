@@ -8,7 +8,6 @@ resources:
   - ../nachet/
   # - ../demo/
   - ../bytebase/
-  - ../open-webui
   - ../louis
 
   # System applications
