@@ -30,7 +30,7 @@ defaults:
 
     # Whether to use an existing CNI installation
     cni:
-      enabled: false
+      enabled: true
       provider: default
 
     # Additional container arguments
