@@ -45,9 +45,9 @@ resource "azurerm_kubernetes_cluster" "k8s" {
     ]
   }
 
-  service_mesh_profile {
-    mode = var.aks_service_mesh_profile
-  }
+  # service_mesh_profile {
+  #   mode = var.aks_service_mesh_profile
+  # }
 
   tags = var.tags
 
