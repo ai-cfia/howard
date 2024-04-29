@@ -450,7 +450,6 @@ defaults:
     #
     meshNetworks: {}
 
-
     # Use the user-specified, secret volume mounted key and certs for Pilot and workloads.
     mountMtlsCerts: false
 
