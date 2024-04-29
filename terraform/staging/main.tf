@@ -145,7 +145,7 @@ module "aks-cluster-1" {
 
   service_cidr         = var.service_cidr
   dns_service_ip       = var.dns_service_ip
-  pod_cidr             = var.pod_cidr
+  pod_cidr             = var.second_pod_cidr
   storage_account_name = null
 
   additional_node_pools = var.additional_node_pools
