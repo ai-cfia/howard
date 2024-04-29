@@ -43,6 +43,11 @@ module "cluster-network-1" {
 module "peering-cluster-network-0-to-cluster-network-1" {
   source = "../modules/azure-vnet-peering"
 
+  depends_on = [ module.aks-cluster-0, module.aks-cluster-1 ]
+
+  principal_id_aks_cluster_0 = module.aks-cluster-0.cluster_principal_id
+  principal_id_aks_cluster_1 = module.aks-cluster-1.cluster_principal_id
+
   vnet_id_1   = module.cluster-network-0.virtual_network_id
   vnet_name_1 = module.cluster-network-0.virtual_network_name
   rg_vnet_1   = module.cluster-network-0.resource_group_name
