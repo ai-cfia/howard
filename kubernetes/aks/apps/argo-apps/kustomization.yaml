@@ -22,7 +22,7 @@ resources:
   - ../../system/trivy/
   - ../../system/oneuptime/custom-probe/
   - ../../system/falco/
-  # - ../../system/istio/
+  - ../../system/istio/
 
 patches:
   - patch: |-
