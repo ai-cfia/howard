@@ -30,10 +30,10 @@ variable "rg_vnet_2" {
 
 variable "principal_id_aks_cluster_0" {
   description = "Principal id of cluster 0"
-  type = string
+  type        = string
 }
 
 variable "principal_id_aks_cluster_1" {
   description = "Principal id of cluster 1"
-  type = string
+  type        = string
 }
