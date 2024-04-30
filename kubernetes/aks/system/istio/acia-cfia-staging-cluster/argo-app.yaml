@@ -12,6 +12,16 @@ spec:
     server: https://kubernetes.default.svc
     namespace: istio-system
   sources:
+    - chart: istiod
+      helm:
+        releaseName: istiod
+        valueFiles:
+          - $values/kubernetes/aks/system/istio/acia-cfia-staging-cluster/helm/values.yaml
+      repoURL: https://istio-release.storage.googleapis.com/charts
+      targetRevision: 1.22.0-beta.0
+    - repoURL: https://github.com/ai-cfia/howard.git
+      targetRevision: HEAD
+      ref: values
     - repoURL: https://github.com/ai-cfia/howard.git
       path: kubernetes/aks/system/istio/acia-cfia-staging-cluster/base
       targetRevision: HEAD
@@ -20,3 +30,6 @@ spec:
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
+    managedNamespaceMetadata:
+      labels:
+        topology.istio.io/network: network1
