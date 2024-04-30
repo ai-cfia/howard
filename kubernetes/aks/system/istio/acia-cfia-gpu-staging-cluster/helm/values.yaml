@@ -57,10 +57,10 @@ defaults:
       # targetAverageUtilization: 80
 
     # Additional volumeMounts to the istiod container
-    volumeMounts: []
-    # - name: cacerts
-    #   mountPath: /etc/certs
-    #   readOnly: true
+    volumeMounts:
+      - name: cacerts
+        mountPath: /etc/cacerts
+        readOnly: true
 
     # Additional volumes to the istiod pod
     volumes:
