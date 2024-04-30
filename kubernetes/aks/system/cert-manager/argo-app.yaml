@@ -37,7 +37,7 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: cert-manager
+  name: cert-manager-gpu-cluster
   namespace: argocd
   annotations:
     argocd.argoproj.io/sync-wave: "0"
