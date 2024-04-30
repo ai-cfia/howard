@@ -147,10 +147,10 @@ nodeSelector: {}
 
 # -- tolerations are applied to pods and allow them to be scheduled on nodes with matching taints.
 tolerations:
-- effect: NoSchedule
-  key: node-role.kubernetes.io/master
-- effect: NoSchedule
-  key: node-role.kubernetes.io/control-plane
+  - effect: NoSchedule
+    key: node-role.kubernetes.io/master
+  - effect: NoSchedule
+    key: node-role.kubernetes.io/control-plane
 
 # -- affinity allows pod placement based on node characteristics, or any other custom labels assigned to nodes.
 affinity: {}
