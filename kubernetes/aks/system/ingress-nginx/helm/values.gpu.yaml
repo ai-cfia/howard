@@ -445,7 +445,7 @@ controller:
     configMapKey: ""
   service:
     # -- Enable controller services or not. This does not influence the creation of either the admission webhook or the metrics service.
-    enabled: false
+    enabled: true
     external:
       # -- Enable the external controller service or not. Useful for internal-only deployments.
       enabled: true
