@@ -340,9 +340,10 @@ service:
     # cloud.google.com/load-balancer-type: Internal
 
 serviceMonitor:
-  enabled: false
+  enabled: true
   # -- Additional labels for the service monitor.
-  additionalLabels: {}
+  additionalLabels:
+    release: kube-prometheus-stack
   # -- Scrape interval. If not set, the Prometheus default scrape interval is used.
   interval: ""
   # -- MetricRelabelConfigs to apply to samples after scraping, but before ingestion.
