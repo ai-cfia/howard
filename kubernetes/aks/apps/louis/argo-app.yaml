@@ -9,7 +9,7 @@ metadata:
 spec:
   project: default
   destination:
-    server: https://kubernetes.default.svc
+    server: https://acia-cfia-gpu-staging-dns-eay3uqut.hcp.canadacentral.azmk8s.io:443
     namespace: louis
   source:
     repoURL: https://github.com/ai-cfia/howard.git

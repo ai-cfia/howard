@@ -29,3 +29,35 @@ spec:
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
+
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: external-dns-gpu-cluster
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  destination:
+    namespace: external-dns
+    server: https://acia-cfia-gpu-staging-dns-eay3uqut.hcp.canadacentral.azmk8s.io:443
+  sources:
+    - chart: external-dns
+      helm:
+        releaseName: external-dns
+        valueFiles:
+          - $values/kubernetes/aks/system/external-dns/helm/values.yaml
+      repoURL: https://charts.bitnami.com/bitnami
+      targetRevision: 6.36.1
+    - repoURL: https://github.com/ai-cfia/howard.git
+      targetRevision: HEAD
+      ref: values
+  syncPolicy:
+    automated:
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
