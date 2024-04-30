@@ -32,3 +32,38 @@ spec:
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
+
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cert-manager
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  destination:
+    namespace: cert-manager
+    server: https://acia-cfia-gpu-staging-dns-eay3uqut.hcp.canadacentral.azmk8s.io:443
+  sources:
+    - chart: cert-manager
+      helm:
+        releaseName: cert-manager
+        valueFiles:
+          - $values/kubernetes/aks/system/cert-manager/helm/values.yaml
+      repoURL: https://charts.jetstack.io
+      targetRevision: 1.14.2
+    - repoURL: https://github.com/ai-cfia/howard.git
+      targetRevision: HEAD
+      ref: values
+    - repoURL: https://github.com/ai-cfia/howard.git
+      path: kubernetes/aks/system/cert-manager/base
+      targetRevision: HEAD
+  syncPolicy:
+    automated:
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
