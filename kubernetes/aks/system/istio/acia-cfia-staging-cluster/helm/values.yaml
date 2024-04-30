@@ -57,19 +57,19 @@ defaults:
       # targetAverageUtilization: 80
 
     # Additional volumeMounts to the istiod container
-    volumeMounts:
-      - name: cacerts
-        mountPath: /etc/cacerts
-        readOnly: true
+    volumeMounts: []
+      # - name: cacerts
+      #   mountPath: /etc/cacerts
+      #   readOnly: true
 
     # Additional volumes to the istiod pod
-    volumes:
-    - name: cacerts
-      csi:
-        driver: secrets-store.csi.k8s.io
-        readOnly: true
-        volumeAttributes:
-          secretProviderClass: istio-tls
+    volumes: []
+    # - name: cacerts
+    #   csi:
+    #     driver: secrets-store.csi.k8s.io
+    #     readOnly: true
+    #     volumeAttributes:
+    #       secretProviderClass: istio-tls
 
     nodeSelector: {}
     podAnnotations: {}
