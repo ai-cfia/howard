@@ -8,7 +8,7 @@ resources:
   - ../nachet/
   - ../demo/otel/
   - ../bytebase/
-  - ../open-webui
+  - ../louis
 
   # System applications
   - ../../system/cert-manager/
@@ -22,6 +22,7 @@ resources:
   - ../../system/trivy/
   - ../../system/oneuptime/custom-probe/
   - ../../system/falco/
+  # - ../../system/istio/
 
 patches:
   - patch: |-
