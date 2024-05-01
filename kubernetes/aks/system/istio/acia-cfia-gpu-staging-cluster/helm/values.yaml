@@ -1,5 +1,5 @@
 defaults:
-  #.Values.pilot for discovery and mesh wide config
+  # .Values.pilot for discovery and mesh wide config
 
   ## Discovery Settings
   pilot:
@@ -290,9 +290,9 @@ defaults:
     # set of DNS settings than the normal application pods (e.g., in
     # multicluster scenarios).
     # NOTE: If using templates, follow the pattern in the commented example below.
-    #podDNSSearchNamespaces:
-    #- global
-    #- "{{ valueOrDefault .DeploymentMeta.Namespace \"default\" }}.global"
+    # podDNSSearchNamespaces:
+    # - global
+    # - "{{ valueOrDefault .DeploymentMeta.Namespace \"default\" }}.global"
 
     # Kubernetes >=v1.11.0 will create two PriorityClass, including system-cluster-critical and
     # system-node-critical, it is better to configure this in order to make sure your Istio pods
@@ -338,7 +338,7 @@ defaults:
       # Expected values are: trace|debug|info|warning|error|critical|off
       logLevel: warning
 
-      #If set to true, istio-proxy container will have privileged securityContext
+      # If set to true, istio-proxy container will have privileged securityContext
       privileged: false
 
       # The number of successive failed probes before indicating readiness failure.
@@ -361,7 +361,7 @@ defaults:
       # This ensures the startup is reasonable fast (polling every 2s). 1s delay is used since the startup is not often ready instantly.
       startupProbe:
         enabled: true
-        failureThreshold: 600 # 10 minutes
+        failureThreshold: 600  # 10 minutes
 
       # Resources for the sidecar.
       resources:
