@@ -651,13 +651,13 @@ opentelemetry-collector:
         metrics:
           receivers: [otlp, spanmetrics]
           processors: [memory_limiter, resource, batch]
-          exporters: [otlphttp/prometheus, debug]
+          exporters: [otlp, debug]
         logs:
           processors: [memory_limiter, resource, batch]
-          exporters: [opensearch, debug]
+          exporters: [otlp, debug]
 
 jaeger:
-  enabled: true
+  enabled: false
   provisionDataStore:
     cassandra: false
   allInOne:
@@ -684,7 +684,7 @@ jaeger:
     enabled: false
 
 prometheus:
-  enabled: true
+  enabled: false
   alertmanager:
     enabled: false
   configmapReload:
@@ -728,7 +728,7 @@ prometheus:
               regex: true
 
 grafana:
-  enabled: true
+  enabled: false
   grafana.ini:
     auth:
       disable_login_form: true
