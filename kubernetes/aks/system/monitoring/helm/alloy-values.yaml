@@ -149,11 +149,11 @@ alloy:
   extraArgs: []
 
   # -- Extra ports to expose on the Alloy container.
-  extraPorts: []
-  # - name: "faro"
-  #   port: 12347
-  #   targetPort: 12347
-  #   protocol: "TCP"
+  extraPorts:
+  - name: "faro"
+    port: 12347
+    targetPort: 12347
+    protocol: "TCP"
 
   mounts:
     # -- Mount /var/log from the host into the container for log collection.
