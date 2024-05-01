@@ -4,27 +4,27 @@ metadata:
   name: open-webui-ingress
   annotations:
     nginx.ingress.kubernetes.io/whitelist-source-range: 205.194.32.0/24,10.5.0.0/16
-    external-dns.alpha.kubernetes.io/target: inspection.alpha.canada.ca
+    # external-dns.alpha.kubernetes.io/target: inspection.alpha.canada.ca
     cert-manager.io/cluster-issuer: letsencrypt-prod
     nginx.ingress.kubernetes.io/client_max_body_size: "200m"
     nginx.ingress.kubernetes.io/proxy-read-timeout: "120"
     ingress.kubernetes.io/force-ssl-redirect: "true"
     kubernetes.io/tls-acme: "true"
-    nginx.ingress.kubernetes.io/auth-signin: "https://vouch.inspection.alpha.canada.ca/login?url=$scheme://$http_host$request_uri&vouch-failcount=$auth_resp_failcount&X-Vouch-Token=$auth_resp_jwt&error=$auth_resp_err"
-    nginx.ingress.kubernetes.io/auth-url: https://vouch.inspection.alpha.canada.ca/validate
-    nginx.ingress.kubernetes.io/auth-snippet: |
-      # these return values are used by the @error401 call
-      auth_request_set $auth_resp_jwt $upstream_http_x_vouch_jwt;
-      auth_request_set $auth_resp_err $upstream_http_x_vouch_err;
-      auth_request_set $auth_resp_failcount $upstream_http_x_vouch_failcount;
+    # nginx.ingress.kubernetes.io/auth-signin: "https://vouch.inspection.alpha.canada.ca/login?url=$scheme://$http_host$request_uri&vouch-failcount=$auth_resp_failcount&X-Vouch-Token=$auth_resp_jwt&error=$auth_resp_err"
+    # nginx.ingress.kubernetes.io/auth-url: https://vouch.inspection.alpha.canada.ca/validate
+    # nginx.ingress.kubernetes.io/auth-snippet: |
+    #   # these return values are used by the @error401 call
+    #   auth_request_set $auth_resp_jwt $upstream_http_x_vouch_jwt;
+    #   auth_request_set $auth_resp_err $upstream_http_x_vouch_err;
+    #   auth_request_set $auth_resp_failcount $upstream_http_x_vouch_failcount;
 spec:
   ingressClassName: nginx
   tls:
     - hosts:
-        - louis-gpu.inspection.alpha.canada.ca
+        - louis.inspection.alpha.canada.ca
       secretName: aciacfia-tls
   rules:
-    - host: louis-gpu.inspection.alpha.canada.ca
+    - host: louis.inspection.alpha.canada.ca
       http:
         paths:
           - path: /

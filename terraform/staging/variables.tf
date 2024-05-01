@@ -144,6 +144,12 @@ variable "pod_cidr" {
   default     = "10.244.0.0/16"
 }
 
+variable "second_pod_cidr" {
+  description = "The CIDR to use for pod IP addresses. Changing this forces a new resource to be created."
+  type        = string
+  default     = "10.244.0.0/16"
+}
+
 variable "additional_node_pools" {
   description = "List of additional node pools to the cluster."
   type = map(object({

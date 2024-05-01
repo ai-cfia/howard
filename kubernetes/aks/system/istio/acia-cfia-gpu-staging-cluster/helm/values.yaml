@@ -58,9 +58,18 @@ defaults:
 
     # Additional volumeMounts to the istiod container
     volumeMounts: []
+      # - name: cacerts
+      #   mountPath: /etc/cacerts
+      #   readOnly: true
 
     # Additional volumes to the istiod pod
     volumes: []
+    # - name: cacerts
+    #   csi:
+    #     driver: secrets-store.csi.k8s.io
+    #     readOnly: true
+    #     volumeAttributes:
+    #       secretProviderClass: istio-tls
 
     nodeSelector: {}
     podAnnotations: {}
@@ -465,7 +474,7 @@ defaults:
 
     # Network defines the network this cluster belong to. This name
     # corresponds to the networks in the map of mesh networks.
-    network: "network1"
+    network: "network2"
 
     # Configure the certificate provider for control plane communication.
     # Currently, two providers are supported: "kubernetes" and "istiod".

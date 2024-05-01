@@ -9,7 +9,7 @@ metadata:
 spec:
   project: default
   destination:
-    server: https://acia-cfia-gpu-staging-dns-wazsxt3w.hcp.canadacentral.azmk8s.io:443
+    server: https://acia-cfia-gpu-staging-dns-eay3uqut.hcp.canadacentral.azmk8s.io:443
     namespace: istio-system
   sources:
     - chart: istiod
@@ -22,8 +22,14 @@ spec:
     - repoURL: https://github.com/ai-cfia/howard.git
       targetRevision: HEAD
       ref: values
+    - repoURL: https://github.com/ai-cfia/howard.git
+      path: kubernetes/aks/system/istio/acia-cfia-gpu-staging-cluster/base
+      targetRevision: HEAD
   syncPolicy:
     automated:
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
+    managedNamespaceMetadata:
+      labels:
+        topology.istio.io/network: network2
