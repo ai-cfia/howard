@@ -12,9 +12,9 @@ spec:
     namespace: monitoring
     server: https://kubernetes.default.svc
   sources:
-    - chart: grafana
+    - chart: grafana/tempo
       helm:
-        releaseName: grafana/tempo
+        releaseName: tempo
         valueFiles:
           - $values/kubernetes/aks/system/monitoring/helm/tempo-values.yaml
       repoURL: https://grafana.github.io/helm-charts

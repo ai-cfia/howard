@@ -12,9 +12,9 @@ spec:
     namespace: monitoring
     server: https://kubernetes.default.svc
   sources:
-    - chart: grafana
+    - chart: grafana/alloy
       helm:
-        releaseName: grafana/alloy
+        releaseName: alloy
         valueFiles:
           - $values/kubernetes/aks/system/monitoring/helm/alloy-values.yaml
       repoURL: https://grafana.github.io/helm-charts
