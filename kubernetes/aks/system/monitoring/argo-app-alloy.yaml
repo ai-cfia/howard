@@ -14,7 +14,7 @@ spec:
   sources:
     - chart: grafana
       helm:
-        releaseName: alloy
+        releaseName: grafana/alloy
         valueFiles:
           - $values/kubernetes/aks/system/monitoring/helm/alloy-values.yaml
       repoURL: https://grafana.github.io/helm-charts

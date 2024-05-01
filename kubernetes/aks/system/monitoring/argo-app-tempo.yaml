@@ -14,7 +14,7 @@ spec:
   sources:
     - chart: grafana
       helm:
-        releaseName: tempo
+        releaseName: grafana/tempo
         valueFiles:
           - $values/kubernetes/aks/system/monitoring/helm/tempo-values.yaml
       repoURL: https://grafana.github.io/helm-charts
