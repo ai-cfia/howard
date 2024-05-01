@@ -33,11 +33,6 @@ alloy:
     # https://grafana.com/docs/alloy/latest/tasks/collect-opentelemetry-data/
     content: |-
       // Alloy config
-      otelcol.exporter.otlp "default" {
-        client {
-          endpoint = "127.0.0.1:4317"
-        }
-      }
 
       otelcol.receiver.otlp "default" {
         // https://grafana.com/docs/alloy/latest/reference/components/otelcol.receiver.otlp/

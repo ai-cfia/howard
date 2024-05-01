@@ -6,6 +6,8 @@ test_pod:
 loki:
   enabled: true
   isDefault: true
+  image:
+    tag: 2.9.3
   url: http://{{(include "loki.serviceName" .)}}:{{ .Values.loki.service.port }}
   readinessProbe:
     httpGet:
@@ -26,7 +28,6 @@ loki:
     annotations: {}
     enabled: true
     size: 10Gi
-
 
 promtail:
   enabled: true
