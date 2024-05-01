@@ -18,7 +18,7 @@ spec:
         valueFiles:
           - $values/kubernetes/aks/apps/demo/otel/values.yaml
       repoURL: https://open-telemetry.github.io/opentelemetry-helm-charts
-      targetRevision: 1.9.0
+      targetRevision: 0.30.5
     - repoURL: https://github.com/ai-cfia/howard.git
       targetRevision: HEAD
       ref: values
