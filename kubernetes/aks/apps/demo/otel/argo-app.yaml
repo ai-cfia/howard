@@ -12,7 +12,7 @@ spec:
     namespace: otel-demo
     server: https://kubernetes.default.svc
   sources:
-    - chart: open-telemetry
+    - chart: opentelemetry-demo
       helm:
         releaseName: opentelemetry-demo
         valueFiles:
