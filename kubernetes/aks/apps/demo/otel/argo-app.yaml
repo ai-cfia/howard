@@ -16,7 +16,7 @@ spec:
       helm:
         releaseName: opentelemetry-demo
         valueFiles:
-          - $values/kubernetes/aks/apps/demo/otel/values.yaml
+          - $values/kubernetes/aks/apps/demo/otel/helm/values.yaml
       repoURL: https://open-telemetry.github.io/opentelemetry-helm-charts
       targetRevision: 0.30.5
     - repoURL: https://github.com/ai-cfia/howard.git
