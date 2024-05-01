@@ -22,6 +22,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: otel-demo-frontendproxy
+                name: opentelemetry-demo-frontendproxy
                 port:
                   number: 8080
