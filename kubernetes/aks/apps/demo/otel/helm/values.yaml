@@ -7,7 +7,7 @@ default:
           apiVersion: v1
           fieldPath: "metadata.labels['app.kubernetes.io/component']"
     - name: OTEL_COLLECTOR_NAME
-      value: '{{ include "otel-demo.name" . }}-otelcol'
+      value: 'alloy.monitoring.svc.cluster.local'
     - name: OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE
       value: cumulative
     - name: OTEL_RESOURCE_ATTRIBUTES
@@ -337,7 +337,7 @@ components:
       - name: WEB_OTEL_SERVICE_NAME
         value: frontend-web
       - name: PUBLIC_OTEL_EXPORTER_OTLP_TRACES_ENDPOINT
-        value: http://localhost:8080/otlp-http/v1/traces             # This expects users to use `kubectl port-forward ...`
+        value: http://localhost:8080/otlp-http/v1/traces             # This expects users to use `kubectl port-forward ...`todo
     resources:
       limits:
         memory: 200Mi
