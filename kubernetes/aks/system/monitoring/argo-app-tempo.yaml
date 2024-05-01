@@ -12,7 +12,7 @@ spec:
     namespace: monitoring
     server: https://kubernetes.default.svc
   sources:
-    - chart: grafana/tempo
+    - chart: tempo
       helm:
         releaseName: tempo
         valueFiles:
