@@ -32,8 +32,6 @@ alloy:
     # -- Content to assign to the new ConfigMap.  This is passed into `tpl` allowing for templating from values.
     # https://grafana.com/docs/alloy/latest/tasks/collect-opentelemetry-data/
     content: |-
-      // Alloy config
-
       otelcol.receiver.otlp "default" {
         // https://grafana.com/docs/alloy/latest/reference/components/otelcol.receiver.otlp/
 
@@ -43,9 +41,9 @@ alloy:
         http { }
 
         output {
-          metrics = [otelcol.exporter.otlp.default.input]
-          logs    = [otelcol.exporter.otlp.default.input]
-          traces  = [otelcol.exporter.otlp.default.input]
+          metrics = [otelcol.exporter.prometheus.default.input]
+          logs    = [otelcol.exporter.loki.default.input]
+          traces  = [otelcol.exporter.otlp.tempo.input]
         }
       }
 

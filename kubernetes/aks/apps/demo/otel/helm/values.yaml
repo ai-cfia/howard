@@ -629,7 +629,7 @@ opentelemetry-collector:
     exporters:
       ## Create an exporter to Grafana Alloy
       otlp:
-        endpoint: 'alloy.monitoring.svc.cluster.local:4317'
+        endpoint: 'alloy.monitoring.svc.cluster.local:12345'
         tls:
           insecure: true
 
