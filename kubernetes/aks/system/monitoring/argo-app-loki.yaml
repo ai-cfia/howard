@@ -14,7 +14,7 @@ spec:
   sources:
     - chart: loki-stack
       helm:
-        releaseName: loki-stack
+        releaseName: loki
         valueFiles:
           - $values/kubernetes/aks/system/monitoring/helm/loki-stack-values.yaml
       repoURL: https://grafana.github.io/helm-charts
