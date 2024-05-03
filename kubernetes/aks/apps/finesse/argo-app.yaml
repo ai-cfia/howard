@@ -26,7 +26,7 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: finesse
+  name: finesse-internal
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
@@ -36,10 +36,10 @@ spec:
   project: default
   destination:
     server: https://kubernetes.default.svc
-    namespace: finesse-private
+    namespace: finesse-internal
   source:
     repoURL: https://github.com/ai-cfia/howard.git
-    path: kubernetes/aks/apps/finesse/private
+    path: kubernetes/aks/apps/finesse/internal
     targetRevision: HEAD
   syncPolicy:
     automated:
