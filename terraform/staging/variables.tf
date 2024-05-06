@@ -114,6 +114,12 @@ variable "subnet_address" {
   default     = "10.241.0.0/16" # Subnet resides within RFC1918-compliant VNet range
 }
 
+variable "dev_subnet_address" {
+  description = "Subnet address for Dev environment services"
+  type        = string
+  default     = "10.242.0.0/16" # Subnet resides within RFC1918-compliant VNet range
+}
+
 variable "second_virtual_network_address" {
   description = "Second virtual network address"
   type        = string
