@@ -5,3 +5,6 @@ kind: Kustomization
 resources:
   - argo-app-kps.yaml
   - argo-app-grafana.yaml
+  - argo-app-alloy.yaml
+  - argo-app-loki.yaml
+  - argo-app-tempo.yaml
