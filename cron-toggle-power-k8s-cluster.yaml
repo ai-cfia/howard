@@ -3,28 +3,31 @@ schedules:
   displayName: Stop Cluster on Weekdays at 5 PM
   branches:
     include:
-      - main
+    - main
   always: true
 
 - cron: "0 7 * * 1-5"
   displayName: Start Cluster on Weekdays at 7 AM
   branches:
     include:
-      - main
+    - main
   always: true
 
 trigger:
   branches:
     include:
-      - main
+    - main
 
 pr: none
 
 pool:
   vmImage: 'ubuntu-latest'
 
+variables:
+  - group: cron-toggle-power-k8s-cluster
+
 stages:
-  - stage: ManageCluster
+- stage: ManageCluster
     jobs:
       - job: ManageAKSCluster
         steps:
@@ -46,8 +49,8 @@ stages:
               inlineScript: |
                 # Conditional operation based on the time trigger
                 if [[ "$(Build.SourceBranch)" == "cron:0 17 * * 1-5" ]]; then
-                  az aks stop --name $(clusterName) --resource-group $(resourceGroupName)
-                  az aks show --name $(clusterName) --resource-group $(resourceGroupName)
+                  az aks stop --name $(aksName) --resource-group $(resourceGroupName)
+                  az aks show --name $(aksName) --resource-group $(resourceGroupName)
                 elif [[ "$(Build.SourceBranch)" == "cron:0 7 * * 1-5" ]]; then
-                  az aks start --name $(clusterName) --resource-group $(resourceGroupName)
-                  az aks show --name $(clusterName) --resource-group $(resourceGroupName)
+                  az aks start --name $(aksName) --resource-group $(resourceGroupName)
+                  az aks show --name $(aksName) --resource-group $(resourceGroupName)
