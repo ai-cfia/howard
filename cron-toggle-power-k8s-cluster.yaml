@@ -1,23 +1,19 @@
 schedules:
-- cron: "0 15 * * 1-5"
-  displayName: Stop Cluster on Weekdays at 5 PM
+- cron: "0 17 * * 1-5"
+  displayName: Stop Cluster on Weekdays at 3 PM
   branches:
     include:
     - main
   always: true
 
-- cron: "30 15 * * 1-5"
-  displayName: Start Cluster on Weekdays at 7 AM
+- cron: "0 7 * * 1-5"
+  displayName: Start Cluster on Weekdays at 3:30 PM
   branches:
     include:
     - main
   always: true
 
-trigger:
-  branches:
-    include:
-    - main
-
+trigger: none
 pr: none
 
 pool:
@@ -48,9 +44,11 @@ stages:
         scriptLocation: inlineScript
         inlineScript: |
           # Conditional operation based on the time trigger
-          if [[ "$(Build.SourceBranch)" == "cron:0 15 * * 1-5" ]]; then
+          if [ "$(Build.CronSchedule.DisplayName)" == "Stop Cluster on Weekdays at 3 PM" ]; then
+            echo "Stopping AKS cluster based on schedule..."
             az aks stop --name $(aksName) --resource-group $(resourceGroupName)
             az aks show --name $(aksName) --resource-group $(resourceGroupName)
-          elif [[ "$(Build.SourceBranch)" == "cron:30 15 * * 1-5" ]]; then
+          elif [ "$(Build.CronSchedule.DisplayName)" == "Start Cluster on Weekdays at 3:30 PM" ]; then
+            echo "Starting AKS cluster based on schedule..."
             az aks start --name $(aksName) --resource-group $(resourceGroupName)
             az aks show --name $(aksName) --resource-group $(resourceGroupName)
