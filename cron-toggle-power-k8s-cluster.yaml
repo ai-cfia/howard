@@ -1,5 +1,5 @@
 schedules:
-- cron: "0 15 * * 1-5"
+- cron: "5 15 * * 1-5"
   displayName: Stop Cluster on Weekdays at 3 PM
   branches:
     include:
