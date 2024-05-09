@@ -29,28 +29,28 @@ variables:
 stages:
 - stage: ManageCluster
   jobs:
-    - job: ManageAKSCluster
-      steps:
-        - task: AzureCLI@2
-          displayName: "Login to Azure"
-          inputs:
-            azureSubscription: $(serviceConnectionName)
-            scriptType: bash
-            scriptLocation: inlineScript
-            inlineScript: |
-              echo "Successfully logged in to Azure"
+  - job: ManageAKSCluster
+    steps:
+    - task: AzureCLI@2
+      displayName: "Login to Azure"
+      inputs:
+        azureSubscription: $(serviceConnectionName)
+        scriptType: bash
+        scriptLocation: inlineScript
+        inlineScript: |
+          echo "Successfully logged in to Azure"
 
-        - task: AzureCLI@2
-          displayName: "Manage AKS Cluster"
-          inputs:
-            azureSubscription: $(serviceConnectionName)
-            scriptType: bash
-            scriptLocation: inlineScript
-            inlineScript: |
-              # Conditional operation based on the time trigger
-              if [[ "$(Build.SourceBranch)" == "cron:0 17 * * 1-5" ]]; then
-                az aks stop --name $(aksName) --resource-group $(resourceGroupName)
-                az aks show --name $(aksName) --resource-group $(resourceGroupName)
-              elif [[ "$(Build.SourceBranch)" == "cron:0 7 * * 1-5" ]]; then
-                az aks start --name $(aksName) --resource-group $(resourceGroupName)
-                az aks show --name $(aksName) --resource-group $(resourceGroupName)
+    - task: AzureCLI@2
+      displayName: "Manage AKS Cluster"
+      inputs:
+        azureSubscription: $(serviceConnectionName)
+        scriptType: bash
+        scriptLocation: inlineScript
+        inlineScript: |
+          # Conditional operation based on the time trigger
+          if [[ "$(Build.SourceBranch)" == "cron:0 17 * * 1-5" ]]; then
+            az aks stop --name $(aksName) --resource-group $(resourceGroupName)
+            az aks show --name $(aksName) --resource-group $(resourceGroupName)
+          elif [[ "$(Build.SourceBranch)" == "cron:0 7 * * 1-5" ]]; then
+            az aks start --name $(aksName) --resource-group $(resourceGroupName)
+            az aks show --name $(aksName) --resource-group $(resourceGroupName)
