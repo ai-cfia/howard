@@ -6,6 +6,11 @@ metadata:
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+    argocd-image-updater.argoproj.io/image-list: nachet-frontend=ghcr.io/ai-cfia/nachet-frontend:main, nachet-backend=ghcr.io/ai-cfia/nachet-backend:main
+    argocd-image-updater.argoproj.io/nachet-frontend.update-strategy: digest
+    argocd-image-updater.argoproj.io/nachet-backend.update-strategy: digest
 spec:
   project: default
   destination:
