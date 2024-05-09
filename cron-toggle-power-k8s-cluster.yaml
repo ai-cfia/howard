@@ -1,5 +1,5 @@
 schedules:
-- cron: '20 19 * * Mon-Fri'
+- cron: '25 19 * * Mon-Fri'
   displayName: Stop cluster on weekdays at 5 PM (EST)
   branches:
     include:
@@ -37,7 +37,7 @@ stages:
           echo "Successfully logged in to Azure"
 
     - task: AzureCLI@2
-      displayName: "Manage AKS Cluster"
+      displayName: "Toggle power (on/off) k8s cluster"
       inputs:
         azureSubscription: $(serviceConnectionName)
         scriptType: bash
@@ -52,3 +52,5 @@ stages:
             echo "Starting AKS cluster based on schedule..."
             az aks start --name $(aksName) --resource-group $(resourceGroupName)
             az aks show --name $(aksName) --resource-group $(resourceGroupName)
+          fi
+
