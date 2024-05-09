@@ -1,13 +1,13 @@
 schedules:
-- cron: '25 19 * * Mon-Fri'
-  displayName: Stop cluster on weekdays at 5 PM (EST)
+- cron: '0 0 * * Mon-Fri'
+  displayName: Stop cluster on weekdays at 20 PM (EST)
   branches:
     include:
     - main
   always: true
 
-- cron: '30 19 * * Mon-Fri'
-  displayName: Start cluster on weekdays at 7 AM (EST)
+- cron: '0 12 * * Mon-Fri'
+  displayName: Start cluster on weekdays at 8 AM (EST)
   branches:
     include:
     - main
@@ -44,11 +44,11 @@ stages:
         scriptLocation: inlineScript
         inlineScript: |
           # Conditional operation based on the time trigger
-          if [ "$(Build.CronSchedule.DisplayName)" == "Stop cluster on weekdays at 5 PM (EST)" ]; then
+          if [ "$(Build.CronSchedule.DisplayName)" == "Stop cluster on weekdays at 20 PM (EST)" ]; then
             echo "Stopping AKS cluster based on schedule..."
             az aks stop --name $(aksName) --resource-group $(resourceGroupName)
             az aks show --name $(aksName) --resource-group $(resourceGroupName)
-          elif [ "$(Build.CronSchedule.DisplayName)" == "Start cluster on weekdays at 7 AM (EST)" ]; then
+          elif [ "$(Build.CronSchedule.DisplayName)" == "Start cluster on weekdays at 8 AM (EST)" ]; then
             echo "Starting AKS cluster based on schedule..."
             az aks start --name $(aksName) --resource-group $(resourceGroupName)
             az aks show --name $(aksName) --resource-group $(resourceGroupName)
