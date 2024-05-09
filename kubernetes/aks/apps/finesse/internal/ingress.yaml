@@ -3,8 +3,8 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: finesse-backend-ingress
-  namespace: finesse
   annotations:
+    nginx.ingress.kubernetes.io/whitelist-source-range: 205.194.32.0/24,10.5.0.0/16
     external-dns.alpha.kubernetes.io/target: inspection.alpha.canada.ca
     cert-manager.io/cluster-issuer: letsencrypt-prod
     nginx.ingress.kubernetes.io/use-regex: "true"
@@ -15,10 +15,10 @@ spec:
   ingressClassName: nginx
   tls:
     - hosts:
-        - finesse.inspection.alpha.canada.ca
+        - finesse-internal.inspection.alpha.canada.ca
       secretName: aciacfia-tls
   rules:
-    - host: finesse.inspection.alpha.canada.ca
+    - host: finesse-internal.inspection.alpha.canada.ca
       http:
         paths:
           - path: /api(/|$)(.*)
@@ -35,8 +35,8 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: finesse-frontend-ingress
-  namespace: finesse
   annotations:
+    nginx.ingress.kubernetes.io/whitelist-source-range: 205.194.32.0/24,10.5.0.0/16
     external-dns.alpha.kubernetes.io/target: inspection.alpha.canada.ca
     cert-manager.io/cluster-issuer: letsencrypt-prod
     ingress.kubernetes.io/force-ssl-redirect: "true"
@@ -46,10 +46,10 @@ spec:
   ingressClassName: nginx
   tls:
     - hosts:
-        - finesse.inspection.alpha.canada.ca
+        - finesse-internal.inspection.alpha.canada.ca
       secretName: aciacfia-tls
   rules:
-    - host: finesse.inspection.alpha.canada.ca
+    - host: finesse-internal.inspection.alpha.canada.ca
       http:
         paths:
           - path: /

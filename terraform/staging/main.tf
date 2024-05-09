@@ -170,6 +170,14 @@ module "vault" {
   }
 }
 
+# Subnet dedicated to provide internal access From Finesse to protected services from Dev
+resource "azurerm_subnet" "subnet_dev" {
+  name                 = "subnet-dev"
+  resource_group_name  = azurerm_resource_group.rg.name
+  virtual_network_name = module.cluster-network-0.virtual_network_name
+  address_prefixes     = var.dev_subnet_address
+}
+
 # module "vms" {
 #  source = "../modules/azure-vm"
 #
