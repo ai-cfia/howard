@@ -25,8 +25,8 @@ spec:
               cpu: "2000m"
               memory: "6Gi"
           envFrom:
-              - configMapRef:
-                  name: librechat-config
+            - configMapRef:
+                name: librechat-config
           volumeMounts:
             - name: librechat-volume
               mountPath: /app
