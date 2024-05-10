@@ -17,11 +17,23 @@ spec:
           image: ghcr.io/danny-avila/librechat-rag-api-dev-lite:latest
           ports:
             - containerPort: 8000
-          env:
-            - name: RAG_PORT
-              value: "8000"
-            - name: DB_HOST
-              value: "vectordb"
           envFrom:
+            - secretRef:
+                name: rag-api-secrets-secrets
             - configMapRef:
                 name: librechat-config
+---
+kind: Secret
+apiVersion: v1
+metadata:
+  name: rag-api-secrets
+  annotations:
+    avp.kubernetes.io/path: "kv/data/librechat/vectordb"
+    avp.kubernetes.io/secret-version: "1"
+stringData:
+  DB_HOST: "vectordb"
+  POSTGRES_DB: <POSTGRES_DB>
+  POSTGRES_USER: <POSTGRES_USER>
+  POSTGRES_PASSWORD: <POSTGRES_PASSWORD>
+  DB_PORT: "5432"
+  RAG_PORT: "8000"
