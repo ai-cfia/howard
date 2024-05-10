@@ -16,9 +16,7 @@ spec:
         - name: librechat
           image: ghcr.io/danny-avila/librechat:latest
           ports:
-            - name: http
-              containerPort: 3080
-              protocol: TCP
+            - containerPort: 3080
           livenessProbe:
             initialDelaySeconds: 10
             timeoutSeconds: 5

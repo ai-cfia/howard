@@ -8,4 +8,4 @@ spec:
     app: librechat
   ports:
     - port: 3080
-      name: http
+      protocol: TCP

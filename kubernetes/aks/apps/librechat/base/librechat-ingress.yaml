@@ -24,4 +24,4 @@ spec:
               service:
                 name: librechat
                 port:
-                  name: http
+                  number: 8080
