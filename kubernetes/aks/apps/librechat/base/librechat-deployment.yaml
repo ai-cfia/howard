@@ -64,7 +64,7 @@ metadata:
   name: librechat-secrets
   annotations:
     avp.kubernetes.io/path: "kv/data/librechat/librechat-client"
-    avp.kubernetes.io/secret-version: "4"
+    avp.kubernetes.io/secret-version: "5"
 stringData:
   SEARCH: "true"
   MEILI_MASTER_KEY: <MEILI_MASTER_KEY>

@@ -51,7 +51,5 @@ data:
   ALLOW_SOCIAL_REGISTRATION: "false"
   SESSION_EXPIRY: "900000"  # 1000 * 60 * 15
   REFRESH_TOKEN_EXPIRY: "604800000"  # (1000 * 60 * 60 * 24) * 7
-  JWT_SECRET: ""
-  JWT_REFRESH_SECRET: ""
   APP_TITLE: "LibreChat"
   HELP_AND_FAQ_URL: "https://librechat.ai"
