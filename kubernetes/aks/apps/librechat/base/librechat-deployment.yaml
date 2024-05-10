@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: librechat-deployment
+  name: librechat
 spec:
   replicas: 1
   selector:

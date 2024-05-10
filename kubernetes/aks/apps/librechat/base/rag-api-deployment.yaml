@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rag_api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rag_api
+  template:
+    metadata:
+      labels:
+        app: rag_api
+    spec:
+      containers:
+        - name: rag_api
+          image: ghcr.io/danny-avila/librechat-rag-api-dev-lite:latest
+          ports:
+            - containerPort: 8000
+          env:
+            - name: RAG_PORT
+              value: "8000"
+            - name: DB_HOST
+              value: "vectordb"
+          envFrom:
+            - configMapRef:
+                name: librechat-config
