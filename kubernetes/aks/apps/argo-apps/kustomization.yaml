@@ -8,7 +8,8 @@ resources:
   - ../nachet/
   - ../demo/otel/
   - ../bytebase/
-  - ../louis
+  - ../louis/
+  - ../librechat/
 
   # System applications
   - ../../system/cert-manager/
