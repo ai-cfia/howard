@@ -5,7 +5,6 @@ metadata:
 data:
   HOST: "librechat.inspection.alpha.canada.ca"
   PORT: "3080"
-  MONGO_URI: "mongodb://mongodb:27017/LibreChat"
   DOMAIN_CLIENT: "http://librechat:3080"
   DOMAIN_SERVER: "http://librechat:3080"
   NO_INDEX: "true"

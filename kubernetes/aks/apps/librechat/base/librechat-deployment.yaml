@@ -27,6 +27,8 @@ spec:
           envFrom:
             - configMapRef:
                 name: librechat-config
+            - secretRef:
+                name: librechat-secrets
           volumeMounts:
             - name: librechat-volume
               mountPath: /app
@@ -34,3 +36,15 @@ spec:
         - name: librechat-volume
           persistentVolumeClaim:
             claimName: librechat-pvc
+---
+kind: Secret
+apiVersion: v1
+metadata:
+  name: librechat-secrets
+  annotations:
+    avp.kubernetes.io/path: "kv/data/librechat/librechat-client"
+    avp.kubernetes.io/secret-version: "1"
+stringData:
+  SEARCH: "true"
+  MEILI_MASTER_KEY: <MEILI_MASTER_KEY>
+  MONGO_URI: <MONGO_URI>
