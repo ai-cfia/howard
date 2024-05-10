@@ -17,6 +17,8 @@ spec:
         - name: vectordb
           image: ankane/pgvector:latest
           imagePullPolicy: Always
+          ports:
+            - containerPort: 5432
           envFrom:
             - secretRef:
                 name: vectordb-secrets
@@ -39,6 +41,19 @@ spec:
     requests:
       storage: "10Gi"
 ---
+apiVersion: v1
+kind: Service
+metadata:
+  name: vectordb
+spec:
+  type: ClusterIP
+  selector:
+    app: vectordb
+  ports:
+    - port: 5432
+      name: http
+
+---
 kind: Secret
 apiVersion: v1
 metadata:
@@ -50,3 +65,4 @@ stringData:
   POSTGRES_DB: <POSTGRES_DB>
   POSTGRES_USER: <POSTGRES_USER>
   POSTGRES_PASSWORD: <POSTGRES_PASSWORD>
+  POSTGRES_PORT: "5432"

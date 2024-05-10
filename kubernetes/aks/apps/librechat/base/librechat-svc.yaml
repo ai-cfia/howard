@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: librechat-svc
+  name: librechat
 spec:
   type: ClusterIP
   selector:
