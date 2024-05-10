@@ -17,18 +17,6 @@ spec:
           image: ghcr.io/danny-avila/librechat:latest
           ports:
             - containerPort: 3080
-          livenessProbe:
-            initialDelaySeconds: 10
-            timeoutSeconds: 5
-            httpGet:
-              path: /health
-              port: 3080
-          readinessProbe:
-            initialDelaySeconds: 5
-            timeoutSeconds: 3
-            httpGet:
-              path: /ready
-              port: 3080
           resources:
             requests:
               cpu: "2000m"
