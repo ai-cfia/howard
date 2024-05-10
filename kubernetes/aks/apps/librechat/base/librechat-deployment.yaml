@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: librechat-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: librechat
+  template:
+    metadata:
+      labels:
+        app: librechat
+    spec:
+      containers:
+        - name: librechat
+          image: ghcr.io/danny-avila/librechat:latest
+          ports:
+            - containerPort: 3080
+          resources:
+            requests:
+              cpu: "2000m"
+              memory: "4Gi"
+            limits:
+              cpu: "2000m"
+              memory: "6Gi"
+          envFrom:
+              - configMapRef:
+                  name: librechat-config
+          volumeMounts:
+            - name: librechat-volume
+              mountPath: /app
+      volumes:
+        - name: librechat-volume
+          persistentVolumeClaim:
+            claimName: librechat-pvc

@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: librechat-service
+spec:
+  type: ClusterIP
+  selector:
+    app: librechat
+  ports:
+    - port: 3080
+      name: http
