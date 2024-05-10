@@ -19,7 +19,7 @@ spec:
             - containerPort: 8000
           envFrom:
             - secretRef:
-                name: rag-api-secrets-secrets
+                name: rag-api-secrets
             - configMapRef:
                 name: librechat-config
 ---
