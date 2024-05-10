@@ -23,13 +23,25 @@ spec:
             - configMapRef:
                 name: librechat-config
 ---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rag-api
+spec:
+  type: ClusterIP
+  selector:
+    app: rag-api
+  ports:
+    - port: 8000
+      name: http
+---
 kind: Secret
 apiVersion: v1
 metadata:
   name: rag-api-secrets
   annotations:
     avp.kubernetes.io/path: "kv/data/librechat/vectordb"
-    avp.kubernetes.io/secret-version: "2"
+    avp.kubernetes.io/secret-version: "3"
 stringData:
   DB_HOST: "vectordb"
   POSTGRES_DB: <POSTGRES_DB>
@@ -37,3 +49,6 @@ stringData:
   POSTGRES_PASSWORD: <POSTGRES_PASSWORD>
   DB_PORT: "5432"
   RAG_PORT: "8000"
+  RAG_AZURE_OPENAI_ENDPOINT: <RAG_AZURE_OPENAI_ENDPOINT>
+  RAG_AZURE_OPENAI_API_VERSION: <RAG_AZURE_OPENAI_API_VERSION>
+  RAG_AZURE_OPENAI_API_KEY: <RAG_AZURE_OPENAI_API_KEY>
