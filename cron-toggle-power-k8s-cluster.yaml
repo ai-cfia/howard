@@ -53,4 +53,3 @@ stages:
             az aks start --name $(aksName) --resource-group $(resourceGroupName)
             az aks show --name $(aksName) --resource-group $(resourceGroupName)
           fi
-
