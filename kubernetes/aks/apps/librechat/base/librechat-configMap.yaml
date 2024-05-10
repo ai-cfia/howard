@@ -11,7 +11,7 @@ data:
   NO_INDEX: "true"
   CONSOLE_JSON: "false"
   DEBUG_LOGGING: "true"
-  DEBUG_CONSOLE: "false"
+  DEBUG_CONSOLE: "true"
   ANTHROPIC_API_KEY: "user_provided"
   BINGAI_TOKEN: "user_provided"
   GOOGLE_KEY: "user_provided"
@@ -57,3 +57,4 @@ data:
   RAG_HOST: "rag-api.librechat.svc.cluster.local"
   RAG_API_URL: "http://rag-api.librechat.svc.cluster.local:8000"
   RAG_PORT: "8000"
+  ENDPOINTS: "azureOpenAI,google,ollama"
