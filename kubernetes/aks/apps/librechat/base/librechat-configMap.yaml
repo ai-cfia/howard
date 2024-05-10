@@ -55,4 +55,5 @@ data:
   APP_TITLE: "LibreChat"
   HELP_AND_FAQ_URL: "https://librechat.ai"
   RAG_HOST: "rag-api.librechat.svc.cluster.local"
+  RAG_API_URL: "http://rag-api.librechat.svc.cluster.local:8000"
   RAG_PORT: "8000"
