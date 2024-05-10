@@ -1,0 +1,52 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vectordb
+spec:
+  selector:
+    matchLabels:
+      app: vectordb
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: vectordb
+    spec:
+      containers:
+        - name: vectordb
+          image: ankane/pgvector:latest
+          imagePullPolicy: Always
+          envFrom:
+            - secretRef:
+                name: vectordb-secrets
+          volumeMounts:
+            - name: storage
+              mountPath: /var/lib/postgresql/data
+      volumes:
+        - name: storage
+          persistentVolumeClaim:
+            claimName: librechat-vectordb-pvc
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: librechat-vectordb-pvc
+spec:
+  accessModes:
+    - "ReadWriteOnce"
+  resources:
+    requests:
+      storage: "10Gi"
+---
+kind: Secret
+apiVersion: v1
+metadata:
+  name: vectordb-secrets
+  annotations:
+    avp.kubernetes.io/path: "kv/data/librechat/vectordb"
+    avp.kubernetes.io/secret-version: "1"
+stringData:
+  POSTGRES_DB: <POSTGRES_DB>
+  POSTGRES_USER: <POSTGRES_USER>
+  POSTGRES_PASSWORD: <POSTGRES_PASSWORD>

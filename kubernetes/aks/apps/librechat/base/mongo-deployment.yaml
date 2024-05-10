@@ -1,0 +1,76 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongodb
+spec:
+  selector:
+    matchLabels:
+      app: mongodb
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: mongodb
+    spec:
+      containers:
+        - name: mongodb
+          image: mongo:6
+          imagePullPolicy: Always
+          command: ["/bin/sh", "-c"]
+          args:
+            - >
+              exec mongod --bind_ip_all
+          envFrom:
+            - secretRef:
+                name: mongodb-secrets
+          ports:
+            - containerPort: 27017
+          volumeMounts:
+            - name: storage
+              mountPath: /data/db
+          livenessProbe:
+            tcpSocket:
+              port: 27017
+            initialDelaySeconds: 30
+            periodSeconds: 20
+            timeoutSeconds: 5
+            failureThreshold: 5
+      volumes:
+        - name: storage
+          persistentVolumeClaim:
+            claimName: librechat-mongodb-pvc
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: librechat-mongodb-pvc
+spec:
+  accessModes:
+    - "ReadWriteOnce"
+  resources:
+    requests:
+      storage: "10Gi"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongodb
+spec:
+  clusterIP: None
+  selector:
+    app: mongodb
+  ports:
+    - port: 27017
+      targetPort: 27017
+---
+kind: Secret
+apiVersion: v1
+metadata:
+  name: mongodb-secrets
+  annotations:
+    avp.kubernetes.io/path: "kv/data/librechat/mongodb"
+    avp.kubernetes.io/secret-version: "1"
+stringData:
+  MONGO_USER: <MONGO_USER>
+  MONGO_PASSWORD: <MONGO_PASSWORD>
