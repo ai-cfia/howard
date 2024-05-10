@@ -68,4 +68,3 @@ metadata:
 stringData:
   SEARCH: "true"
   MEILI_MASTER_KEY: <MEILI_MASTER_KEY>
-  MONGO_URI: <MONGO_URI>
