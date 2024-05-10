@@ -55,11 +55,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: mongodbdb
+  name: mongodb
 spec:
   clusterIP: None
   selector:
-    app: mongodbdb
+    app: mongodb
   ports:
     - port: 27017
       targetPort: 27017
