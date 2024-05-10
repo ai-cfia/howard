@@ -72,5 +72,5 @@ metadata:
     avp.kubernetes.io/path: "kv/data/librechat/mongodb"
     avp.kubernetes.io/secret-version: "1"
 stringData:
-  MONGO_USER : <MONGO_USER>
-  MONGO_PASSWORD : <MONGO_PASSWORD>
+  MONGO_USER: <MONGO_USER>
+  MONGO_PASSWORD: <MONGO_PASSWORD>
