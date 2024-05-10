@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: rag_api
+  name: rag-api
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: rag_api
+      app: rag-api
   template:
     metadata:
       labels:
-        app: rag_api
+        app: rag-api
     spec:
       containers:
-        - name: rag_api
+        - name: rag-api
           image: ghcr.io/danny-avila/librechat-rag-api-dev-lite:latest
           ports:
             - containerPort: 8000
