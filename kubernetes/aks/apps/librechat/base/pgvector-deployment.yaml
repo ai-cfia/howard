@@ -60,7 +60,7 @@ metadata:
   name: vectordb-secrets
   annotations:
     avp.kubernetes.io/path: "kv/data/librechat/vectordb"
-    avp.kubernetes.io/secret-version: "1"
+    avp.kubernetes.io/secret-version: "2"
 stringData:
   POSTGRES_DB: <POSTGRES_DB>
   POSTGRES_USER: <POSTGRES_USER>
