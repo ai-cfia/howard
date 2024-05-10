@@ -5,15 +5,15 @@ terraform {
   required_providers {
     local = {
       source  = "hashicorp/local"
-      version = "2.4.0"
+      version = "2.5.1"
     }
     tls = {
       source  = "hashicorp/tls"
-      version = "4.0.4"
+      version = "4.0.5"
     }
     external = {
       source  = "hashicorp/external"
-      version = "2.3.1"
+      version = "2.3.3"
     }
     kubernetes = {
       source  = "hashicorp/kubernetes"
