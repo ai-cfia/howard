@@ -395,7 +395,8 @@ jetons, mots de passe, certificats et autres secrets.</p>
 <li><strong>Terraform :</strong> Outil open-source d'infrastructure en tant que code permettant
 de gérer le cycle de vie des services chez les fournisseurs cloud
 de manière déclarative.</li>
-<li><strong>Ansible :</strong> Outil d'automatisation pour la configuration et la gestion des ordinateurs.</li>
+<li><strong>Ansible :</strong> Outil d'automatisation pour la configuration et la gestion
+des ordinateurs.</li>
 </ul>
 <h2 id="installation">Installation</h2>
 <h3 id="deploiement-terraform">Déploiement Terraform</h3>
@@ -404,7 +405,8 @@ disposons d'un pipeline Azure DevOps apply-terraform.yml qui applique les
 ressources Terraform créées sur notre abonnement Azure. L'état est ensuite
 sauvegardé dans un stockage blob d'Azure.</p>
 <h3 id="configuration-de-kubectl">Configuration de Kubectl</h3>
-<p>En supposant que vous ayez installé Azure CLI et le plugin kubelogin, voici comment récupérer localement la configuration kube :</p>
+<p>En supposant que vous ayez installé Azure CLI et le plugin kubelogin, voici
+comment récupérer localement la configuration kube :</p>
 <pre><code class="language-bash">az login
 az account set --subscription xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
 az aks get-credentials --resource-group resource-group-name --name aks-name --overwrite-existing
