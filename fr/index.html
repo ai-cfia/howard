@@ -96,7 +96,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Home
+              Accueil
             
           </span>
         </div>
@@ -252,7 +252,7 @@
         
   
   <span class="md-ellipsis">
-    Home
+    Accueil
   </span>
   
 
@@ -293,7 +293,7 @@
         
   
   <span class="md-ellipsis">
-    Configuration / Implementation
+    Configuration / Implémentation
   </span>
   
 
@@ -339,75 +339,72 @@
 
 
 <h1 id="le-projet-howard">Le projet Howard</h1>
-<h1 id="howard-cloud-infrastructure-of-the-canadian-food-inspection-agency-cfia-acia-cfia-ai-lab">Howard: Cloud infrastructure of the Canadian Food Inspection Agency (CFIA) ACIA-CFIA ai-Lab</h1>
-<h2 id="about-the-project">About the project</h2>
-<p>The Howard project is named after Luke Howard, FRS, a notable British
-manufacturing chemist and amateur meteorologist known as "The Godfather of
-Clouds". His work laid foundational concepts in meteorology, including a
-nomenclature system for clouds introduced in 1802. Inspired by his innovation
-and legacy in categorizing the elements, our project aims to effectively manage
-and orchestrate the cloud-based infrastructure for the Canadian Food Inspection
-Agency (CFIA) ai-lab.</p>
-<p>Howard is essentially the backbone that supports CFIA's ai-lab Kubernetes environment,
-where key applications such as Nachet, Finesse, and Louis are deployed and
-managed dynamically. This infrastructure emphasizes robustness, security, and
-efficiency to handle the critical workload involved in food inspection
-and safety.</p>
-<h2 id="technology-stack-and-tools">Technology stack and tools</h2>
-<p>The Howard infrastructure leverages a comprehensive suite of tools designed to
-provide a resilient, secure, and scalable environment:</p>
-<h3 id="cloud-providers">Cloud providers</h3>
+<h1 id="howard-infrastructure-cloud-de-lagence-canadienne-dinspection-des-aliments-acia-acia-cfia-ai-lab">Howard : Infrastructure Cloud de l'Agence canadienne d'inspection des aliments (ACIA) ACIA-CFIA ai-Lab</h1>
+<h2 id="a-propos-du-projet">À propos du projet</h2>
+<p>Le projet Howard est nommé d'après Luke Howard, FRS, un chimiste manufacturier
+et météorologue amateur britannique notable connu sous le nom de
+"Le Parrain des Nuages". Son travail a jeté les bases de concepts en
+météorologie, notamment un système de nomenclature pour les nuages introduit
+en 1802. Inspiré par son innovation et son héritage dans la catégorisation des
+éléments, notre projet vise à gérer et orchestrer efficacement l'infrastructure
+basée sur le cloud pour le laboratoire d'intelligence artificielle (ai-lab)
+de l'Agence canadienne d'inspection des aliments (ACIA).</p>
+<p>Howard est essentiellement la colonne vertébrale qui soutient l'environnement
+Kubernetes du laboratoire d'intelligence artificielle de l'ACIA, où des
+applications clés telles que Nachet, Finesse et Louis sont déployées et gérées
+de manière dynamique. Cette infrastructure met l'accent sur la robustesse, la
+sécurité et l'efficacité pour traiter la charge de travail critique impliquée
+dans l'inspection et la sécurité alimentaire.</p>
+<h2 id="ensemble-de-technologies-et-outils">Ensemble de technologies et outils</h2>
+<p>L'infrastructure Howard s'appuie sur une suite complète d'outils conçus pour
+fournir un environnement résilient, sécurisé et évolutif :</p>
+<h3 id="fournisseurs-de-cloud">Fournisseurs de cloud</h3>
 <ul>
-<li>Initially hosted on Google Cloud, the infrastructure has transitioned to
-Azure.</li>
+<li>Initialement hébergée sur Google Cloud, l'infrastructure a
+été transférée sur Azure.</li>
 </ul>
-<h3 id="container-orchestration">Container orchestration</h3>
-<ul>
-<li><strong>Kubernetes</strong>: Orchestrates container deployment, scaling, and management.</li>
-</ul>
+<h3 id="orchestration-des-conteneurs">Orchestration des conteneurs</h3>
+<p><strong>Kubernetes :</strong> Orchestrer le déploiement, la mise à l'échelle et la
+gestion des conteneurs.</p>
 <h3 id="gitops">GitOps</h3>
+<p><strong>ArgoCD :</strong> Utilisé pour la livraison continue, gestion des ressources
+Kubernetes de manière déclarative via des dépôts Git.</p>
+<h3 id="surveillance-et-securite">Surveillance et sécurité</h3>
 <ul>
-<li><strong>ArgoCD</strong>: Used for continuous delivery, managing Kubernetes resources in
-a declarative way through Git repositories.</li>
+<li><strong>Grafana :</strong> Logiciel de visualisation et d'analytique.</li>
+<li><strong>Kube-Prometheus-Stack :</strong> Surveillance complète des clusters Kubernetes
+avec Prometheus.</li>
+<li><strong>Falco :</strong> Outil de sécurité open-source en temps réel.</li>
+<li><strong>Trivy :</strong> Scanner de vulnérabilités pour les conteneurs.</li>
+<li><strong>Oneuptime :</strong> Outil de surveillance pour des informations sur la
+performance et la sécurité en temps réel.</li>
 </ul>
-<h3 id="monitoring-and-security">Monitoring and security</h3>
+<h3 id="reseautage">Réseautage</h3>
 <ul>
-<li><strong>Grafana</strong>: Visualization and analytics software.</li>
-<li><strong>Kube-Prometheus-Stack</strong>: Comprehensive Kubernetes cluster monitoring
-with Prometheus.</li>
-<li><strong>Falco</strong>: Open-source runtime security tool.</li>
-<li><strong>Trivy</strong>: Vulnerability scanner for containers.</li>
-<li><strong>Oneuptime</strong>: Monitoring tool for real-time performance and security insights.</li>
+<li><strong>Vouch-Proxy :</strong> Proxy d'authentification.</li>
+<li><strong>Nginx Ingress :</strong> Contrôleur d'entrée pour Kubernetes utilisant NGINX comme
+proxy inverse et équilibreuse de charge.</li>
+<li><strong>Istio :</strong> Maillage de services qui fournit une interface sécurisée pour la
+communication entre services.</li>
 </ul>
-<h3 id="networking">Networking</h3>
+<h3 id="gestion-des-secrets">Gestion des secrets</h3>
+<p><strong>HashiCorp Vault :</strong> Sécurise, stocke et contrôle strictement l'accès aux
+jetons, mots de passe, certificats et autres secrets.</p>
+<h3 id="gestion-de-linfrastructure-cloud">Gestion de l'infrastructure cloud</h3>
 <ul>
-<li><strong>Vouch-Proxy</strong>: Authentication proxy.</li>
-<li><strong>Nginx Ingress</strong>: Ingress controller for Kubernetes using NGINX as a
-reverse proxy and load balancer.</li>
-<li><strong>Istio</strong>: Service mesh that provides a secure interface for inter-service communication.</li>
-</ul>
-<h3 id="secrets-management">Secrets management</h3>
-<ul>
-<li><strong>HashiCorp Vault</strong>: Secures, stores, and tightly controls access to tokens,
-passwords, certificates, and other secrets.</li>
-</ul>
-<h3 id="cloud-infrastructure-management">Cloud infrastructure management</h3>
-<ul>
-<li><strong>Terraform</strong>: Open-source infrastructure as code software tool that
-allows managing service life cycle in cloud providers declaratively.</li>
-<li><strong>Ansible</strong>: Automation tool for configuring and managing computers.</li>
+<li><strong>Terraform :</strong> Outil open-source d'infrastructure en tant que code permettant
+de gérer le cycle de vie des services chez les fournisseurs cloud
+de manière déclarative.</li>
+<li><strong>Ansible :</strong> Outil d'automatisation pour la configuration et la gestion des ordinateurs.</li>
 </ul>
 <h2 id="installation">Installation</h2>
-<h3 id="terraform-deployment">Terraform deployment</h3>
-<p>Current configuration is hosting a kubernetes cluster on Azure (AKS). We have an
-Azure Devops pipeline <code>apply-terraform.yml</code> that applies terraform's resources
-that are created on our Azure's subscription. The state is then saved to a blob
-storage in Azure.</p>
-<h3 id="kubectl-configuration">Kubectl configuration</h3>
-<p>Assuming you have <a href="https://learn.microsoft.com/en-us/cli/azure/install-azure-cli">Azure's
-CLI</a> and
-<a href="https://github.com/Azure/kubelogin">kubelogin</a> plugin installed, here is how
-you can locally fetch the kube config :</p>
+<h3 id="deploiement-terraform">Déploiement Terraform</h3>
+<p>La configuration actuelle héberge un cluster Kubernetes sur Azure (AKS). Nous
+disposons d'un pipeline Azure DevOps apply-terraform.yml qui applique les
+ressources Terraform créées sur notre abonnement Azure. L'état est ensuite
+sauvegardé dans un stockage blob d'Azure.</p>
+<h3 id="configuration-de-kubectl">Configuration de Kubectl</h3>
+<p>En supposant que vous ayez installé Azure CLI et le plugin kubelogin, voici comment récupérer localement la configuration kube :</p>
 <pre><code class="language-bash">az login
 az account set --subscription xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
 az aks get-credentials --resource-group resource-group-name --name aks-name --overwrite-existing
