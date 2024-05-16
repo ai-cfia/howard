@@ -66,7 +66,8 @@ jetons, mots de passe, certificats et autres secrets.
 - **Terraform :** Outil open-source d'infrastructure en tant que code permettant
 de gérer le cycle de vie des services chez les fournisseurs cloud
 de manière déclarative.
-- **Ansible :** Outil d'automatisation pour la configuration et la gestion des ordinateurs.
+- **Ansible :** Outil d'automatisation pour la configuration et la gestion
+des ordinateurs.
 
 ## Installation
 
@@ -79,7 +80,8 @@ sauvegardé dans un stockage blob d'Azure.
 
 ### Configuration de Kubectl
 
-En supposant que vous ayez installé Azure CLI et le plugin kubelogin, voici comment récupérer localement la configuration kube :
+En supposant que vous ayez installé Azure CLI et le plugin kubelogin, voici
+comment récupérer localement la configuration kube :
 
 ```bash
 az login
