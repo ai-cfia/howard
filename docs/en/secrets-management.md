@@ -123,7 +123,7 @@ the same security mechanisms as the Vault server.
     applications. ![PV secret engine](img/pv-secret-engine.png)
 5. Once in the directory of your application secrets, simply click on 'create
     new version' and you will be able to add, update, or delete secrets as
-    needed. ![Create mew secret](img/create-new-secret.png)
+    needed. ![Create new secret](img/create-new-secret.png)
 
 ### Steps to update secrets injected into pods
 

@@ -10,7 +10,7 @@ Azure subscription.
 
 The following diagram illustrates the Terraform workflow for managing resources
 :
-![Terraform Workflow](./img/terraform-workflow.svg)
+![Terraform Workflow](img/terraform-workflow.svg)
 
 ## Getting Started
 

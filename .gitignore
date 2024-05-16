@@ -38,3 +38,6 @@ jq
 
 # ansible vault password file
 .ansible_vault_password.txt
+
+# mkdocs build
+site/*
