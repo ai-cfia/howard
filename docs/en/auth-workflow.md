@@ -52,7 +52,7 @@ annotations:
 
 ## Authentication Flow
 
-![Vouch-Proxy Authentication Flow](../img/auth-vouch-proxy.svg)
+![Vouch-Proxy Authentication Flow](img/auth-vouch-proxy.svg)
 
 1. A user requests access to an application protected by Vouch-Proxy.
 2. The Nginx ingress controller intercepts the request and queries Vouch-Proxy

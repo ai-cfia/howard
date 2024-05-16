@@ -33,7 +33,7 @@ Kubernetes et garantit que les données sensibles sont protégées contre tout
 accès non autorisé.
 
 Le diagramme suivant illustre la structure de l'architecture Vault au sein
-de Howard: ![Vault architecture diagram](../img/vault-argocd-architecture.svg)
+de Howard: ![Vault architecture diagram](img/vault-argocd-architecture.svg)
 
 Le diagramme de séquence suivant décrit le processus permettant à un
 développeur de mettre à jour des secrets en utilisant le service UI de Vault
@@ -124,7 +124,7 @@ que le serveur Vault.
 2. Générez un jeton d'accès personnel (PAT) sur GitHub et utilisez-le
    pour vous authentifier au service d'interface utilisateur de
    Vault. La portée du jeton devrait être: ![PAT token
-   scope](../img/pat-token-scope.png)
+   scope](img/pat-token-scope.png)
 3. Accédez au service d'interface utilisateur de Vault en naviguant vers l'URL
    de Vault dans un navigateur web. Vous serez invité à vous authentifier en
    utilisant votre jeton PAT de GitHub.
@@ -133,11 +133,11 @@ que le serveur Vault.
    Il vous suffit de naviguer vers le moteur de secrets PV et de suivre le
    chemin jusqu'aux secrets de vos applications. Le moteur de secrets PV est
    un magasin clé-valeur qui vous permet de stocker et de gérer les secrets
-   pour vos applications.![PV secret engine](../img/pv-secret-engine.png)
+   pour vos applications.![PV secret engine](img/pv-secret-engine.png)
 5. Une fois dans le répertoire des secrets de votre application, cliquez
    simplement sur 'create new version' (créer une nouvelle version) et vous
    pourrez ajouter, mettre à jour ou supprimer des secrets selon
-   vos besoins.![Create new secret](../img/create-new-secret.png)
+   vos besoins.![Create new secret](img/create-new-secret.png)
 
 ### Étapes pour mettre à jour les secrets injectés dans les pods
 

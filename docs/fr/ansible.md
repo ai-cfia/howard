@@ -31,7 +31,7 @@ l'intérieur d'un ordinateur physique.
 
 ## Diagrammes
 
-![Ansible](../img/ansible.svg)
+![Ansible](img/ansible.svg)
 
 ## Références
 

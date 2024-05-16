@@ -25,7 +25,7 @@ certificats pour les services exposés sur internet.
 
 ## Diagrammes
 
-![Request](../img/request.svg)
+![Request](img/request.svg)
 
 ## .inspection.alpha.canada.ca
 

@@ -30,7 +30,7 @@ way to manage secrets in the Kubernetes cluster and ensures that sensitive data
 is protected from unauthorized access.
 
 The following diagram illustrates the structure of the Vault architecture within
-howard : ![Vault architecture diagram](../img/vault-argocd-architecture.svg)
+howard : ![Vault architecture diagram](img/vault-argocd-architecture.svg)
 
 The following sequence diagram describes the process of how a developer can
 update secrets using the Vault UI service and how the secrets are injected into
@@ -113,17 +113,17 @@ the same security mechanisms as the Vault server.
    Github.
 2. Generate a personal access token on Github and use it to authenticate to the
    Vault UI service. The scope of the token should be : ![PAT token
-   scope](../img/pat-token-scope.png)
+   scope](img/pat-token-scope.png)
 3. Gain access to the Vault UI service by navigating to the Vault URL in a web
    browser. You will be prompted to authenticate using your Github PAT token.
 4. Once authenticated, you will be able to create, read, update, and delete
    secrets using the UI service. Simply navigate to the PV secret engine and
    follow the path to your applications secrets. The PV secret engine is a
     key-value store that allows you to store and manage secrets for your
-    applications. ![PV secret engine](../img/pv-secret-engine.png)
+    applications. ![PV secret engine](img/pv-secret-engine.png)
 5. Once in the directory of your application secrets, simply click on 'create
     new version' and you will be able to add, update, or delete secrets as
-    needed. ![Create new secret](../img/create-new-secret.png)
+    needed. ![Create new secret](img/create-new-secret.png)
 
 ### Steps to update secrets injected into pods
 

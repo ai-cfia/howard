@@ -10,7 +10,7 @@ des ressources sur notre abonnement Azure.
 
 Le diagramme suivant illustre le workflow Terraform pour la gestion
 des ressources :
-![Terraform Workflow](../img/terraform-workflow.svg)
+![Terraform Workflow](img/terraform-workflow.svg)
 
 ## Démarrage
 

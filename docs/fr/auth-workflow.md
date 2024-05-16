@@ -54,7 +54,7 @@ annotations:
 
 ## Authentication Flow
 
-![Flux d'authentification de Vouch-Proxy](../img/auth-vouch-proxy.svg)
+![Flux d'authentification de Vouch-Proxy](img/auth-vouch-proxy.svg)
 
 1. Un utilisateur demande l'accès à une application protégée par Vouch-Proxy.
 

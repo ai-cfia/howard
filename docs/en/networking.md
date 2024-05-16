@@ -26,7 +26,7 @@ certificates for services exposed on the internet.
 
 ## Diagrams
 
-![Request](../img/request.svg)
+![Request](img/request.svg)
 
 ## .inspection.alpha.canada.ca
 

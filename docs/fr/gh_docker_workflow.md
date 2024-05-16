@@ -34,7 +34,7 @@ cette image.
 
 ## Diagrammes
 
-![Github image workflow](../img/ghcr_docker_workflow.svg)
+![Github image workflow](img/ghcr_docker_workflow.svg)
 
 ## Références
 
