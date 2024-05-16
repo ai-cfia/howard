@@ -26,9 +26,9 @@ extra:
       lang: fr
 
 nav:
-  - Home: index.md
+  - Accueil: index.md
   - ADR: adr.md
-  - Configuration / Implementation: configuration.md
+  - Configuration / Implémentation: configuration.md
 
 markdown_extensions:
   - pymdownx.snippets
