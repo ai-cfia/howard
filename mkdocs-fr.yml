@@ -7,7 +7,7 @@ repo_name: ai-cfia/howard
 theme:
   name: material
   highlightjs: true
-  language: en
+  language: fr
   hljs_languages:
     - yaml
   features:
