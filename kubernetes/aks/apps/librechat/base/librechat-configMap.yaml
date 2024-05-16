@@ -3,20 +3,15 @@ kind: ConfigMap
 metadata:
   name: librechat-config
 data:
-  HOST: "localhost"
+  HOST: "0.0.0.0"
   PORT: "3080"
-  DOMAIN_CLIENT: "http://localhost:3080"
-  DOMAIN_SERVER: "http://localhost:3080"
+  DOMAIN_CLIENT: "https://librechat.inspection.alpha.canada.ca"
+  DOMAIN_SERVER: "https://librechat.inspection.alpha.canada.ca"
   MONGO_URI: mongodb://mongodb:27017/LibreChat
   NO_INDEX: "true"
   CONSOLE_JSON: "false"
   DEBUG_LOGGING: "true"
-  DEBUG_CONSOLE: "false"
-  ANTHROPIC_API_KEY: "user_provided"
-  BINGAI_TOKEN: "user_provided"
-  GOOGLE_KEY: "user_provided"
-  OPENAI_API_KEY: "user_provided"
-  ASSISTANTS_API_KEY: "user_provided"
+  DEBUG_CONSOLE: "true"
   DEBUG_PLUGINS: "true"
   CREDS_KEY: ""
   CREDS_IV: ""
@@ -55,4 +50,6 @@ data:
   APP_TITLE: "LibreChat"
   HELP_AND_FAQ_URL: "https://librechat.ai"
   RAG_HOST: "rag-api.librechat.svc.cluster.local"
+  RAG_API_URL: "http://rag-api.librechat.svc.cluster.local:8000"
   RAG_PORT: "8000"
+  ENDPOINTS: "azureOpenAI,google,ollama"
