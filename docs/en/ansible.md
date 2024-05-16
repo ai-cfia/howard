@@ -29,7 +29,7 @@ computer inside a physical computer.
 
 ## Diagrams
 
-![Ansible](img/ansible.svg)
+![Ansible](../img/ansible.svg)
 
 ## References
 

@@ -33,7 +33,7 @@ Once the image is in the GCR, a Kubernetes deployment can use the image
 
 ## Diagram
 
-![Github image workflow](img/ghcr_docker_workflow.svg)
+![Github image workflow](../img/ghcr_docker_workflow.svg)
 
 ## References
 

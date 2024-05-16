@@ -1,0 +1,37 @@
+site_name: Howard
+docs_dir: 'docs/en'
+site_dir: 'site/en'
+repo_url: https://github.com/ai-cfia/howard
+repo_name: ai-cfia/howard
+
+theme:
+  name: material
+  highlightjs: true
+  language: en
+  hljs_languages:
+    - yaml
+  features:
+    - navigation.instant
+    - header.autohide
+  icon:
+    repo: fontawesome/brands/github
+
+extra:
+  alternate:
+    - name: English
+      link: /en/
+      lang: en
+    - name: French
+      link: /fr/
+      lang: fr
+
+nav:
+  - Home: index.md
+  - ADR: adr.md
+  - Configuration / Implementation: configuration.md
+
+markdown_extensions:
+  - pymdownx.snippets
+
+plugins:
+  - search
