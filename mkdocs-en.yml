@@ -19,10 +19,10 @@ theme:
 extra:
   alternate:
     - name: English
-      link: /en/
+      link: /howard/en/
       lang: en
     - name: French
-      link: /fr/
+      link: /howard/fr/
       lang: fr
 
 nav:
