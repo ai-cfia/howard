@@ -1,51 +1,52 @@
-# Networking
+# Réseautique
 
-## Executive summary
+## Résumé exécutif
 
-Here's how a request is routed to our Kubernetes cluster. Once the
-image responds with the content, the process is reversed to display
-the results to the user.
+Voici comment une requête est routée vers notre cluster Kubernetes. Une fois
+que l'image répond avec le contenu, le processus est inversé pour afficher
+les résultats à l'utilisateur.
 
-## Glossary
+## Glossaire
 
-**DNS:** Translates domain names (like google.com)
-into IP addresses (like 172.217.14.238).
+**DNS :** Traduction des noms de domaine (comme google.com) en adresses IP
+(comme 172.217.14.238).
 
-**Ingress NGINX:** A controller that uses NGINX as a web server
-to manage incoming traffic to a Kubernetes cluster.
-It routes traffic to different services based on URL,
-hostname, or other criteria.
+**Ingress NGINX :** Un contrôleur qui utilise NGINX comme serveur web pour
+gérer le trafic entrant vers un cluster Kubernetes. Il route le trafic vers
+différents services en fonction de l'URL, du nom d'hôte ou d'autres critères.
 
-**Kubernetes:** An open-source container orchestration platform
-for automating the deployment, scaling,
-and management of containerized applications.
+**Kubernetes :** Une plateforme d'orchestration de conteneurs open-source pour
+automatiser le déploiement, la mise à l'échelle et la gestion des applications
+conteneurisées.
 
-**Cert-manager:** A tool for managing TLS certificates for Kubernetes.
-It automates the process of obtaining, renewing, and validating
-certificates for services exposed on the internet.
+**Cert-manager :** Un outil pour gérer les certificats TLS pour Kubernetes. Il
+automatise le processus d'obtention, de renouvellement et de validation des
+certificats pour les services exposés sur internet.
 
-## Diagrams
+## Diagrammes
 
 ![Request](../img/request.svg)
 
 ## .inspection.alpha.canada.ca
 
-As part of the deployments we carry out within the AI Lab, we needed a DNS
-that would allow us to deploy our services. Since we are not in production, we
-needed a name that is suitable for an alpha/staging environment that
-complies with the following guidelines:
+Dans le cadre des déploiements que nous effectuons au sein du Laboratoire d'IA,
+nous avions besoin d'un DNS qui nous permettrait de déployer nos services.
+Puisque nous ne sommes pas en production, nous avions besoin d'un nom qui soit
+approprié pour un environnement alpha/staging et qui soit conforme aux
+directives suivantes :
 
 - [Alpha canada.ca](https://alpha.canada.ca/en/instructions.html)
 - [Government of Canada Digital Standards](
 https://www.canada.ca/en/government/system/digital-government/government-canada-digital-standards.html)
 
-For more information, please refer to this pull request (PR) submitted to
-cds-snc so that they can subdelegate `inspection.alpha.canada.ca` to us:
+Pour plus d'informations, veuillez vous référer à cette pull request (PR)
+soumise à cds-snc afin qu'ils puissent nous subdéléguer
+`inspection.alpha.canada.ca` :
 
 - [The pull request made to cds-snc (status: merged)](
 https://github.com/cds-snc/dns/pull/370)
 
-## References
+## Références
 
 - [Cert manager](https://cert-manager.io/)
 - [Ingress NGINX](https://github.com/kubernetes/ingress-nginx)

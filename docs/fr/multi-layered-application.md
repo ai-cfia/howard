@@ -1,45 +1,48 @@
-# Multi layered application
+# Application à niveaux multiples
 
-## Executive summary
+## Résumé exécutif
 
-In our multi layered architecture, the frontend and backend of our applications
-are intricately linked, with the backend coded in Python and the frontend in
-TypeScript, each residing in their respective directories. The backend not only
-processes requests but also occasionally interacts with various object storage
-solutions, such as AI models, databases, and blob storage, to manage and
-retrieve data. This interaction is crucial for the seamless operation of our
-services and is depicted in the accompanying of sequence diagrams, which
-illustrates the flow of a request from the frontend through the ingress to the
-backend.
+Dans notre architecture à niveaux multiples, le frontend et le backend de nos
+applications sont intimement liés, avec le backend codé en Python et le frontend
+en TypeScript, chacun résidant dans leurs répertoires respectifs. Le backend
+ne se contente pas de traiter les demandes, mais interagit également
+occasionnellement avec diverses solutions de stockage d'objets comme les modèles
+d'IA, les bases de données et le stockage blob pour gérer et récupérer des
+données. Cette interaction est cruciale pour le fonctionnement transparent de
+nos services et est représentée dans les diagrammes de séquence accompagnants,
+qui illustrent le flux d'une requête depuis le frontend à travers l'ingress
+jusqu'au backend.
 
-## Glossary
+## Glossaire
 
-**Frontend:** Frontend refers to the part of a website or application that users
-interact with directly, encompassing the design, layout, and behavior that
-people experience within a web browser or app interface.
+**Frontend :** Le frontend se réfère à la partie d'un site web ou d'une application
+avec laquelle les utilisateurs interagissent directement, englobant le design,
+la mise en page et le comportement que les gens expérimentent dans un navigateur
+web ou une interface d'application.
 
-**Backend:** The backend refers to the server-side of a web application,
-encompassing the database, server, and application logic that process user
-requests and perform the core functional operations of the system.
+**Backend :** Le backend fait référence au côté serveur d'une application web,
+englobant la base de données, le serveur et la logique d'application qui
+traitent les requêtes des utilisateurs et réalisent les opérations
+fonctionnelles principales du système.
 
-**Database:** A database is a structured collection of data that is stored and
-accessed electronically, designed to manage, query, and retrieve information
-efficiently.
+**Base de données :** Une base de données est une collection structurée de données
+stockées et accessibles électroniquement, conçue pour gérer, interroger et
+récupérer des informations de manière efficace.
 
-**Ingress:** Ingress refers to the act of entering or the ability to enter. n
-the context of networking and computing, it typically denotes incoming traffic
-to a network or service from an external source.
+**Ingress :** Ingress fait référence à l'acte d'entrer ou à la capacité d'entrer.
+Dans le contexte des réseaux et de l'informatique, cela désigne généralement
+le trafic entrant vers un réseau ou un service à partir d'une source externe.
 
-**Browser:** A browser, also known as a web browser, is a software application
-used to access, retrieve, and view content on the World Wide Web, including
-webpages,  images, videos, and other multimedia. It interprets HTML and other
-web technologies to present information in an accessible format.
+**Navigateur :** Un navigateur, également connu sous le nom de navigateur web, est
+une application logicielle utilisée pour accéder, récupérer et afficher du
+contenu sur le World Wide Web, y compris des pages web, des images, des vidéos
+et d'autres multimédias. Il interprète le HTML et d'autres technologies web
+pour présenter l'information dans un format accessible.
 
-## Diagram
+## Diagrammes
 
-This diagram shows the communication between the `frontend`, the
-`backend (/api)`, the `browser (client)`, and the `ingress (ingress nginx)`
-for an application.
+Ce diagramme montre la communication entre le frontend, le backend (/api),
+le navigateur (client), et l'ingress (ingress nginx) pour une application.
 
 ```mermaid
 sequenceDiagram

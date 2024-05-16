@@ -1,40 +1,43 @@
-# Secret management
+# Gestion des secrets
 
 ## Introduction
 
-Secrets are sensitive pieces of information that should be protected from
-unauthorized access. In the context of a Kubernetes cluster, secrets are used to
-store sensitive data such as passwords, tokens, and keys. To allow for secure
-and efficient management of secrets, we are using HashiCorp Vault, a tool that
-is designed to manage secrets and protect sensitive data. Vault provides a
-centralized way to manage access to secrets and encryption keys, and it also has
-the ability to generate dynamic secrets on demand. This document provides an
-overview of the secret management process and the role of Vault in securing and
-managing secrets in the Kubernetes cluster.
+Les secrets sont des informations sensibles qui doivent être protégées contre
+tout accès non autorisé. Dans le contexte d'un cluster Kubernetes, les secrets
+sont utilisés pour stocker des données sensibles telles que des mots de passe,
+des jetons et des clés. Pour permettre une gestion sécurisée et efficace des
+secrets, nous utilisons HashiCorp Vault, un outil conçu pour gérer les secrets
+et protéger les données sensibles. Vault fournit un moyen centralisé de gérer
+l'accès aux secrets et aux clés de chiffrement, et il a également la capacité
+de générer des secrets dynamiques à la demande. Ce document fournit un aperçu
+du processus de gestion des secrets et du rôle de Vault dans la sécurisation
+et la gestion des secrets dans le cluster Kubernetes.
 
-## Vault architecture
+## Architecture de Vault
 
-Vault is a highly available and distributed system that is designed to provide
-secure storage and management of secrets. It is built on a client-server
-architecture, with the server being the central component that stores and
-manages secrets, and the clients being the applications and services that access
-the secrets. The server is responsible for authenticating clients, authorizing
-access to secrets, and providing encryption and decryption services. The server
-is also responsible for generating dynamic secrets on demand, which are
-short-lived and are automatically revoked after a certain period of time.
+Vault est un système hautement disponible et distribué conçu pour fournir un
+stockage sécurisé et une gestion des secrets. Il est basé sur une architecture
+client-serveur, avec le serveur étant le composant central qui stocke et gère
+les secrets, et les clients étant les applications et services qui accèdent aux
+secrets. Le serveur est responsable de l'authentification des clients, de
+l'autorisation de l'accès aux secrets, et de la fourniture de services de
+chiffrement et de déchiffrement. Le serveur est également responsable de générer
+des secrets dynamiques à la demande, qui sont de courte durée et sont
+automatiquement révoqués après une certaine période.
 
-Current configuration allows vault to inject secrets into pods secrets using the
-ArgoCD Vault plugin. The plugin reads placeholders in the YAML files and
-replaces them with the actual secret values from Vault. This provides a secure
-way to manage secrets in the Kubernetes cluster and ensures that sensitive data
-is protected from unauthorized access.
+La configuration actuelle permet à Vault d'injecter des secrets dans les pods
+en utilisant le plugin ArgoCD Vault. Le plugin lit les espaces réservés dans
+les fichiers YAML et les remplace par les valeurs réelles des secrets provenant
+de Vault. Cela offre un moyen sécurisé de gérer les secrets dans le cluster
+Kubernetes et garantit que les données sensibles sont protégées contre tout
+accès non autorisé.
 
-The following diagram illustrates the structure of the Vault architecture within
-howard : ![Vault architecture diagram](../img/vault-argocd-architecture.svg)
+Le diagramme suivant illustre la structure de l'architecture Vault au sein
+de Howard: ![Vault architecture diagram](../img/vault-argocd-architecture.svg)
 
-The following sequence diagram describes the process of how a developer can
-update secrets using the Vault UI service and how the secrets are injected into
-pods :
+Le diagramme de séquence suivant décrit le processus permettant à un
+développeur de mettre à jour des secrets en utilisant le service UI de Vault
+et comment les secrets sont injectés dans les pods :
 
 ```mermaid
 sequenceDiagram
@@ -67,112 +70,127 @@ sequenceDiagram
     Developer->>+FinessePod: 4. Trigger hard refresh through argoCD
 ```
 
-Take note that the developer needs to trigger a hard refresh on the pod to
-reflect the changes in the secrets. This is done in the ArgoCD UI, but we are
-working on a way to automate this process.
+Veuillez noter que le développeur doit déclencher un rafraîchissement complet
+du pod pour refléter les modifications des secrets. Cela se fait dans
+l'interface utilisateur d'ArgoCD, mais nous travaillons sur un moyen
+d'automatiser ce processus.
 
-## Secret management process
+## Processus de gestion des secrets
 
 The secret management process involves the following steps:
 
-1. **Secret creation**: Secrets are created and stored in Vault using the Vault
-   CLI or API. When a secret is created, it is encrypted and stored in the
-   central Vault server.
+1. **Création des secrets**: Les secrets sont créés et stockés dans Vault en
+    utilisant l'interface CLI de Vault ou  l'API. Lorsqu'un secret est créé,
+    il est chiffré et stocké dans le serveur central Vault.
 
-2. **Secret retrieval**: Applications and services can retrieve secrets from
-    Vault using the Vault CLI or API. When a secret is retrieved, it is
-    decrypted and returned to the client in a secure manner.
+2. **Récupération des secrets**: Les applications et services peuvent récupérer les
+    secrets depuis Vault en utilisant l'interface CLI de Vault ou l'API.
+    Lorsqu'un secret est récupéré, il est déchiffré et renvoyé au client
+    de manière sécurisée.
 
-3. **Dynamic secret generation**: Vault has the ability to generate dynamic
-    secrets on demand. This means that instead of storing static secrets in
-    Vault, Vault can generate short-lived secrets that are automatically revoked
-    after a certain period of time. This provides an additional layer of
-    security and reduces the risk of unauthorized access to secrets.
+3. **Génération de secrets dynamiques**: Vault has the ability to generate
+    dynamic secrets on demand. This means that instead of
+    storing static secrets in Vault, Vault can generate short-lived secrets
+    that are automatically revoked after a certain period of time. This
+    provides an additional layer of security and reduces the risk of
+    unauthorized access to secrets.
 
-4. **Access control**: Vault provides fine-grained access control to secrets,
-    allowing administrators to define policies that specify which clients can
-    access which secrets. This ensures that only authorized clients can access
-    sensitive data. Currently, we are using the Kubernetes authentication method
-    to authenticate hosted applications and authorize access to secrets. As for
-    the human users, we are using the Github authentication method to
-    authenticate and authorize access to secrets.
+4. **Contrôle d'accès**: Vault fournit un contrôle d'accès granulaire
+    aux secrets, permettant aux administrateurs de définir des politiques
+    qui spécifient quels clients peuvent accéder à quels secrets. Cela
+    garantit que seuls les clients autorisés peuvent accéder aux données
+    sensibles. Actuellement, nous utilisons la méthode d’authentification
+    Kubernetes pour authentifier les applications hébergées et autoriser
+    l'accès aux secrets. En ce qui concerne les utilisateurs humains,
+    nous utilisons la méthode d'authentification GitHub pour
+    authentifier et autoriser l'accès aux secrets.
 
-## Create, read, update, and delete secrets
+## Création, lecture, mise à jour et suppression des secrets
 
-Vault provides a UI service to manage secrets. The UI service is a web-based
-user interface that allows administrators to create, read, update, and delete
-secrets. The service also provides a way to manage access control policies and
-audit logs. The service is accessible through a web browser and is protected by
-the same security mechanisms as the Vault server.
+Vault fournit un service d'interface utilisateur pour gérer les secrets.
+Le service d'interface utilisateur est une interface utilisateur web qui
+permet aux administrateurs de créer, lire, mettre à jour et supprimer des
+secrets. Le service fournit également un moyen de gérer les politiques de
+contrôle d'accès et les journaux d'audit. Le service est accessible via un
+navigateur web et est protégé par les mêmes mécanismes de sécurité
+que le serveur Vault.
 
-### Steps to update secrets values using the Vault UI
+### Étapes pour mettre à jour les valeurs des secrets en utilisant l'interface utilisateur de Vault
 
-1. In order to gain access to the Vault UI service, you need to have the
-   appropriate permissions and access to the Vault URL. It is currently
-   configured to give access to any member of the `ai-cfia` organization on
-   Github.
-2. Generate a personal access token on Github and use it to authenticate to the
-   Vault UI service. The scope of the token should be : ![PAT token
-   scope](img/pat-token-scope.png)
-3. Gain access to the Vault UI service by navigating to the Vault URL in a web
-   browser. You will be prompted to authenticate using your Github PAT token.
-4. Once authenticated, you will be able to create, read, update, and delete
-   secrets using the UI service. Simply navigate to the PV secret engine and
-   follow the path to your applications secrets. The PV secret engine is a
-    key-value store that allows you to store and manage secrets for your
-    applications. ![PV secret engine](../img/pv-secret-engine.png)
-5. Once in the directory of your application secrets, simply click on 'create
-    new version' and you will be able to add, update, or delete secrets as
-    needed. ![Create mew secret](../img/create-new-secret.png)
+1. Afin d'accéder au service d'interface utilisateur de Vault, vous devez
+   disposer des autorisations appropriées et accéder à l'URL de Vault.
+   Elle est actuellement configurée pour donner accès à tout membre de
+   l'organisation ai-cfia sur Github.
+2. Générez un jeton d'accès personnel (PAT) sur GitHub et utilisez-le
+   pour vous authentifier au service d'interface utilisateur de
+   Vault. La portée du jeton devrait être: ![PAT token
+   scope](../img/pat-token-scope.png)
+3. Accédez au service d'interface utilisateur de Vault en naviguant vers l'URL
+   de Vault dans un navigateur web. Vous serez invité à vous authentifier en
+   utilisant votre jeton PAT de GitHub.
+4. Une fois authentifié, vous pourrez créer, lire, mettre à jour et
+   supprimer des secrets en utilisant le service d'interface utilisateur.
+   Il vous suffit de naviguer vers le moteur de secrets PV et de suivre le
+   chemin jusqu'aux secrets de vos applications. Le moteur de secrets PV est
+   un magasin clé-valeur qui vous permet de stocker et de gérer les secrets
+   pour vos applications.![PV secret engine](../img/pv-secret-engine.png)
+5. Une fois dans le répertoire des secrets de votre application, cliquez
+   simplement sur 'create new version' (créer une nouvelle version) et vous
+   pourrez ajouter, mettre à jour ou supprimer des secrets selon
+   vos besoins.![Create new secret](../img/create-new-secret.png)
 
-### Steps to update secrets injected into pods
+### Étapes pour mettre à jour les secrets injectés dans les pods
 
-In order to update secrets that are injected into pods, you need to update the
-secret manifest for the application. The secret manifest is a YAML file that
-defines the secrets that are injected into the pod's as environment variables.
-We will use Finesse as an example.
+Pour mettre à jour les secrets qui sont injectés dans les pods, vous devez
+mettre à jour le manifeste des secrets pour l'application. Le manifeste des
+secrets est un fichier YAML qui définit les secrets qui sont injectés dans
+les pods en tant que variables d'environnement. Nous prendrons
+Finesse comme exemple.
 
-1. Open an issue with the following template : [Secrets update template](url to
-   be provided when the template is created). You can then create a working
-   branch from the issue.
-2. Open `/kubernetes/aks/apps/finesse/base/finesse-secrets.yaml`.
-3. Update the secrets key references as needed. For example, to add a new
-   secret, you can add a new key-value pair to the `data` section of the secret
-  manifest :
+1. Ouvrez une issue avec le modèle suivant : [Modèle de mise à jour des
+   secrets](url à fournir lorsque le modèle sera créé). Vous pouvez ensuite
+   créer une branche de travail à partir de l'issue.
+2. Ouvrir `/kubernetes/aks/apps/finesse/base/finesse-secrets.yaml`.
+3. Mettez à jour les références des clés de secrets selon les besoins.
+   Par exemple, pour ajouter un nouveau secret, vous pouvez ajouter une
+   nouvelle paire clé-valeur à la section data du manifeste des secrets :
 
    ```yaml
    FINESSE_BACKEND_AZURE_SEARCH_TRANSFORM_MAP: <FINESSE_BACKEND_AZURE_SEARCH_TRANSFORM_MAP>
    ```
 
-   The key represents the environment variable name that will be injected into the
-   pod, and the value represents the secret key in Vault that will be used to fetch
-   the secret value.
+   La clé représente le nom de la variable d'environnement qui sera injectée
+   dans le pod, et la valeur représente la clé du secret dans Vault qui sera
+   utilisée pour récupérer la valeur du secret.
 
-4. Update the version annotation of  the secrets being fetch from vault :
+4. Mettez à jour l'annotation de version des secrets récupérés depuis Vault :
 
    ```yaml
-   # Bump the version of the secret from
+   # Augmentez la version du secret de
    avp.kubernetes.io/secret-version: "4"
-   # To
+   # À
    avp.kubernetes.io/secret-version: "5"
    ```
 
-   This is the new version that we create in step 5 of the previous section.
+   Ceci est la nouvelle version que nous créons à l'étape 5 de la section
+   précédente.
 
-   As additional example, here is an issue and a pull request that showcases the
-   process of updating secrets in the Nachet application :
+   À titre d'exemple supplémentaire, voici un problème et une pull request
+   qui illustrent le processus de mise à jour des secrets dans
+   l'application Nachet :
 
    - [Issue](https://github.com/ai-cfia/howard/issues/133)
    - [Pull request](https://github.com/ai-cfia/howard/pull/131)
 
-## Argo CD Vault plugin (AVP)
+## Plugin Argo CD Vault (AVP)
 
-The [argocd-vault-plugin](https://argocd-vault-plugin.readthedocs.io/en/stable/)
-is used to manage secrets inside our deployments the Gitops way. It allows to
-use `<placeholders>` in any YAML or JSON files that have been templated and make
-use of annotations to provide the path and version of a secret inside vault.
+Le [argocd-vault-plugin](https://argocd-vault-plugin.readthedocs.io/en/stable/)
+est utilisé pour gérer les secrets au sein de nos déploiements de manière
+GitOps. Il permet d'utiliser des `<placeholders>` dans n'importe quel
+fichier YAML ou JSON qui a été modélisé et fait usage d'annotations pour
+fournir le chemin et la version d'un secret dans le Vault.
 
-An example of usage is showcased inside the demo app sample. The official
+Un exemple d'utilisation est présenté dans l'application de démonstration. La
 [documentation](https://argocd-vault-plugin.readthedocs.io/en/stable/howitworks/)
-for the plugin is well explained and can be followed according to the usecase
-needed.
+du plugin est bien expliquée et peut être suivie en fonction du cas
+d'utilisation nécessaire.

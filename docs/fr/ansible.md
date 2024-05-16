@@ -1,37 +1,39 @@
-# Ansible playbooks
+# Playbooks Ansible
 
-## Executive Summary
+## Résumé exécutif
 
-As part of our tasks, we aimed to create virtual machines (VMs) to facilitate
-the work of developers. The following needs were mentioned:
+Dans le cadre de nos tâches, nous avons cherché à créer des machines virtuelles
+(VM) pour faciliter le travail des développeurs. Les besoins suivants
+ont été mentionnés :
 
-- Testing applications before requesting IT to install the software
-on our personal laptops
+- Tester les applications avant de demander à l'informatique d'installer les
+logiciels sur nos ordinateurs portables personnels.
 
-- Facilitating the work of certain developers
-(e.g., having CLIs already installed and configured)
+- Faciliter le travail de certains développeurs (par exemple, avoir des CLI
+déjà installés et configurés).
 
-To set up virtual machines in the cloud, using Ansible was very useful
-to enable scaling in case we need more VMs in the future.
+Pour configurer des machines virtuelles dans le cloud, l'utilisation d'Ansible
+s'est avérée très utile pour permettre l'évolutivité en cas de besoin de
+plus de VM à l'avenir.
 
-## Glossary
+## Glossaire
 
-**Ansible:** Ansible is an open-source software tool for IT automation.
-It automates the provisioning, configuration, and deployment of servers and
-applications. Ansible is agentless, meaning it does not require any software
-to be installed on the machines it manages. It uses SSH to connect to machines
-and execute commands.
+**Ansible :** Ansible est un outil logiciel open-source pour l'automatisation
+informatique. Il automatise le provisionnement, la configuration et le
+déploiement des serveurs et des applications. Ansible est sans agent, ce qui
+signifie qu'aucun logiciel n'a besoin d'être installé sur les machines qu'il
+gère. Il utilise SSH pour se connecter aux machines et exécuter des commandes.
 
-**Virtual machine (VM):** A virtual machine is a software that simulates a
-complete computer, with its own operating system and applications, and runs
-on a physical computer. In short, it is a virtual
-computer inside a physical computer.
+**Machine virtuelle (VM) :** Une machine virtuelle est un logiciel qui simule un
+ordinateur complet, avec son propre système d'exploitation et ses applications,
+et s'exécute sur un ordinateur physique. En bref, c'est un ordinateur virtuel à
+l'intérieur d'un ordinateur physique.
 
-## Diagrams
+## Diagrammes
 
 ![Ansible](../img/ansible.svg)
 
-## References
+## Références
 
 [Kubernetes](https://kubernetes.io/docs/concepts/overview/)
 
@@ -39,4 +41,4 @@ computer inside a physical computer.
 
 [HA](https://www.techtarget.com/searchdatacenter/definition/high-availability)
 
-[Load balancer](https://www.nginx.com/resources/glossary/load-balancing/)
+[Équilibreur de charge](https://www.nginx.com/resources/glossary/load-balancing/)

@@ -1,41 +1,42 @@
-# Github workflow to build and push images to GCR
+# Workflow GitHub pour construire et pousser des images vers ghcr
 
-## Executive summary
+## Résumé exécutif
 
-The provided text outlines a workflow designed to build and push an image to
-the GitHub Container Registry. It involves creating three tags: pull request
-number, pull request name, and commit SHA.
+Le texte fourni décrit un workflow conçu pour construire et pousser une image
+vers le GitHub Container Registry. Il implique la création de trois tags :
+numéro de pull request, nom de pull request, et commit SHA.
 
-## Glossary
+## Glossaire
 
-- **Image:** The term "image" typically refers to a packaged, standalone
-software component that includes everything needed to run an application,
-such as the code, runtime, libraries, and dependencies.
+**Image :** Le terme "image" fait généralement référence à un composant logiciel
+autonome et emballé qui inclut tout ce qui est nécessaire pour exécuter une
+application, comme le code, le runtime, les bibliothèques et les dépendances.
 
-- **GitHub Container Registry (GCR):** GCR is a service provided by GitHub
-that allows users to store, manage, and distribute Docker container images
-within the GitHub ecosystem. It serves as a centralized repository
-for container images associated with GitHub repositories.
+**GitHub Container Registry (GHCR) :** GCR est un service fourni par GitHub qui
+permet aux utilisateurs de stocker, gérer et distribuer des images de conteneurs
+Docker au sein de l'écosystème GitHub. Il sert de référentiel centralisé pour
+les images de conteneurs associées aux dépôts GitHub.
 
-- **GitHub Action:** A GitHub Action is essentially a workflow or automated
-process defined within a GitHub repository. It enables users to automate
-tasks such as building, testing, and deploying software directly within
-the GitHub platform, providing a powerful way to streamline development
-workflows.
+**GitHub Action :** Une GitHub Action est essentiellement un workflow ou un
+processus automatisé défini au sein d'un dépôt GitHub. Elle permet aux
+utilisateurs d'automatiser des tâches telles que la construction, le test et le
+déploiement de logiciels directement sur la plateforme GitHub, offrant ainsi un
+moyen puissant de rationaliser les workflows de développement.
 
-## Explanation of the diagram
+## Explication du diagramme
 
-The diagram illustrates a workflow for building and pushing an image to the
-GitHub Container Registry. It outlines the steps involved in this process,
-including the creation of three specific tags: pull request number,
-pull request name, and commit SHA based on the commit made in a pull request.
-Once the image is in the GCR, a Kubernetes deployment can use the image
+Le diagramme illustre un workflow pour construire et pousser une image vers le
+GitHub Container Registry. Il décrit les étapes impliquées dans ce processus,
+y compris la création de trois tags spécifiques : numéro de pull request, nom
+de pull request, et commit SHA basés sur le commit effectué dans une pull
+request. Une fois l'image dans le GCR, un déploiement Kubernetes peut utiliser
+cette image.
 
-## Diagram
+## Diagrammes
 
 ![Github image workflow](../img/ghcr_docker_workflow.svg)
 
-## References
+## Références
 
 [Docker](https://www.docker.com/)
 
@@ -43,4 +44,4 @@ Once the image is in the GCR, a Kubernetes deployment can use the image
 
 [Github container registry](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry)
 
-[Kubernetes image](https://kubernetes.io/docs/concepts/containers/images/)
+[Image Kubernetes](https://kubernetes.io/docs/concepts/containers/images/)

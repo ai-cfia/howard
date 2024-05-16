@@ -1,4 +1,4 @@
-# Configuration / implementation of ADRs inside the Howard project
+# Configuration / implementation des ADRs dans le project Howard
 
 - [Infrastructure](generic-architecture.md)
 - GitOps (coming soon...)
@@ -9,6 +9,7 @@
 - [Réseautique](networking.md)
 - Sécuriter (coming soon...)
 
-## More configuration / implementation
+## Plus de configurations / implementations
 
 - [Ansible](ansible.md)
+- [Application à niveaux multiples](multi-layered-application.md)

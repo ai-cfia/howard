@@ -1,23 +1,24 @@
-# Vouch-Proxy Documentation
+# Documentation de Vouch-Proxy
 
-## Overview
+## Vue d'ensemble
 
-Vouch-Proxy is an authentication and authorization solution that acts as a
-companion to our Nginx ingress controller. It's designed to authenticate users
-against an OpenID Connect provider (OIDC) and then pass those validated
-credentials to our web application.
+Vouch-Proxy est une solution d'authentification et d'autorisation qui agit
+comme un compagnon pour notre contrôleur d'ingress Nginx. Il est conçu pour
+authentifier les utilisateurs via un fournisseur OpenID Connect (OIDC) puis
+passer ces informations d'identification validées à notre application web.
 
-## Integration with Azure Active Directory
+## Intégration avec Azure Active Directory
 
-Vouch-Proxy can be configured to authenticate users via Azure Active Directory
-(Azure AD), leveraging Azure's App Registrations to authenticate users from a
-specific Azure AD tenant. This setup involves:
+Vouch-Proxy peut être configuré pour authentifier les utilisateurs via Azure
+Active Directory (Azure AD), en utilisant les enregistrements d'applications
+d'Azure pour authentifier les utilisateurs d'un locataire Azure AD spécifique.
+Cette configuration implique :
 
-- Creating an App Registration in Azure AD.
-- Configuring the redirect URIs for the App Registration to
+- La création d'un enregistrement d'application dans Azure AD.
+- La configuration des URI de redirection pour l'enregistrement d'application à
   ```<https://vouch.inspection.alpha.canada.ca/auth>```
-- Using the App Registration's details (client ID, client secret, tenantID) in
-  Vouch-Proxy's configuration :
+- L'utilisation des détails de l'enregistrement d'application (ID client, secret
+client, tenantID) dans la configuration de Vouch-Proxy :
 
   ```yaml
     client_id: <id>
@@ -26,18 +27,19 @@ specific Azure AD tenant. This setup involves:
     token_url: https://login.microsoftonline.com/<tenantID>/oauth2/v2.0/token
   ```
 
-When a user attempts to access a protected resource, they are redirected to
-Azure AD to log in. Once authenticated, Azure AD redirects back to Vouch-Proxy,
-which then validates the user's session and forwards the authentication details
-to the Nginx ingress controller.
+Lorsqu'un utilisateur tente d'accéder à une ressource protégée, il est redirigé
+vers Azure AD pour se connecter. Une fois authentifié, Azure AD redirige vers
+Vouch-Proxy, qui valide ensuite la session de l'utilisateur et transmet les
+détails d'authentification au contrôleur d'ingress Nginx.
 
-## Nginx Ingress Annotations for Authentication
+## Annotations Nginx Ingress pour l'authentification
 
-To protect an application using Vouch-Proxy, you can configure Nginx ingress
-resources with specific annotations. These annotations instruct the Nginx
-controller to consult Vouch-Proxy for authentication before granting access to
-the application. Here’s how to configure these annotations for an app with the
-ingress hostname `vouch.inspection.alpha.canada.ca`:
+Pour protéger une application utilisant Vouch-Proxy, vous pouvez configurer des
+ressources d'ingress Nginx avec des annotations spécifiques. Ces annotations
+demandent au contrôleur Nginx de consulter Vouch-Proxy pour l'authentification
+avant d'accorder l'accès à l'application. Voici comment configurer ces
+annotations pour une app avec le nom d'hôte d'ingress
+`vouch.inspection.alpha.canada.ca` :
 
 ```yaml
 annotations:
@@ -52,13 +54,19 @@ annotations:
 
 ## Authentication Flow
 
-![Vouch-Proxy Authentication Flow](../img/auth-vouch-proxy.svg)
+![Flux d'authentification de Vouch-Proxy](../img/auth-vouch-proxy.svg)
 
-1. A user requests access to an application protected by Vouch-Proxy.
-2. The Nginx ingress controller intercepts the request and queries Vouch-Proxy
-   to validate the user's session.
-3. If the user is not authenticated, they are redirected to the Azure AD login
-   page.
-4. After successful authentication, the user is redirected back to Vouch-Proxy,
-5. Vouch-proxy then sets a cookie in the user's browser and redirects the user
-   back to the original application, passing along any specified user details.
+1. Un utilisateur demande l'accès à une application protégée par Vouch-Proxy.
+
+2. Le contrôleur d'ingress Nginx intercepte la demande et interroge
+Vouch-Proxy pour valider la session de l'utilisateur.
+
+3. Si l'utilisateur n'est pas authentifié, il est redirigé vers la
+page de connexion Azure AD.
+
+4. Après une authentification réussie, l'utilisateur est redirigé vers
+Vouch-Proxy.
+
+5. Vouch-Proxy définit ensuite un cookie dans le navigateur de l'utilisateur
+et redirige l'utilisateur vers l'application d'origine, en transmettant les
+détails de l'utilisateur spécifiés.
