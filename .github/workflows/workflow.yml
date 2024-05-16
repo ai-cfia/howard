@@ -53,7 +53,12 @@ jobs:
       - run: mkdocs build -f mkdocs-en.yml
       - run: mkdocs build -f mkdocs-fr.yml
       - run: cp index.html site/
-      - run: mkdocs gh-deploy --force --site-dir site -f mkdocs-en.yml
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: site
 
   # Missing configuration permissions for ours VM's so this won't be applied for now
   # ansible-lint-and-apply:
