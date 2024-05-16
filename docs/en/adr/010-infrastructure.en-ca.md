@@ -90,17 +90,17 @@ Our solution will consist of deploying Kubernetes clusters on various cloud
 providers. Here are the components that will be deployed to manage various use
 cases:
 
-- [Container management and deployment: Kubernetes](014-containers.fr-ca.md)
-- [Secret management: HashiCorp Vault](012-secret-management.fr-ca.md)
-- [Deployment management: ArgoCD](011-gitops.fr-ca.md)
-- [Infrastructure as Code (IaC) management: Terraform](013-IaC-tool.fr-ca.md)
+- [Container management and deployment: Kubernetes](014-containers.en-ca.md)
+- [Secret management: HashiCorp Vault](012-secret-management.en-ca.md)
+- [Deployment management: ArgoCD](011-gitops.en-ca.md)
+- [Infrastructure as Code (IaC) management: Terraform](013-IaC-tool.en-ca.md)
 - Development environment management: AzureML (coming soon)
 - [User authentication management:
   Vouch-proxy](015-authentication-management.fr-ca.md)
 - Observability management: Grafana, Prometheus, Open-Telemetry, and OneUptime
   (coming soon)
-- [Load balancing management: Ingress NGINX](016-networking.fr-ca.md)
-- [Security management: Trivy and Falco](017-security.fr-ca.md)
+- [Load balancing management: Ingress NGINX](016-networking.en-ca.md)
+- [Security management: Trivy and Falco](017-security.en-ca.md)
 - Managing redundancy: Itsio / Cluster mesh (coming soon)
 
 Additional components will be added as needed.
