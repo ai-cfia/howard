@@ -96,7 +96,7 @@ cases:
 - [Infrastructure as Code (IaC) management: Terraform](013-IaC-tool.en-ca.md)
 - Development environment management: AzureML (coming soon)
 - [User authentication management:
-  Vouch-proxy](015-authentication-management.fr-ca.md)
+  Vouch-proxy](015-authentication-management.en-ca.md)
 - Observability management: Grafana, Prometheus, Open-Telemetry, and OneUptime
   (coming soon)
 - [Load balancing management: Ingress NGINX](016-networking.en-ca.md)
