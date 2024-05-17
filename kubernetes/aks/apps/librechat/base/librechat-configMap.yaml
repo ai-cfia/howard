@@ -79,7 +79,6 @@ data:
       azureOpenAI:
         titleModel: "ailab-llm gpt-4"
         plugins: true
-        assistants: true
         groups:
         - group: "gpt4"
           apiKey: "${AZURE_OPENAI_GPT4_API_KEY}"
