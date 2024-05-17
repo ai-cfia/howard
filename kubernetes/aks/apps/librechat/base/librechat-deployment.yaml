@@ -33,6 +33,7 @@ spec:
             - name: config-yaml
               mountPath: "/app/librechat.yaml"
               subPath: "librechat.yaml"
+              readOnly: true
             - name: image-volume
               mountPath: "/app/client/public/images"
           securityContext:
