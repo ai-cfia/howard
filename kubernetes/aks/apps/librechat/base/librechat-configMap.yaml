@@ -77,7 +77,8 @@ data:
       - "inspection.gc.ca"
     endpoints:
       azureOpenAI:
-        titleModel: "azureOpenAI"
+        titleModel: "current_model"
+        titleConvo: true
         plugins: true
         groups:
         - group: "azureOpenAI"
