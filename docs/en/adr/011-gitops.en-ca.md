@@ -47,5 +47,4 @@ Disadvantages:
 ## References
 
 - [ArgoCD ACIA/CFIA url](https://argocd.inspection.alpha.canada.ca/)
-- [Document on Secret Management](
-https://github.com/ai-cfia/howard/blob/main/docs/secrets-management.md)
+- [Document on Secret Management](../secrets-management.md)

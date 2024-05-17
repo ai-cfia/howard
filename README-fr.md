@@ -92,4 +92,4 @@ kubelogin convert-kubeconfig -l azurecli
 
 ## Documentation
 
-mkdocs link here
+<https://ai-cfia.github.io/howard/fr/>

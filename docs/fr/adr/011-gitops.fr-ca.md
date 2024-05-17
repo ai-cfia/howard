@@ -53,5 +53,4 @@ travailler plus étroitement ensemble.
 ## Références
 
 - [ArgoCD ACIA/CFIA url](https://argocd.inspection.alpha.canada.ca/)
-- [Document sur la gestion des secrets](
-https://github.com/ai-cfia/howard/blob/main/docs/secrets-management.md)
+- [Document sur la gestion des secrets](../secrets-management.md)

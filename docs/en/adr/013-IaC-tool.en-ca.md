@@ -120,8 +120,8 @@ collaboration.
 
 ## References
 
-- [Documentation on workflow with Terraform for deploying our
-  services](https://github.com/ai-cfia/howard/blob/main/docs/terraform-workflow.md)
+- [Documentation on workflow with Terraform for deploying
+our services](../terraform-workflow.md)
 - [Infrastructure source code
   (Howard)](https://github.com/ai-cfia/howard/tree/main/terraform)
 - [Official Terraform website](https://www.terraform.io/)
