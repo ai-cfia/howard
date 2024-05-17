@@ -77,15 +77,18 @@ data:
       - "inspection.gc.ca"
     endpoints:
       azureOpenAI:
-        titleModel: "ailab-llm gpt-4"
+        titleModel: "azureOpenAI"
         plugins: true
         groups:
-        - group: "gpt4"
+        - group: "azureOpenAI"
           apiKey: "${AZURE_OPENAI_GPT4_API_KEY}"
-          instanceName: "ailab-llm"
-          baseURL: "https://azure-open-ai-common-infra.openai.azure.com/openai/deployments/ailab-llm/chat/completions?api-version=2023-03-15-preview"
-          version: "0613"
+          instanceName: "azure-open-ai-common-infra"
+          baseURL: "https://azure-open-ai-common-infra.openai.azure.com"
+          version: "2023-03-15-preview"
           models:
             gpt-4:
               deploymentName: ailab-llm
+              version: "0613"
+            ailab-gpt-35-turbo:
+              deploymentName: ailab-gpt-35-turbo
               version: "0613"

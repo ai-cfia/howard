@@ -26,10 +26,10 @@ spec:
             - containerPort: 3080
           resources:
             requests:
-              cpu: "2000m"
+              cpu: "2"
               memory: "4Gi"
             limits:
-              cpu: "2000m"
+              cpu: "2"
               memory: "6Gi"
           envFrom:
             - configMapRef:
@@ -46,7 +46,6 @@ spec:
           securityContext:
             runAsUser: 1000
             runAsGroup: 3000
-            fsGroup: 2000
       volumes:
         - name: config-yaml
           configMap:
