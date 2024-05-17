@@ -83,6 +83,7 @@ data:
         groups:
         - group: "gpt4"
           apiKey: "${AZURE_OPENAI_GPT4_API_KEY}"
+          instanceName: "ailab-llm"
           baseURL: "https://azure-open-ai-common-infra.openai.azure.com/openai/deployments/ailab-llm/chat/completions?api-version=2023-03-15-preview"
           version: "0613"
           models:
