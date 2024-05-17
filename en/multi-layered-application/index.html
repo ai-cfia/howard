@@ -402,7 +402,7 @@ web technologies to present information in an accessible format.</p>
 <p>This diagram shows the communication between the <code>frontend</code>, the
 <code>backend (/api)</code>, the <code>browser (client)</code>, and the <code>ingress (ingress nginx)</code>
 for an application.</p>
-<pre><code class="language-mermaid">sequenceDiagram
+<pre class="mermaid"><code>sequenceDiagram
     participant Browser
     participant Ingress
     participant Frontend
@@ -420,8 +420,7 @@ for an application.</p>
     Ingress-&gt;&gt;Backend: GET /search
     Note over Ingress: /api is /search (ImplementationSpecific)
     Backend--&gt;&gt;Ingress: 200
-    Ingress--&gt;&gt;Browser: The browser display the result
-</code></pre>
+    Ingress--&gt;&gt;Browser: The browser display the result</code></pre>
 <h2 id="references">References</h2>
 <p><a href="https://docs.nginx.com/nginx-ingress-controller/">Ingress NGINX</a></p>
 <p><a href="https://docs.nginx.com/nginx-ingress-controller/configuration/ingress-resources/basic-configuration/">Ingress NGINX - ImplementationSpecific</a></p>

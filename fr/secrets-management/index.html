@@ -436,7 +436,7 @@ de Howard: <img alt="Vault architecture diagram" src="../img/vault-argocd-archit
 <p>Le diagramme de séquence suivant décrit le processus permettant à un
 développeur de mettre à jour des secrets en utilisant le service UI de Vault
 et comment les secrets sont injectés dans les pods :</p>
-<pre><code class="language-mermaid">sequenceDiagram
+<pre class="mermaid"><code>sequenceDiagram
     participant Developer
     participant FinesseRepo as Finesse Repository
     participant GHWorkflow as GitHub Workflow
@@ -463,8 +463,7 @@ et comment les secrets sont injectés dans les pods :</p>
     ArgoRepoServer-&gt;&gt;+ArgoVaultPlugin: triggers refresh on finesse namespace,&lt;br&gt; sync secrets from Vault
     ArgoVaultPlugin-&gt;&gt;+Vault: Fetch specific version of secrets
     ArgoVaultPlugin-&gt;&gt;+FinessePod: Injects secrets
-    Developer-&gt;&gt;+FinessePod: 4. Trigger hard refresh through argoCD
-</code></pre>
+    Developer-&gt;&gt;+FinessePod: 4. Trigger hard refresh through argoCD</code></pre>
 <p>Veuillez noter que le développeur doit déclencher un rafraîchissement complet
 du pod pour refléter les modifications des secrets. Cela se fait dans
 l'interface utilisateur d'ArgoCD, mais nous travaillons sur un moyen
@@ -550,19 +549,19 @@ Finesse comme exemple.</p>
    Par exemple, pour ajouter un nouveau secret, vous pouvez ajouter une
    nouvelle paire clé-valeur à la section data du manifeste des secrets :</li>
 </ol>
-<p><code>yaml
-   FINESSE_BACKEND_AZURE_SEARCH_TRANSFORM_MAP: &lt;FINESSE_BACKEND_AZURE_SEARCH_TRANSFORM_MAP&gt;</code></p>
+<div class="highlight"><pre><span></span><code><span class="nt">FINESSE_BACKEND_AZURE_SEARCH_TRANSFORM_MAP</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;FINESSE_BACKEND_AZURE_SEARCH_TRANSFORM_MAP&gt;</span>
+</code></pre></div>
 <p>La clé représente le nom de la variable d'environnement qui sera injectée
    dans le pod, et la valeur représente la clé du secret dans Vault qui sera
    utilisée pour récupérer la valeur du secret.</p>
 <ol>
 <li>Mettez à jour l'annotation de version des secrets récupérés depuis Vault :</li>
 </ol>
-<p><code>yaml
-   # Augmentez la version du secret de
-   avp.kubernetes.io/secret-version: "4"
-   # À
-   avp.kubernetes.io/secret-version: "5"</code></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Augmentez la version du secret de</span>
+<span class="nt">avp.kubernetes.io/secret-version</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;4&quot;</span>
+<span class="c1"># À</span>
+<span class="nt">avp.kubernetes.io/secret-version</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;5&quot;</span>
+</code></pre></div>
 <p>Ceci est la nouvelle version que nous créons à l'étape 5 de la section
    précédente.</p>
 <p>À titre d'exemple supplémentaire, voici un problème et une pull request
