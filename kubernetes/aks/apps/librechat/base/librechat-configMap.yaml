@@ -89,6 +89,6 @@ data:
             gpt-4:
               deploymentName: ailab-llm
               version: "0613"
-            ailab-gpt-35-turbo:
+            gpt-35-turbo:
               deploymentName: ailab-gpt-35-turbo
               version: "0613"
