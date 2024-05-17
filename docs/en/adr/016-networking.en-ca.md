@@ -78,10 +78,8 @@ maintenance of our networking services.
 
 ## References
 
-- [Implementation for the Howard project](
-https://github.com/ai-cfia/howard/blob/main/docs/networking.md)
-- [Implementation of Vouch proxy for the Howard project](
-https://github.com/ai-cfia/howard/blob/main/docs/auth-workflow.md)
+- [Implementation for the Howard project](../networking.md)
+- [Implementation of Vouch proxy for the Howard project](../auth-workflow.md)
 - [Istio ingress](
 https://istio.io/latest/docs/tasks/traffic-management/ingress/)
 - [Kubernetes gateway api](https://gateway-api.sigs.k8s.io/)

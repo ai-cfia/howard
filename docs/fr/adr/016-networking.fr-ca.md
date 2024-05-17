@@ -82,10 +82,8 @@ facilitant la scalabilité et la maintenance de nos services de réseautique.
 
 ## Références
 
-- [Implementation dans Howard](
-https://github.com/ai-cfia/howard/blob/main/docs/networking.md)
-- [Implementation de Vouch proxy dans Howard](
-https://github.com/ai-cfia/howard/blob/main/docs/auth-workflow.md)
+- [Implementation dans Howard](../networking.md)
+- [Implementation de Vouch proxy dans Howard](../auth-workflow.md)
 - [Istio ingress](
 https://istio.io/latest/docs/tasks/traffic-management/ingress/)
 - [Kubernetes gateway api](https://gateway-api.sigs.k8s.io/)

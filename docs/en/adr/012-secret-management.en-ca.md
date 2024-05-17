@@ -104,7 +104,7 @@ pipeline.
 ## References
 
 - [Documentation on our configuration and use of HashiCorp
-  Vault](https://github.com/ai-cfia/howard/blob/main/docs/secrets-management.md)
+  Vault](../secrets-management.md)
 - [Official HashiCorp Vault
   Documentation](https://developer.hashicorp.com/vault/docs?product_intent=vault)
 - [HashiCorp Vault integration with

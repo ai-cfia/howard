@@ -109,7 +109,7 @@ processus existants pour intégrer pleinement Vault dans notre pipeline CI/CD.
 ## Références
 
 - [Documentation sur notre configuration et utilisation de HashiCorp
-  Vault](https://github.com/ai-cfia/howard/blob/main/docs/secrets-management.md)
+  Vault](../secrets-management.md)
 - [Documentation officielle de HashiCorp
   Vault](https://developer.hashicorp.com/vault/docs?product_intent=vault)
 - [Intégration de HashiCorp Vault avec

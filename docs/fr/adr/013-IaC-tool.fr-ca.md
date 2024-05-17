@@ -132,8 +132,7 @@ collaboration.
 ## Références
 
 - [Documentation sur le flux de travail avec Terraform pour faire le déploiement
-  de nos
-  services](https://github.com/ai-cfia/howard/blob/main/docs/terraform-workflow.md)
+  de nos services](../terraform-workflow.md)
 - [Code source de l'infrastructure
   (Howard)](https://github.com/ai-cfia/howard/tree/main/terraform)
 - [Site officiel de Terraform](https://www.terraform.io/)
