@@ -408,13 +408,13 @@ storage in Azure.</p>
 CLI</a> and
 <a href="https://github.com/Azure/kubelogin">kubelogin</a> plugin installed, here is how
 you can locally fetch the kube config :</p>
-<div class="highlight"><pre><span></span><code>az<span class="w"> </span>login
-az<span class="w"> </span>account<span class="w"> </span><span class="nb">set</span><span class="w"> </span>--subscription<span class="w"> </span>xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-az<span class="w"> </span>aks<span class="w"> </span>get-credentials<span class="w"> </span>--resource-group<span class="w"> </span>resource-group-name<span class="w"> </span>--name<span class="w"> </span>aks-name<span class="w"> </span>--overwrite-existing
-kubelogin<span class="w"> </span>convert-kubeconfig<span class="w"> </span>-l<span class="w"> </span>azurecli
-</code></pre></div>
+<pre><code class="language-bash">az login
+az account set --subscription xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+az aks get-credentials --resource-group resource-group-name --name aks-name --overwrite-existing
+kubelogin convert-kubeconfig -l azurecli
+</code></pre>
 <h2 id="documentation">Documentation</h2>
-<p><a href="https://ai-cfia.github.io/howard/en/">https://ai-cfia.github.io/howard/en/</a></p>
+<p>mkdocs link here</p>
 
 
 

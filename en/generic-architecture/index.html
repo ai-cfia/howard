@@ -433,81 +433,83 @@ traditional network.</p>
 <h2 id="diagrams">Diagrams</h2>
 <p>Describe the operation of our implementation for high availability (HA)
 as well as the redundancy of services within Azure using Kubernetes</p>
-<pre class="mermaid"><code>flowchart
-    subgraph Azure["Azure"]
+<pre><code class="language-mermaid">flowchart
+    subgraph Azure[&quot;Azure&quot;]
         direction TB
-        subgraph CC["Canada central (CA)"]
-            subgraph VNet1["VNet-CC"]
-                subgraph Kubernetes1["Kubernetes-CC"]
+        subgraph CC[&quot;Canada central (CA)&quot;]
+            subgraph VNet1[&quot;VNet-CC&quot;]
+                subgraph Kubernetes1[&quot;Kubernetes-CC&quot;]
                     direction TB
-                    Ingress1["Ingress"]
-                    Pod1["Pod"]
-                    Pod2["Pod"]
-                    Pod3["Pod"]
-                    Pod4["Pod"]
-                    Pod5["Pod"]
-                    Pod6["Pod"]
+                    Ingress1[&quot;Ingress&quot;]
+                    Pod1[&quot;Pod&quot;]
+                    Pod2[&quot;Pod&quot;]
+                    Pod3[&quot;Pod&quot;]
+                    Pod4[&quot;Pod&quot;]
+                    Pod5[&quot;Pod&quot;]
+                    Pod6[&quot;Pod&quot;]
                 end
             end
         end
 
-        subgraph CE["Canada east (CE)"]
-            subgraph VNet2["VNet-CE"]
-                subgraph Kubernetes2["Kubernetes-CE"]
+        subgraph CE[&quot;Canada east (CE)&quot;]
+            subgraph VNet2[&quot;VNet-CE&quot;]
+                subgraph Kubernetes2[&quot;Kubernetes-CE&quot;]
                     direction TB
-                    Ingress2["Ingress"]
-                    Pod7["Pod"]
-                    Pod8["Pod"]
-                    Pod9["Pod"]
-                    Pod10["Pod"]
-                    Pod11["Pod"]
-                    Pod12["Pod"]
+                    Ingress2[&quot;Ingress&quot;]
+                    Pod7[&quot;Pod&quot;]
+                    Pod8[&quot;Pod&quot;]
+                    Pod9[&quot;Pod&quot;]
+                    Pod10[&quot;Pod&quot;]
+                    Pod11[&quot;Pod&quot;]
+                    Pod12[&quot;Pod&quot;]
                 end
             end
         end
 
-        VNet1["VNet-CC"] &lt;---&gt;|HA| VNet2["VNet-CE"]
-        Kubernetes1["Kubernetes-CC"] &lt;---&gt;|1:1 redundancy| Kubernetes2["Kubernetes-CE"]
-    end</code></pre>
+        VNet1[&quot;VNet-CC&quot;] &lt;---&gt;|HA| VNet2[&quot;VNet-CE&quot;]
+        Kubernetes1[&quot;Kubernetes-CC&quot;] &lt;---&gt;|1:1 redundancy| Kubernetes2[&quot;Kubernetes-CE&quot;]
+    end
+</code></pre>
 <p>Represents the process of sending a request to our infrastructure
 within Azure</p>
-<pre class="mermaid"><code>flowchart
-    Client["Client"] --&gt;|request| LB
-    subgraph Azure["Azure"]
-        LB["Load balancer"]
+<pre><code class="language-mermaid">flowchart
+    Client[&quot;Client&quot;] --&gt;|request| LB
+    subgraph Azure[&quot;Azure&quot;]
+        LB[&quot;Load balancer&quot;]
         LB --&gt; VNet1
         LB --&gt; VNet2
         direction LR
-        subgraph CC["Canada central (CC)"]
-            subgraph VNet1["VNet-CC"]
-                subgraph Kubernetes1["Kubernetes-CC"]
+        subgraph CC[&quot;Canada central (CC)&quot;]
+            subgraph VNet1[&quot;VNet-CC&quot;]
+                subgraph Kubernetes1[&quot;Kubernetes-CC&quot;]
                     direction TB
-                    Ingress1["Ingress"]
-                    Pod1["Pod"]
-                    Pod2["Pod"]
-                    Pod3["Pod"]
-                    Pod4["Pod"]
-                    Pod5["Pod"]
-                    Pod6["Pod"]
+                    Ingress1[&quot;Ingress&quot;]
+                    Pod1[&quot;Pod&quot;]
+                    Pod2[&quot;Pod&quot;]
+                    Pod3[&quot;Pod&quot;]
+                    Pod4[&quot;Pod&quot;]
+                    Pod5[&quot;Pod&quot;]
+                    Pod6[&quot;Pod&quot;]
                 end
             end
         end
 
-        subgraph CE["Canada east (CE)"]
-            subgraph VNet2["VNet-CE"]
-                subgraph Kubernetes2["Kubernetes-CE"]
+        subgraph CE[&quot;Canada east (CE)&quot;]
+            subgraph VNet2[&quot;VNet-CE&quot;]
+                subgraph Kubernetes2[&quot;Kubernetes-CE&quot;]
                     direction TB
-                    Ingress2["Ingress"]
-                    Pod7["Pod"]
-                    Pod8["Pod"]
-                    Pod9["Pod"]
-                    Pod10["Pod"]
-                    Pod11["Pod"]
-                    Pod12["Pod"]
+                    Ingress2[&quot;Ingress&quot;]
+                    Pod7[&quot;Pod&quot;]
+                    Pod8[&quot;Pod&quot;]
+                    Pod9[&quot;Pod&quot;]
+                    Pod10[&quot;Pod&quot;]
+                    Pod11[&quot;Pod&quot;]
+                    Pod12[&quot;Pod&quot;]
                 end
             end
         end
-    end</code></pre>
+    end
+</code></pre>
 <p>Representation of the two diagrams above in one</p>
 <p><img alt="Diagram" src="../img/ha-redundancy-lb.png" /></p>
 <h2 id="references">References</h2>

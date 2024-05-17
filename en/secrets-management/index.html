@@ -433,7 +433,7 @@ howard : <img alt="Vault architecture diagram" src="../img/vault-argocd-architec
 <p>The following sequence diagram describes the process of how a developer can
 update secrets using the Vault UI service and how the secrets are injected into
 pods :</p>
-<pre class="mermaid"><code>sequenceDiagram
+<pre><code class="language-mermaid">sequenceDiagram
     participant Developer
     participant FinesseRepo as Finesse Repository
     participant GHWorkflow as GitHub Workflow
@@ -460,7 +460,8 @@ pods :</p>
     ArgoRepoServer-&gt;&gt;+ArgoVaultPlugin: triggers refresh on finesse namespace,&lt;br&gt; sync secrets from Vault
     ArgoVaultPlugin-&gt;&gt;+Vault: Fetch specific version of secrets
     ArgoVaultPlugin-&gt;&gt;+FinessePod: Injects secrets
-    Developer-&gt;&gt;+FinessePod: 4. Trigger hard refresh through argoCD</code></pre>
+    Developer-&gt;&gt;+FinessePod: 4. Trigger hard refresh through argoCD
+</code></pre>
 <p>Take note that the developer needs to trigger a hard refresh on the pod to
 reflect the changes in the secrets. This is done in the ArgoCD UI, but we are
 working on a way to automate this process.</p>
@@ -534,19 +535,19 @@ We will use Finesse as an example.</p>
    secret, you can add a new key-value pair to the <code>data</code> section of the secret
   manifest :</li>
 </ol>
-<div class="highlight"><pre><span></span><code><span class="nt">FINESSE_BACKEND_AZURE_SEARCH_TRANSFORM_MAP</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;FINESSE_BACKEND_AZURE_SEARCH_TRANSFORM_MAP&gt;</span>
-</code></pre></div>
+<p><code>yaml
+   FINESSE_BACKEND_AZURE_SEARCH_TRANSFORM_MAP: &lt;FINESSE_BACKEND_AZURE_SEARCH_TRANSFORM_MAP&gt;</code></p>
 <p>The key represents the environment variable name that will be injected into the
    pod, and the value represents the secret key in Vault that will be used to fetch
    the secret value.</p>
 <ol>
 <li>Update the version annotation of  the secrets being fetch from vault :</li>
 </ol>
-<div class="highlight"><pre><span></span><code><span class="c1"># Bump the version of the secret from</span>
-<span class="nt">avp.kubernetes.io/secret-version</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;4&quot;</span>
-<span class="c1"># To</span>
-<span class="nt">avp.kubernetes.io/secret-version</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;5&quot;</span>
-</code></pre></div>
+<p><code>yaml
+   # Bump the version of the secret from
+   avp.kubernetes.io/secret-version: "4"
+   # To
+   avp.kubernetes.io/secret-version: "5"</code></p>
 <p>This is the new version that we create in step 5 of the previous section.</p>
 <p>As additional example, here is an issue and a pull request that showcases the
    process of updating secrets in the Nachet application :</p>
