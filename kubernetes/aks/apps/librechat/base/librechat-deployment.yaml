@@ -12,6 +12,13 @@ spec:
       labels:
         app: librechat
     spec:
+      initContainers:
+        - name: take-data-dir-ownership
+          image: alpine:3
+          command: ["sh", "-c", "chown -R 1000:3000 /app/client/public/images"]
+          volumeMounts:
+            - name: image-volume
+              mountPath: /app/client/public/images
       containers:
         - name: librechat
           image: ghcr.io/danny-avila/librechat:latest
