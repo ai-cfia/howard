@@ -1,62 +1,77 @@
-# Infrastructure Repository for ACIA-CFIA AI-Lab
+# Howard: Cloud infrastructure of the Canadian Food Inspection Agency (CFIA) ACIA-CFIA ai-Lab
 
-This repository contains all the infrastructure used by the ACIA/CFIA AI Lab.
-In this repository, you can find the Kubernetes manifests that deploy each of
-the applications on the three different cloud providers: Google Cloud Platform
-(GCP), Amazon Web Services (AWS), and Azure.
+## About the project
 
-## Dependencies
+The Howard project is named after Luke Howard, FRS, a notable British
+manufacturing chemist and amateur meteorologist known as "The Godfather of
+Clouds". His work laid foundational concepts in meteorology, including a
+nomenclature system for clouds introduced in 1802. Inspired by his innovation
+and legacy in categorizing the elements, our project aims to effectively manage
+and orchestrate the cloud-based infrastructure for the Canadian Food Inspection
+Agency (CFIA) ai-lab.
 
-- [Terraform](https://www.terraform.io/downloads.html)
-- [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
-- [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli)
+Howard is essentially the backbone that supports CFIA's ai-lab Kubernetes environment,
+where key applications such as Nachet, Finesse, and Louis are deployed and
+managed dynamically. This infrastructure emphasizes robustness, security, and
+efficiency to handle the critical workload involved in food inspection
+and safety.
 
-## Documentation
+## Technology stack and tools
 
-For more information about this project, you can refer to the documentation
-which contains explanations as well as diagrams:
+The Howard infrastructure leverages a comprehensive suite of tools designed to
+provide a resilient, secure, and scalable environment:
 
-- [Global overview](docs/generic-achitecture.md)
-- [Ingress](docs/multi-layered-application.md)
-- [Secrets management](docs/secrets-management.md)
-- [Ansible](docs/ansible.md)
-- [Networking](docs/networking.md)
-- [Authentication](docs/auth-workflow.md)
-- [Terraform](docs/terraform-workflow.md)
+### Cloud providers
 
-## Content
+- Initially hosted on Google Cloud, the infrastructure has transitioned to
+Azure.
 
-- The Terraform configuration for the GCP cluster.
-- Kubernetes manifests used to deploy the following applications:
-  - [Nachet backend](https://github.com/ai-cfia/nachet-backend)
-  - [Nachet frontend](https://github.com/ai-cfia/nachet-frontend)
-  - [Finesse backend](https://github.com/ai-cfia/finesse-backend)
-  - [Finesse frontend](https://github.com/ai-cfia/finesse-frontend)
-- Configuration for Vault, Grafana, Prometheus, Alert Manager, Ingress NGINX,
-and Cert Manager to meet our requirements.
+### Container orchestration
 
-## Tooling
+- **Kubernetes**: Orchestrates container deployment, scaling, and management.
 
-- [Hashicorp Vault](https://www.vaultproject.io/)
-- [Grafana](https://grafana.com/)
-- [Prometheus](https://prometheus.io/docs/visualization/grafana/)
-- [Alert manager](https://github.com/prometheus/alertmanager)
-- [Cert manager](https://cert-manager.io/)
-- [Ingress NGINX](https://docs.nginx.com/nginx-ingress-controller/)
-- [OTEL](https://opentelemetry.io/)
+### GitOps
 
-## Useful links
+- **ArgoCD**: Used for continuous delivery, managing Kubernetes resources in
+a declarative way through Git repositories.
 
-[ai-cfia github container registry](https://github.com/orgs/ai-cfia/packages)
+### Monitoring and security
 
-## Terraform Deployment
+- **Grafana**: Visualization and analytics software.
+- **Kube-Prometheus-Stack**: Comprehensive Kubernetes cluster monitoring
+with Prometheus.
+- **Falco**: Open-source runtime security tool.
+- **Trivy**: Vulnerability scanner for containers.
+- **Oneuptime**: Monitoring tool for real-time performance and security insights.
+
+### Networking
+
+- **Vouch-Proxy**: Authentication proxy.
+- **Nginx Ingress**: Ingress controller for Kubernetes using NGINX as a
+reverse proxy and load balancer.
+- **Istio**: Service mesh that provides a secure interface for inter-service communication.
+
+### Secrets management
+
+- **HashiCorp Vault**: Secures, stores, and tightly controls access to tokens,
+passwords, certificates, and other secrets.
+
+### Cloud infrastructure management
+
+- **Terraform**: Open-source infrastructure as code software tool that
+allows managing service life cycle in cloud providers declaratively.
+- **Ansible**: Automation tool for configuring and managing computers.
+
+## Installation
+
+### Terraform deployment
 
 Current configuration is hosting a kubernetes cluster on Azure (AKS). We have an
 Azure Devops pipeline `apply-terraform.yml` that applies terraform's resources
 that are created on our Azure's subscription. The state is then saved to a blob
 storage in Azure.
 
-## Kubectl configuration
+### Kubectl configuration
 
 Assuming you have [Azure's
 CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli) and
@@ -69,3 +84,7 @@ az account set --subscription xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
 az aks get-credentials --resource-group resource-group-name --name aks-name --overwrite-existing
 kubelogin convert-kubeconfig -l azurecli
 ```
+
+## Documentation
+
+<https://ai-cfia.github.io/howard/en/>
