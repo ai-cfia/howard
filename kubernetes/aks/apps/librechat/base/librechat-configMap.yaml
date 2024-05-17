@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: librechat-config
+  name: librechat-configenv
 data:
   HOST: "0.0.0.0"
   PORT: "3080"
@@ -53,3 +53,38 @@ data:
   RAG_API_URL: "http://rag-api.librechat.svc.cluster.local:8000"
   RAG_PORT: "8000"
   ENDPOINTS: "azureOpenAI,google,ollama"
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: librechat-config
+data:
+  librechat.yaml: |
+    # https://www.librechat.ai/docs/configuration/librechat_yaml
+    # Configuration version (required)
+    version: 1.0.9
+    cache: true
+    interface:
+      privacyPolicy:
+        externalUrl: 'https://librechat.ai/privacy-policy'
+        openNewTab: true
+      termsOfService:
+        externalUrl: 'https://librechat.ai/tos'
+        openNewTab: true
+    registration:
+      allowedDomains:
+      - "inspection.gc.ca"
+    endpoints:
+      azureOpenAI:
+        titleModel: "ailab-llm gpt-4"
+        plugins: true
+        assistants: true
+        groups:
+        - group: "gpt4"
+          apiKey: "${AZURE_OPENAI_GPT4_API_KEY}"
+          baseURL: "https://azure-open-ai-common-infra.openai.azure.com/openai/deployments/ailab-llm/chat/completions?api-version=2023-03-15-preview"
+          version: "0613"
+          models:
+            gpt-4:
+              deploymentName: ailab-llm
+              version: "0613"

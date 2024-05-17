@@ -26,7 +26,7 @@ spec:
               memory: "6Gi"
           envFrom:
             - configMapRef:
-                name: librechat-config
+                name: librechat-configenv
             - secretRef:
                 name: librechat-secrets
           volumeMounts:
@@ -50,10 +50,11 @@ metadata:
   name: librechat-secrets
   annotations:
     avp.kubernetes.io/path: "kv/data/librechat/librechat-client"
-    avp.kubernetes.io/secret-version: "6"
+    avp.kubernetes.io/secret-version: "7"
 stringData:
   SEARCH: "true"
   MEILI_MASTER_KEY: <MEILI_MASTER_KEY>
   JWT_SECRET: <JWT_SECRET>
   JWT_REFRESH_SECRET: <JWT_REFRESH_SECRET>
   GOOGLE_KEY: <GOOGLE_KEY>
+  AZURE_OPENAI_GPT4_API_KEY: <AZURE_OPENAI_GPT4_API_KEY>
