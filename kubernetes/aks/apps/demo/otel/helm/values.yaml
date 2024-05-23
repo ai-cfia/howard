@@ -455,7 +455,7 @@ components:
       - name: FLAGD_PORT
         value: "8013"
       - name: OTEL_EXPORTER_OTLP_ENDPOINT
-        value: http://$(OTEL_COLLECTOR_NAME):4317
+        value: http://$(OTEL_COLLECTOR_NAME):12347
     resources:
       limits:
         memory: 20Mi
