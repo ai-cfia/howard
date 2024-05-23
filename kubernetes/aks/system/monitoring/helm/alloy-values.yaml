@@ -149,6 +149,10 @@ alloy:
 
   # -- Extra ports to expose on the Alloy container.
   extraPorts:
+  - name: "faro"
+    port: 12347
+    targetPort: 12347
+    protocol: "TCP"
   - name: "grpc"
     port: 4317
     targetPort: 4317
@@ -156,10 +160,6 @@ alloy:
   - name: "http"
     port: 4318
     targetPort: 4318
-    protocol: "TCP"
-  - name: "faro"
-    port: 12347
-    targetPort: 12347
     protocol: "TCP"
 
   mounts:
