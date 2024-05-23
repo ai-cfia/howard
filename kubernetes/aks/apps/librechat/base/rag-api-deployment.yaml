@@ -50,4 +50,4 @@ stringData:
   RAG_AZURE_OPENAI_ENDPOINT: <path:kv/data/librechat/rag-api#RAG_AZURE_OPENAI_ENDPOINT#1>
   RAG_AZURE_OPENAI_API_VERSION: <path:kv/data/librechat/rag-api#RAG_AZURE_OPENAI_API_VERSION#1>
   RAG_AZURE_OPENAI_API_KEY: <path:kv/data/librechat/rag-api#RAG_AZURE_OPENAI_API_KEY#1>
-  JWT_SECRET: <path:kv/data/librechat/librechat-secrets#JWT_SECRET#7>
+  JWT_SECRET: <path:kv/data/librechat/librechat-client#JWT_SECRET#7>
