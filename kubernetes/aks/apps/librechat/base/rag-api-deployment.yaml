@@ -41,7 +41,7 @@ metadata:
   name: rag-api-secrets
   annotations:
     avp.kubernetes.io/path: "kv/data/librechat/vectordb"
-    avp.kubernetes.io/secret-version: "4"
+    avp.kubernetes.io/secret-version: "5"
 stringData:
   DB_HOST: "vectordb"
   POSTGRES_DB: <POSTGRES_DB>
