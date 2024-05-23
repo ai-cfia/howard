@@ -32,7 +32,7 @@ alloy:
     # -- Content to assign to the new ConfigMap.  This is passed into `tpl` allowing for templating from values.
     # https://grafana.com/docs/alloy/latest/tasks/collect-opentelemetry-data/
     content: |-
-      otelcol.exporter.otlp.default "default" {
+      otelcol.exporter.otlp "default" {
         client {
           endpoint = "127.0.0.1:4317"
         }
@@ -126,7 +126,7 @@ alloy:
   listenAddr: 0.0.0.0
 
   # -- Port to listen for traffic on.
-  listenPort: 12345
+  listenPort: 12347
 
   # -- Scheme is needed for readiness probes. If enabling tls in your configs, set to "HTTPS"
   listenScheme: HTTP
