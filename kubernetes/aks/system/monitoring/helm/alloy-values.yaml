@@ -278,7 +278,7 @@ controller:
     # -- The lower limit for the number of replicas to which the autoscaler can scale down.
     minReplicas: 1
     # -- The upper limit for the number of replicas to which the autoscaler can scale up.
-    maxReplicas: 5
+    maxReplicas: 2
     # -- Average CPU utilization across all relevant pods, a percentage of the requested value of the resource for the pods. Setting `targetCPUUtilizationPercentage` to 0 will disable CPU scaling.
     targetCPUUtilizationPercentage: 0
     # -- Average Memory utilization across all relevant pods, a percentage of the requested value of the resource for the pods. Setting `targetMemoryUtilizationPercentage` to 0 will disable Memory scaling.
@@ -372,6 +372,7 @@ ingress:
   ingressClassName: nginx
   # Values can be templated
   annotations:
+    nginx.ingress.kubernetes.io/whitelist-source-range: 205.194.32.0/24,10.5.0.0/16
     external-dns.alpha.kubernetes.io/target: inspection.alpha.canada.ca
     cert-manager.io/cluster-issuer: letsencrypt-prod
     ingress.kubernetes.io/force-ssl-redirect: "true"
