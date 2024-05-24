@@ -6,7 +6,6 @@ resources:
   # User applications
   - ../finesse/
   - ../nachet/
-  - ../demo/otel/
   - ../bytebase/
   - ../louis/
   - ../librechat/
