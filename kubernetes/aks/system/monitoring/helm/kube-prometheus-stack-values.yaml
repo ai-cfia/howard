@@ -3227,7 +3227,8 @@ prometheus:
 
     ## Allows setting additional arguments for the Prometheus container
     ## ref: https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/api.md#monitoring.coreos.com/v1.Prometheus
-    additionalArgs: []
+    additionalArgs:
+      - --web.enable-remote-write-receiver
 
     ## Interval between consecutive scrapes.
     ## Defaults to 30s.
