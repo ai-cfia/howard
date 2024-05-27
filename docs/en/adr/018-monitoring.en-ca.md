@@ -194,9 +194,9 @@ performance and reliability in the early stages of development.
 
 - [Microsoft Azure Monitor and
   OpenTelemetry](https://learn.microsoft.com/en-us/azure/azure-monitor/app/opentelemetry-enable?tabs=python#why-is-microsoft-azure-monitor-investing-in-opentelemetry)
-- [Grafana Alloy](https://grafana.com/products/alloy/)
-- [Grafana Loki](https://grafana.com/products/loki/)
-- [Grafana Tempo](https://grafana.com/products/tempo/)
+- [Grafana Alloy](https://grafana.com/oss/alloy-opentelemetry-collector/)
+- [Grafana Loki](https://grafana.com/oss/loki/)
+- [Grafana Tempo](https://grafana.com/oss/tempo/)
 - [Prometheus](https://prometheus.io/)
 - [OpenTelemetry documentation](https://opentelemetry.io/docs/)
 - [Jaeger](https://www.jaegertracing.io/)
@@ -204,5 +204,5 @@ performance and reliability in the early stages of development.
 - [ClickHouse](https://clickhouse.tech/)
 - [Elasticsearch](https://www.elastic.co/elasticsearch/)
 - [Kibana](https://www.elastic.co/kibana/)
-- [DataDog Documentation](https://docs.datadoghq.com/)
+- [DataDog documentation](https://docs.datadoghq.com/)
 - [Prometheus UI](https://prometheus.io/docs/visualization/browser/)

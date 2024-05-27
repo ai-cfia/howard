@@ -212,9 +212,9 @@ développement.
 
 - [Microsoft Azure Monitor et
   OpenTelemetry](https://learn.microsoft.com/en-us/azure/azure-monitor/app/opentelemetry-enable?tabs=python#why-is-microsoft-azure-monitor-investing-in-opentelemetry)
-- [Grafana Alloy](https://grafana.com/products/alloy/)
-- [Grafana Loki](https://grafana.com/products/loki/)
-- [Grafana Tempo](https://grafana.com/products/tempo/)
+- [Grafana Alloy](https://grafana.com/oss/alloy-opentelemetry-collector/)
+- [Grafana Loki](https://grafana.com/oss/loki/)
+- [Grafana Tempo](https://grafana.com/oss/tempo/)
 - [Prometheus](https://prometheus.io/)
 - [Documentation OpenTelemetry](https://opentelemetry.io/docs/)
 - [Jaeger](https://www.jaegertracing.io/)
