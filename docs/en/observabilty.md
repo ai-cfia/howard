@@ -104,11 +104,11 @@ Grafana Alloy processes and forwards the received data to the respective
 backends.
 
 - Logs are forwarded to Loki at
-  <http://loki.monitoring.svc.cluster.local:3100/loki/api/v1/push>
+  `http://loki.monitoring.svc.cluster.local:3100/loki/api/v1/push`
 - Traces are forwarded to Tempo at
-  <http://tempo.monitoring.svc.cluster.local:4317>
+  `http://tempo.monitoring.svc.cluster.local:4317`
 - Metrics are forwarded to Prometheus at
-  <http://kube-prometheus-stack-prometheus.monitoring.svc.cluster.local:9090/api/v1/write>
+  `http://kube-prometheus-stack-prometheus.monitoring.svc.cluster.local:9090/api/v1/write`
 
 ## Using Grafana for Visualization
 

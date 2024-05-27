@@ -108,11 +108,11 @@ exporter = OtlpExporter(endpoint="alloy.monitoring.svc.cluster.local:4317")
 Grafana Alloy traite et transmet les données reçues aux backends respectifs.
 
 - Les journaux sont transmis à Loki à
-  <http://loki.monitoring.svc.cluster.local:3100/loki/api/v1/push>
+  `http://loki.monitoring.svc.cluster.local:3100/loki/api/v1/push`
 - Les traces sont transmises à Tempo à
-  <http://tempo.monitoring.svc.cluster.local:4317>
+  `http://tempo.monitoring.svc.cluster.local:4317`
 - Les métriques sont transmises à Prometheus à
-  <http://kube-prometheus-stack-prometheus.monitoring.svc.cluster.local:9090/api/v1/write>
+  `http://kube-prometheus-stack-prometheus.monitoring.svc.cluster.local:9090/api/v1/write`
 
 ## Utilisation de Grafana pour la visualisation
 
