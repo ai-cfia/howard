@@ -10,11 +10,11 @@ and legacy in categorizing the elements, our project aims to effectively manage
 and orchestrate the cloud-based infrastructure for the Canadian Food Inspection
 Agency (CFIA) ai-lab.
 
-Howard is essentially the backbone that supports CFIA's ai-lab Kubernetes environment,
-where key applications such as Nachet, Finesse, and Louis are deployed and
-managed dynamically. This infrastructure emphasizes robustness, security, and
-efficiency to handle the critical workload involved in food inspection
-and safety.
+Howard is essentially the backbone that supports CFIA's ai-lab Kubernetes
+environment, where key applications such as Nachet, Finesse, and Louis are
+deployed and managed dynamically. This infrastructure emphasizes robustness,
+security, and efficiency to handle the critical workload involved in food
+inspection and safety.
 
 ## Technology stack and tools
 
@@ -32,24 +32,30 @@ Azure.
 
 ### GitOps
 
-- **ArgoCD**: Used for continuous delivery, managing Kubernetes resources in
-a declarative way through Git repositories.
+- **ArgoCD**: Used for continuous delivery, managing Kubernetes resources in a
+declarative way through Git repositories.
 
 ### Monitoring and security
 
 - **Grafana**: Visualization and analytics software.
-- **Kube-Prometheus-Stack**: Comprehensive Kubernetes cluster monitoring
-with Prometheus.
+- **Kube-Prometheus-Stack**: Comprehensive Kubernetes cluster monitoring with
+Prometheus.
+- **Grafana Tempo** Distributed tracing of our applications.
+- **Grafana Loki:** Logging and aggregation system.
+- **Grafana Alloy:** Allows the collection and transmission of OpenTelemetry
+  data from our applications.
 - **Falco**: Open-source runtime security tool.
 - **Trivy**: Vulnerability scanner for containers.
-- **Oneuptime**: Monitoring tool for real-time performance and security insights.
+- **Oneuptime**: Monitoring tool for real-time performance and security
+  insights.
 
 ### Networking
 
 - **Vouch-Proxy**: Authentication proxy.
-- **Nginx Ingress**: Ingress controller for Kubernetes using NGINX as a
-reverse proxy and load balancer.
-- **Istio**: Service mesh that provides a secure interface for inter-service communication.
+- **Nginx Ingress**: Ingress controller for Kubernetes using NGINX as a reverse
+proxy and load balancer.
+- **Istio**: Service mesh that provides a secure interface for inter-service
+  communication.
 
 ### Secrets management
 
@@ -58,8 +64,8 @@ passwords, certificates, and other secrets.
 
 ### Cloud infrastructure management
 
-- **Terraform**: Open-source infrastructure as code software tool that
-allows managing service life cycle in cloud providers declaratively.
+- **Terraform**: Open-source infrastructure as code software tool that allows
+managing service life cycle in cloud providers declaratively.
 - **Ansible**: Automation tool for configuring and managing computers.
 
 ## Installation
