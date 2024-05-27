@@ -16,7 +16,7 @@
     
     
       
-        <title>Workflow GitHub pour construire et pousser des images vers ghcr - Howard</title>
+        <title>Documentation d'implémentation pour la solution d'observabilité - Howard</title>
       
     
     
@@ -58,7 +58,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#workflow-github-pour-construire-et-pousser-des-images-vers-ghcr" class="md-skip">
+        <a href="#documentation-dimplementation-pour-la-solution-dobservabilite" class="md-skip">
           Aller au contenu
         </a>
       
@@ -94,7 +94,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Workflow GitHub pour construire et pousser des images vers ghcr
+              Documentation d'implémentation pour la solution d'observabilité
             
           </span>
         </div>
@@ -317,38 +317,122 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#resume-executif" class="md-nav__link">
+  <a href="#vue-densemble" class="md-nav__link">
     <span class="md-ellipsis">
-      Résumé exécutif
+      Vue d'ensemble
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#glossaire" class="md-nav__link">
+  <a href="#fonctionnement-de-grafana-alloy" class="md-nav__link">
     <span class="md-ellipsis">
-      Glossaire
+      Fonctionnement de Grafana Alloy
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#explication-du-diagramme" class="md-nav__link">
+  <a href="#configuration-de-grafana-alloy" class="md-nav__link">
     <span class="md-ellipsis">
-      Explication du diagramme
+      Configuration de Grafana Alloy
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuration de Grafana Alloy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#explication-de-la-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Explication de la configuration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exposition-des-services-alloy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exposition des services Alloy
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#instrumentation-des-metriques-journaux-et-traces" class="md-nav__link">
+    <span class="md-ellipsis">
+      Instrumentation des métriques, journaux et traces
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#diagrammes" class="md-nav__link">
+  <a href="#transmission-des-donnees-a-loki-tempo-et-prometheus" class="md-nav__link">
     <span class="md-ellipsis">
-      Diagrammes
+      Transmission des données à Loki, Tempo et Prometheus
     </span>
   </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#utilisation-de-grafana-pour-la-visualisation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Utilisation de Grafana pour la visualisation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Utilisation de Grafana pour la visualisation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#configuration-de-grafana" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuration de Grafana
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#creation-de-tableaux-de-bord" class="md-nav__link">
+    <span class="md-ellipsis">
+      Création de tableaux de bord
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tableaux-de-bord-actuels" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tableaux de bord actuels
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mises-a-jour-futures" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mises à jour futures
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -379,38 +463,139 @@
   
 
 
-<h1 id="workflow-github-pour-construire-et-pousser-des-images-vers-ghcr">Workflow GitHub pour construire et pousser des images vers ghcr</h1>
-<h2 id="resume-executif">Résumé exécutif</h2>
-<p>Le texte fourni décrit un workflow conçu pour construire et pousser une image
-vers le GitHub Container Registry. Il implique la création de trois tags :
-numéro de pull request, nom de pull request, et commit SHA.</p>
-<h2 id="glossaire">Glossaire</h2>
-<p><strong>Image :</strong> Le terme "image" fait généralement référence à un composant logiciel
-autonome et emballé qui inclut tout ce qui est nécessaire pour exécuter une
-application, comme le code, le runtime, les bibliothèques et les dépendances.</p>
-<p><strong>GitHub Container Registry (GHCR) :</strong> GCR est un service fourni par GitHub qui
-permet aux utilisateurs de stocker, gérer et distribuer des images de conteneurs
-Docker au sein de l'écosystème GitHub. Il sert de référentiel centralisé pour
-les images de conteneurs associées aux dépôts GitHub.</p>
-<p><strong>GitHub Action :</strong> Une GitHub Action est essentiellement un workflow ou un
-processus automatisé défini au sein d'un dépôt GitHub. Elle permet aux
-utilisateurs d'automatiser des tâches telles que la construction, le test et le
-déploiement de logiciels directement sur la plateforme GitHub, offrant ainsi un
-moyen puissant de rationaliser les workflows de développement.</p>
-<h2 id="explication-du-diagramme">Explication du diagramme</h2>
-<p>Le diagramme illustre un workflow pour construire et pousser une image vers le
-GitHub Container Registry. Il décrit les étapes impliquées dans ce processus,
-y compris la création de trois tags spécifiques : numéro de pull request, nom
-de pull request, et commit SHA basés sur le commit effectué dans une pull
-request. Une fois l'image dans le GCR, un déploiement Kubernetes peut utiliser
-cette image.</p>
-<h2 id="diagrammes">Diagrammes</h2>
-<p><img alt="Github image workflow" src="../img/ghcr_docker_workflow.svg" /></p>
+<h1 id="documentation-dimplementation-pour-la-solution-dobservabilite">Documentation d'implémentation pour la solution d'observabilité</h1>
+<h2 id="vue-densemble">Vue d'ensemble</h2>
+<p>Cette documentation explique l'implémentation de notre pile d'observabilité en
+utilisant OpenTelemetry, Grafana Alloy, Loki, Tempo et Prometheus. Cette pile
+fournit une surveillance et une observabilité complètes pour nos applications
+hébergées sur Azure Kubernetes Service (AKS).</p>
+<h2 id="fonctionnement-de-grafana-alloy">Fonctionnement de Grafana Alloy</h2>
+<p>Grafana Alloy agit comme le collecteur principal d'OpenTelemetry, agrégeant les
+métriques, les journaux et les traces de diverses sources. Il traite les données
+collectées et les transmet à Loki, Tempo et Prometheus pour le stockage et la
+requête.</p>
+<h2 id="configuration-de-grafana-alloy">Configuration de Grafana Alloy</h2>
+<p>La configuration détaillée de Grafana Alloy est disponible à partir de :
+<a href="https://github.com/ai-cfia/howard/blob/d8964d58ad42808b97c5cccc8ee7aaf8fab69b63/kubernetes/aks/system/monitoring/helm/alloy-values.yaml#L28">alloy-values.yaml</a>.</p>
+<h3 id="explication-de-la-configuration">Explication de la configuration</h3>
+<ul>
+<li><strong>otelcol.exporter.otlp</strong> : Configure l'exportateur OTLP pour envoyer des
+  données aux points de terminaison spécifiés.</li>
+<li><strong>otelcol.receiver.otlp</strong> : Configure les récepteurs OTLP pour les protocoles
+  gRPC et HTTP, définissant comment les métriques, les journaux et les traces
+  sont reçus et transmis.</li>
+<li><strong>otelcol.processor.memory_limiter</strong> : Implémente un limiteur de mémoire pour
+  contrôler l'utilisation de la mémoire, assurant la stabilité.</li>
+<li><strong>otelcol.processor.batch</strong> : Regroupe les données de télémétrie avant de les
+  transmettre pour améliorer les performances et l'efficacité.</li>
+<li><strong>logging</strong> : Configure le niveau et le format des journaux pour le dépannage
+  et la surveillance du fonctionnement d'Alloy.</li>
+<li><strong>otelcol.exporter.loki</strong> : Configure l'exportateur pour envoyer des journaux
+  à Loki.</li>
+<li><strong>loki.write</strong> : Définit le point de terminaison pour l'envoi des journaux à
+  Loki.</li>
+<li><strong>otelcol.exporter.otlp</strong> : Configure l'exportateur pour envoyer des traces à
+  Tempo.</li>
+<li><strong>otelcol.exporter.prometheus</strong> : Configure l'exportateur pour envoyer des
+  métriques à Prometheus.</li>
+<li><strong>prometheus.remote_write</strong> : Définit le point de terminaison pour l'envoi des
+  métriques à Prometheus.</li>
+</ul>
+<h3 id="exposition-des-services-alloy">Exposition des services Alloy</h3>
+<p>Les ports de service suivants exposent Alloy, le rendant accessible au sein du
+cluster Kubernetes :</p>
+<div class="highlight"><pre><span></span><code><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;grpc&quot;</span>
+<span class="w">  </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4317</span>
+<span class="w">  </span><span class="nt">targetPort</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4317</span>
+<span class="w">  </span><span class="nt">protocol</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;TCP&quot;</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;http&quot;</span>
+<span class="w">  </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4318</span>
+<span class="w">  </span><span class="nt">targetPort</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4318</span>
+<span class="w">  </span><span class="nt">protocol</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;TCP&quot;</span>
+</code></pre></div>
+<p>Accessible via : alloy.monitoring.svc.cluster.local</p>
+<h2 id="instrumentation-des-metriques-journaux-et-traces">Instrumentation des métriques, journaux et traces</h2>
+<p>Pour envoyer des métriques, des journaux et des traces à Grafana Alloy,
+configurez vos applications pour utiliser les SDK OpenTelemetry et définissez le
+point de terminaison sur alloy.monitoring.svc.cluster.local.</p>
+<p>Exemple pour les métriques</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">opentelemetry</span> <span class="kn">import</span> <span class="n">metrics</span>
+<span class="kn">from</span> <span class="nn">opentelemetry.sdk.metrics</span> <span class="kn">import</span> <span class="n">MeterProvider</span>
+<span class="kn">from</span> <span class="nn">opentelemetry.exporter.otlp.proto.grpc.metric_exporter</span> <span class="kn">import</span> <span class="n">OtlpExporter</span>
+
+<span class="n">metrics</span><span class="o">.</span><span class="n">set_meter_provider</span><span class="p">(</span><span class="n">MeterProvider</span><span class="p">())</span>
+<span class="n">meter</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">get_meter</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+<span class="n">exporter</span> <span class="o">=</span> <span class="n">OtlpExporter</span><span class="p">(</span><span class="n">endpoint</span><span class="o">=</span><span class="s2">&quot;alloy.monitoring.svc.cluster.local:4317&quot;</span><span class="p">)</span>
+</code></pre></div>
+<p>Exemple pour les journaux</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">opentelemetry</span> <span class="kn">import</span> <span class="n">logs</span>
+<span class="kn">from</span> <span class="nn">opentelemetry.sdk.logs</span> <span class="kn">import</span> <span class="n">LogEmitterProvider</span>
+<span class="kn">from</span> <span class="nn">opentelemetry.exporter.otlp.proto.grpc.log_exporter</span> <span class="kn">import</span> <span class="n">OtlpExporter</span>
+
+<span class="n">logs</span><span class="o">.</span><span class="n">set_log_emitter_provider</span><span class="p">(</span><span class="n">LogEmitterProvider</span><span class="p">())</span>
+<span class="n">emitter</span> <span class="o">=</span> <span class="n">logs</span><span class="o">.</span><span class="n">get_log_emitter</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+<span class="n">exporter</span> <span class="o">=</span> <span class="n">OtlpExporter</span><span class="p">(</span><span class="n">endpoint</span><span class="o">=</span><span class="s2">&quot;alloy.monitoring.svc.cluster.local:4317&quot;</span><span class="p">)</span>
+</code></pre></div>
+<p>Exemple pour les traces</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">opentelemetry</span> <span class="kn">import</span> <span class="n">trace</span>
+<span class="kn">from</span> <span class="nn">opentelemetry.sdk.trace</span> <span class="kn">import</span> <span class="n">TracerProvider</span>
+<span class="kn">from</span> <span class="nn">opentelemetry.exporter.otlp.proto.grpc.trace_exporter</span> <span class="kn">import</span> <span class="n">OtlpExporter</span>
+
+<span class="n">trace</span><span class="o">.</span><span class="n">set_tracer_provider</span><span class="p">(</span><span class="n">TracerProvider</span><span class="p">())</span>
+<span class="n">tracer</span> <span class="o">=</span> <span class="n">trace</span><span class="o">.</span><span class="n">get_tracer</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+<span class="n">exporter</span> <span class="o">=</span> <span class="n">OtlpExporter</span><span class="p">(</span><span class="n">endpoint</span><span class="o">=</span><span class="s2">&quot;alloy.monitoring.svc.cluster.local:4317&quot;</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="transmission-des-donnees-a-loki-tempo-et-prometheus">Transmission des données à Loki, Tempo et Prometheus</h2>
+<p>Grafana Alloy traite et transmet les données reçues aux backends respectifs.</p>
+<ul>
+<li>Les journaux sont transmis à Loki à
+  <a href="http://loki.monitoring.svc.cluster.local:3100/loki/api/v1/push">http://loki.monitoring.svc.cluster.local:3100/loki/api/v1/push</a></li>
+<li>Les traces sont transmises à Tempo à
+  <a href="http://tempo.monitoring.svc.cluster.local:4317">http://tempo.monitoring.svc.cluster.local:4317</a></li>
+<li>Les métriques sont transmises à Prometheus à
+  <a href="http://kube-prometheus-stack-prometheus.monitoring.svc.cluster.local:9090/api/v1/write">http://kube-prometheus-stack-prometheus.monitoring.svc.cluster.local:9090/api/v1/write</a></li>
+</ul>
+<h2 id="utilisation-de-grafana-pour-la-visualisation">Utilisation de Grafana pour la visualisation</h2>
+<p>Grafana est disponible à <a href="https://grafana.inspection.alpha.canada.ca">https://grafana.inspection.alpha.canada.ca</a>. L'accès
+est accordé via l'organisation GitHub de l'agence.</p>
+<h3 id="configuration-de-grafana">Configuration de Grafana</h3>
+<ol>
+<li>Connectez-vous à Grafana en utilisant vos identifiants GitHub.</li>
+<li>Naviguez vers les Tableaux de bord pour explorer différents répertoires tels
+que admin, devsecops, finesse, et nachet.</li>
+<li>Utilisez l'une des trois sources de données :<ul>
+<li>Prometheus pour les métriques Loki pour les journaux</li>
+<li>Tempo pour les traces</li>
+</ul>
+</li>
+</ol>
+<h3 id="creation-de-tableaux-de-bord">Création de tableaux de bord</h3>
+<ol>
+<li>Allez à Tableaux de bord &gt; Nouveau tableau de bord.</li>
+<li>Sélectionnez la source de données (Prometheus, Loki ou Tempo).</li>
+<li>Créez des visualisations et configurez les panneaux selon vos besoins.</li>
+</ol>
+<h3 id="tableaux-de-bord-actuels">Tableaux de bord actuels</h3>
+<p>La plupart des tableaux de bord se trouvent dans le dossier devsecops, y
+compris:
+    - Surveillance de la santé des nœuds
+    - Activité ArgoCD
+    - Trafic Ingress-NGINX
+    - Scans de vulnérabilités par Trivy et Falco</p>
+<h3 id="mises-a-jour-futures">Mises à jour futures</h3>
+<p>Cette documentation sera mise à jour au fur et à mesure que nous incorporerons
+des tableaux de bord pour des applications clientes telles que Fertiscan,
+Finesse et Nachet.</p>
 <h2 id="references">Références</h2>
-<p><a href="https://www.docker.com/">Docker</a></p>
-<p><a href="https://docs.github.com/en/actions">Github action</a></p>
-<p><a href="https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry">Github container registry</a></p>
-<p><a href="https://kubernetes.io/docs/concepts/containers/images/">Image Kubernetes</a></p>
+<ul>
+<li><a href="https://opentelemetry.io/docs/">Documentation OpenTelemetry</a></li>
+<li><a href="https://opentelemetry.io/docs/languages/python/">SDK Python OpenTelemetry</a></li>
+<li><a href="https://grafana.com/docs/grafana/latest/">Documentation Grafana</a></li>
+<li><a href="https://prometheus.io/docs/">Documentation Prometheus</a></li>
+<li><a href="https://grafana.com/docs/loki/latest/">Documentation Loki</a></li>
+<li><a href="https://grafana.com/docs/tempo/latest/">Documentation Tempo</a></li>
+<li><a href="https://grafana.com/docs/alloy/latest/">Documentation Grafana Alloy</a></li>
+</ul>
 
 
 

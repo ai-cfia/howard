@@ -16,7 +16,7 @@
     
     
       
-        <title>Vouch-Proxy Documentation - Howard</title>
+        <title>Implementation documentation for observability Solution - Howard</title>
       
     
     
@@ -58,7 +58,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#vouch-proxy-documentation" class="md-skip">
+        <a href="#implementation-documentation-for-observability-solution" class="md-skip">
           Skip to content
         </a>
       
@@ -94,7 +94,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Vouch-Proxy Documentation
+              Implementation documentation for observability Solution
             
           </span>
         </div>
@@ -326,27 +326,120 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#integration-with-azure-active-directory" class="md-nav__link">
+  <a href="#how-grafana-alloy-works" class="md-nav__link">
     <span class="md-ellipsis">
-      Integration with Azure Active Directory
+      How Grafana Alloy works
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#nginx-ingress-annotations-for-authentication" class="md-nav__link">
+  <a href="#configuration-of-grafana-alloy" class="md-nav__link">
     <span class="md-ellipsis">
-      Nginx Ingress Annotations for Authentication
+      Configuration of Grafana Alloy
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuration of Grafana Alloy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#explanation-of-the-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Explanation of the configuration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exposing-alloy-services" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exposing Alloy services
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#instrumentation-of-metrics-logs-and-traces" class="md-nav__link">
+    <span class="md-ellipsis">
+      Instrumentation of Metrics, Logs, and Traces
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#authentication-flow" class="md-nav__link">
+  <a href="#forwarding-data-to-loki-tempo-and-prometheus" class="md-nav__link">
     <span class="md-ellipsis">
-      Authentication Flow
+      Forwarding Data to Loki, Tempo, and Prometheus
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-grafana-for-visualization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Using Grafana for Visualization
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Using Grafana for Visualization">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#setting-up-grafana" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setting Up Grafana
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#creating-dashboards" class="md-nav__link">
+    <span class="md-ellipsis">
+      Creating Dashboards
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#current-dashboards" class="md-nav__link">
+    <span class="md-ellipsis">
+      Current Dashboards
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#future-updates" class="md-nav__link">
+    <span class="md-ellipsis">
+      Future Updates
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      References
     </span>
   </a>
   
@@ -370,59 +463,136 @@
   
 
 
-<h1 id="vouch-proxy-documentation">Vouch-Proxy Documentation</h1>
+<h1 id="implementation-documentation-for-observability-solution">Implementation documentation for observability Solution</h1>
 <h2 id="overview">Overview</h2>
-<p>Vouch-Proxy is an authentication and authorization solution that acts as a
-companion to our Nginx ingress controller. It's designed to authenticate users
-against an OpenID Connect provider (OIDC) and then pass those validated
-credentials to our web application.</p>
-<h2 id="integration-with-azure-active-directory">Integration with Azure Active Directory</h2>
-<p>Vouch-Proxy can be configured to authenticate users via Azure Active Directory
-(Azure AD), leveraging Azure's App Registrations to authenticate users from a
-specific Azure AD tenant. This setup involves:</p>
+<p>This documentation explains the implementation of our observability stack using
+OpenTelemetry, Grafana Alloy, Loki, Tempo, and Prometheus. This stack provides
+comprehensive monitoring and observability for our applications hosted on Azure
+Kubernetes Service (AKS).</p>
+<h2 id="how-grafana-alloy-works">How Grafana Alloy works</h2>
+<p>Grafana Alloy acts as the primary OpenTelemetry collector, aggregating metrics,
+logs, and traces from various sources. It processes the collected data and
+forwards it to Loki, Tempo, and Prometheus for storage and querying.</p>
+<h2 id="configuration-of-grafana-alloy">Configuration of Grafana Alloy</h2>
+<p>The detailed configuration of Grafana Alloy is available from:
+<a href="https://github.com/ai-cfia/howard/blob/d8964d58ad42808b97c5cccc8ee7aaf8fab69b63/kubernetes/aks/system/monitoring/helm/alloy-values.yaml#L28">alloy-values.yaml</a>.</p>
+<h3 id="explanation-of-the-configuration">Explanation of the configuration</h3>
 <ul>
-<li>Creating an App Registration in Azure AD.</li>
-<li>Configuring the redirect URIs for the App Registration to
-  <code>&lt;https://vouch.inspection.alpha.canada.ca/auth&gt;</code></li>
-<li>Using the App Registration's details (client ID, client secret, tenantID) in
-  Vouch-Proxy's configuration :</li>
+<li><strong>otelcol.exporter.otlp</strong>: Configures the OTLP exporter to send data to
+  specified endpoints.</li>
+<li><strong>otelcol.receiver.otlp</strong>: Sets up OTLP receivers for gRPC and HTTP protocols,
+  defining how metrics, logs, and traces are received and forwarded.</li>
+<li><strong>otelcol.processor.memory_limiter</strong>: Implements a memory limiter to control
+  memory usage, ensuring stability.</li>
+<li><strong>otelcol.processor.batch</strong>: Batches telemetry data before forwarding to
+  improve performance and efficiency.</li>
+<li><strong>logging</strong>: Configures logging level and format for troubleshooting and
+  monitoring Alloy’s operation.</li>
+<li><strong>otelcol.exporter.loki</strong>: Configures the exporter to send logs to Loki.</li>
+<li><strong>loki.write</strong>: Defines the endpoint for sending logs to Loki.</li>
+<li><strong>otelcol.exporter.otlp</strong>: Configures the exporter to send traces to Tempo.</li>
+<li><strong>otelcol.exporter.prometheus</strong>: Configures the exporter to send metrics to
+  Prometheus.</li>
+<li><strong>prometheus.remote_write</strong>: Defines the endpoint for sending metrics to
+  Prometheus.</li>
 </ul>
-<div class="highlight"><pre><span></span><code><span class="w">  </span><span class="nt">client_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;id&gt;</span>
-<span class="w">  </span><span class="nt">client_secret</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;secret&gt;</span>
-<span class="w">  </span><span class="nt">auth_url</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://login.microsoftonline.com/&lt;tenantID&gt;/oauth2/v2.0/authorize</span>
-<span class="w">  </span><span class="nt">token_url</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://login.microsoftonline.com/&lt;tenantID&gt;/oauth2/v2.0/token</span>
+<h3 id="exposing-alloy-services">Exposing Alloy services</h3>
+<p>The following service ports expose Alloy, making it accessible within the
+Kubernetes cluster:</p>
+<div class="highlight"><pre><span></span><code><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;grpc&quot;</span>
+<span class="w">  </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4317</span>
+<span class="w">  </span><span class="nt">targetPort</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4317</span>
+<span class="w">  </span><span class="nt">protocol</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;TCP&quot;</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;http&quot;</span>
+<span class="w">  </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4318</span>
+<span class="w">  </span><span class="nt">targetPort</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4318</span>
+<span class="w">  </span><span class="nt">protocol</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;TCP&quot;</span>
 </code></pre></div>
-<p>When a user attempts to access a protected resource, they are redirected to
-Azure AD to log in. Once authenticated, Azure AD redirects back to Vouch-Proxy,
-which then validates the user's session and forwards the authentication details
-to the Nginx ingress controller.</p>
-<h2 id="nginx-ingress-annotations-for-authentication">Nginx Ingress Annotations for Authentication</h2>
-<p>To protect an application using Vouch-Proxy, you can configure Nginx ingress
-resources with specific annotations. These annotations instruct the Nginx
-controller to consult Vouch-Proxy for authentication before granting access to
-the application. Here’s how to configure these annotations for an app with the
-ingress hostname <code>vouch.inspection.alpha.canada.ca</code>:</p>
-<div class="highlight"><pre><span></span><code><span class="nt">annotations</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">nginx.ingress.kubernetes.io/auth-signin</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;https://vouch.inspection.alpha.canada.ca/login?url=$scheme://$http_host$request_uri&amp;vouch-failcount=$auth_resp_failcount&amp;X-Vouch-Token=$auth_resp_jwt&amp;error=$auth_resp_err&quot;</span>
-<span class="w">  </span><span class="nt">nginx.ingress.kubernetes.io/auth-url</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://vouch.inspection.alpha.canada.ca/validate</span>
-<span class="w">  </span><span class="nt">nginx.ingress.kubernetes.io/auth-snippet</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
-<span class="w">    </span><span class="no"># these return values are used by the @error401 call</span>
-<span class="w">    </span><span class="no">auth_request_set $auth_resp_jwt $upstream_http_x_vouch_jwt;</span>
-<span class="w">    </span><span class="no">auth_request_set $auth_resp_err $upstream_http_x_vouch_err;</span>
-<span class="w">    </span><span class="no">auth_request_set $auth_resp_failcount $upstream_http_x_vouch_failcount;</span>
+<p>Accessible via: alloy.monitoring.svc.cluster.local</p>
+<h2 id="instrumentation-of-metrics-logs-and-traces">Instrumentation of Metrics, Logs, and Traces</h2>
+<p>To send metrics, logs, and traces to Grafana Alloy, configure your applications
+to use the OpenTelemetry SDKs and set the endpoint to
+alloy.monitoring.svc.cluster.local.</p>
+<p>Example for Metrics</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">opentelemetry</span> <span class="kn">import</span> <span class="n">metrics</span>
+<span class="kn">from</span> <span class="nn">opentelemetry.sdk.metrics</span> <span class="kn">import</span> <span class="n">MeterProvider</span>
+<span class="kn">from</span> <span class="nn">opentelemetry.exporter.otlp.proto.grpc.metric_exporter</span> <span class="kn">import</span> <span class="n">OtlpExporter</span>
+
+<span class="n">metrics</span><span class="o">.</span><span class="n">set_meter_provider</span><span class="p">(</span><span class="n">MeterProvider</span><span class="p">())</span>
+<span class="n">meter</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">get_meter</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+<span class="n">exporter</span> <span class="o">=</span> <span class="n">OtlpExporter</span><span class="p">(</span><span class="n">endpoint</span><span class="o">=</span><span class="s2">&quot;alloy.monitoring.svc.cluster.local:4317&quot;</span><span class="p">)</span>
 </code></pre></div>
-<h2 id="authentication-flow">Authentication Flow</h2>
-<p><img alt="Vouch-Proxy Authentication Flow" src="../img/auth-vouch-proxy.svg" /></p>
+<p>Example for Logs</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">opentelemetry</span> <span class="kn">import</span> <span class="n">logs</span>
+<span class="kn">from</span> <span class="nn">opentelemetry.sdk.logs</span> <span class="kn">import</span> <span class="n">LogEmitterProvider</span>
+<span class="kn">from</span> <span class="nn">opentelemetry.exporter.otlp.proto.grpc.log_exporter</span> <span class="kn">import</span> <span class="n">OtlpExporter</span>
+
+<span class="n">logs</span><span class="o">.</span><span class="n">set_log_emitter_provider</span><span class="p">(</span><span class="n">LogEmitterProvider</span><span class="p">())</span>
+<span class="n">emitter</span> <span class="o">=</span> <span class="n">logs</span><span class="o">.</span><span class="n">get_log_emitter</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+<span class="n">exporter</span> <span class="o">=</span> <span class="n">OtlpExporter</span><span class="p">(</span><span class="n">endpoint</span><span class="o">=</span><span class="s2">&quot;alloy.monitoring.svc.cluster.local:4317&quot;</span><span class="p">)</span>
+</code></pre></div>
+<p>Example for Traces</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">opentelemetry</span> <span class="kn">import</span> <span class="n">trace</span>
+<span class="kn">from</span> <span class="nn">opentelemetry.sdk.trace</span> <span class="kn">import</span> <span class="n">TracerProvider</span>
+<span class="kn">from</span> <span class="nn">opentelemetry.exporter.otlp.proto.grpc.trace_exporter</span> <span class="kn">import</span> <span class="n">OtlpExporter</span>
+
+<span class="n">trace</span><span class="o">.</span><span class="n">set_tracer_provider</span><span class="p">(</span><span class="n">TracerProvider</span><span class="p">())</span>
+<span class="n">tracer</span> <span class="o">=</span> <span class="n">trace</span><span class="o">.</span><span class="n">get_tracer</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+<span class="n">exporter</span> <span class="o">=</span> <span class="n">OtlpExporter</span><span class="p">(</span><span class="n">endpoint</span><span class="o">=</span><span class="s2">&quot;alloy.monitoring.svc.cluster.local:4317&quot;</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="forwarding-data-to-loki-tempo-and-prometheus">Forwarding Data to Loki, Tempo, and Prometheus</h2>
+<p>Grafana Alloy processes and forwards the received data to the respective
+backends.</p>
+<ul>
+<li>Logs are forwarded to Loki at
+  <a href="http://loki.monitoring.svc.cluster.local:3100/loki/api/v1/push">http://loki.monitoring.svc.cluster.local:3100/loki/api/v1/push</a></li>
+<li>Traces are forwarded to Tempo at
+  <a href="http://tempo.monitoring.svc.cluster.local:4317">http://tempo.monitoring.svc.cluster.local:4317</a></li>
+<li>Metrics are forwarded to Prometheus at
+  <a href="http://kube-prometheus-stack-prometheus.monitoring.svc.cluster.local:9090/api/v1/write">http://kube-prometheus-stack-prometheus.monitoring.svc.cluster.local:9090/api/v1/write</a></li>
+</ul>
+<h2 id="using-grafana-for-visualization">Using Grafana for Visualization</h2>
+<p>Grafana is available at <a href="https://grafana.inspection.alpha.canada.ca">https://grafana.inspection.alpha.canada.ca</a>. Access is
+granted through the agency's GitHub organization.</p>
+<h3 id="setting-up-grafana">Setting Up Grafana</h3>
 <ol>
-<li>A user requests access to an application protected by Vouch-Proxy.</li>
-<li>The Nginx ingress controller intercepts the request and queries Vouch-Proxy
-   to validate the user's session.</li>
-<li>If the user is not authenticated, they are redirected to the Azure AD login
-   page.</li>
-<li>After successful authentication, the user is redirected back to Vouch-Proxy,</li>
-<li>Vouch-proxy then sets a cookie in the user's browser and redirects the user
-   back to the original application, passing along any specified user details.</li>
+<li>Login to Grafana using your GitHub credentials.</li>
+<li>Navigate to Dashboards to explore different directories like admin,
+   devsecops, finesse, and nachet.</li>
+<li>Use one of the three data sources:<ul>
+<li>Prometheus for metrics</li>
+<li>Loki for logs</li>
+<li>Tempo for traces</li>
+</ul>
+</li>
 </ol>
+<h3 id="creating-dashboards">Creating Dashboards</h3>
+<ol>
+<li>Go to Dashboards &gt; New Dashboard.</li>
+<li>Select the data source (Prometheus, Loki, or Tempo).</li>
+<li>Create visualizations and configure panels as needed.</li>
+</ol>
+<h3 id="current-dashboards">Current Dashboards</h3>
+<p>Most dashboards are under the devsecops folder, including:</p>
+<ul>
+<li>Node Health Monitoring</li>
+<li>ArgoCD Activity</li>
+<li>Ingress-NGINX Traffic</li>
+<li>Vulnerability Scans by Trivy and Falco</li>
+</ul>
+<h3 id="future-updates">Future Updates</h3>
+<p>This documentation will be updated as we incorporate dashboards for client
+applications such as Fertiscan, Finesse and Nachet.</p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://opentelemetry.io/docs/">OpenTelemetry documentation</a></li>
+<li><a href="https://opentelemetry.io/docs/languages/python/">Python OpenTelemetry SDK</a></li>
+<li><a href="https://grafana.com/docs/grafana/latest/">Grafana documentation</a></li>
+<li><a href="https://prometheus.io/docs/">Prometheus documentation</a></li>
+<li><a href="https://grafana.com/docs/loki/latest/">Loki documentation</a></li>
+<li><a href="https://grafana.com/docs/tempo/latest/">Tempo documentation</a></li>
+<li><a href="https://grafana.com/docs/alloy/latest/">Grafana Alloy documentation</a></li>
+</ul>
 
 
 

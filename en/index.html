@@ -14,7 +14,7 @@
       
       
       <link rel="icon" href="assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.24">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.25">
     
     
       
@@ -348,11 +348,11 @@ nomenclature system for clouds introduced in 1802. Inspired by his innovation
 and legacy in categorizing the elements, our project aims to effectively manage
 and orchestrate the cloud-based infrastructure for the Canadian Food Inspection
 Agency (CFIA) ai-lab.</p>
-<p>Howard is essentially the backbone that supports CFIA's ai-lab Kubernetes environment,
-where key applications such as Nachet, Finesse, and Louis are deployed and
-managed dynamically. This infrastructure emphasizes robustness, security, and
-efficiency to handle the critical workload involved in food inspection
-and safety.</p>
+<p>Howard is essentially the backbone that supports CFIA's ai-lab Kubernetes
+environment, where key applications such as Nachet, Finesse, and Louis are
+deployed and managed dynamically. This infrastructure emphasizes robustness,
+security, and efficiency to handle the critical workload involved in food
+inspection and safety.</p>
 <h2 id="technology-stack-and-tools">Technology stack and tools</h2>
 <p>The Howard infrastructure leverages a comprehensive suite of tools designed to
 provide a resilient, secure, and scalable environment:</p>
@@ -367,24 +367,30 @@ Azure.</li>
 </ul>
 <h3 id="gitops">GitOps</h3>
 <ul>
-<li><strong>ArgoCD</strong>: Used for continuous delivery, managing Kubernetes resources in
-a declarative way through Git repositories.</li>
+<li><strong>ArgoCD</strong>: Used for continuous delivery, managing Kubernetes resources in a
+declarative way through Git repositories.</li>
 </ul>
 <h3 id="monitoring-and-security">Monitoring and security</h3>
 <ul>
 <li><strong>Grafana</strong>: Visualization and analytics software.</li>
-<li><strong>Kube-Prometheus-Stack</strong>: Comprehensive Kubernetes cluster monitoring
-with Prometheus.</li>
+<li><strong>Kube-Prometheus-Stack</strong>: Comprehensive Kubernetes cluster monitoring with
+Prometheus.</li>
+<li><strong>Grafana Tempo</strong> Distributed tracing of our applications.</li>
+<li><strong>Grafana Loki:</strong> Logging and aggregation system.</li>
+<li><strong>Grafana Alloy:</strong> Allows the collection and transmission of OpenTelemetry
+  data from our applications.</li>
 <li><strong>Falco</strong>: Open-source runtime security tool.</li>
 <li><strong>Trivy</strong>: Vulnerability scanner for containers.</li>
-<li><strong>Oneuptime</strong>: Monitoring tool for real-time performance and security insights.</li>
+<li><strong>Oneuptime</strong>: Monitoring tool for real-time performance and security
+  insights.</li>
 </ul>
 <h3 id="networking">Networking</h3>
 <ul>
 <li><strong>Vouch-Proxy</strong>: Authentication proxy.</li>
-<li><strong>Nginx Ingress</strong>: Ingress controller for Kubernetes using NGINX as a
-reverse proxy and load balancer.</li>
-<li><strong>Istio</strong>: Service mesh that provides a secure interface for inter-service communication.</li>
+<li><strong>Nginx Ingress</strong>: Ingress controller for Kubernetes using NGINX as a reverse
+proxy and load balancer.</li>
+<li><strong>Istio</strong>: Service mesh that provides a secure interface for inter-service
+  communication.</li>
 </ul>
 <h3 id="secrets-management">Secrets management</h3>
 <ul>
@@ -393,8 +399,8 @@ passwords, certificates, and other secrets.</li>
 </ul>
 <h3 id="cloud-infrastructure-management">Cloud infrastructure management</h3>
 <ul>
-<li><strong>Terraform</strong>: Open-source infrastructure as code software tool that
-allows managing service life cycle in cloud providers declaratively.</li>
+<li><strong>Terraform</strong>: Open-source infrastructure as code software tool that allows
+managing service life cycle in cloud providers declaratively.</li>
 <li><strong>Ansible</strong>: Automation tool for configuring and managing computers.</li>
 </ul>
 <h2 id="installation">Installation</h2>

@@ -16,7 +16,7 @@
     
     
       
-        <title>ADR-015 : Gestion d'authentification des utilisateurs - Howard</title>
+        <title>ADR-018 : Gestion de l'observabilité - Howard</title>
       
     
     
@@ -58,7 +58,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#adr-015-gestion-dauthentification-des-utilisateurs" class="md-skip">
+        <a href="#adr-018-gestion-de-lobservabilite" class="md-skip">
           Aller au contenu
         </a>
       
@@ -94,7 +94,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              ADR-015 : Gestion d'authentification des utilisateurs
+              ADR-018 : Gestion de l'observabilité
             
           </span>
         </div>
@@ -319,7 +319,7 @@
         <li class="md-nav__item">
   <a href="#resume-executif" class="md-nav__link">
     <span class="md-ellipsis">
-      Résumé Exécutif
+      Résumé exécutif
     </span>
   </a>
   
@@ -341,40 +341,23 @@
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#alternatives-considerees" class="md-nav__link">
-    <span class="md-ellipsis">
-      Alternatives Considérées
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Alternatives Considérées">
+    <nav class="md-nav" aria-label="Décision">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#ori-network-ori-oathkeeper-ori-kratos" class="md-nav__link">
+  <a href="#source-de-donnees-opentelemetry" class="md-nav__link">
     <span class="md-ellipsis">
-      Ori network (Ori Oathkeeper, Ori Kratos)
+      Source de données : OpenTelemetry
     </span>
   </a>
   
-</li>
+    <nav class="md-nav" aria-label="Source de données : OpenTelemetry">
+      <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#oauth2-proxy" class="md-nav__link">
+  <a href="#alternatives-considerees-pour-la-source-de-donnees" class="md-nav__link">
     <span class="md-ellipsis">
-      Oauth2-Proxy
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#solution-sur-mesure-pour-lauthentification" class="md-nav__link">
-    <span class="md-ellipsis">
-      Solution sur mesure pour l'authentification
+      Alternatives considérées pour la source de données
     </span>
   </a>
   
@@ -384,11 +367,64 @@
     </nav>
   
 </li>
+        
+          <li class="md-nav__item">
+  <a href="#plateforme-de-donnees-grafana-alloy-loki-tempo-prometheus" class="md-nav__link">
+    <span class="md-ellipsis">
+      Plateforme de données : Grafana Alloy, Loki, Tempo, Prometheus
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Plateforme de données : Grafana Alloy, Loki, Tempo, Prometheus">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#alternatives-considerees-pour-la-plateforme-de-donnees" class="md-nav__link">
+    <span class="md-ellipsis">
+      Alternatives considérées pour la plateforme de données
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#consommation-grafana" class="md-nav__link">
+    <span class="md-ellipsis">
+      Consommation : Grafana
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Consommation : Grafana">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#alternatives-considerees-pour-la-consommation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Alternatives Considérées pour la Consommation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
       
         <li class="md-nav__item">
-  <a href="#consequences" class="md-nav__link">
+  <a href="#conclusion" class="md-nav__link">
     <span class="md-ellipsis">
-      Conséquences
+      Conclusion
     </span>
   </a>
   
@@ -421,126 +457,270 @@
   
 
 
-<h1 id="adr-015-gestion-dauthentification-des-utilisateurs">ADR-015 : Gestion d'authentification des utilisateurs</h1>
-<h2 id="resume-executif">Résumé Exécutif</h2>
-<p>Dans le cadre de la gestion centralisée de l'authentification des utilisateurs
-pour nos applications, notamment l'application Nachet, nous avons choisi
-d'implémenter Vouch-proxy. Cette solution a été sélectionnée pour sa capacité à
-intégrer de manière efficace les services d'authentification tels qu'Azure et
-Github, tout en récupérant les informations de groupe des utilisateurs dans un
-token. Vouch-proxy nous permet d'appliquer une gestion d'authentification
-uniforme et sécurisée pour tous les services hébergés sur notre cluster
-Kubernetes, grâce à son intégration avec l'ingress NGINX. Ce choix vise à
-améliorer la sécurité tout en offrant une flexibilité et une évolutivité accrues
-pour nos opérations de gestion d'identité et d'accès.</p>
+<h1 id="adr-018-gestion-de-lobservabilite">ADR-018 : Gestion de l'observabilité</h1>
+<h2 id="resume-executif">Résumé exécutif</h2>
+<p>Nous avons décidé de mettre en place une pile d'observabilité complète pour nos
+applications hébergées sur Azure Kubernetes Service (AKS) en utilisant
+OpenTelemetry, Grafana Alloy et divers composants Grafana (Loki, Tempo,
+Prometheus). Cette décision vise à améliorer notre visibilité sur les
+performances du système, à améliorer la surveillance des services critiques et à
+fournir une solution open-source, indépendante du fournisseur, qui répond aux
+exigences de notre agence.</p>
+<p><img alt="monitoring-stack" src="../../img/monitoring-stack.png" /></p>
 <h2 id="contexte">Contexte</h2>
-<p>Certaines de nos applications, dont l'application Nachet, requièrent une
-authentification pour accéder à leurs services. Initialement, Nachet a été
-déployée sans mécanismes d'authentification, permettant ainsi à n'importe quel
-utilisateur de consulter la page et potentiellement d'y insérer des images
-malveillantes. Face à cette vulnérabilité, et afin de sécuriser l'accès à
-l'ensemble des applications sur notre cluster Kubernetes, il est devenu
-impératif d'adopter une solution d'authentification centralisée. Cette solution
-doit également être capable de s'intégrer avec les fournisseurs d'identité tels
-que Azure et Github, et de récupérer les groupes d'utilisateurs dans un token
-pour une gestion fine des autorisations.</p>
+<p>À l'Agence canadienne d'inspection des aliments, nous avons rencontré des défis
+significatifs dans la surveillance et la compréhension des performances de nos
+applications et services système sur Azure Kubernetes Service (AKS). Malgré une
+haute disponibilité et une automatisation avec AKS, nous manquions de données
+contextualisées pour diagnostiquer les problèmes et surveiller la santé de nos
+nœuds et services tels qu'ArgoCD et NGINX Ingress, ainsi que nos applications
+clientes.</p>
+<p>Nous cherchions une solution qui offrirait une surveillance centralisée et
+open-source, fournissant des informations sur l'activité, le traffic et
+l'engagement avec nos applications. Notre objectif était de mettre en œuvre une
+solution générique, indépendante du fournisseur, pour la collecte et l'affichage
+des données de télémétrie (logs, traces et métriques) sur nos applications.
+Après avoir évalué diverses options, nous avons choisi OpenTelemetry pour la
+collecte de données, Grafana Alloy comme collecteur, et la suite d'outils
+Grafana (Loki, Tempo, Prometheus) pour la gestion des logs, traces et métriques.</p>
 <h2 id="decision">Décision</h2>
-<p>Après avoir évalué plusieurs alternatives, nous avons opté pour l'utilisation de
-Vouch-proxy pour répondre à nos besoins d'authentification centralisée.
-Vouch-proxy se distingue par sa compatibilité avec les fournisseurs d'identité
-Azure et Github, facilitant ainsi l'authentification des utilisateurs tout en
-récupérant les informations essentielles des groupes dans un token. Cette
-capacité nous est cruciale pour la gestion des autorisations au sein de nos
-services. En outre, Vouch-proxy s'intègre parfaitement à l'ingress NGINX de
-notre cluster Kubernetes, permettant une gestion centralisée de
-l'authentification pour tous nos services. Cette approche centralisée garantit
-une sécurité renforcée et une meilleure cohérence dans la gestion des accès
-utilisateurs à travers différentes applications.</p>
-<h2 id="alternatives-considerees">Alternatives Considérées</h2>
-<h3 id="ori-network-ori-oathkeeper-ori-kratos">Ori network (Ori Oathkeeper, Ori Kratos)</h3>
-<p>Avantages :</p>
+<h3 id="source-de-donnees-opentelemetry">Source de données : OpenTelemetry</h3>
+<p>Nous avons choisi OpenTelemetry comme principale source de données pour la
+collecte de télémétrie en raison de sa nature indépendante du fournisseur et de
+ses API/SDK cohérents à travers plusieurs langages de programmation. Ce choix
+s'aligne bien avec le paysage technologique diversifié de notre agence et assure
+une large compatibilité et évolutivité.</p>
+<h4 id="alternatives-considerees-pour-la-source-de-donnees">Alternatives considérées pour la source de données</h4>
+<ol>
+<li><strong>Jaeger :</strong></li>
+<li><strong>Avantages :</strong> Excellentes capacités de traçage, intégration avec divers
+     systèmes de stockage backend.</li>
+<li>
+<p><strong>Inconvénients :</strong> Principalement axé sur le traçage, moins de support
+     pour les métriques et les logs comparé à OpenTelemetry.</p>
+</li>
+<li>
+<p><strong>Zipkin :</strong></p>
+</li>
+<li><strong>Avantages :</strong> Simple et facile à déployer, bon support de traçage.</li>
+<li><strong>Inconvénients :</strong> Support limité pour les métriques et les logs, moins
+     flexible qu'OpenTelemetry.</li>
+</ol>
+<h3 id="plateforme-de-donnees-grafana-alloy-loki-tempo-prometheus">Plateforme de données : Grafana Alloy, Loki, Tempo, Prometheus</h3>
+<p>Nous avons décidé d'utiliser Grafana Alloy comme notre collecteur OpenTelemetry,
+tirant parti de sa position neutre vis-à-vis des fournisseurs et de son
+intégration transparente avec les autres composants Grafana. L'attrait principal
+de Grafana Alloy réside dans sa promesse de fournir une plateforme
+d'observabilité unifiée, semblable à une clé maîtresse pour diverses serrures.
+Cela permet une intégration transparente avec des outils tels que Prometheus
+pour les métriques, Loki pour les journaux, et bien d'autres. Alloy simplifie la
+pile d'observabilité, la rendant plus accessible et gérable.</p>
+<p>Pour les sources de données, nous avons sélectionné Grafana Loki pour les
+journaux, Grafana Tempo pour les traces, et Prometheus pour les métriques.</p>
+<ol>
+<li>
+<p><strong>Alloy :</strong></p>
 <ul>
-<li>Ori Oathkeeper est un proxy d'authentification et d'autorisation qui peut être
-  utilisé pour gérer l'authentification des utilisateurs et des services de
-  facons centralisée. Ori Kratos est un service d'identité et d'accès qui peut
-  être utilisé pour gérer les utilisateurs et les rôles de manière centralisée.
-  L'avantage de ces solutions est qu'elles peuvent être utilisées comme solution
-  complète pour gérer l'authentification et l'autorisation des utilisateurs et
-  des services.</li>
+<li><strong>Avantages :</strong> Plateforme d'observabilité unifiée, neutre vis-à-vis des
+  fournisseurs, intégration transparente avec les autres composants Grafana.</li>
+<li><strong>Inconvénients :</strong> Complexité de la configuration et de la gestion des
+  solutions de stockage de journaux à grande échelle.</li>
 </ul>
-<p>Inconvénients :</p>
+</li>
+<li>
+<p><strong>Loki :</strong></p>
 <ul>
-<li>Ori Oathkeeper et Ori Kratos sont des solutions relativement nouvelles et se
-  sont avérées moins matures que d'autres solutions d'authentification. Nous
-  avons essayer un déploiement de Kratos et avons rencontré des problèmes de
-  configuration entre autres. La documentation est également moins complète que
-  celle d'autres solutions.</li>
+<li><strong>Avantages :</strong> Agrégation de journaux hautement efficace, stockage
+  évolutif, et intégration avec Grafana pour une visualisation transparente.</li>
+<li><strong>Inconvénients :</strong> Complexité de la configuration et de la gestion des
+  solutions de stockage de journaux à grande échelle.</li>
 </ul>
-<h3 id="oauth2-proxy">Oauth2-Proxy</h3>
-<p>Avantages :</p>
+</li>
+<li>
+<p><strong>Tempo :</strong></p>
 <ul>
-<li>Oauth2-Proxy est un proxy d'authentification qui peut être utilisé pour gérer
-  l'authentification des utilisateurs et peut être configuré avec le ingress
-  NGINX.</li>
+<li><strong>Avantages :</strong> Tracing distribué efficace et évolutif, s'intègre bien
+  avec les tableaux de bord Grafana.</li>
+<li><strong>Inconvénients :</strong> Peut être gourmand en ressources, nécessite une
+  configuration appropriée pour des performances optimales.</li>
 </ul>
-<p>Inconvénients :</p>
+</li>
+<li>
+<p><strong>Prometheus :</strong></p>
 <ul>
-<li>Oauth2-Proxy est configurable pour gérer l'authentification 1 pour 1, mais
-  n'est pas conçu pour gérer l'authentification de manière centralisée pour
-  plusieurs services. Vouch-proxy est une alternative plus adaptée à nos besoins
-  de gestion d'authentification centralisée.</li>
+<li><strong>Avantages :</strong> Capacités robustes de collecte et de requête de métriques,
+  support solide de l'écosystème, et gestion des alertes.</li>
+<li><strong>Inconvénients :</strong> Peut être gourmand en ressources, en particulier à
+  grande échelle, et nécessite une configuration et une maintenance
+  significatives.</li>
 </ul>
-<h3 id="solution-sur-mesure-pour-lauthentification">Solution sur mesure pour l'authentification</h3>
-<p>Avantages :</p>
+</li>
+</ol>
+<h4 id="alternatives-considerees-pour-la-plateforme-de-donnees">Alternatives considérées pour la plateforme de données</h4>
+<ol>
+<li>
+<p><strong>Collecteur OpenTelemetry natif :</strong></p>
 <ul>
-<li>Adaptation précise : Une solution sur mesure offre la possibilité de
-  développer un système d'authentification qui correspond précisément aux
-  exigences spécifiques de notre infrastructure et de nos applications. Cela
-  permet une intégration plus fine et adaptée aux processus internes.</li>
-<li>Contrôle complet : En concevant notre propre solution, nous bénéficions d'un
-  contrôle total sur les aspects de sécurité et de fonctionnalité, nous
-  permettant ainsi d'ajuster ou d'améliorer la solution en fonction des
-  évolutions des besoins de sécurité et de gestion des utilisateurs.</li>
+<li><strong>Avantages :</strong><ul>
+<li><strong>Intégration directe :</strong> Support direct pour les protocoles
+  OpenTelemetry assurant une collecte et une exportation de données sans
+  couture.</li>
+<li><strong>Hautement personnalisable :</strong> Offre de vastes options de
+  personnalisation pour adapter le pipeline d'observabilité à des
+  besoins spécifiques.</li>
 </ul>
-<p>Inconvénients :</p>
+</li>
+<li><strong>Inconvénients :</strong><ul>
+<li><strong>Configuration complexe :</strong> Nécessite un effort significatif de
+  configuration et de mise en place, ce qui peut être chronophage.</li>
+<li><strong>Absence de tableaux de Bbord intégrés :</strong> Ne propose pas d'outils de
+  visualisation intégrés, nécessitant des intégrations supplémentaires
+  pour les tableaux de bord.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Azure Monitor :</strong></p>
+</li>
+<li><strong>Avantages :</strong><ul>
+<li><strong>Intégration native avec Azure :</strong> Intégration transparente avec les
+   services et ressources Azure, simplifiant la configuration et la gestion.</li>
+<li><strong>Surveillance complète :</strong> Offre une large gamme de fonctionnalités de
+   surveillance et d'observabilité, y compris les journaux, les métriques et
+   les traces.</li>
+</ul>
+</li>
+<li>
+<p><strong>Inconvénients :</strong></p>
 <ul>
-<li>Coût et temps de développement élevés : La conception d'une solution
-  personnalisée exige un investissement initial significatif en temps et en
-  ressources humaines.</li>
-<li>Maintenance et mise à jour : Les coûts opérationnels post-développement
-  peuvent être importants, incluant la maintenance régulière et les mises à jour
-  nécessaires pour répondre aux nouvelles menaces de sécurité et aux exigences
-  légales.</li>
-<li>Compétitivité et maturité : Il est difficile pour une solution interne de
-  rivaliser avec les fonctionnalités et la sécurité offertes par des solutions
-  éprouvées sur le marché, qui bénéficient d'un développement continu et du
-  retour d'expérience d'une large base d'utilisateurs.</li>
+<li><strong>Dépendance au fournisseur :</strong> Lié à l'écosystème Azure, limitant la
+   flexibilité et la portabilité.</li>
+<li><strong>Coûteux à grande échelle :</strong> Les coûts peuvent augmenter rapidement,
+   surtout avec de grands volumes de données.</li>
+<li><strong>Limitations de configuration :</strong> Capacité limitée à configurer en tant
+   que code, ce qui peut entraver l'automatisation et les efforts de
+   contrôle de version.</li>
+<li><strong>Support communautaire limité :</strong> Communauté relativement restreinte par
+   rapport aux solutions open-source, ce qui peut limiter les ressources et
+   le support.</li>
 </ul>
-<h2 id="consequences">Conséquences</h2>
-<p>L'adoption de Vouch-proxy pour l'authentification centralisée au sein de notre
-infrastructure présente des implications significatives, tant positives que
-négatives. Sur le plan positif, cette décision renforcera la sécurité de nos
-applications en intégrant efficacement des services d'authentification robustes
-tels qu'Azure et Github, tout en facilitant la gestion des droits d'accès grâce
-à la récupération des groupes d'utilisateurs dans un token. Cela simplifiera
-également l'administration de nos systèmes et améliorera la cohérence de
-l'expérience utilisateur à travers différentes applications. Toutefois, il est
-essentiel de reconnaître que cette mise en œuvre nécessitera des ajustements
-techniques, notamment dans la configuration et le maintien de l'ingress NGINX,
-et pourrait introduire une complexité initiale lors de la phase d'intégration.
-De plus, cette décision engage l'entreprise à dépendre de la pérennité et de
-l'évolution de Vouch-proxy, ainsi que de la stabilité de ses intégrations avec
-les fournisseurs d'identité. Il sera donc crucial de suivre de près ces aspects
-et de prévoir des plans d'action pour les mises à jour nécessaires et les
-éventuels ajustements en réponse aux défis qui pourraient survenir.</p>
+</li>
+<li>
+<p><strong>ClickHouse :</strong></p>
+<ul>
+<li><strong>Avantages :</strong><ul>
+<li><strong>Haute performance :</strong> Performance exceptionnelle dans la gestion de
+  grands volumes de données, adapté aux analyses intensives.</li>
+<li><strong>Évolutif :</strong> S'adapte efficacement pour gérer des besoins croissants
+  en données sans dégradation significative des performances.</li>
+</ul>
+</li>
+<li><strong>Inconvénients :</strong><ul>
+<li><strong>Configuration complexe :</strong> Nécessite un processus de configuration
+  et de mise en place complexe, rendant son adoption difficile pour les
+  petites équipes.</li>
+<li><strong>Besoin d'outils supplémentaires :</strong> Nécessite des outils
+  supplémentaires pour la visualisation et l'intégration, augmentant la
+  complexité globale de la pile.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Elasticsearch :</strong></p>
+<ul>
+<li><strong>Avantages :</strong><ul>
+<li><strong>Capacités de recherche puissantes :</strong> Offre des capacités de
+  recherche et d'analyse robustes, idéal pour la gestion des logs.</li>
+<li><strong>Large adoption :</strong> Largement adopté avec une grande communauté,
+  offrant de nombreuses ressources et un support étendu.</li>
+</ul>
+</li>
+<li><strong>Inconvénients :</strong><ul>
+<li><strong>Intensif en ressources :</strong> Peut être gourmand en ressources,
+  nécessitant une infrastructure substantielle pour fonctionner
+  efficacement.</li>
+<li><strong>Coûteux à grande échelle :</strong> Les coûts peuvent augmenter rapidement,
+  en particulier lorsque l'on traite de grands volumes de données.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="consommation-grafana">Consommation : Grafana</h3>
+<p>Pour la visualisation des données et la création de tableaux de bord, nous avons
+choisi Grafana en raison de son support robuste pour diverses sources de
+données, de sa communauté étendue et de ses capacités puissantes de création de
+tableaux de bord. Grafana nous permet de créer des tableaux de bord
+personnalisés pour surveiller divers aspects de notre système, y compris
+l'activité des applications, le trafic et les métriques de performance.</p>
+<h4 id="alternatives-considerees-pour-la-consommation">Alternatives Considérées pour la Consommation</h4>
+<ol>
+<li><strong>Kibana :</strong></li>
+<li><strong>Avantages :</strong> Excellent pour visualiser les données stockées dans
+     Elasticsearch, capacités de recherche et d'analyse puissantes.</li>
+<li>
+<p><strong>Inconvénients :</strong> Principalement lié à l'écosystème Elasticsearch, moins
+     flexible avec d'autres sources de données.</p>
+</li>
+<li>
+<p><strong>Azure Log Analytics :</strong></p>
+</li>
+<li><strong>Avantages :</strong> Intégration native avec les services Azure, capacités de
+     surveillance complètes.</li>
+<li>
+<p><strong>Inconvénients :</strong> Dépendance au fournisseur, support limité pour les
+     sources de données non-Azure.</p>
+</li>
+<li>
+<p><strong>DataDog :</strong></p>
+</li>
+<li><strong>Avantages :</strong> Plateforme de surveillance et d'observabilité complète,
+     intégrations solides.</li>
+<li>
+<p><strong>Inconvénients :</strong> Propriétaire, peut être coûteux, moins flexible pour
+     les intégrations open-source.</p>
+</li>
+<li>
+<p><strong>Prometheus UI :</strong></p>
+</li>
+<li><strong>Avantages :</strong> Support natif pour les métriques Prometheus, simple à
+     utiliser.</li>
+<li><strong>Inconvénients :</strong> Capacités de visualisation limitées comparées à
+     Grafana, principalement axé sur les métriques.</li>
+</ol>
+<h2 id="conclusion">Conclusion</h2>
+<p>La mise en œuvre d'OpenTelemetry pour la collecte de données, de Grafana Alloy
+pour le traitement des données et de Grafana pour la visualisation fournit une
+pile d'observabilité entièrement open-source et indépendante du fournisseur.
+Cette approche améliore notre capacité à surveiller et à dépanner efficacement
+nos applications et services. Les solutions choisies offrent évolutivité,
+flexibilité et support communautaire robuste, garantissant que nous pouvons
+répondre à nos besoins d'observabilité actuels et futurs. De plus, OpenTelemetry
+est une norme largement adoptée sur le marché, permettant à nos développeurs de
+travailler avec des normes industrielles. Étant donné que nous sommes aux
+premiers stades de développement de nos prototypes, c'est une opportunité idéale
+pour fournir une instrumentation par conception et assurer la visibilité sur les
+performances dès le départ. Cette approche proactive nous aidera à optimiser les
+performances et la fiabilité de nos applications dès les premières étapes du
+développement.</p>
 <h2 id="references">Références</h2>
 <ul>
-<li><a href="https://oauth2-proxy.github.io/oauth2-proxy/">Oauth2-Proxy</a></li>
-<li><a href="https://github.com/vouch/vouch-proxy">Vouch-proxy</a></li>
-<li><a href="https://www.ory.sh/oathkeeper/">Ori Oathkeeper</a></li>
-<li><a href="https://www.ory.sh/kratos/">Ori Kratos</a></li>
-<li><a href="https://learn.microsoft.com/en-us/entra/identity-platform/tutorial-v2-nodejs-webapp-msal">Example of implementing authentication with Express Web
-  app</a></li>
+<li><a href="https://learn.microsoft.com/en-us/azure/azure-monitor/app/opentelemetry-enable?tabs=python#why-is-microsoft-azure-monitor-investing-in-opentelemetry">Microsoft Azure Monitor et
+  OpenTelemetry</a></li>
+<li><a href="https://grafana.com/products/alloy/">Grafana Alloy</a></li>
+<li><a href="https://grafana.com/products/loki/">Grafana Loki</a></li>
+<li><a href="https://grafana.com/products/tempo/">Grafana Tempo</a></li>
+<li><a href="https://prometheus.io/">Prometheus</a></li>
+<li><a href="https://opentelemetry.io/docs/">Documentation OpenTelemetry</a></li>
+<li><a href="https://www.jaegertracing.io/">Jaeger</a></li>
+<li><a href="https://zipkin.io/">Zipkin</a></li>
+<li><a href="https://clickhouse.tech/">ClickHouse</a></li>
+<li><a href="https://www.elastic.co/elasticsearch/">Elasticsearch</a></li>
+<li><a href="https://www.elastic.co/kibana/">Kibana</a></li>
+<li><a href="https://docs.datadoghq.com/">Documentation DataDog</a></li>
+<li><a href="https://prometheus.io/docs/visualization/browser/">Prometheus UI</a></li>
 </ul>
 
 

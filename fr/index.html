@@ -14,7 +14,7 @@
       
       
       <link rel="icon" href="assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.24">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.25">
     
     
       
@@ -342,13 +342,13 @@
 <h1 id="howard-infrastructure-cloud-de-lagence-canadienne-dinspection-des-aliments-acia-acia-cfia-ai-lab">Howard : Infrastructure Cloud de l'Agence canadienne d'inspection des aliments (ACIA) ACIA-CFIA ai-Lab</h1>
 <h2 id="a-propos-du-projet">À propos du projet</h2>
 <p>Le projet Howard est nommé d'après Luke Howard, FRS, un chimiste manufacturier
-et météorologue amateur britannique notable connu sous le nom de
-"Le Parrain des Nuages". Son travail a jeté les bases de concepts en
-météorologie, notamment un système de nomenclature pour les nuages introduit
-en 1802. Inspiré par son innovation et son héritage dans la catégorisation des
-éléments, notre projet vise à gérer et orchestrer efficacement l'infrastructure
-basée sur le cloud pour le laboratoire d'intelligence artificielle (ai-lab)
-de l'Agence canadienne d'inspection des aliments (ACIA).</p>
+et météorologue amateur britannique notable connu sous le nom de "Le Parrain des
+Nuages". Son travail a jeté les bases de concepts en météorologie, notamment un
+système de nomenclature pour les nuages introduit en 1802. Inspiré par son
+innovation et son héritage dans la catégorisation des éléments, notre projet
+vise à gérer et orchestrer efficacement l'infrastructure basée sur le cloud pour
+le laboratoire d'intelligence artificielle (ai-lab) de l'Agence canadienne
+d'inspection des aliments (ACIA).</p>
 <p>Howard est essentiellement la colonne vertébrale qui soutient l'environnement
 Kubernetes du laboratoire d'intelligence artificielle de l'ACIA, où des
 applications clés telles que Nachet, Finesse et Louis sont déployées et gérées
@@ -360,24 +360,28 @@ dans l'inspection et la sécurité alimentaire.</p>
 fournir un environnement résilient, sécurisé et évolutif :</p>
 <h3 id="fournisseurs-de-cloud">Fournisseurs de cloud</h3>
 <ul>
-<li>Initialement hébergée sur Google Cloud, l'infrastructure a
-été transférée sur Azure.</li>
+<li>Initialement hébergée sur Google Cloud, l'infrastructure a été transférée sur
+Azure.</li>
 </ul>
 <h3 id="orchestration-des-conteneurs">Orchestration des conteneurs</h3>
-<p><strong>Kubernetes :</strong> Orchestrer le déploiement, la mise à l'échelle et la
-gestion des conteneurs.</p>
+<p><strong>Kubernetes :</strong> Orchestrer le déploiement, la mise à l'échelle et la gestion
+des conteneurs.</p>
 <h3 id="gitops">GitOps</h3>
 <p><strong>ArgoCD :</strong> Utilisé pour la livraison continue, gestion des ressources
 Kubernetes de manière déclarative via des dépôts Git.</p>
 <h3 id="surveillance-et-securite">Surveillance et sécurité</h3>
 <ul>
 <li><strong>Grafana :</strong> Logiciel de visualisation et d'analytique.</li>
-<li><strong>Kube-Prometheus-Stack :</strong> Surveillance complète des clusters Kubernetes
-avec Prometheus.</li>
+<li><strong>Kube-Prometheus-Stack :</strong> Surveillance complète des clusters Kubernetes avec
+Prometheus.</li>
+<li><strong>Grafana Tempo</strong> Traçage distribué de nos applications.</li>
+<li><strong>Grafana Loki :</strong> Système de journalisation et d'agrégation.</li>
+<li><strong>Grafana Alloy :</strong> Permet la collecte et la transmission de données de
+  télémétrie depuis nos applications.</li>
 <li><strong>Falco :</strong> Outil de sécurité open-source en temps réel.</li>
 <li><strong>Trivy :</strong> Scanner de vulnérabilités pour les conteneurs.</li>
-<li><strong>Oneuptime :</strong> Outil de surveillance pour des informations sur la
-performance et la sécurité en temps réel.</li>
+<li><strong>Oneuptime :</strong> Outil de surveillance pour des informations sur la performance
+et la sécurité en temps réel.</li>
 </ul>
 <h3 id="reseautage">Réseautage</h3>
 <ul>
@@ -393,10 +397,10 @@ jetons, mots de passe, certificats et autres secrets.</p>
 <h3 id="gestion-de-linfrastructure-cloud">Gestion de l'infrastructure cloud</h3>
 <ul>
 <li><strong>Terraform :</strong> Outil open-source d'infrastructure en tant que code permettant
-de gérer le cycle de vie des services chez les fournisseurs cloud
-de manière déclarative.</li>
-<li><strong>Ansible :</strong> Outil d'automatisation pour la configuration et la gestion
-des ordinateurs.</li>
+de gérer le cycle de vie des services chez les fournisseurs cloud de manière
+déclarative.</li>
+<li><strong>Ansible :</strong> Outil d'automatisation pour la configuration et la gestion des
+ordinateurs.</li>
 </ul>
 <h2 id="installation">Installation</h2>
 <h3 id="deploiement-terraform">Déploiement Terraform</h3>
