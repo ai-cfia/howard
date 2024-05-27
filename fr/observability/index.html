@@ -549,11 +549,11 @@ point de terminaison sur alloy.monitoring.svc.cluster.local.</p>
 <p>Grafana Alloy traite et transmet les données reçues aux backends respectifs.</p>
 <ul>
 <li>Les journaux sont transmis à Loki à
-  <a href="http://loki.monitoring.svc.cluster.local:3100/loki/api/v1/push">http://loki.monitoring.svc.cluster.local:3100/loki/api/v1/push</a></li>
+  <code>http://loki.monitoring.svc.cluster.local:3100/loki/api/v1/push</code></li>
 <li>Les traces sont transmises à Tempo à
-  <a href="http://tempo.monitoring.svc.cluster.local:4317">http://tempo.monitoring.svc.cluster.local:4317</a></li>
+  <code>http://tempo.monitoring.svc.cluster.local:4317</code></li>
 <li>Les métriques sont transmises à Prometheus à
-  <a href="http://kube-prometheus-stack-prometheus.monitoring.svc.cluster.local:9090/api/v1/write">http://kube-prometheus-stack-prometheus.monitoring.svc.cluster.local:9090/api/v1/write</a></li>
+  <code>http://kube-prometheus-stack-prometheus.monitoring.svc.cluster.local:9090/api/v1/write</code></li>
 </ul>
 <h2 id="utilisation-de-grafana-pour-la-visualisation">Utilisation de Grafana pour la visualisation</h2>
 <p>Grafana est disponible à <a href="https://grafana.inspection.alpha.canada.ca">https://grafana.inspection.alpha.canada.ca</a>. L'accès
