@@ -3,13 +3,13 @@
 ## À propos du projet
 
 Le projet Howard est nommé d'après Luke Howard, FRS, un chimiste manufacturier
-et météorologue amateur britannique notable connu sous le nom de
-"Le Parrain des Nuages". Son travail a jeté les bases de concepts en
-météorologie, notamment un système de nomenclature pour les nuages introduit
-en 1802. Inspiré par son innovation et son héritage dans la catégorisation des
-éléments, notre projet vise à gérer et orchestrer efficacement l'infrastructure
-basée sur le cloud pour le laboratoire d'intelligence artificielle (ai-lab)
-de l'Agence canadienne d'inspection des aliments (ACIA).
+et météorologue amateur britannique notable connu sous le nom de "Le Parrain des
+Nuages". Son travail a jeté les bases de concepts en météorologie, notamment un
+système de nomenclature pour les nuages introduit en 1802. Inspiré par son
+innovation et son héritage dans la catégorisation des éléments, notre projet
+vise à gérer et orchestrer efficacement l'infrastructure basée sur le cloud pour
+le laboratoire d'intelligence artificielle (ai-lab) de l'Agence canadienne
+d'inspection des aliments (ACIA).
 
 Howard est essentiellement la colonne vertébrale qui soutient l'environnement
 Kubernetes du laboratoire d'intelligence artificielle de l'ACIA, où des
@@ -25,13 +25,13 @@ fournir un environnement résilient, sécurisé et évolutif :
 
 ### Fournisseurs de cloud
 
-- Initialement hébergée sur Google Cloud, l'infrastructure a
-été transférée sur Azure.
+- Initialement hébergée sur Google Cloud, l'infrastructure a été transférée sur
+Azure.
 
 ### Orchestration des conteneurs
 
-**Kubernetes :** Orchestrer le déploiement, la mise à l'échelle et la
-gestion des conteneurs.
+**Kubernetes :** Orchestrer le déploiement, la mise à l'échelle et la gestion
+des conteneurs.
 
 ### GitOps
 
@@ -41,12 +41,16 @@ Kubernetes de manière déclarative via des dépôts Git.
 ### Surveillance et sécurité
 
 - **Grafana :** Logiciel de visualisation et d'analytique.
-- **Kube-Prometheus-Stack :** Surveillance complète des clusters Kubernetes
-avec Prometheus.
+- **Kube-Prometheus-Stack :** Surveillance complète des clusters Kubernetes avec
+Prometheus.
+- **Grafana Tempo** Traçage distribué de nos applications.
+- **Grafana Loki :** Système de journalisation et d'agrégation.
+- **Grafana Alloy :** Permet la collecte et la transmission de données de
+  télémétrie depuis nos applications.
 - **Falco :** Outil de sécurité open-source en temps réel.
 - **Trivy :** Scanner de vulnérabilités pour les conteneurs.
-- **Oneuptime :** Outil de surveillance pour des informations sur la
-performance et la sécurité en temps réel.
+- **Oneuptime :** Outil de surveillance pour des informations sur la performance
+et la sécurité en temps réel.
 
 ### Réseautage
 
@@ -64,10 +68,10 @@ jetons, mots de passe, certificats et autres secrets.
 ### Gestion de l'infrastructure cloud
 
 - **Terraform :** Outil open-source d'infrastructure en tant que code permettant
-de gérer le cycle de vie des services chez les fournisseurs cloud
-de manière déclarative.
-- **Ansible :** Outil d'automatisation pour la configuration et la gestion
-des ordinateurs.
+de gérer le cycle de vie des services chez les fournisseurs cloud de manière
+déclarative.
+- **Ansible :** Outil d'automatisation pour la configuration et la gestion des
+ordinateurs.
 
 ## Installation
 
