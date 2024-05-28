@@ -8,6 +8,7 @@
 - [Gestion de l'authentification](auth-workflow.md)
 - [Réseautique](networking.md)
 - Sécuriter (coming soon...)
+- [Gestion de l'observabilité](observability.md)
 
 ## Plus de configurations / implementations
 

@@ -8,6 +8,7 @@
 - [Authentication management](adr/015-authentication-management.en-ca.md)
 - [Networking](adr/016-networking.en-ca.md)
 - [Security](adr/017-security.en-ca.md)
+- [Monitoring](adr/018-monitoring.en-ca.md)
 
 ## More configuration / implementation
 

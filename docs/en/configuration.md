@@ -8,6 +8,7 @@
 - [Authentication management](auth-workflow.md)
 - [Networking](networking.md)
 - Security (coming soon...)
+- [Observability management](observability.md)
 
 ## More configuration / implementation
 
