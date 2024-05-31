@@ -14,7 +14,7 @@ spec:
   tls:
     - hosts:
         - ollama.inspection.alpha.canada.ca
-      secretName: aciacfia-tls
+      secretName: ollama-tls
   rules:
     - host: ollama.inspection.alpha.canada.ca
       http:
