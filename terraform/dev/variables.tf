@@ -108,12 +108,6 @@ variable "subnet_address" {
   default     = "10.241.0.0/16" # Subnet resides within RFC1918-compliant VNet range
 }
 
-variable "dev_subnet_address" {
-  description = "Subnet address for Dev environment services"
-  type        = string
-  default     = "10.242.0.0/16" # Subnet resides within RFC1918-compliant VNet range
-}
-
 variable "service_cidr" {
   description = "The Network Range used by the Kubernetes service.Changing this forces a new resource to be created."
   type        = string
@@ -202,4 +196,29 @@ variable "dns_a_record_name" {
 variable "dns_a_records" {
   description = "DNS A records list"
   type        = list(string)
+}
+
+variable "vnet-private-network-name"{
+  description = "Private virtual network name"
+  type = string
+}
+
+variable "vnet-private-network-subnet"{
+  description = "Private virtual network subnet"
+  type = string
+}
+
+variable "vnet-network-name" {
+  description = "Virtual network name"
+  type = string
+}
+
+variable "vnet-network-address-space"{
+  description = "Virtual network address space"
+  type = string
+}
+
+variable "vnet-network-subnet-name"{
+  description = "Virtual network name"
+  type = string
 }
