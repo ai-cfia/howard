@@ -19,11 +19,6 @@ variable "aks_name" {
   type        = string
 }
 
-variable "aks_gpu_name" {
-  description = "AKS GPU cluster name"
-  type        = string
-}
-
 variable "k8s_version" {
   description = "Version of Kubernetes specified when creating the AKS managed cluster."
   type        = string
@@ -34,12 +29,6 @@ variable "default_node_vm_size" {
   description = "Size of the main nodepool VM"
   type        = string
   default     = "Standard_E8as_v4"
-}
-
-variable "default_gpu_node_vm_size" {
-  description = "Size on the main nodepool VM (GPU)"
-  type        = string
-  default     = "Standard_NC6s_v3"
 }
 
 variable "auto_scaling_default_node" {
@@ -72,40 +61,10 @@ variable "node_max_count" {
   default     = 10
 }
 
-variable "gpu_node_count" {
-  description = "Number of Cluster Nodes"
-  type        = number
-  default     = 1
-}
-
-variable "gpu_node_min_count" {
-  description = "Minimum number of nodes in the cluster"
-  type        = number
-  default     = 1
-}
-
-variable "gpu_node_max_count" {
-  description = "Maximum number of nodes in the cluster"
-  type        = number
-  default     = 10
-}
-
 variable "max_pods" {
   description = "Total number of pods that can be started on a kubernetes node "
   type        = number
   default     = 110
-}
-
-variable "virtual_network_address" {
-  description = "Virtual network address"
-  type        = string
-  default     = "10.0.0.0/16" # RFC1918-compliant private address space
-}
-
-variable "subnet_address" {
-  description = "Subnet address"
-  type        = string
-  default     = "10.241.0.0/16" # Subnet resides within RFC1918-compliant VNet range
 }
 
 variable "service_cidr" {
@@ -121,12 +80,6 @@ variable "dns_service_ip" {
 }
 
 variable "pod_cidr" {
-  description = "The CIDR to use for pod IP addresses. Changing this forces a new resource to be created."
-  type        = string
-  default     = "10.244.0.0/16"
-}
-
-variable "second_pod_cidr" {
   description = "The CIDR to use for pod IP addresses. Changing this forces a new resource to be created."
   type        = string
   default     = "10.244.0.0/16"
@@ -178,35 +131,35 @@ variable "aks_admin_group_object_ids" {
   type        = list(string)
 }
 
-variable "soa_record_tech_contact_email" {
-  description = "SOA Record tech contact email (no @ inside the email)"
-  type        = string
-}
+# variable "soa_record_tech_contact_email" {
+#   description = "SOA Record tech contact email (no @ inside the email)"
+#   type        = string
+# }
 
-variable "dns_zone_name" {
-  description = "azurerm_dns_zone name"
-  type        = string
-}
+# variable "dns_zone_name" {
+#   description = "azurerm_dns_zone name"
+#   type        = string
+# }
 
-variable "dns_a_record_name" {
-  description = "DNS A Record name"
-  type        = string
-}
+# variable "dns_a_record_name" {
+#   description = "DNS A Record name"
+#   type        = string
+# }
 
-variable "dns_a_records" {
-  description = "DNS A records list"
-  type        = list(string)
-}
+# variable "dns_a_records" {
+#   description = "DNS A records list"
+#   type        = list(string)
+# }
 
-variable "vnet-private-network-name" {
-  description = "Private virtual network name"
-  type        = string
-}
+# variable "vnet-private-network-name" {
+#   description = "Private virtual network name"
+#   type        = string
+# }
 
-variable "vnet-private-network-subnet" {
-  description = "Private virtual network subnet"
-  type        = string
-}
+# variable "vnet-private-network-subnet" {
+#   description = "Private virtual network subnet"
+#   type        = string
+# }
 
 variable "vnet-network-name" {
   description = "Virtual network name"
