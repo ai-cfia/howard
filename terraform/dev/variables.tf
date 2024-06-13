@@ -198,27 +198,27 @@ variable "dns_a_records" {
   type        = list(string)
 }
 
-variable "vnet-private-network-name"{
+variable "vnet-private-network-name" {
   description = "Private virtual network name"
-  type = string
+  type        = string
 }
 
-variable "vnet-private-network-subnet"{
+variable "vnet-private-network-subnet" {
   description = "Private virtual network subnet"
-  type = string
+  type        = string
 }
 
 variable "vnet-network-name" {
   description = "Virtual network name"
-  type = string
+  type        = string
 }
 
-variable "vnet-network-address-space"{
+variable "vnet-network-address-space" {
   description = "Virtual network address space"
-  type = string
+  type        = string
 }
 
-variable "vnet-network-subnet-name"{
+variable "vnet-network-subnet-name" {
   description = "Virtual network name"
-  type = string
+  type        = string
 }
