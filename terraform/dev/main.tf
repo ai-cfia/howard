@@ -3,7 +3,7 @@ terraform {
     resource_group_name  = "rg-ai-cfia-terraform-state"
     storage_account_name = "tfcfiastatedev"
     container_name       = "infra-terraform-state"
-    key                  = "terraform.tfstate"
+    key                  = "tf/terraform.tfstate"
   }
 }
 
