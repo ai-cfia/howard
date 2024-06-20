@@ -211,3 +211,8 @@ variable "network_acls_virtual_network_subnet_ids" {
   description = "Network acls virtual network subnet ids"
   type        = list(string)
 }
+
+variable "identity_type" {
+  description = "Identity type"
+  type        = string
+}
