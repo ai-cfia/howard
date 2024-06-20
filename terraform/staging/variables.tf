@@ -25,11 +25,6 @@ variable "aks_name" {
   type        = string
 }
 
-variable "aks_gpu_name" {
-  description = "AKS GPU cluster name"
-  type        = string
-}
-
 variable "k8s_version" {
   description = "Version of Kubernetes specified when creating the AKS managed cluster."
   type        = string
@@ -40,12 +35,6 @@ variable "default_node_vm_size" {
   description = "Size of the main nodepool VM"
   type        = string
   default     = "Standard_E8as_v4"
-}
-
-variable "default_gpu_node_vm_size" {
-  description = "Size on the main nodepool VM (GPU)"
-  type        = string
-  default     = "Standard_NC6s_v3"
 }
 
 variable "auto_scaling_default_node" {
@@ -78,24 +67,6 @@ variable "node_max_count" {
   default     = 10
 }
 
-variable "gpu_node_count" {
-  description = "Number of Cluster Nodes"
-  type        = number
-  default     = 1
-}
-
-variable "gpu_node_min_count" {
-  description = "Minimum number of nodes in the cluster"
-  type        = number
-  default     = 1
-}
-
-variable "gpu_node_max_count" {
-  description = "Maximum number of nodes in the cluster"
-  type        = number
-  default     = 10
-}
-
 variable "max_pods" {
   description = "Total number of pods that can be started on a kubernetes node "
   type        = number
@@ -120,18 +91,6 @@ variable "dev_subnet_address" {
   default     = "10.242.0.0/16" # Subnet resides within RFC1918-compliant VNet range
 }
 
-variable "second_virtual_network_address" {
-  description = "Second virtual network address"
-  type        = string
-  default     = "10.0.0.0/16" # RFC1918-compliant private address space
-}
-
-variable "second_subnet_address" {
-  description = "Second subnet address"
-  type        = string
-  default     = "10.241.0.0/16" # Subnet resides within RFC1918-compliant VNet range
-}
-
 variable "service_cidr" {
   description = "The Network Range used by the Kubernetes service.Changing this forces a new resource to be created."
   type        = string
@@ -145,12 +104,6 @@ variable "dns_service_ip" {
 }
 
 variable "pod_cidr" {
-  description = "The CIDR to use for pod IP addresses. Changing this forces a new resource to be created."
-  type        = string
-  default     = "10.244.0.0/16"
-}
-
-variable "second_pod_cidr" {
   description = "The CIDR to use for pod IP addresses. Changing this forces a new resource to be created."
   type        = string
   default     = "10.244.0.0/16"
@@ -367,4 +320,53 @@ variable "dns_a_records" {
 # variable "ad_members" {
 #   description = "ad members to be added to ad groups"
 #   type        = list(string)
+# }
+
+# GPU related variables
+
+# variable "aks_gpu_name" {
+#   description = "AKS GPU cluster name"
+#   type        = string
+# }
+
+# variable "default_gpu_node_vm_size" {
+#   description = "Size on the main nodepool VM (GPU)"
+#   type        = string
+#   default     = "Standard_NC6s_v3"
+# }
+
+# variable "gpu_node_count" {
+#   description = "Number of Cluster Nodes"
+#   type        = number
+#   default     = 1
+# }
+
+# variable "gpu_node_min_count" {
+#   description = "Minimum number of nodes in the cluster"
+#   type        = number
+#   default     = 1
+# }
+
+# variable "gpu_node_max_count" {
+#   description = "Maximum number of nodes in the cluster"
+#   type        = number
+#   default     = 10
+# }
+
+# variable "second_virtual_network_address" {
+#   description = "Second virtual network address"
+#   type        = string
+#   default     = "10.0.0.0/16" # RFC1918-compliant private address space
+# }
+
+# variable "second_subnet_address" {
+#   description = "Second subnet address"
+#   type        = string
+#   default     = "10.241.0.0/16" # Subnet resides within RFC1918-compliant VNet range
+# }
+
+# variable "second_pod_cidr" {
+#   description = "The CIDR to use for pod IP addresses. Changing this forces a new resource to be created."
+#   type        = string
+#   default     = "10.244.0.0/16"
 # }
