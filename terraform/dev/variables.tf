@@ -161,19 +161,20 @@ variable "aks_admin_group_object_ids" {
 #   type        = string
 # }
 
-variable "vnet-network-name" {
+variable "vnet_name" {
   description = "Virtual network name"
   type        = string
 }
 
-variable "vnet-network-address-space" {
-  description = "Virtual network address space"
+variable "vnet_subnet_name" {
+  description = "Virtual network name"
   type        = string
 }
 
-variable "vnet-network-subnet-name" {
-  description = "Virtual network name"
+variable "vnet_rg_name" {
+  description = "Virtual network rg name"
   type        = string
+
 }
 
 variable "key_vault_name" {

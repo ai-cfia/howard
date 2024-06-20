@@ -42,9 +42,9 @@ module "aks-cluster-0" {
   aks_admin_group_object_ids = var.aks_admin_group_object_ids
   # ad_groups                  = var.ad_groups
   # ad_members                 = var.ad_members
-  network_resource_group = var.vnet-network-name
-  network_vnet           = var.vnet-network-address-space
-  network_subnet         = var.vnet-network-subnet-name
+  network_resource_group = var.vnet_rg_name
+  network_vnet           = var.vnet_name
+  network_subnet         = var.vnet_subnet_name
   service_cidr           = var.service_cidr
   dns_service_ip         = var.dns_service_ip
   pod_cidr               = var.pod_cidr
