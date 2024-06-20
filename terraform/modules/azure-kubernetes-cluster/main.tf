@@ -27,7 +27,7 @@ resource "azurerm_kubernetes_cluster" "k8s" {
 
   identity {
     type = var.identity_type
-    user_assigned_identity_id = var.user_assigned_identity_id == "" ? null : var.user_assigned_identity_id
+    identity_ids = var.user_assigned_identity_ids
   }
 
   key_vault_secrets_provider {

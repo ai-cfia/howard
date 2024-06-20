@@ -61,7 +61,7 @@ module "aks-cluster-0" {
   tags                   = var.tags
   sku_tier               = var.sku_tier
   identity_type          = var.identity_type
-  user_assigned_identity_id = azurerm_user_assigned_identity.aks_identity.id
+  user_assigned_identity_ids = [ azurerm_user_assigned_identity.aks_identity.id ]
 }
 
 module "azure-key-vault" {
