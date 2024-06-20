@@ -48,14 +48,6 @@ stages:
             inputs:
               secureFile: "dev.tfvars"
 
-          - task: PowerShell@2
-            displayName: 'print ip'
-            inputs:
-              targetType: 'inline'
-              script: |
-                $ip = (Invoke-WebRequest -uri "http://ifconfig.me/ip").Content
-                echo $ip
-
           - task: TerraformTaskV2@2
             displayName: Terra Init
             inputs:
