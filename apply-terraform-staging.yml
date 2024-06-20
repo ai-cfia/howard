@@ -1,0 +1,136 @@
+---
+trigger:
+  branches:
+    include:
+      - main
+
+pr: none
+
+pool:
+  vmImage: "ubuntu-latest"
+
+variables:
+  - group: terraform-backend-settings
+
+stages:
+  - stage: InitAndPlan
+    displayName: "Initialize and Plan"
+    jobs:
+      - job: TerraformInitPlan
+        displayName: "Terraform Init and Plan"
+        steps:
+          - task: AzureCLI@2
+            displayName: "Azure CLI Login"
+            inputs:
+              azureSubscription: $(serviceConnectionName)
+              scriptType: "bash"
+              scriptLocation: "inlineScript"
+              inlineScript: |
+                echo "Successfully logged in with Azure CLI"
+
+          - task: AzureCLI@2
+            displayName: "Get AKS Credentials"
+            inputs:
+              azureSubscription: $(serviceConnectionName)
+              scriptType: "bash"
+              scriptLocation: "inlineScript"
+              inlineScript: |
+                az aks get-credentials \
+                  --name $(aks-name) \
+                  --resource-group $(aks-resource-group) \
+                  --admin \
+                  --file ~/.kube/config
+                echo "AKS credentials configured for kubectl"
+
+          - task: DownloadSecureFile@1
+            name: DownloadSecureVars
+            displayName: "Download staging.tfvars"
+            inputs:
+              secureFile: "staging.tfvars"
+
+          - task: TerraformTaskV2@2
+            displayName: Terra Init
+            inputs:
+              provider: "azurerm"
+              command: "init"
+              workingDirectory: "$(System.DefaultWorkingDirectory)/terraform/staging"
+              backendServiceArm: "$(serviceConnectionName)"
+              backendAzureRmResourceGroupName: "$(resourceGroupName)"
+              backendAzureRmStorageAccountName: "$(storageAccountName)"
+              backendAzureRmContainerName: "$(containerName)"
+              backendAzureRmKey: "$(stateKey)"
+
+          - task: TerraformTaskV2@2
+            displayName: Terra Plan
+            inputs:
+              provider: "azurerm"
+              command: "plan"
+              commandOptions: "-var-file=$(DownloadSecureVars.SecureFilePath)"
+              workingDirectory: "$(System.DefaultWorkingDirectory)/terraform/staging"
+              environmentServiceNameAzureRM: "$(serviceConnectionName)"
+
+  - stage: Apply
+    displayName: "Apply Terraform Plan"
+    dependsOn: InitAndPlan
+    condition: succeeded()
+    jobs:
+      - deployment: TerraformApply
+        displayName: "Terraform Apply"
+        pool:
+          vmImage: "ubuntu-latest"
+        environment: "ProductionApproval"
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - checkout: self
+
+                - task: AzureCLI@2
+                  displayName: "Azure CLI Login"
+                  inputs:
+                    azureSubscription: $(serviceConnectionName)
+                    scriptType: "bash"
+                    scriptLocation: "inlineScript"
+                    inlineScript: |
+                      echo "Successfully logged in with Azure CLI"
+
+                - task: AzureCLI@2
+                  displayName: "Get AKS Credentials"
+                  inputs:
+                    azureSubscription: $(serviceConnectionName)
+                    scriptType: "bash"
+                    scriptLocation: "inlineScript"
+                    inlineScript: |
+                      az aks get-credentials \
+                        --name $(aks-name) \
+                        --resource-group $(aks-resource-group) \
+                        --admin \
+                        --file ~/.kube/config
+                      echo "AKS credentials configured for kubectl"
+
+                - task: DownloadSecureFile@1
+                  name: DownloadSecureVars
+                  displayName: "Download staging.tfvars"
+                  inputs:
+                    secureFile: "staging.tfvars"
+
+                - task: TerraformTaskV2@2
+                  displayName: Terra Init
+                  inputs:
+                    provider: "azurerm"
+                    command: "init"
+                    workingDirectory: "$(System.DefaultWorkingDirectory)/terraform/staging"
+                    backendServiceArm: "$(serviceConnectionName)"
+                    backendAzureRmResourceGroupName: "$(resourceGroupName)"
+                    backendAzureRmStorageAccountName: "$(storageAccountName)"
+                    backendAzureRmContainerName: "$(containerName)"
+                    backendAzureRmKey: "$(stateKey)"
+
+                - task: TerraformTaskV2@2
+                  displayName: "Terra Apply"
+                  inputs:
+                    provider: "azurerm"
+                    command: "apply"
+                    commandOptions: "-var-file=$(DownloadSecureVars.SecureFilePath)"
+                    workingDirectory: "$(System.DefaultWorkingDirectory)/terraform/staging"
+                    environmentServiceNameAzureRM: "$(serviceConnectionName)"

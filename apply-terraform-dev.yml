@@ -10,7 +10,7 @@ pool:
   vmImage: "ubuntu-latest"
 
 variables:
-  - group: terraform-backend-settings
+  - group: terraform-dev-backend-settings
 
 stages:
   - stage: InitAndPlan
@@ -44,16 +44,16 @@ stages:
 
           - task: DownloadSecureFile@1
             name: DownloadSecureVars
-            displayName: "Download staging.tfvars"
+            displayName: "Download dev.tfvars"
             inputs:
-              secureFile: "staging.tfvars"
+              secureFile: "dev.tfvars"
 
           - task: TerraformTaskV2@2
             displayName: Terra Init
             inputs:
               provider: "azurerm"
               command: "init"
-              workingDirectory: "$(System.DefaultWorkingDirectory)/terraform/staging"
+              workingDirectory: "$(System.DefaultWorkingDirectory)/terraform/dev"
               backendServiceArm: "$(serviceConnectionName)"
               backendAzureRmResourceGroupName: "$(resourceGroupName)"
               backendAzureRmStorageAccountName: "$(storageAccountName)"
@@ -66,7 +66,7 @@ stages:
               provider: "azurerm"
               command: "plan"
               commandOptions: "-var-file=$(DownloadSecureVars.SecureFilePath)"
-              workingDirectory: "$(System.DefaultWorkingDirectory)/terraform/staging"
+              workingDirectory: "$(System.DefaultWorkingDirectory)/terraform/dev"
               environmentServiceNameAzureRM: "$(serviceConnectionName)"
 
   - stage: Apply
@@ -110,26 +110,27 @@ stages:
 
                 - task: DownloadSecureFile@1
                   name: DownloadSecureVars
-                  displayName: "Download staging.tfvars"
+                  displayName: "Download dev.tfvars"
                   inputs:
-                    secureFile: "staging.tfvars"
+                    secureFile: "dev.tfvars"
 
                 - task: TerraformTaskV2@2
                   displayName: Terra Init
                   inputs:
                     provider: "azurerm"
                     command: "init"
-                    workingDirectory: "$(System.DefaultWorkingDirectory)/terraform/staging"
+                    workingDirectory: "$(System.DefaultWorkingDirectory)/terraform/dev"
                     backendServiceArm: "$(serviceConnectionName)"
                     backendAzureRmResourceGroupName: "$(resourceGroupName)"
                     backendAzureRmStorageAccountName: "$(storageAccountName)"
                     backendAzureRmContainerName: "$(containerName)"
                     backendAzureRmKey: "$(stateKey)"
+
                 - task: TerraformTaskV2@2
                   displayName: "Terra Apply"
                   inputs:
                     provider: "azurerm"
                     command: "apply"
                     commandOptions: "-var-file=$(DownloadSecureVars.SecureFilePath)"
-                    workingDirectory: "$(System.DefaultWorkingDirectory)/terraform/staging"
+                    workingDirectory: "$(System.DefaultWorkingDirectory)/terraform/dev"
                     environmentServiceNameAzureRM: "$(serviceConnectionName)"
