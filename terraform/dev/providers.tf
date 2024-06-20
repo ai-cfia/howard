@@ -3,10 +3,6 @@ terraform {
   required_version = ">= 1.7.2"
 
   required_providers {
-    google = {
-      source  = "hashicorp/google"
-      version = "~> 5.0"
-    }
     azurerm = {
       source  = "hashicorp/azurerm"
       version = "~> 3.25"

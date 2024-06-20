@@ -54,17 +54,17 @@ module "aks-cluster-0" {
   sku_tier               = var.sku_tier
 }
 
-module "vault" {
-  source                  = "../modules/vault"
-  location                = var.location_1
-  resource_group          = azurerm_resource_group.rg.name
-  prefix                  = var.environment
-  cluster_principal_id    = module.aks-cluster-0.cluster_principal_id
-  ca_cluster              = module.aks-cluster-0.cluster_ca_certificate
-  kv_identity_resource_id = module.aks-cluster-0.kv_identity_resource_id
-  providers = {
-    kubernetes = kubernetes
-  }
+module "azure-key-vault" {
+  source = "../modules/azure-key-vault"
+
+  key_vault_name                     = var.key_vault_name
+  key_vault_resource_group_name      = var.key_vault_resource_group_name
+  key_vault_resource_group_location  = var.key_vault_resource_group_location
+  key_vault_purge_protection_enabled = true
+
+  key_vault_key_permissions     = var.key_vault_key_permissions
+  key_vault_secret_permissions  = var.key_vault_secret_permissions
+  key_vault_storage_permissions = var.key_vault_storage_permissions
 }
 
 # Subnet dedicated to provide internal access From Finesse to protected services from Dev
