@@ -8,11 +8,11 @@ variable "resource_group" {
   type        = string
 }
 
-variable "environment" {
-  type        = string
-  description = "Name of the deployment environment"
-  default     = "staging"
-}
+# variable "environment" {
+#   type        = string
+#   description = "Name of the deployment environment"
+#   default     = "staging"
+# }
 
 variable "aks_name" {
   description = "AKS cluster name"
