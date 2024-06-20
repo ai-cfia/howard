@@ -48,11 +48,11 @@ stages:
             inputs:
               secureFile: "dev.tfvars"
 
-          - task: AzurePowerShell@5
-            displayName: 'Add buildserver public ip'
+          - task: PowerShell@2
+            displayName: 'print ip'
             inputs:
-              ScriptType: InlineScript
-              Inline: |
+              targetType: 'inline'
+              script: |
                 $ip = (Invoke-WebRequest -uri "http://ifconfig.me/ip").Content
                 echo $ip
 
