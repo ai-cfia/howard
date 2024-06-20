@@ -24,6 +24,13 @@ provider "azuread" {}
 #   soa_record_tech_contact_email = var.soa_record_tech_contact_email
 # }
 
+resource "azurerm_user_assigned_identity" "aks_identity" {
+  resource_group_name = azurerm_resource_group.rg.name
+  location            = azurerm_resource_group.rg.location
+
+  name = "aks-identity"
+}
+
 module "aks-cluster-0" {
   source                      = "../modules/azure-kubernetes-cluster"
   prefix                      = var.aks_name
@@ -53,6 +60,8 @@ module "aks-cluster-0" {
   additional_node_pools  = var.additional_node_pools
   tags                   = var.tags
   sku_tier               = var.sku_tier
+  identity_type          = var.identity_type
+  user_assigned_identity_id = azurerm_user_assigned_identity.aks_identity.id
 }
 
 module "azure-key-vault" {

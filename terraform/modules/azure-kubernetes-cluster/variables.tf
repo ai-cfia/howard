@@ -164,6 +164,18 @@ variable "k8s_private_cluster_enabled" {
   default     = false
 }
 
+variable "identity_type" {
+  description = "The identity type of the managed cluster. Possible values are SystemAssigned and UserAssigned."
+  type        = string
+  default     = "SystemAssigned"
+}
+
+variable "user_assigned_identity_id" {
+  description = "The ID of the User Assigned Identity to be used for the managed cluster."
+  type        = string
+  default     = ""
+}
+
 # variable "aks_service_mesh_profile" {
 #   description = "AKS Service mesh profile"
 #   default     = "Istio"
