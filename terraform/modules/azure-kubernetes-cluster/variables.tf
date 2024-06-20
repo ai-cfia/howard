@@ -174,6 +174,7 @@ variable "user_assigned_identity_ids" {
   description = "The ID of the User Assigned Identity to be used for the managed cluster."
   type        = list(string)
   default     = []
+}
 
 # variable "aks_service_mesh_profile" {
 #   description = "AKS Service mesh profile"
