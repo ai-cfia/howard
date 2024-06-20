@@ -181,16 +181,6 @@ variable "key_vault_name" {
   type        = string
 }
 
-variable "key_vault_resource_group_name" {
-  description = "Azure key vault resource group name"
-  type        = string
-}
-
-variable "key_vault_resource_group_location" {
-  description = "Azure key vault resource group location"
-  type        = string
-}
-
 variable "key_vault_key_permissions" {
   description = "Azure key vault key permissions"
   type        = list(string)

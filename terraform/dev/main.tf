@@ -58,8 +58,8 @@ module "azure-key-vault" {
   source = "../modules/azure-key-vault"
 
   key_vault_name                     = var.key_vault_name
-  key_vault_resource_group_name      = var.key_vault_resource_group_name
-  key_vault_resource_group_location  = var.key_vault_resource_group_location
+  key_vault_resource_group_name      = azurerm_resource_group.rg.name
+  key_vault_resource_group_location  = azurerm_resource_group.rg.location
   key_vault_purge_protection_enabled = true
 
   key_vault_key_permissions     = var.key_vault_key_permissions
