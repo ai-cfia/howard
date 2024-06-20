@@ -196,3 +196,18 @@ variable "key_vault_storage_permissions" {
   description = "Azure key vault storage permissions"
   type        = list(string)
 }
+
+variable "k8s_private_cluster_enabled" {
+  description = "K8s private cluster enabled"
+  type        = bool
+}
+
+variable "network_acls_ip_rules" {
+  description = "Network acls ip rules"
+  type        = list(string)
+}
+
+variable "network_acls_virtual_network_subnet_ids" {
+  description = "Network acls virtual network subnet ids"
+  type        = list(string)
+}

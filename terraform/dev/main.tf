@@ -25,21 +25,22 @@ provider "azuread" {}
 # }
 
 module "aks-cluster-0" {
-  source                     = "../modules/azure-kubernetes-cluster"
-  prefix                     = var.aks_name
-  resource_group             = azurerm_resource_group.rg.name
-  location                   = azurerm_resource_group.rg.location
-  k8s_version                = var.k8s_version
-  auto_scaling_default_node  = var.auto_scaling_default_node
-  zones                      = var.zones
-  vm_size                    = var.default_node_vm_size
-  max_pods                   = var.max_pods
-  node_count                 = var.node_count
-  node_min_count             = var.node_min_count
-  node_max_count             = var.node_max_count
-  managed                    = var.managed
-  rbac_enabled               = var.rbac_enabled
-  aks_admin_group_object_ids = var.aks_admin_group_object_ids
+  source                      = "../modules/azure-kubernetes-cluster"
+  prefix                      = var.aks_name
+  resource_group              = azurerm_resource_group.rg.name
+  location                    = azurerm_resource_group.rg.location
+  k8s_version                 = var.k8s_version
+  k8s_private_cluster_enabled = var.k8s_private_cluster_enabled
+  auto_scaling_default_node   = var.auto_scaling_default_node
+  zones                       = var.zones
+  vm_size                     = var.default_node_vm_size
+  max_pods                    = var.max_pods
+  node_count                  = var.node_count
+  node_min_count              = var.node_min_count
+  node_max_count              = var.node_max_count
+  managed                     = var.managed
+  rbac_enabled                = var.rbac_enabled
+  aks_admin_group_object_ids  = var.aks_admin_group_object_ids
   # ad_groups                  = var.ad_groups
   # ad_members                 = var.ad_members
   network_resource_group = var.vnet_rg_name
@@ -65,6 +66,9 @@ module "azure-key-vault" {
   key_vault_key_permissions     = var.key_vault_key_permissions
   key_vault_secret_permissions  = var.key_vault_secret_permissions
   key_vault_storage_permissions = var.key_vault_storage_permissions
+
+  network_acls_ip_rules                   = var.network_acls_ip_rules
+  network_acls_virtual_network_subnet_ids = var.network_acls_virtual_network_subnet_ids
 }
 
 # Subnet dedicated to provide internal access From Finesse to protected services from Dev

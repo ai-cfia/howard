@@ -51,3 +51,25 @@ variable "key_vault_storage_permissions" {
   description = "Azure key vault storage permissions"
   type        = list(string)
 }
+
+variable "network_acls_default_action" {
+  description = "Network acls default action"
+  type        = string
+  default     = "Deny"
+}
+
+variable "network_acls_bypass" {
+  description = "Network acls bypass"
+  type        = string
+  default     = "AzureServices"
+}
+
+variable "network_acls_ip_rules" {
+  description = "Network acls ip rules"
+  type        = list(string)
+}
+
+variable "network_acls_virtual_network_subnet_ids" {
+  description = "Network acls virtual network subnet ids"
+  type        = list(string)
+}

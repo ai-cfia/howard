@@ -1,10 +1,11 @@
 resource "azurerm_kubernetes_cluster" "k8s" {
 
-  name                = local.prefix
-  resource_group_name = var.resource_group
-  location            = var.location
-  dns_prefix          = local.dns_prefix
-  kubernetes_version  = var.k8s_version
+  name                    = local.prefix
+  resource_group_name     = var.resource_group
+  location                = var.location
+  dns_prefix              = local.dns_prefix
+  kubernetes_version      = var.k8s_version
+  private_cluster_enabled = var.k8s_private_cluster_enabled
 
   default_node_pool {
     name                = "main"

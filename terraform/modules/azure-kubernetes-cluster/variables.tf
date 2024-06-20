@@ -158,6 +158,12 @@ variable "aks_admin_group_object_ids" {
   type        = list(string)
 }
 
+variable "k8s_private_cluster_enabled" {
+  description = "K8s private cluster enabled"
+  type        = bool
+  default     = false
+}
+
 # variable "aks_service_mesh_profile" {
 #   description = "AKS Service mesh profile"
 #   default     = "Istio"
