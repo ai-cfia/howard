@@ -27,35 +27,35 @@ module "cluster-network-0" {
   tags                    = var.tags
 }
 
-module "cluster-network-1" {
-  source              = "../modules/azure-cluster-network"
-  location            = var.location_1
-  resource_group_name = azurerm_resource_group.rg.name
+# module "cluster-network-1" {
+#   source              = "../modules/azure-cluster-network"
+#   location            = var.location_1
+#   resource_group_name = azurerm_resource_group.rg.name
 
-  vnet_name   = "vnet-${var.aks_gpu_name}"
-  subnet_name = "subnet-${var.aks_gpu_name}"
+#   vnet_name   = "vnet-${var.aks_gpu_name}"
+#   subnet_name = "subnet-${var.aks_gpu_name}"
 
-  address_space           = [var.second_virtual_network_address]
-  subnet_address_prefixes = [var.second_subnet_address]
-  tags                    = var.tags
-}
+#   address_space           = [var.second_virtual_network_address]
+#   subnet_address_prefixes = [var.second_subnet_address]
+#   tags                    = var.tags
+# }
 
-module "peering-cluster-network-0-to-cluster-network-1" {
-  source = "../modules/azure-vnet-peering"
+# module "peering-cluster-network-0-to-cluster-network-1" {
+#   source = "../modules/azure-vnet-peering"
 
-  depends_on = [module.aks-cluster-0, module.aks-cluster-1]
+#   depends_on = [module.aks-cluster-0, module.aks-cluster-1]
 
-  # principal_id_aks_cluster_0 = module.aks-cluster-0.cluster_principal_id
-  # principal_id_aks_cluster_1 = module.aks-cluster-1.cluster_principal_id
+#   # principal_id_aks_cluster_0 = module.aks-cluster-0.cluster_principal_id
+#   # principal_id_aks_cluster_1 = module.aks-cluster-1.cluster_principal_id
 
-  vnet_id_1   = module.cluster-network-0.virtual_network_id
-  vnet_name_1 = module.cluster-network-0.virtual_network_name
-  rg_vnet_1   = module.cluster-network-0.resource_group_name
+#   vnet_id_1   = module.cluster-network-0.virtual_network_id
+#   vnet_name_1 = module.cluster-network-0.virtual_network_name
+#   rg_vnet_1   = module.cluster-network-0.resource_group_name
 
-  vnet_id_2   = module.cluster-network-1.virtual_network_id
-  vnet_name_2 = module.cluster-network-1.virtual_network_name
-  rg_vnet_2   = module.cluster-network-1.resource_group_name
-}
+#   vnet_id_2   = module.cluster-network-1.virtual_network_id
+#   vnet_name_2 = module.cluster-network-1.virtual_network_name
+#   rg_vnet_2   = module.cluster-network-1.resource_group_name
+# }
 
 module "azure-dns-staging" {
   source = "../modules/azure-dns"
@@ -114,46 +114,46 @@ module "aks-cluster-0" {
   sku_tier = var.sku_tier
 }
 
-module "aks-cluster-1" {
-  depends_on = [module.cluster-network-1]
+# module "aks-cluster-1" {
+#   depends_on = [module.cluster-network-1]
 
-  source = "../modules/azure-kubernetes-cluster"
+#   source = "../modules/azure-kubernetes-cluster"
 
-  prefix         = var.aks_gpu_name
-  resource_group = azurerm_resource_group.rg.name
-  location       = azurerm_resource_group.rg.location
+#   prefix         = var.aks_gpu_name
+#   resource_group = azurerm_resource_group.rg.name
+#   location       = azurerm_resource_group.rg.location
 
-  k8s_version = var.k8s_version
+#   k8s_version = var.k8s_version
 
-  auto_scaling_default_node = var.auto_scaling_default_node
-  zones                     = var.zones
-  vm_size                   = var.default_gpu_node_vm_size
-  max_pods                  = var.max_pods
-  node_count                = var.gpu_node_count
-  node_min_count            = var.gpu_node_min_count
-  node_max_count            = var.gpu_node_max_count
+#   auto_scaling_default_node = var.auto_scaling_default_node
+#   zones                     = var.zones
+#   vm_size                   = var.default_gpu_node_vm_size
+#   max_pods                  = var.max_pods
+#   node_count                = var.gpu_node_count
+#   node_min_count            = var.gpu_node_min_count
+#   node_max_count            = var.gpu_node_max_count
 
-  managed                    = var.managed
-  rbac_enabled               = var.rbac_enabled
-  aks_admin_group_object_ids = var.aks_admin_group_object_ids
-  # ad_groups                  = var.ad_groups
-  # ad_members                 = var.ad_members
+#   managed                    = var.managed
+#   rbac_enabled               = var.rbac_enabled
+#   aks_admin_group_object_ids = var.aks_admin_group_object_ids
+#   # ad_groups                  = var.ad_groups
+#   # ad_members                 = var.ad_members
 
-  network_resource_group = module.cluster-network-1.resource_group_name
-  network_vnet           = module.cluster-network-1.virtual_network_name
-  network_subnet         = module.cluster-network-1.subnet_name
+#   network_resource_group = module.cluster-network-1.resource_group_name
+#   network_vnet           = module.cluster-network-1.virtual_network_name
+#   network_subnet         = module.cluster-network-1.subnet_name
 
-  service_cidr         = var.service_cidr
-  dns_service_ip       = var.dns_service_ip
-  pod_cidr             = var.second_pod_cidr
-  storage_account_name = null
+#   service_cidr         = var.service_cidr
+#   dns_service_ip       = var.dns_service_ip
+#   pod_cidr             = var.second_pod_cidr
+#   storage_account_name = null
 
-  additional_node_pools = var.additional_node_pools
+#   additional_node_pools = var.additional_node_pools
 
-  tags = var.tags
+#   tags = var.tags
 
-  sku_tier = var.sku_tier
-}
+#   sku_tier = var.sku_tier
+# }
 
 module "vault" {
   source         = "../modules/vault"
