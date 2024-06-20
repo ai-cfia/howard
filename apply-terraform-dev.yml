@@ -78,7 +78,6 @@ stages:
         displayName: "Terraform Apply"
         pool:
           vmImage: "ubuntu-latest"
-        environment: "DevApproval"
         strategy:
           runOnce:
             deploy:
