@@ -50,18 +50,18 @@ module "aks-cluster-0" {
   aks_admin_group_object_ids  = var.aks_admin_group_object_ids
   # ad_groups                  = var.ad_groups
   # ad_members                 = var.ad_members
-  network_resource_group = var.vnet_rg_name
-  network_vnet           = var.vnet_name
-  network_subnet         = var.vnet_subnet_name
-  service_cidr           = var.service_cidr
-  dns_service_ip         = var.dns_service_ip
-  pod_cidr               = var.pod_cidr
-  storage_account_name   = null
-  additional_node_pools  = var.additional_node_pools
-  tags                   = var.tags
-  sku_tier               = var.sku_tier
-  identity_type          = var.identity_type
-  user_assigned_identity_ids = [ azurerm_user_assigned_identity.aks_identity.id ]
+  network_resource_group     = var.vnet_rg_name
+  network_vnet               = var.vnet_name
+  network_subnet             = var.vnet_subnet_name
+  service_cidr               = var.service_cidr
+  dns_service_ip             = var.dns_service_ip
+  pod_cidr                   = var.pod_cidr
+  storage_account_name       = null
+  additional_node_pools      = var.additional_node_pools
+  tags                       = var.tags
+  sku_tier                   = var.sku_tier
+  identity_type              = var.identity_type
+  user_assigned_identity_ids = [azurerm_user_assigned_identity.aks_identity.id]
 }
 
 module "azure-key-vault" {

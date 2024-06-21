@@ -26,7 +26,7 @@ resource "azurerm_kubernetes_cluster" "k8s" {
   }
 
   identity {
-    type = var.identity_type
+    type         = var.identity_type
     identity_ids = var.user_assigned_identity_ids
   }
 
