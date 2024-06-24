@@ -17,6 +17,9 @@ spec:
       containers:
       - name: litellm
         image: ghcr.io/berriai/litellm:main-latest
+        env:
+        - name: LITELLM_MASTER_KEY
+          value: "sk-1234567"
         ports:
         - containerPort: 4000
         volumeMounts:
