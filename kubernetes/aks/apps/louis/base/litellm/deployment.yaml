@@ -18,18 +18,15 @@ spec:
       - name: litellm
         image: ghcr.io/berriai/litellm:main-latest
         ports:
-          - containerPort: 4000
+        - containerPort: 4000
         volumeMounts:
-          - name: config-volume
-            mountPath: /app/proxy_server_config.yaml
-            subPath: config.yaml
-        envFrom:
-          - secretRef:
-              name: litellm-secrets
-      volumes:
         - name: config-volume
-          configMap:
-            name: litellm-config-file
+          mountPath: /app/proxy_server_config.yaml
+          subPath: config.yaml
+      volumes:
+      - name: config-volume
+        configMap:
+          name: litellm-config-file
 
 ---
 apiVersion: v1
