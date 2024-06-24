@@ -17,6 +17,7 @@ spec:
       containers:
       - name: litellm
         image: ghcr.io/berriai/litellm:main-latest
+        command: ["litellm", "--config", "config.yaml"]
         env:
         - name: LITELLM_MASTER_KEY
           value: "sk-1234567"
@@ -24,7 +25,7 @@ spec:
         - containerPort: 4000
         volumeMounts:
         - name: config-volume
-          mountPath: /app/proxy_server_config.yaml
+          mountPath: /app/config.yaml
           subPath: config.yaml
       volumes:
       - name: config-volume
