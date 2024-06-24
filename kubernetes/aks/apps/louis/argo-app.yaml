@@ -9,7 +9,7 @@ metadata:
 spec:
   project: default
   destination:
-    server: https://acia-cfia-gpu-staging-dns-eay3uqut.hcp.canadacentral.azmk8s.io:443
+    server: https://kubernetes.default.svc
     namespace: louis
   source:
     repoURL: https://github.com/ai-cfia/howard.git
@@ -18,11 +18,6 @@ spec:
   syncPolicy:
     automated:
       selfHeal: true
-    syncOptions:
-      - CreateNamespace=true
-    managedNamespaceMetadata:
-      labels:
-        istio-injection: enabled
 
 ---
 apiVersion: argoproj.io/v1alpha1
@@ -35,7 +30,7 @@ metadata:
 spec:
   project: default
   destination:
-    server: https://acia-cfia-gpu-staging-dns-eay3uqut.hcp.canadacentral.azmk8s.io:443
+    server: https://kubernetes.default.svc
     namespace: louis
   source:
     repoURL: https://github.com/ai-cfia/howard.git
@@ -44,8 +39,24 @@ spec:
   syncPolicy:
     automated:
       selfHeal: true
-    syncOptions:
-      - CreateNamespace=true
-    managedNamespaceMetadata:
-      labels:
-        istio-injection: enabled
+
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: litellm
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: louis
+  source:
+    repoURL: https://github.com/ai-cfia/howard.git
+    path: kubernetes/aks/apps/louis/base/litellm
+    targetRevision: HEAD
+  syncPolicy:
+    automated:
+      selfHeal: true
