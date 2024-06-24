@@ -17,12 +17,14 @@ spec:
       containers:
       - name: litellm
         image: ghcr.io/berriai/litellm:main-latest
-        command: ["litellm", "--config", "config.yaml"]
         env:
         - name: LITELLM_MASTER_KEY
           value: "sk-1234567"
         ports:
         - containerPort: 4000
+        args:
+          - "--config"
+          - "/app/config.yaml"
         volumeMounts:
         - name: config-volume
           mountPath: /app/config.yaml
