@@ -9,6 +9,7 @@ resources:
   - ../bytebase/
   - ../louis/
   - ../librechat/
+  - ../ailab/
 
   # System applications
   - ../../system/cert-manager/
