@@ -1,0 +1,26 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: ailab
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+    argocd-image-updater.argoproj.io/image-list: ai-cfia-ia-acia.github.io=ghcr.io/ai-cfia/ai-cfia-ia-acia.github.io:main
+    argocd-image-updater.argoproj.io/ai-cfia-ia-acia.github.io.update-strategy: digest
+spec:
+  project: default
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: ailab
+  source:
+    repoURL: https://github.com/ai-cfia/howard.git
+    path: kubernetes/aks/apps/ailab/base
+    targetRevision: HEAD
+  syncPolicy:
+    automated:
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
