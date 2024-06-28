@@ -19,6 +19,10 @@ spec:
           imagePullPolicy: Always
           command: ["/bin/sh", "-c"]
           args: ['hypercorn -b :8080 app:app']
+          volumeMounts:
+            - name: secrets-store
+              mountPath: "/mnt/secrets-store"
+              readOnly: true
           envFrom:
             - secretRef:
                 name: nachet-backend-secrets
@@ -30,6 +34,13 @@ spec:
               port: 8080
             initialDelaySeconds: 60
             periodSeconds: 10
+      volumes:
+        - name: secrets-store
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: "nachet-backend-spc"
 ---
 apiVersion: v1
 kind: Service
