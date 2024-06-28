@@ -5,6 +5,7 @@ metadata:
   name: ailab-ingress
   namespace:
   annotations:
+    nginx.ingress.kubernetes.io/whitelist-source-range: 205.194.32.0/24,10.5.0.0/16
     external-dns.alpha.kubernetes.io/target: inspection.alpha.canada.ca
     cert-manager.io/cluster-issuer: letsencrypt-prod
     nginx.ingress.kubernetes.io/add-base-url: "true"
