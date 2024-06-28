@@ -18,17 +18,23 @@ spec:
           imagePullPolicy: Always
           ports:
             - containerPort: 5432
-          envFrom:
-            - secretRef:
-                name: vectordb-secrets
           volumeMounts:
             - name: storage
               mountPath: /var/lib/postgresql/data
               subPath: pgdata
+            - name: secrets-store
+              mountPath: "/mnt/secrets-store"
+              readOnly: true
       volumes:
         - name: storage
           persistentVolumeClaim:
             claimName: librechat-vectordb-pvc
+        - name: secrets-store
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: "librechat-spc"
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -52,17 +58,3 @@ spec:
   ports:
     - port: 5432
       name: http
-
----
-kind: Secret
-apiVersion: v1
-metadata:
-  name: vectordb-secrets
-  annotations:
-    avp.kubernetes.io/path: "kv/data/librechat/vectordb"
-    avp.kubernetes.io/secret-version: "2"
-stringData:
-  POSTGRES_DB: <POSTGRES_DB>
-  POSTGRES_USER: <POSTGRES_USER>
-  POSTGRES_PASSWORD: <POSTGRES_PASSWORD>
-  POSTGRES_PORT: "5432"

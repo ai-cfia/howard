@@ -34,8 +34,6 @@ spec:
           envFrom:
             - configMapRef:
                 name: librechat-configenv
-            - secretRef:
-                name: librechat-secrets
           volumeMounts:
             - name: config-yaml
               mountPath: "/app/librechat.yaml"
@@ -43,6 +41,9 @@ spec:
               readOnly: true
             - name: image-volume
               mountPath: "/app/client/public/images"
+            - name: secrets-store
+              mountPath: "/mnt/secrets-store"
+              readOnly: true
           securityContext:
             runAsUser: 1000
             runAsGroup: 3000
@@ -53,18 +54,35 @@ spec:
         - name: image-volume
           persistentVolumeClaim:
             claimName: librechat-images-pvc
+        - name: secrets-store
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: "librechat-spc"
 ---
-kind: Secret
 apiVersion: v1
+kind: Service
 metadata:
-  name: librechat-secrets
-  annotations:
-    avp.kubernetes.io/path: "kv/data/librechat/librechat-client"
-    avp.kubernetes.io/secret-version: "7"
-stringData:
-  SEARCH: "true"
-  MEILI_MASTER_KEY: <MEILI_MASTER_KEY>
-  JWT_SECRET: <JWT_SECRET>
-  JWT_REFRESH_SECRET: <JWT_REFRESH_SECRET>
-  # GOOGLE_KEY: <GOOGLE_KEY>
-  AZURE_OPENAI_GPT4_API_KEY: <AZURE_OPENAI_GPT4_API_KEY>
+  name: librechat
+spec:
+  clusterIP: None
+  selector:
+    app: librechat
+  ports:
+    - port: 3080
+      protocol: TCP
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  labels:
+    app: librechat
+  name: librechat-images-pvc
+spec:
+  storageClassName: default
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
