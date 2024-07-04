@@ -17,7 +17,7 @@ spec:
     namespace: ailab
   source:
     repoURL: https://github.com/ai-cfia/howard.git
-    path: kubernetes/aks/apps/ailab/base
+    path: kubernetes/aks/apps/ailab/prod
     targetRevision: HEAD
   syncPolicy:
     automated:
