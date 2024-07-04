@@ -17,11 +17,11 @@ spec:
           image: ghcr.io/ai-cfia/ai-cfia-ia-acia.github.io:main
           imagePullPolicy: Always
           ports:
-            - containerPort: 80
+            - containerPort: 3000
           livenessProbe:
             httpGet:
               path: /
-              port: 80
+              port: 3000
             initialDelaySeconds: 60
             periodSeconds: 10
 ---
@@ -35,4 +35,4 @@ spec:
     app: ailab
   ports:
     - protocol: TCP
-      port: 80
+      port: 3000
