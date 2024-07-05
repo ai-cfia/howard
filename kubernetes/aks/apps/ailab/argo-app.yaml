@@ -8,11 +8,11 @@ metadata:
     - resources-finalizer.argocd.argoproj.io
   annotations:
     argocd.argoproj.io/sync-wave: "0"
-    argocd-image-updater.argoproj.io/image-list: ai-cfia-ia-acia.github.io=ghcr.io/ai-cfia/ai-cfia-ia-acia.github.io:main
-    argocd-image-updater.argoproj.io/ai-cfia-ia-acia.github.io.update-strategy: digest
+    argocd-image-updater.argoproj.io/image-list: ailab=ghcr.io/ai-cfia/ai-cfia-ia-acia.github.io:main
+    argocd-image-updater.argoproj.io/ailab.update-strategy: digest
 spec:
   project: default
-  destination:
+  destination: # docker pull ghcr.io/ai-cfia/ai-cfia-ia-acia.github.io:8ccb687ed6dfd3193dd016c9cbf286f0fea9f415
     server: https://kubernetes.default.svc
     namespace: ailab
   source:
