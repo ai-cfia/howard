@@ -17,18 +17,24 @@ spec:
         - name: chat-meilisearch
           image: getmeili/meilisearch:v1.7.3
           imagePullPolicy: Always
-          envFrom:
-            - secretRef:
-                name: meilisearch-secrets
           ports:
             - containerPort: 7700
           volumeMounts:
             - name: storage
               mountPath: /meili_data
+            - name: secrets-store
+              mountPath: "/mnt/secrets-store"
+              readOnly: true
       volumes:
         - name: storage
           persistentVolumeClaim:
             claimName: librechat-meilisearch-pvc
+        - name: secrets-store
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: "librechat-spc"
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -52,16 +58,3 @@ spec:
   ports:
     - port: 7700
       targetPort: 7700
----
-kind: Secret
-apiVersion: v1
-metadata:
-  name: meilisearch-secrets
-  annotations:
-    avp.kubernetes.io/path: "kv/data/librechat/meilisearch"
-    avp.kubernetes.io/secret-version: "1"
-stringData:
-  SEARCH: "true"
-  MEILI_MASTER_KEY: <MEILI_MASTER_KEY>
-  MEILI_HOST: "http://0.0.0.0:7700"
-  MEILI_NO_ANALYTICS: "true"

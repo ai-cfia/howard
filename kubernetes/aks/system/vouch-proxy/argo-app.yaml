@@ -74,8 +74,8 @@ spec:
                   # https://developer.github.com/apps/building-integrations/setting-up-and-registering-oauth-apps/about-authorization-options-for-oauth-apps/
                   # Done at https://github.com/settings/applications/new
                   provider: github
-                  client_id: <path:kv/data/system/vouch-proxy#github-client-id#1>
-                  client_secret: <path:kv/data/system/vouch-proxy#github-client-secret#1>
+                  client_id: <ailab-key-vault-dev#vouch-github-client-id>
+                  client_secret: <ailab-key-vault-dev#vouch-github-client-secret>
                   scopes:
                     - read:user
                     - user:email

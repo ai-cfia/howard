@@ -22,9 +22,20 @@ spec:
             [
               gunicorn --bind :8080 --workers 1 --threads 8 --timeout 0 --forwarded-allow-ips "*" app:app,
             ]
+          volumeMounts:
+            - name: secrets-store
+              mountPath: "/mnt/secrets-store"
+              readOnly: true
           envFrom:
             - secretRef:
-                name: finesse-secrets
+                name: finesse-internal-secrets
+          env:
+            - name: FINESSE_BACKEND_DEBUG_MODE
+              value: "false"
+            - name: FINESSE_BACKEND_STATIC_FILE_URL
+              value: "https://api.github.com/repos/ai-cfia/finesse-data/contents"
+            - name: FINESSE_WEIGHTS
+              value: '{"recency":1,"traffic":1,"current":0.5,"typicality":0.2,"similarity":1}'
           ports:
             - containerPort: 8080
           livenessProbe:
@@ -33,7 +44,13 @@ spec:
               port: 8080
             initialDelaySeconds: 60
             periodSeconds: 10
-
+      volumes:
+        - name: secrets-store
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: "finesse-internal-spc"
 ---
 apiVersion: v1
 kind: Service

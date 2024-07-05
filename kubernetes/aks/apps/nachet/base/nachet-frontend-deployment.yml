@@ -17,11 +17,6 @@ spec:
         - name: nachet-frontend
           image: ghcr.io/ai-cfia/nachet-frontend:main
           imagePullPolicy: Always
-          command: ["/bin/sh", "-c"]
-          args: [serve -s build]
-          envFrom:
-            - secretRef:
-                name: nachet-frontend-secrets
           ports:
             - containerPort: 3000
           livenessProbe:

@@ -1,30 +1,30 @@
----
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: finesse
-  namespace: argocd
-  finalizers:
-    - resources-finalizer.argocd.argoproj.io
-  annotations:
-    argocd.argoproj.io/sync-wave: "0"
-    argocd-image-updater.argoproj.io/image-list: finesse-frontend=ghcr.io/ai-cfia/finesse-frontend:main, finesse-backend=ghcr.io/ai-cfia/finesse-backend:main
-    argocd-image-updater.argoproj.io/finesse-frontend.update-strategy: digest
-    argocd-image-updater.argoproj.io/finesse-backend.update-strategy: digest
-spec:
-  project: default
-  destination:
-    server: https://kubernetes.default.svc
-    namespace: finesse
-  source:
-    repoURL: https://github.com/ai-cfia/howard.git
-    path: kubernetes/aks/apps/finesse/public
-    targetRevision: HEAD
-  syncPolicy:
-    automated:
-      selfHeal: true
-    syncOptions:
-      - CreateNamespace=true
+# ---
+# apiVersion: argoproj.io/v1alpha1
+# kind: Application
+# metadata:
+#   name: finesse
+#   namespace: argocd
+#   finalizers:
+#     - resources-finalizer.argocd.argoproj.io
+#   annotations:
+#     argocd.argoproj.io/sync-wave: "0"
+#     argocd-image-updater.argoproj.io/image-list: finesse-frontend=ghcr.io/ai-cfia/finesse-frontend:main, finesse-backend=ghcr.io/ai-cfia/finesse-backend:main
+#     argocd-image-updater.argoproj.io/finesse-frontend.update-strategy: digest
+#     argocd-image-updater.argoproj.io/finesse-backend.update-strategy: digest
+# spec:
+#   project: default
+#   destination:
+#     server: https://kubernetes.default.svc
+#     namespace: finesse
+#   source:
+#     repoURL: https://github.com/ai-cfia/howard.git
+#     path: kubernetes/aks/apps/finesse/public
+#     targetRevision: HEAD
+#   syncPolicy:
+#     automated:
+#       selfHeal: true
+#     syncOptions:
+#       - CreateNamespace=true
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
