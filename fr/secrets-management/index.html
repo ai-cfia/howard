@@ -326,9 +326,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#architecture-dazure-key-vault" class="md-nav__link">
+  <a href="#architecture-de-vault" class="md-nav__link">
     <span class="md-ellipsis">
-      Architecture d'Azure Key Vault
+      Architecture de Vault
     </span>
   </a>
   
@@ -344,19 +344,19 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#creer-lire-mettre-a-jour-et-supprimer-des-secrets" class="md-nav__link">
+  <a href="#creation-lecture-mise-a-jour-et-suppression-des-secrets" class="md-nav__link">
     <span class="md-ellipsis">
-      Créer, lire, mettre à jour et supprimer des secrets
+      Création, lecture, mise à jour et suppression des secrets
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Créer, lire, mettre à jour et supprimer des secrets">
+    <nav class="md-nav" aria-label="Création, lecture, mise à jour et suppression des secrets">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#etapes-pour-mettre-a-jour-les-valeurs-des-secrets-en-utilisant-le-portail-azure" class="md-nav__link">
+  <a href="#etapes-pour-mettre-a-jour-les-valeurs-des-secrets-en-utilisant-linterface-utilisateur-de-vault" class="md-nav__link">
     <span class="md-ellipsis">
-      Étapes pour mettre à jour les valeurs des secrets en utilisant le portail Azure
+      Étapes pour mettre à jour les valeurs des secrets en utilisant l'interface utilisateur de Vault
     </span>
   </a>
   
@@ -405,173 +405,182 @@
 
 <h1 id="gestion-des-secrets">Gestion des secrets</h1>
 <h2 id="introduction">Introduction</h2>
-<p>Les secrets sont des informations sensibles qui doivent être protégées contre un
-accès non autorisé. Dans le contexte d'un cluster Kubernetes, les secrets sont
-utilisés pour stocker des données sensibles telles que des mots de passe, des
-jetons et des clés. Pour permettre une gestion sécurisée et efficace des
-secrets, nous utilisons Azure Key Vault. Azure Key Vault est un outil conçu pour
-gérer les secrets et protéger les données sensibles. Il fournit un moyen
-centralisé de gérer l'accès aux secrets. Ce document fournit un aperçu du
-processus de gestion des secrets et du rôle d'Azure Key Vault dans la
-sécurisation et la gestion des secrets dans le cluster Kubernetes.</p>
-<h2 id="architecture-dazure-key-vault">Architecture d'Azure Key Vault</h2>
-<p>Azure Key Vault est un service basé sur le cloud qui fournit un stockage
-sécurisé pour les secrets, les clés et les certificats. Il est conçu pour aider
-à protéger les clés cryptographiques et les secrets utilisés par les
-applications et services cloud. Key Vault simplifie le processus de gestion des
-clés, vous permettant de maintenir le contrôle des clés et autres secrets en
-centralisant le stockage et l'accès.</p>
-<p>La configuration actuelle permet à Azure Key Vault d'injecter des secrets dans
-les pods en utilisant le driver CSI (Container Storage Interface) Secret Store.
-Cela fournit un moyen sécurisé de gérer les secrets dans le cluster Kubernetes
-et garantit que les données sensibles sont protégées contre un accès non
-autorisé.</p>
-<p>Le diagramme suivant illustre la structure de l'architecture d'Azure Key Vault
-dans notre configuration :</p>
-<p><img alt="Diagramme de l'architecture de Vault" src="../img/vault-argocd-architecture.svg" /></p>
-<p>Le diagramme de séquence suivant décrit le processus permettant à un développeur
-de mettre à jour les secrets en utilisant le portail Azure et comment les
-secrets sont injectés dans les pods :</p>
-<pre class="mermaid"><code>```mermaid
-sequenceDiagram
+<p>Les secrets sont des informations sensibles qui doivent être protégées contre
+tout accès non autorisé. Dans le contexte d'un cluster Kubernetes, les secrets
+sont utilisés pour stocker des données sensibles telles que des mots de passe,
+des jetons et des clés. Pour permettre une gestion sécurisée et efficace des
+secrets, nous utilisons HashiCorp Vault, un outil conçu pour gérer les secrets
+et protéger les données sensibles. Vault fournit un moyen centralisé de gérer
+l'accès aux secrets et aux clés de chiffrement, et il a également la capacité
+de générer des secrets dynamiques à la demande. Ce document fournit un aperçu
+du processus de gestion des secrets et du rôle de Vault dans la sécurisation
+et la gestion des secrets dans le cluster Kubernetes.</p>
+<h2 id="architecture-de-vault">Architecture de Vault</h2>
+<p>Vault est un système hautement disponible et distribué conçu pour fournir un
+stockage sécurisé et une gestion des secrets. Il est basé sur une architecture
+client-serveur, avec le serveur étant le composant central qui stocke et gère
+les secrets, et les clients étant les applications et services qui accèdent aux
+secrets. Le serveur est responsable de l'authentification des clients, de
+l'autorisation de l'accès aux secrets, et de la fourniture de services de
+chiffrement et de déchiffrement. Le serveur est également responsable de générer
+des secrets dynamiques à la demande, qui sont de courte durée et sont
+automatiquement révoqués après une certaine période.</p>
+<p>La configuration actuelle permet à Vault d'injecter des secrets dans les pods
+en utilisant le plugin ArgoCD Vault. Le plugin lit les espaces réservés dans
+les fichiers YAML et les remplace par les valeurs réelles des secrets provenant
+de Vault. Cela offre un moyen sécurisé de gérer les secrets dans le cluster
+Kubernetes et garantit que les données sensibles sont protégées contre tout
+accès non autorisé.</p>
+<p>Le diagramme suivant illustre la structure de l'architecture Vault au sein
+de Howard: <img alt="Vault architecture diagram" src="../img/vault-argocd-architecture.svg" /></p>
+<p>Le diagramme de séquence suivant décrit le processus permettant à un
+développeur de mettre à jour des secrets en utilisant le service UI de Vault
+et comment les secrets sont injectés dans les pods :</p>
+<pre class="mermaid"><code>sequenceDiagram
     participant Developer
-    participant FinesseRepo as Référentiel Finesse
-    participant GHWorkflow as Flux de travail GitHub
-    participant ContainerReg as Registre de conteneurs GitHub
-    participant HowardRepo as Référentiel Howard
-    participant ArgoInstance as Instance ArgoCD
-    participant CSIProvider as Fournisseur de secrets CSI
-    participant FinessePod as Pod Finesse
-    participant AzureKeyVaultUI as Interface utilisateur d'Azure Key Vault
-    participant AzureKeyVault as Azure Key Vault
+    participant FinesseRepo as Finesse Repository
+    participant GHWorkflow as GitHub Workflow
+    participant ContainerReg as GitHub Container Registry
+    participant HowardRepo as Howard Repository
+    participant ArgoRepoServer as ArgoCD Repo Server
+    participant ArgoVaultPlugin as Argo Vault Plugin
+    participant FinessePod as Finesse Pod
 
-    Developer-&gt;&gt;+FinesseRepo: 1. Pousse les commits
-    FinesseRepo-&gt;&gt;+GHWorkflow: Déclenche le flux de travail
-    GHWorkflow-&gt;&gt;+ContainerReg: Construit et pousse une nouvelle version sémantique
-    ArgoInstance-&gt;&gt;+ContainerReg: Vérifie les nouvelles balises d'image
-    ArgoInstance-&gt;&gt;+FinessePod: Déclenche la synchronisation avec le pod
-    FinessePod-&gt;&gt;+ContainerReg: Récupère l'image avec la nouvelle balise de version
-    FinessePod-&gt;&gt;+FinessePod: Actualise le déploiement avec la nouvelle version
-    Developer-&gt;&gt;+AzureKeyVaultUI: 2. Accède à l'interface pour mettre à jour/créer des secrets
-    AzureKeyVaultUI-&gt;&gt;+AzureKeyVault: Valide la mise à jour/création des secrets
-    Developer-&gt;&gt;+HowardRepo: 3. Commet les nouveaux/mis à jour secrets
-    ArgoInstance-&gt;&gt;+HowardRepo: Vérifie les modifications dans le référentiel
-    ArgoInstance-&gt;&gt;+CSIProvider: déclenche la mise à jour dans l'espace de noms finesse,&lt;br&gt; synchronise les secrets depuis Azure Key Vault
-    CSIProvider-&gt;&gt;+AzureKeyVault: Récupère la version spécifique des secrets
-    CSIProvider-&gt;&gt;+FinessePod: Injecte les secrets
-    ArgoInstance-&gt;&gt;+FinessePod: 4. Déclenche une actualisation complète</code></pre>
+    participant VaultUI as Vault UI
+    participant Vault as Vault Server
+
+    Developer-&gt;&gt;+FinesseRepo: 1. Pushes commits
+    FinesseRepo-&gt;&gt;+GHWorkflow: Triggers workflow
+    GHWorkflow-&gt;&gt;+ContainerReg: Builds and pushes new semantic version
+    GHWorkflow-&gt;&gt;+ArgoRepoServer: Triggers webhook
+    ArgoRepoServer-&gt;&gt;+FinessePod: Triggers synchronisation to pod
+    FinessePod-&gt;&gt;+ContainerReg: Fetches image with new version tag
+    FinessePod-&gt;&gt;+FinessePod: Refreshes deployment with new version
+    Developer-&gt;&gt;+VaultUI: 2. Accesses UI to update/create secrets
+    VaultUI-&gt;&gt;+Vault: Commit update/creation of secrets
+    Developer-&gt;&gt;+HowardRepo: 3. Commits new/updated secrets
+    HowardRepo-&gt;&gt;+ArgoRepoServer: Triggers sync via webhook
+    ArgoRepoServer-&gt;&gt;+ArgoVaultPlugin: triggers refresh on finesse namespace,&lt;br&gt; sync secrets from Vault
+    ArgoVaultPlugin-&gt;&gt;+Vault: Fetch specific version of secrets
+    ArgoVaultPlugin-&gt;&gt;+FinessePod: Injects secrets
+    Developer-&gt;&gt;+FinessePod: 4. Trigger hard refresh through argoCD</code></pre>
+<p>Veuillez noter que le développeur doit déclencher un rafraîchissement complet
+du pod pour refléter les modifications des secrets. Cela se fait dans
+l'interface utilisateur d'ArgoCD, mais nous travaillons sur un moyen
+d'automatiser ce processus.</p>
 <h2 id="processus-de-gestion-des-secrets">Processus de gestion des secrets</h2>
-<p>Le processus de gestion des secrets implique les étapes suivantes :</p>
+<p>The secret management process involves the following steps:</p>
 <ol>
 <li>
-<p><strong>Création des secrets</strong> : Les secrets sont créés et stockés dans Azure Key
-   Vault en utilisant l'interface CLI ou API d'Azure Key Vault. Lorsqu'un secret
-   est créé, il est chiffré et stocké dans le serveur central Key Vault.</p>
+<p><strong>Création des secrets</strong>: Les secrets sont créés et stockés dans Vault en
+    utilisant l'interface CLI de Vault ou  l'API. Lorsqu'un secret est créé,
+    il est chiffré et stocké dans le serveur central Vault.</p>
 </li>
 <li>
-<p><strong>Récupération des secrets</strong> : Les secrets sont récupérés par les
-   applications et services en utilisant la classe SecretProvider qui utilise
-   l'identité gérée pour récupérer en toute sécurité les secrets depuis Azure
-   Key Vault et les injecter dans les pods Kubernetes.</p>
+<p><strong>Récupération des secrets</strong>: Les applications et services peuvent récupérer les
+    secrets depuis Vault en utilisant l'interface CLI de Vault ou l'API.
+    Lorsqu'un secret est récupéré, il est déchiffré et renvoyé au client
+    de manière sécurisée.</p>
 </li>
 <li>
-<p><strong>Contrôle d'accès</strong> : Azure Key Vault fournit un contrôle d'accès granulaire
-   aux secrets, permettant aux administrateurs de définir des politiques
-   spécifiant quels clients peuvent accéder à quels secrets. Cela garantit que
-   seuls les clients autorisés peuvent accéder aux données sensibles.
-   Actuellement, nous utilisons la méthode d'authentification Managed Identity
-   pour authentifier les applications hébergées et autoriser l'accès aux
-   secrets.</p>
+<p><strong>Génération de secrets dynamiques</strong>: Vault has the ability to generate
+    dynamic secrets on demand. This means that instead of
+    storing static secrets in Vault, Vault can generate short-lived secrets
+    that are automatically revoked after a certain period of time. This
+    provides an additional layer of security and reduces the risk of
+    unauthorized access to secrets.</p>
+</li>
+<li>
+<p><strong>Contrôle d'accès</strong>: Vault fournit un contrôle d'accès granulaire
+    aux secrets, permettant aux administrateurs de définir des politiques
+    qui spécifient quels clients peuvent accéder à quels secrets. Cela
+    garantit que seuls les clients autorisés peuvent accéder aux données
+    sensibles. Actuellement, nous utilisons la méthode d’authentification
+    Kubernetes pour authentifier les applications hébergées et autoriser
+    l'accès aux secrets. En ce qui concerne les utilisateurs humains,
+    nous utilisons la méthode d'authentification GitHub pour
+    authentifier et autoriser l'accès aux secrets.</p>
 </li>
 </ol>
-<h2 id="creer-lire-mettre-a-jour-et-supprimer-des-secrets">Créer, lire, mettre à jour et supprimer des secrets</h2>
-<p>Azure Key Vault fournit un service d'interface utilisateur pour gérer les
-secrets. Le service d'interface utilisateur est une interface utilisateur basée
-sur le web qui permet aux administrateurs de créer, lire, mettre à jour et
-supprimer des secrets. Le service fournit également un moyen de gérer les
-politiques de contrôle d'accès et les journaux d'audit. Le service est
-accessible via un navigateur web et est protégé par les mêmes mécanismes de
-sécurité que le service Key Vault.</p>
-<h3 id="etapes-pour-mettre-a-jour-les-valeurs-des-secrets-en-utilisant-le-portail-azure">Étapes pour mettre à jour les valeurs des secrets en utilisant le portail Azure</h3>
+<h2 id="creation-lecture-mise-a-jour-et-suppression-des-secrets">Création, lecture, mise à jour et suppression des secrets</h2>
+<p>Vault fournit un service d'interface utilisateur pour gérer les secrets.
+Le service d'interface utilisateur est une interface utilisateur web qui
+permet aux administrateurs de créer, lire, mettre à jour et supprimer des
+secrets. Le service fournit également un moyen de gérer les politiques de
+contrôle d'accès et les journaux d'audit. Le service est accessible via un
+navigateur web et est protégé par les mêmes mécanismes de sécurité
+que le serveur Vault.</p>
+<h3 id="etapes-pour-mettre-a-jour-les-valeurs-des-secrets-en-utilisant-linterface-utilisateur-de-vault">Étapes pour mettre à jour les valeurs des secrets en utilisant l'interface utilisateur de Vault</h3>
 <ol>
-<li>
-<p><strong>Accéder au portail Azure</strong> : Accédez au <a href="https://portal.azure.com/">portail
-   Azure</a> dans votre navigateur web.</p>
-</li>
-<li>
-<p><strong>Naviguer vers Azure Key Vault</strong> :</p>
-</li>
-<li>Dans le portail Azure, utilisez la barre de recherche en haut pour
-     rechercher "Key Vaults".</li>
-<li>
-<p>Sélectionnez votre Key Vault dans la liste.</p>
-</li>
-<li>
-<p><strong>Créer ou mettre à jour des secrets</strong> :</p>
-</li>
-<li>Dans votre Key Vault, sélectionnez l'option "Secrets" dans le menu de
-     gauche.</li>
-<li>Pour créer un nouveau secret, cliquez sur le bouton "+ Generate/Import".</li>
-<li>Pour mettre à jour un secret existant, cliquez sur le nom du secret dans la
-     liste, puis cliquez sur le bouton "New Version".</li>
-<li>Entrez le nom et la valeur du secret. Assurez-vous que le nom du secret est
-     préfixé par le nom de l'application (par exemple, <code>librechat-jwt-secret</code>)
-     et cliquez sur "Create" ou "Save".</li>
+<li>Afin d'accéder au service d'interface utilisateur de Vault, vous devez
+   disposer des autorisations appropriées et accéder à l'URL de Vault.
+   Elle est actuellement configurée pour donner accès à tout membre de
+   l'organisation ai-cfia sur Github.</li>
+<li>Générez un jeton d'accès personnel (PAT) sur GitHub et utilisez-le
+   pour vous authentifier au service d'interface utilisateur de
+   Vault. La portée du jeton devrait être: <img alt="PAT token
+   scope" src="../img/pat-token-scope.png" /></li>
+<li>Accédez au service d'interface utilisateur de Vault en naviguant vers l'URL
+   de Vault dans un navigateur web. Vous serez invité à vous authentifier en
+   utilisant votre jeton PAT de GitHub.</li>
+<li>Une fois authentifié, vous pourrez créer, lire, mettre à jour et
+   supprimer des secrets en utilisant le service d'interface utilisateur.
+   Il vous suffit de naviguer vers le moteur de secrets PV et de suivre le
+   chemin jusqu'aux secrets de vos applications. Le moteur de secrets PV est
+   un magasin clé-valeur qui vous permet de stocker et de gérer les secrets
+   pour vos applications.<img alt="PV secret engine" src="../img/pv-secret-engine.png" /></li>
+<li>Une fois dans le répertoire des secrets de votre application, cliquez
+   simplement sur 'create new version' (créer une nouvelle version) et vous
+   pourrez ajouter, mettre à jour ou supprimer des secrets selon
+   vos besoins.<img alt="Create new secret" src="../img/create-new-secret.png" /></li>
 </ol>
-<p>Après avoir mis à jour les secrets dans Azure Key Vault, les secrets seront
-automatiquement injectés dans les pods Kubernetes en fonction de la
-configuration <code>SecretProviderClass</code>.</p>
 <h3 id="etapes-pour-mettre-a-jour-les-secrets-injectes-dans-les-pods">Étapes pour mettre à jour les secrets injectés dans les pods</h3>
 <p>Pour mettre à jour les secrets qui sont injectés dans les pods, vous devez
 mettre à jour le manifeste des secrets pour l'application. Le manifeste des
-secrets est un fichier YAML qui définit les secrets qui sont injectés dans les
-variables d'environnement du pod. Nous utiliserons Finesse comme exemple.</p>
+secrets est un fichier YAML qui définit les secrets qui sont injectés dans
+les pods en tant que variables d'environnement. Nous prendrons
+Finesse comme exemple.</p>
 <ol>
-<li><strong>Ouvrir un problème et créer une branche de travail</strong> :</li>
-<li>
-<p>Ouvrez un problème avec le modèle suivant : <a href="URL à fournir lorsque le modèle sera créé">Modèle de mise à jour des
-     secrets</a>. Vous pouvez ensuite
-     créer une branche de travail à partir du problème.</p>
-</li>
-<li>
-<p><strong>Modifier le manifeste SecretProviderClass</strong> :</p>
-</li>
-<li>Ouvrez <code>/kubernetes/aks/apps/finesse/base/secretProviderClass.yaml</code>.</li>
-<li>
-<p>Mettez à jour les références de clés de secrets au besoin. Par exemple,
-     pour ajouter un nouveau secret, vous pouvez ajouter une nouvelle paire
-     clé-valeur dans la section <code>data</code> du manifeste <code>SecretProviderClass</code> :</p>
-<div class="highlight"><pre><span></span><code><span class="w"> </span><span class="nt">data</span><span class="p">:</span>
-<span class="w">   </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">objectName</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">azure-openai-chatgpt-deployment</span><span class="w"> </span><span class="c1"># Cela représente le nom du secret dans Azure Key Vault</span>
-<span class="w">     </span><span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">AZURE_OPENAI_CHATGPT_DEPLOYMENT</span><span class="w"> </span><span class="c1"># Cela représente le nom de la variable d&#39;environnement qui sera injectée dans le pod</span>
-</code></pre></div>
-</li>
-<li>
-<p>Ajoutez le objectName et la clé pour le nouveau secret dans la section
-     'objects' du manifeste <code>SecretProviderClass</code> :</p>
-<div class="highlight"><pre><span></span><code><span class="nt">objects</span><span class="p">:</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">objectName</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">azure-openai-chatgpt-deployment</span>
-<span class="w">   </span><span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">secret</span>
-<span class="w">   </span><span class="l l-Scalar l-Scalar-Plain">version</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">&quot;&quot;</span>
-</code></pre></div>
-<p>Le <code>objectName</code> représente le nom du secret dans Azure Key Vault
- (assurez-vous qu'il est préfixé par le nom de l'application, par exemple,
- la <code>key</code> représente le nom de la variable d'environnement qui sera injectée
- dans le pod. Vous pouvez également spécifier <code>objectVersion</code> si vous
- souhaitez utiliser une version spécifique du secret.</p>
-</li>
+<li>Ouvrez une issue avec le modèle suivant : <a href="url à fournir lorsque le modèle sera créé">Modèle de mise à jour des
+   secrets</a>. Vous pouvez ensuite
+   créer une branche de travail à partir de l'issue.</li>
+<li>Ouvrir <code>/kubernetes/aks/apps/finesse/base/finesse-secrets.yaml</code>.</li>
+<li>Mettez à jour les références des clés de secrets selon les besoins.
+   Par exemple, pour ajouter un nouveau secret, vous pouvez ajouter une
+   nouvelle paire clé-valeur à la section data du manifeste des secrets :</li>
 </ol>
+<div class="highlight"><pre><span></span><code><span class="nt">FINESSE_BACKEND_AZURE_SEARCH_TRANSFORM_MAP</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;FINESSE_BACKEND_AZURE_SEARCH_TRANSFORM_MAP&gt;</span>
+</code></pre></div>
+<p>La clé représente le nom de la variable d'environnement qui sera injectée
+   dans le pod, et la valeur représente la clé du secret dans Vault qui sera
+   utilisée pour récupérer la valeur du secret.</p>
+<ol>
+<li>Mettez à jour l'annotation de version des secrets récupérés depuis Vault :</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="c1"># Augmentez la version du secret de</span>
+<span class="nt">avp.kubernetes.io/secret-version</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;4&quot;</span>
+<span class="c1"># À</span>
+<span class="nt">avp.kubernetes.io/secret-version</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;5&quot;</span>
+</code></pre></div>
+<p>Ceci est la nouvelle version que nous créons à l'étape 5 de la section
+   précédente.</p>
+<p>À titre d'exemple supplémentaire, voici un problème et une pull request
+   qui illustrent le processus de mise à jour des secrets dans
+   l'application Nachet :</p>
+<ul>
+<li><a href="https://github.com/ai-cfia/howard/issues/133">Issue</a></li>
+<li><a href="https://github.com/ai-cfia/howard/pull/131">Pull request</a></li>
+</ul>
 <h2 id="plugin-argo-cd-vault-avp">Plugin Argo CD Vault (AVP)</h2>
-<p>Le <a href="https://argocd-vault-plugin.readthedocs.io/en/stable/">plugin argocd-vault</a>
-est utilisé pour gérer les secrets à l'intérieur de nos déploiements de manière
-GitOps. Il permet d'utiliser des <code>&lt;placeholders&gt;</code> dans n'importe quel fichier
-YAML ou JSON qui a été modélisé et de faire usage d'annotations pour fournir le
-chemin et la version d'un secret dans le vault. Pour l'instant, il n'est utilisé
-que pour les déploiements helm qui n'ont pas d'intégration pour l'injection de
-secrets. Le plugin est installé dans l'instance ArgoCD et est configuré pour
-utiliser Azure Key Vault comme backend pour les secrets.</p>
-<p>Un exemple d'utilisation est montré dans le déploiement de vouch-proxy sous
-<code>kubernetes\aks\system\vouch-proxy\argo-app.yaml</code>.</p>
+<p>Le <a href="https://argocd-vault-plugin.readthedocs.io/en/stable/">argocd-vault-plugin</a>
+est utilisé pour gérer les secrets au sein de nos déploiements de manière
+GitOps. Il permet d'utiliser des <code>&lt;placeholders&gt;</code> dans n'importe quel
+fichier YAML ou JSON qui a été modélisé et fait usage d'annotations pour
+fournir le chemin et la version d'un secret dans le Vault.</p>
+<p>Un exemple d'utilisation est présenté dans l'application de démonstration. La
+<a href="https://argocd-vault-plugin.readthedocs.io/en/stable/howitworks/">documentation</a>
+du plugin est bien expliquée et peut être suivie en fonction du cas
+d'utilisation nécessaire.</p>
 
 
 
