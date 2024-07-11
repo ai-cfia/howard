@@ -23,12 +23,12 @@ spec:
           drop:
             - ALL
       containers:
-      - name: ollama
-        image: ollama/ollama:latest
-        ports:
-        - name: http
-          containerPort: 11434
-          protocol: TCP
+        - name: ollama
+          image: ollama/ollama:latest
+          ports:
+            - name: http
+              containerPort: 11434
+              protocol: TCP
 
 ---
 apiVersion: policy/v1
