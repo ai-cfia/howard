@@ -14,6 +14,16 @@ spec:
       labels:
         app: litellm
     spec:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 3000
+        fsGroup: 2000
+        allowPrivilegeEscalation: false
+        readOnlyRootFilesystem: true
+        capabilities:
+          drop:
+            - ALL
       containers:
       - name: litellm
         image: ghcr.io/berriai/litellm:main-latest
@@ -33,6 +43,17 @@ spec:
       - name: config-volume
         configMap:
           name: litellm-config-file
+
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: litellm-pdb
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app: litellm
 
 ---
 apiVersion: v1
