@@ -13,6 +13,16 @@ spec:
       labels:
         app: nachet-frontend
     spec:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 3000
+        fsGroup: 2000
+        allowPrivilegeEscalation: false
+        readOnlyRootFilesystem: true
+        capabilities:
+          drop:
+            - ALL
       containers:
         - name: nachet-frontend
           image: ghcr.io/ai-cfia/nachet-frontend:main
@@ -30,6 +40,26 @@ spec:
               port: 3000
             initialDelaySeconds: 60
             periodSeconds: 10
+          resources:
+            requests:
+              cpu: "250m"
+              memory: "512Mi"
+            limits:
+              cpu: "500m"
+              memory: "1Gi"
+
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: nachet-frontend-pdb
+  namespace: nachet
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app: nachet-frontend
+
 ---
 apiVersion: v1
 kind: Service
