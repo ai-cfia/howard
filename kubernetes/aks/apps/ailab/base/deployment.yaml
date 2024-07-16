@@ -36,9 +36,9 @@ spec:
               cpu: 500m
               memory: 256Mi
           securityContext:
-            allowPrivilegeEscalation: true
-            runAsNonRoot: false
-            readOnlyRootFilesystem: false
+            allowPrivilegeEscalation: false
+            runAsNonRoot: true
+            readOnlyRootFilesystem: true
             capabilities:
               drop:
                 - ALL
