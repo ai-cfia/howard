@@ -4,6 +4,7 @@ metadata:
   name: ailab
 spec:
   replicas: 2
+  revisionHistoryLimit: 3
   selector:
     matchLabels:
       app: ailab
