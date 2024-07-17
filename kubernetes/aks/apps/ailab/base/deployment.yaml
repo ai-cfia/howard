@@ -60,9 +60,9 @@ spec:
 apiVersion: policy/v1
 kind: PodDisruptionBudget
 metadata:
-  name: finesse-frontend-pdb
+  name: ailab-pdb
 spec:
   minAvailable: 1
   selector:
     matchLabels:
-      app: finesse-frontend
+      app: ailab
