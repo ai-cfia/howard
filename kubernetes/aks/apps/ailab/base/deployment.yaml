@@ -44,6 +44,12 @@ spec:
                 - ALL
             seccompProfile:
               type: RuntimeDefault
+          volumeMounts:
+            - name: cache-volume
+              mountPath: /home/node/.cache
+      volumes:
+        - name: cache-volume
+          emptyDir: {}
 ---
 apiVersion: v1
 kind: Service
