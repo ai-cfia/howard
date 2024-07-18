@@ -13,6 +13,10 @@ spec:
       labels:
         app: finesse-backend
     spec:
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 3000
+        fsGroup: 2000
       containers:
         - name: finesse-backend
           image: ghcr.io/ai-cfia/finesse-backend:main
@@ -33,7 +37,22 @@ spec:
               port: 8080
             initialDelaySeconds: 60
             periodSeconds: 10
-
+          resources:
+            requests:
+              cpu: 100m
+              memory: 256Mi
+            limits:
+              cpu: 200m
+              memory: 512Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            runAsNonRoot: true
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop:
+                - ALL
+            seccompProfile:
+              type: RuntimeDefault
 ---
 apiVersion: v1
 kind: Service
@@ -46,3 +65,13 @@ spec:
   ports:
     - protocol: TCP
       port: 8080
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: finesse-backend-pdb
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app: finesse-backend
