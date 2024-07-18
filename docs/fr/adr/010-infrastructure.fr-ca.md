@@ -24,8 +24,8 @@ sécurité renforcées pour répondre aux besoins futurs.
 
 Notre équipe fait face à des défis en matière de déploiement de solutions,
 notamment dans le choix des fournisseurs d'infonuages. Initialement, nous
-utilisions [Google Cloud Run](https://cloud.google.com/run/?hl=en) et [Azure App
-Service](https://azure.microsoft.com/en-ca/products/app-service/). Cependant, en
+utilisions [Google Cloud Run](https://cloud.google.com/run/?hl=en) et Azure App
+Service. Cependant, en
 raison de l'absence de compte Google Cloud et des restrictions d'accès sur
 Azure, nous nous retrouvons à basculer d'un compte à l'autre, entraînant
 d'importants temps d'arrêt pour nos applications.
@@ -143,3 +143,4 @@ garantir leur efficacité et leur sécurité à long terme.
 
 - [Repertoire Howard - Contient la configuration de notre infrastructure
   accompagnée de documentation](https://github.com/ai-cfia/howard)
+- Azure App Service : `https://azure.microsoft.com/en-ca/products/app-service/`

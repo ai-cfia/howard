@@ -22,10 +22,9 @@ meet future needs.
 
 Our team faces challenges in deploying solutions, especially in choosing cloud
 providers. Initially, we used [Google Cloud
-Run](https://cloud.google.com/run/?hl=en) and [Azure App
-Service](https://azure.microsoft.com/en-ca/products/app-service/). However, due
-to the absence of a Google Cloud account and access restrictions on Azure, we
-find ourselves switching from one account to another, resulting in significant
+Run](https://cloud.google.com/run/?hl=en) and Azure App Service. However, due to
+the absence of a Google Cloud account and access restrictions on Azure, we find
+ourselves switching from one account to another, resulting in significant
 downtime for our applications.
 
 Moreover, the manual creation of all services on cloud providers via ClickOps
@@ -130,3 +129,4 @@ term.
 
 - [Howard Repository - Contains the configuration of our infrastructure along
   with documentation](https://github.com/ai-cfia/howard)
+- Azure App Service : `https://azure.microsoft.com/en-ca/products/app-service/`
