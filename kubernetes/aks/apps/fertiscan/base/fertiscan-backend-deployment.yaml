@@ -18,7 +18,7 @@ spec:
         fsGroup: 1000
         runAsNonRoot: true
         allowPrivilegeEscalation: false
-        # readOnlyRootFilesystem: true
+        readOnlyRootFilesystem: true
         capabilities:
           drop:
             - ALL
@@ -37,6 +37,12 @@ spec:
               port: 5000
             initialDelaySeconds: 60
             periodSeconds: 10
+          volumeMounts:
+            - name: tmp
+              mountPath: /cachedir_joblib
+      volumes:
+        - name: tmp
+          emptyDir: {}
           # resources:
           #   requests:
           #     cpu: "250m"
@@ -44,6 +50,7 @@ spec:
           #   limits:
           #     cpu: "500m"
           #     memory: "1Gi"
+
 
 ---
 apiVersion: policy/v1
