@@ -31,12 +31,6 @@ spec:
                 name: fertiscan-backend-secrets
           ports:
             - containerPort: 5000
-          livenessProbe:
-            httpGet:
-              path: /
-              port: 5000
-            initialDelaySeconds: 60
-            periodSeconds: 10
           volumeMounts:
             - name: tmp
               mountPath: /cachedir_joblib
