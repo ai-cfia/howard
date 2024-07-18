@@ -1,0 +1,70 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fertiscan-frontend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: fertiscan-frontend
+  template:
+    metadata:
+      labels:
+        app: fertiscan-frontend
+    spec:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 3000
+        fsGroup: 2000
+        allowPrivilegeEscalation: false
+        readOnlyRootFilesystem: true
+        capabilities:
+          drop:
+            - ALL
+      containers:
+        - name: fertiscan-frontend
+          image: ghcr.io/ai-cfia/fertiscan-frontend:main
+          imagePullPolicy: Always
+          envFrom:
+            - secretRef:
+                name: fertiscan-frontend-secrets
+          ports:
+            - containerPort: 3000
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 3000
+            initialDelaySeconds: 60
+            periodSeconds: 10
+          # resources:
+          #   requests:
+          #     cpu: "250m"
+          #     memory: "512Mi"
+          #   limits:
+          #     cpu: "500m"
+          #     memory: "1Gi"
+
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: fertiscan-frontend-pdb
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app: fertiscan-frontend
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: fertiscan-frontend-svc
+spec:
+  clusterIP: None
+  selector:
+    app: fertiscan-frontend
+  ports:
+    - protocol: TCP
+      port: 3000

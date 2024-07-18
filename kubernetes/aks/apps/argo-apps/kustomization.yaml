@@ -10,6 +10,7 @@ resources:
   - ../louis/
   - ../librechat/
   - ../ailab/
+  - ../fertiscan/
 
   # System applications
   - ../../system/cert-manager/
