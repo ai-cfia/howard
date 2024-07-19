@@ -19,8 +19,51 @@ resource "azurerm_dns_a_record" "dns_zone_a_record" {
   tags = var.tags
 }
 
-# resource "azurerm_role_assignment" "external-dns" {
-#   scope                = azurerm_dns_zone.dns_zone.id
-#   role_definition_name = "DNS Zone Contributor"
-#   principal_id         = var.cluster_kubelet_identity
-# }
+resource "azurerm_dns_mx_record" "dns_zone_mx_record" {
+  name                = var.dns_mx_record_name
+  zone_name           = azurerm_dns_zone.dns_zone.name
+  resource_group_name = var.rg_name
+  ttl                 = 300
+  record {
+    preference = 0
+    exchange = "."
+  }
+
+  tags = var.tags
+}
+
+resource "azurerm_dns_txt_record" "dns_zone_txt_record_spf" {
+  name                = var.dns_txt_record_name_spf
+  zone_name           = azurerm_dns_zone.dns_zone.name
+  resource_group_name = var.rg_name
+  ttl                 = 300
+  record {
+    value = "v=spf1 -all"
+  }
+
+  tags = var.tags
+}
+
+resource "azurerm_dns_txt_record" "dns_zone_txt_record_dkim" {
+  name                = var.dns_txt_record_name_dkim
+  zone_name           = azurerm_dns_zone.dns_zone.name
+  resource_group_name = var.rg_name
+  ttl                 = 300
+  record {
+    value = "v=DKIM1; p="
+  }
+
+  tags = var.tags
+}
+
+resource "azurerm_dns_txt_record" "dns_zone_txt_record_dmarc" {
+  name                = var.dns_txt_record_name_dmarc
+  zone_name           = azurerm_dns_zone.dns_zone.name
+  resource_group_name = var.rg_name
+  ttl                 = 300
+  record {
+    value = "v=DMARC1;p=reject;sp=reject;adkim=s;aspf=s"
+  }
+
+  tags = var.tags
+}

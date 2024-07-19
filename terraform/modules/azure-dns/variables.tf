@@ -28,7 +28,26 @@ variable "dns_a_records" {
   type        = list(string)
 }
 
-# variable "cluster_kubelet_identity" {
-#   description = "Kubernetes (AKS) cluster kubelet identity"
-#   type        = string
-# }
+variable "dns_mx_record_name" {
+  description = "DNS MX Record name (@) to specify non-email server"
+  type        = string
+  default     = "@"
+}
+
+variable "dns_txt_record_name_spf" {
+  description = "DNS TXT Record name (@) for SPF to specify non-email server"
+  type        = string
+  default     = "@"
+}
+
+variable "dns_txt_record_name_dkim" {
+  description = "DNS TXT Record name (@) for DKIM to specify non-email server"
+  type        = string
+  default     = "*._domainkey"
+}
+
+variable "dns_txt_record_name_dmarc" {
+  description = "DNS TXT Record name (@) for DMARC to specify non-email server"
+  type        = string
+  default     = "_dmarc"
+}
