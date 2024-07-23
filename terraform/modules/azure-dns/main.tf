@@ -62,7 +62,7 @@ resource "azurerm_dns_txt_record" "dns_zone_txt_record_dmarc" {
   resource_group_name = var.rg_name
   ttl                 = 300
   record {
-    value = "v=DMARC1;p=reject;sp=reject;adkim=s;aspf=s"
+    value = "v=DMARC1;p=reject;sp=reject;adkim=s;aspf=s;rua=mailto:ssc.dmarc.spc@canada.ca,mailto:dmarc@cyber.gc.ca;"
   }
 
   tags = var.tags
