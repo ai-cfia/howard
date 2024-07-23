@@ -51,6 +51,7 @@ controller:
     ssl-prefer-server-ciphers: "true"
     ssl-ciphers: "ECDHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-AES128-GCM-SHA256"
     ssl-ecdh-curve: "secp256r1:secp384r1:secp521r1"
+    force-ssl-redirect: "true"
     server-snippet: |
       add_header X-Robots-Tag "noindex,nofollow";
       ssl_conf_command CipherSuites TLS_AES_128_GCM_SHA256:TLS_AES_256_GCM_SHA384;
