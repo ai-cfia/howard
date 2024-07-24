@@ -24,7 +24,7 @@ spec:
           drop:
             - ALL
       containers:
-        - name: fertiscan-frontend
+        - name: fertiscan-frontend 
           image: ghcr.io/ai-cfia/fertiscan-frontend:main
           imagePullPolicy: Always
           envFrom:
