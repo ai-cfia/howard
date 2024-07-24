@@ -5,6 +5,7 @@ metadata:
   name: finesse-backend
 spec:
   replicas: 2
+  revisionHistoryLimit: 3
   selector:
     matchLabels:
       app: finesse-backend
