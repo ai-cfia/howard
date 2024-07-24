@@ -92,3 +92,5 @@ data:
               deploymentName: ailab-llm
             gpt-35-turbo:
               deploymentName: ailab-gpt-35-turbo
+            gpt-4o:
+              deploymentName: ailab-llm-gpt-4o
