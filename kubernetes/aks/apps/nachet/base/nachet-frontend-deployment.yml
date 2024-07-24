@@ -9,6 +9,11 @@ spec:
   selector:
     matchLabels:
       app: nachet-frontend
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
   template:
     metadata:
       labels:
