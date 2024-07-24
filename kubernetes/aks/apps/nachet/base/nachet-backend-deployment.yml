@@ -5,6 +5,7 @@ metadata:
   namespace: nachet
 spec:
   replicas: 2
+  revisionHistoryLimit: 3
   selector:
     matchLabels:
       app: nachet-backend
