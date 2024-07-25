@@ -22,6 +22,24 @@ spec:
       #   capabilities:
       #     drop:
       #       - ALL
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: app
+                    operator: In
+                    values:
+                      - open-webui
+              topologyKey: "kubernetes.io/hostname"
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/role
+                    operator: In
+                    values:
+                      - agent
       containers:
         - name: open-webui
           image: ghcr.io/open-webui/open-webui:v0.3.5

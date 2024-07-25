@@ -19,6 +19,24 @@ spec:
           volumeMounts:
             - name: image-volume
               mountPath: /app/client/public/images
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: app
+                    operator: In
+                    values:
+                      - librechat
+              topologyKey: "kubernetes.io/hostname"
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/role
+                    operator: In
+                    values:
+                      - agent
       containers:
         - name: librechat
           image: ghcr.io/danny-avila/librechat:latest

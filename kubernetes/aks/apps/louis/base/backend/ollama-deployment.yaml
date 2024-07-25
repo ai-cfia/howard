@@ -23,6 +23,24 @@ spec:
       #   capabilities:
       #     drop:
       #       - ALL
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: name
+                    operator: In
+                    values:
+                      - ollama
+              topologyKey: "kubernetes.io/hostname"
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/role
+                    operator: In
+                    values:
+                      - agent
       containers:
         - name: ollama
           image: ollama/ollama:latest
