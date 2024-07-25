@@ -8,7 +8,6 @@ metadata:
     cert-manager.io/cluster-issuer: letsencrypt-prod
     nginx.ingress.kubernetes.io/client_max_body_size: "200m"
     nginx.ingress.kubernetes.io/proxy-read-timeout: "120"
-    ingress.kubernetes.io/force-ssl-redirect: "true"
     kubernetes.io/tls-acme: "true"
     # nginx.ingress.kubernetes.io/auth-signin: "https://vouch.inspection.alpha.canada.ca/login?url=$scheme://$http_host$request_uri&vouch-failcount=$auth_resp_failcount&X-Vouch-Token=$auth_resp_jwt&error=$auth_resp_err"
     # nginx.ingress.kubernetes.io/auth-url: https://vouch.inspection.alpha.canada.ca/validate

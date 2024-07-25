@@ -4,6 +4,7 @@
 - GitOps (coming soon...)
 - [Secret management](secrets-management.md)
 - [Infrastructure as code (IaC)](terraform-workflow.md)
+- [certificates-management.md](certificates-management.md)
 - [Containers](gh_docker_workflow.md)
 - [Authentication management](auth-workflow.md)
 - [Networking](networking.md)
