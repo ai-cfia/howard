@@ -26,7 +26,7 @@ resource "azurerm_dns_mx_record" "dns_zone_mx_record" {
   ttl                 = 300
   record {
     preference = 0
-    exchange = "."
+    exchange   = "."
   }
 
   tags = var.tags
