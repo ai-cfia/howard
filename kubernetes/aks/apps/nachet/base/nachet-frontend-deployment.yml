@@ -29,6 +29,24 @@ spec:
         capabilities:
           drop:
             - ALL
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: app
+                    operator: In
+                    values:
+                      - nachet-frontend
+              topologyKey: "kubernetes.io/hostname"
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/role
+                    operator: In
+                    values:
+                      - agent
       containers:
         - name: nachet-frontend
           image: ghcr.io/ai-cfia/nachet-frontend:main
