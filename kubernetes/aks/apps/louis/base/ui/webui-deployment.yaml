@@ -46,13 +46,13 @@ spec:
           image: ghcr.io/open-webui/open-webui:v0.3.5
           ports:
             - containerPort: 8080
-          resources:
-            requests:
-              cpu: "2000m"
-              memory: "4Gi"
-            limits:
-              cpu: "2000m"
-              memory: "6Gi"
+          # resources:
+          #   requests:
+          #     cpu: "2000m"
+          #     memory: "4Gi"
+          #   limits:
+          #     cpu: "2000m"
+          #     memory: "6Gi"
           env:
             - name: OLLAMA_BASE_URL
               value: "http://10.0.51.223:11434"
