@@ -9,8 +9,6 @@
       
       
       
-        <link rel="prev" href="../adr/">
-      
       
       
       <link rel="icon" href="../assets/images/favicon.png">
@@ -18,7 +16,7 @@
     
     
       
-        <title>Configuration / Implémentation - Howard</title>
+        <title>Gestion des certificats - Howard</title>
       
     
     
@@ -60,7 +58,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#configuration-implementation-des-adrs-dans-le-project-howard" class="md-skip">
+        <a href="#gestion-des-certificats" class="md-skip">
           Aller au contenu
         </a>
       
@@ -96,7 +94,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Configuration / Implémentation
+              Gestion des certificats
             
           </span>
         </div>
@@ -276,30 +274,10 @@
       
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  <span class="md-ellipsis">
-    Configuration / Implémentation
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../configuration/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -308,35 +286,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table des matières">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table des matières
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#plus-de-configurations-implementations" class="md-nav__link">
-    <span class="md-ellipsis">
-      Plus de configurations / implementations
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -368,11 +317,68 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#plus-de-configurations-implementations" class="md-nav__link">
+  <a href="#domaines-et-certificats" class="md-nav__link">
     <span class="md-ellipsis">
-      Plus de configurations / implementations
+      Domaines et certificats
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Domaines et certificats">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exemple-de-certificat" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exemple de certificat
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration-hsts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuration HSTS
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration-des-chiffrements" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuration des chiffrements
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration-de-la-securite-des-emails" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuration de la sécurité des emails
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuration de la sécurité des emails">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#configuration-des-enregistrements" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuration des enregistrements
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -394,24 +400,149 @@
   
 
 
-<h1 id="configuration-implementation-des-adrs-dans-le-project-howard">Configuration / implementation des ADRs dans le project Howard</h1>
-<ul>
-<li><a href="../generic-architecture/">Infrastructure</a></li>
-<li>GitOps (coming soon...)</li>
-<li><a href="../secrets-management/">Gestion des secrets</a></li>
-<li><a href="../terraform-workflow/">Infrastructure en code</a></li>
-<li><a href="../certificates-management/">Gestion des certificats</a></li>
-<li><a href="../gh_docker_workflow/">Conteneurs</a></li>
-<li><a href="../auth-workflow/">Gestion de l'authentification</a></li>
-<li><a href="../networking/">Réseautique</a></li>
-<li>Sécuriter (coming soon...)</li>
-<li><a href="../observability/">Gestion de l'observabilité</a></li>
-</ul>
-<h2 id="plus-de-configurations-implementations">Plus de configurations / implementations</h2>
-<ul>
-<li><a href="../ansible/">Ansible</a></li>
-<li><a href="../multi-layered-application/">Application à niveaux multiples</a></li>
-</ul>
+<h1 id="gestion-des-certificats">Gestion des certificats</h1>
+<p>Notre infrastructure doit être conforme aux protocoles de sécurité et à leurs
+méthodes d'utilisation appropriées selon le Centre canadien pour la
+cybersécurité (CCCS).</p>
+<h2 id="domaines-et-certificats">Domaines et certificats</h2>
+<p>Actuellement, nos certificats sont gérés avec
+<a href="https://cert-manager.io/">cert-manager</a> qui crée nos certificats TLS pour nos
+charges de travail et gère le renouvellement automatique avant leur expiration.
+Il est actuellement configuré pour obtenir des certificats de <a href="https://letsencrypt.org/">Let's
+Encrypt</a> en utilisant le <a href="https://cert-manager.io/docs/configuration/acme/">type de fournisseur
+ACME</a>.</p>
+<h3 id="exemple-de-certificat">Exemple de certificat</h3>
+<p><img alt="Exemple de certificat" src="../img/finesse-cert.png" /></p>
+<p>Tout d'abord, nous voulons nous assurer que nous avons des configurations
+valides pour HTTPS et HSTS. Ceux-ci sont activés par notre contrôleur d'entrée
+(<a href="https://kubernetes.github.io/ingress-nginx/">Ingress-nginx</a>) qui applique ces
+certificats sur nos ingress.</p>
+<p>Le contrôleur d'entrée NGINX est conçu pour être le point d'accès au trafic
+HTTPS vers les applications qui s'exécutent à l'intérieur de notre cluster. La
+figure suivante montre comment NGINX fonctionne en tant qu'équilibreur de charge
+géré par ingress :</p>
+<pre class="mermaid"><code>graph LR;
+  client([client])-. Ingress-managed &lt;br&gt; load balancer .-&gt;ingress[Ingress];
+  ingress--&gt;|routing rule|service[Service];
+  subgraph cluster
+  ingress;
+  service--&gt;pod1[Pod];
+  service--&gt;pod2[Pod];
+  end
+  classDef plain fill:#ddd,stroke:#fff,stroke-width:4px,color:#000;
+  classDef k8s fill:#326ce5,stroke:#fff,stroke-width:4px,color:#fff;
+  classDef cluster fill:#fff,stroke:#bbb,stroke-width:2px,color:#326ce5;
+  class ingress,service,pod1,pod2 k8s;
+  class client plain;
+  class cluster cluster;</code></pre>
+<p><a href="https://kubernetes.io/docs/concepts/services-networking/ingress/#what-is-ingress">https://kubernetes.io/docs/concepts/services-networking/ingress/#what-is-ingress</a></p>
+<p>De cette manière, nos applications sont exposées avec une terminaison SSL/TLS
+utilisant des certificats générés par cert-manager et créés par Let's Encrypt.
+Cela permet au SSL dans HTTP(S) d'être valide puisque le domaine est obtenu via
+une autorité de certification (CA) de confiance.</p>
+<p>Voici un exemple de configuration d'ingress avec un certificat valide :</p>
+<div class="highlight"><pre><span></span><code><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">networking.k8s.io/v1</span>
+<span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Ingress</span>
+<span class="nt">metadata</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">finesse-frontend-ingress</span>
+<span class="w">  </span><span class="nt">annotations</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">external-dns.alpha.kubernetes.io/target</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">inspection.alpha.canada.ca</span>
+<span class="w">    </span><span class="nt">cert-manager.io/cluster-issuer</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">letsencrypt-prod</span>
+<span class="w">    </span><span class="nt">kubernetes.io/tls-acme</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;true&quot;</span>
+<span class="w">    </span><span class="nt">nginx.ingress.kubernetes.io/use-regex</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;true&quot;</span>
+<span class="nt">spec</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">ingressClassName</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nginx</span>
+<span class="w">  </span><span class="nt">tls</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">hosts</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">finesse.inspection.alpha.canada.ca</span>
+<span class="w">      </span><span class="nt">secretName</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">aciacfia-tls</span>
+<span class="w">  </span><span class="nt">rules</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">finesse.inspection.alpha.canada.ca</span>
+<span class="w">      </span><span class="nt">http</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">paths</span><span class="p">:</span>
+<span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/</span>
+<span class="w">            </span><span class="nt">pathType</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Prefix</span>
+<span class="w">            </span><span class="nt">backend</span><span class="p">:</span>
+<span class="w">              </span><span class="nt">service</span><span class="p">:</span>
+<span class="w">                </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">finesse-frontend-svc</span>
+<span class="w">                </span><span class="nt">port</span><span class="p">:</span>
+<span class="w">                  </span><span class="nt">number</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3000</span>
+</code></pre></div>
+<p>Cette configuration est pour le service frontend Finesse. La section <code>tls</code>
+spécifie le domaine et le nom du secret qui contient le certificat et la clé
+privée. L'annotation <code>cert-manager.io/cluster-issuer</code> spécifie le fournisseur de
+certificats du cluster qui sera utilisé pour générer le certificat. L'annotation
+<code>kubernetes.io/tls-acme</code> est utilisée pour activer le type de fournisseur ACME.
+Nous avons également l'annotation <code>external-dns.alpha.kubernetes.io/target</code> pour
+spécifier le domaine cible pour l'enregistrement DNS. Cela est utilisé par le
+contrôleur ExternalDNS pour créer l'enregistrement DNS du domaine sur notre zone
+DNS Azure.</p>
+<h3 id="configuration-hsts">Configuration HSTS</h3>
+<p>HSTS est une fonctionnalité de sécurité qui garantit qu'un domaine ne peut être
+accédé qu'en utilisant HTTPS. HSTS est activé par <a href="https://kubernetes.github.io/ingress-nginx/user-guide/tls/#http-strict-transport-security">nginx-ingress par
+défaut</a>
+et nous appliquons également la redirection vers HTTPS sur tous nos ingress via
+une annotation Kubernetes utilisée dans la configuration de notre contrôleur
+d'ingress :</p>
+<div class="highlight"><pre><span></span><code><span class="nt">force-ssl-redirect</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;true&quot;</span>
+</code></pre></div>
+<h3 id="configuration-des-chiffrements">Configuration des chiffrements</h3>
+<p>Selon les directives, la configuration requise pour résoudre les suites de
+chiffrement est expliquée dans le document suivant
+<a href="https://www.cyber.gc.ca/en/guidance/guidance-securely-configuring-network-protocols-itsp40062">ITSP.40.062</a>.
+Il montre que les chiffrements suivants sont recommandés :</p>
+<p><img alt="itsp.40.062-ciphers" src="../img/itsp.40.062-ciphers.png" /></p>
+<p>Nginx ingress permet de spécifier et d'appliquer des chiffrements sous notre
+utilisation du protocole SSL comme suit :</p>
+<div class="highlight"><pre><span></span><code><span class="nt">ssl-prefer-server-ciphers</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;true&quot;</span>
+<span class="nt">ssl-ciphers</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;ECDHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-AES128-GCM-SHA256&quot;</span>
+<span class="nt">ssl-ecdh-curve</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;secp256r1:secp384r1:secp521r1&quot;</span>
+<span class="nt">server-snippet</span><span class="p">:</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">ssl_conf_command CipherSuites TLS_AES_128_GCM_SHA256:TLS_AES_256_GCM_SHA384;</span>
+</code></pre></div>
+<p>Cela permet à nos certificats d'utiliser les chiffrements recommandés selon les
+directives du CCCS ainsi que de définir les courbes ECDH à utiliser. Les
+directives de l'ITSP.40.062 indiquent que nos certificats doivent utiliser la
+cryptographie à courbe elliptique (ECC). L'annotation précédente nous permet de
+définir des courbes spécifiques qui sont recommandées et permettent de réussir
+la validation.</p>
+<h3 id="configuration-de-la-securite-des-emails">Configuration de la sécurité des emails</h3>
+<p>Le document <a href="https://www.cyber.gc.ca/en/guidance/implementation-guidance-email-domain-protection#annb4">ITSP.40.065
+v1.1</a>
+fournit des directives sur la gestion des domaines non destinés à gérer les
+emails avec les enregistrements DNS appropriés.</p>
+<h4 id="configuration-des-enregistrements">Configuration des enregistrements</h4>
+<p>Voici les enregistrements utilisés pour nos domaines :</p>
+<p><strong>Enregistrement MX</strong> : Utilisation d'une priorité de 0 et '.' comme nom d'hôte.
+Configuration d'enregistrement MX recommandée pour les domaines non destinés à
+recevoir des emails, comme méthode pour indiquer l'absence d'infrastructure
+prévue pour recevoir des emails.</p>
+<p><strong>Enregistrement SPF</strong> : L'enregistrement SPF recommandé pour les domaines non
+destinés à recevoir des emails est d'avoir un enregistrement TXT avec <code>v=spf1</code>,
+qui informe le serveur que l'enregistrement contient une politique SPF et
+l'indicateur <code>-all</code> indique au serveur que tous les emails non conformes seront
+rejetés et, par conséquent, aucune adresse IP ou domaine n'est autorisé.</p>
+<p><strong>Enregistrement DMARC</strong> : En conformité avec les recommandations du CCCS. La
+mention de <code>p=reject</code> indique que les serveurs de messagerie doivent rejeter les
+emails qui échouent aux vérifications DKIM et SPF.</p>
+<p><strong>Enregistrement DKIM</strong> : Recommandé pour un enregistrement DKIM.
+<code>*._domainkey.inspection.alpha.canada.ca</code> est utilisé avec un caractère
+générique pour couvrir toutes les valeurs possibles pour ce sélecteur. Le
+contenu <code>v=DKIM1; p=</code> spécifie que l'enregistrement fait référence à une
+politique DKIM et la valeur vide pour <code>p</code> spécifie que la clé publique a été
+révoquée selon la <a href="https://datatracker.ietf.org/doc/html/rfc6376#section-3.6.1">documentation RFC
+6376</a> (page 27) :</p>
+<blockquote>
+<p>p= Public-key data (base64; REQUIRED). An empty value means that this public
+key has been revoked.</p>
+</blockquote>
+<p>De cette façon, le service essayant de signer un email avec le domaine ne sera
+pas autorisé. Avec des échecs de vérification DKIM, cela permet à la
+configuration DMARC de rejeter les demandes d'email.</p>
+<p>Afin de s'assurer que ces enregistrements sont utilisés pour tous nos
+enregistrements dans tous les environnements, nous avons utilisé Terraform pour
+automatiser la création des enregistrements requis dans notre zone DNS sur Azure
+hébergeant le domaine inspection.alpha.canada.ca et tous les sous-domaines.</p>
 
 
 
