@@ -8,11 +8,21 @@ spec:
     matchLabels:
       app: mongodb
   replicas: 1
+  revisionHistoryLimit: 3
   template:
     metadata:
       labels:
         app: mongodb
     spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/role
+                    operator: In
+                    values:
+                      - agent
       containers:
         - name: mongodb
           image: mongo:6

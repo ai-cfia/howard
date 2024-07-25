@@ -4,6 +4,7 @@ metadata:
   name: rag-api
 spec:
   replicas: 1
+  revisionHistoryLimit: 3
   selector:
     matchLabels:
       app: rag-api
@@ -12,6 +13,15 @@ spec:
       labels:
         app: rag-api
     spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/role
+                    operator: In
+                    values:
+                      - agent
       containers:
         - name: rag-api
           image: ghcr.io/danny-avila/librechat-rag-api-dev-lite:latest

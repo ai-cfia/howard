@@ -8,11 +8,21 @@ spec:
     matchLabels:
       app: meilisearch
   replicas: 1
+  revisionHistoryLimit: 3
   template:
     metadata:
       labels:
         app: meilisearch
     spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/role
+                    operator: In
+                    values:
+                      - agent
       containers:
         - name: chat-meilisearch
           image: getmeili/meilisearch:v1.7.3

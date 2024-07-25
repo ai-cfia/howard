@@ -4,6 +4,8 @@ kind: Deployment
 metadata:
   name: ollama
 spec:
+  replicas: 1
+  revisionHistoryLimit: 3
   selector:
     matchLabels:
       name: ollama
@@ -12,7 +14,6 @@ spec:
       labels:
         name: ollama
     spec:
-
       # securityContext:
       #   runAsNonRoot: true
       #   runAsUser: 1000

@@ -4,6 +4,7 @@ metadata:
   name: open-webui-deployment
 spec:
   replicas: 1
+  revisionHistoryLimit: 3
   selector:
     matchLabels:
       app: open-webui
