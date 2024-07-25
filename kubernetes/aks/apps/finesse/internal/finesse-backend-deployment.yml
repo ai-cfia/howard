@@ -8,16 +8,34 @@ spec:
   revisionHistoryLimit: 3
   selector:
     matchLabels:
-      app: finesse-backend
+      app: finesse-backend-internal
   template:
     metadata:
       labels:
-        app: finesse-backend
+        app: finesse-backend-internal
     spec:
       securityContext:
         runAsUser: 1000
         runAsGroup: 3000
         fsGroup: 2000
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: app
+                    operator: In
+                    values:
+                      - finesse-backend-internal
+              topologyKey: "kubernetes.io/hostname"
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/role
+                    operator: In
+                    values:
+                      - agent
       containers:
         - name: finesse-backend
           image: ghcr.io/ai-cfia/finesse-backend:main
@@ -67,7 +85,7 @@ metadata:
 spec:
   clusterIP: None
   selector:
-    app: finesse-backend
+    app: finesse-backend-internal
   ports:
     - protocol: TCP
       port: 8080

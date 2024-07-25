@@ -23,8 +23,26 @@ spec:
         capabilities:
           drop:
             - ALL
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: app
+                    operator: In
+                    values:
+                      - fertiscan-frontend
+              topologyKey: "kubernetes.io/hostname"
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/role
+                    operator: In
+                    values:
+                      - agent
       containers:
-        - name: fertiscan-frontend 
+        - name: fertiscan-frontend
           image: ghcr.io/ai-cfia/fertiscan-frontend:main
           imagePullPolicy: Always
           envFrom:

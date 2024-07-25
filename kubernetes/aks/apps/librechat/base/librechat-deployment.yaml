@@ -4,6 +4,7 @@ metadata:
   name: librechat
 spec:
   replicas: 1
+  revisionHistoryLimit: 3
   selector:
     matchLabels:
       app: librechat
@@ -19,6 +20,15 @@ spec:
           volumeMounts:
             - name: image-volume
               mountPath: /app/client/public/images
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/role
+                    operator: In
+                    values:
+                      - agent
       containers:
         - name: librechat
           image: ghcr.io/danny-avila/librechat:latest
