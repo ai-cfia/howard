@@ -10,6 +10,7 @@ metadata:
     nginx.ingress.kubernetes.io/proxy-body-size: "50m"
     nginx.ingress.kubernetes.io/proxy-read-timeout: "120"
     cert-manager.io/cluster-issuer: letsencrypt-http
+    ingress.kubernetes.io/force-ssl-redirect: "true"
     kubernetes.io/tls-acme: "true"
 spec:
   ingressClassName: nginx
@@ -41,6 +42,7 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /
     nginx.ingress.kubernetes.io/proxy-read-timeout: "120"
     cert-manager.io/cluster-issuer: letsencrypt-http
+    ingress.kubernetes.io/force-ssl-redirect: "true"
     kubernetes.io/tls-acme: "true"
 spec:
   ingressClassName: nginx

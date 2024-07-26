@@ -8,6 +8,7 @@ metadata:
     nginx.ingress.kubernetes.io/use-regex: "true"
     nginx.ingress.kubernetes.io/rewrite-target: /$2  # https://kubernetes.github.io/ingress-nginx/examples/rewrite/
     cert-manager.io/cluster-issuer: letsencrypt-http
+    ingress.kubernetes.io/force-ssl-redirect: "true"
     kubernetes.io/tls-acme: "true"
 spec:
   ingressClassName: nginx
@@ -38,6 +39,7 @@ metadata:
     nginx.ingress.kubernetes.io/add-base-url: "true"
     nginx.ingress.kubernetes.io/rewrite-target: /
     cert-manager.io/cluster-issuer: letsencrypt-http
+    ingress.kubernetes.io/force-ssl-redirect: "true"
     kubernetes.io/tls-acme: "true"
 spec:
   ingressClassName: nginx
