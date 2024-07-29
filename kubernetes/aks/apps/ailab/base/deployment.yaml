@@ -79,7 +79,7 @@ kind: Service
 metadata:
   name: ailab-svc
 spec:
-  clusterIP: None
+  type: ClusterIP
   selector:
     app: ailab
   ports:
