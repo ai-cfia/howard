@@ -33,13 +33,15 @@ kind: Ingress
 metadata:
   name: inspection-ingress
   annotations:
-    nginx.ingress.kubernetes.io/whitelist-source-range: 205.194.32.0/24,10.5.0.0/
+    nginx.ingress.kubernetes.io/whitelist-source-range: 205.194.32.0/24,10.5.0.0/16
     external-dns.alpha.kubernetes.io/target: inspection.alpha.canada.ca
     cert-manager.io/cluster-issuer: letsencrypt-prod
     nginx.ingress.kubernetes.io/add-base-url: "true"
     kubernetes.io/tls-acme: "true"
     nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
     nginx.ingress.kubernetes.io/hsts: "true"
+    nginx.ingress.kubernetes.io/hsts-include-subdomains: "true"
+    nginx.ingress.kubernetes.io/hsts-preload: "true
 spec:
   ingressClassName: nginx
   tls:
