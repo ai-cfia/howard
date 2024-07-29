@@ -41,9 +41,9 @@ metadata:
 spec:
   ingressClassName: nginx
   tls:
-    - hosts:
-        - inspection.alpha.canada.ca
-      secretName: aciacfia-tls
+  - hosts:
+    - inspection.alpha.canada.ca
+    secretName: apex-domain-tls
   rules:
     - host: inspection.alpha.canada.ca
       http:
