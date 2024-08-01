@@ -22,6 +22,14 @@ spec:
                     operator: In
                     values:
                       - agent
+      initContainers:
+        - name: take-data-dir-ownership
+          image: busybox
+          command: ['sh', '-c', 'chown -R 999:999 /var/lib/postgresql/data']
+          volumeMounts:
+            - name: storage
+              mountPath: /var/lib/postgresql/data
+              subPath: pgdata
       containers:
         - name: vectordb
           image: ankane/pgvector:latest
@@ -35,10 +43,36 @@ spec:
             - name: storage
               mountPath: /var/lib/postgresql/data
               subPath: pgdata
+            - name: run
+              mountPath: /var/run/postgresql
+            - name: tmp
+              mountPath: /tmp
+          resources:
+            requests:
+              cpu: 100m
+              memory: 4Gi
+            limits:
+              cpu: 500m
+              memory: 6Gi
+          securityContext:
+            runAsUser: 999
+            runAsGroup: 999
+            allowPrivilegeEscalation: false
+            runAsNonRoot: true
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop:
+                - ALL
+            seccompProfile:
+              type: RuntimeDefault
       volumes:
         - name: storage
           persistentVolumeClaim:
             claimName: librechat-vectordb-pvc
+        - name: tmp
+          emptyDir: {}
+        - name: run
+          emptyDir: {}
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
