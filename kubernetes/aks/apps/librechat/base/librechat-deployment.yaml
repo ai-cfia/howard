@@ -16,10 +16,10 @@ spec:
       initContainers:
         - name: take-data-dir-ownership
           image: alpine:3
-          command: ["sh", "-c", "chown -R 1000:3000 /app/client/public/images"]
+          command: ["sh", "-c", "chown -R 1000:3000 /app"]
           volumeMounts:
             - name: image-volume
-              mountPath: /app/client/public/images
+              mountPath: /app
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
@@ -53,9 +53,21 @@ spec:
               readOnly: true
             - name: image-volume
               mountPath: "/app/client/public/images"
+            - name: tmp-node
+              mountPath: "/home/node"
+            - name: logs-volume
+              mountPath: "/app/api/logs"
           securityContext:
             runAsUser: 1000
             runAsGroup: 3000
+            allowPrivilegeEscalation: false
+            runAsNonRoot: true
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop:
+                - ALL
+            seccompProfile:
+              type: RuntimeDefault
       volumes:
         - name: config-yaml
           configMap:
@@ -63,6 +75,10 @@ spec:
         - name: image-volume
           persistentVolumeClaim:
             claimName: librechat-images-pvc
+        - name: tmp-node
+          emptyDir: {}
+        - name: logs-volume
+          emptyDir: {}
 ---
 kind: Secret
 apiVersion: v1
