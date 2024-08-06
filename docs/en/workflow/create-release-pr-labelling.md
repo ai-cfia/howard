@@ -131,7 +131,7 @@ jobs:
       registry: ghcr.io/my-org
 ```
 
-**Ensure that a tag is pushed to the repository to trigger the release creation.**
+Ensure that a tag is pushed to the repository to trigger the release creation.
 
 ## Workflow (2): Pull Request Labeler
 

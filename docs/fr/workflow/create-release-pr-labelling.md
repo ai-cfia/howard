@@ -139,7 +139,8 @@ jobs:
       registry: ghcr.io/my-org
 ```
 
-**Assurez-vous qu'un tag est poussé dans le dépôt pour déclencher la création de la release.**
+Assurez-vous qu'un tag est poussé dans le dépôt pour déclencher la création
+de la release.
 
 ## Workflow (2) : Étiqueteur de pull requests
 
