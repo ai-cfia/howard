@@ -16,7 +16,7 @@
     
     
       
-        <title>ADR-018 : Observability Management - Howard</title>
+        <title>Create release and label pull request - Howard</title>
       
     
     
@@ -58,7 +58,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#adr-018-observability-management" class="md-skip">
+        <a href="#create-release-and-label-pull-request" class="md-skip">
           Skip to content
         </a>
       
@@ -94,7 +94,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              ADR-018 : Observability Management
+              Create release and label pull request
             
           </span>
         </div>
@@ -257,7 +257,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
+      <a href="../../adr/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -297,7 +297,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../workflow/" class="md-nav__link">
+      <a href="../" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -337,47 +337,56 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#executive-summary" class="md-nav__link">
+  <a href="#workflow-1-create-release-build-and-push-to-ghcr-with-specific-tag" class="md-nav__link">
     <span class="md-ellipsis">
-      Executive Summary
+      Workflow (1): Create Release, Build and Push to GHCR with Specific Tag
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Workflow (1): Create Release, Build and Push to GHCR with Specific Tag">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#purpose-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Purpose (1)
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#background" class="md-nav__link">
+        
+          <li class="md-nav__item">
+  <a href="#trigger-1" class="md-nav__link">
     <span class="md-ellipsis">
-      Background
+      Trigger (1)
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#decision" class="md-nav__link">
+        
+          <li class="md-nav__item">
+  <a href="#steps-1" class="md-nav__link">
     <span class="md-ellipsis">
-      Décision
+      Steps (1)
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Décision">
-      <ul class="md-nav__list">
+</li>
         
           <li class="md-nav__item">
-  <a href="#data-source-opentelemetry" class="md-nav__link">
+  <a href="#configuration-1" class="md-nav__link">
     <span class="md-ellipsis">
-      Data Source: OpenTelemetry
+      Configuration (1)
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Data Source: OpenTelemetry">
+    <nav class="md-nav" aria-label="Configuration (1)">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#data-source-considered-alternatives" class="md-nav__link">
+  <a href="#explanation-1" class="md-nav__link">
     <span class="md-ellipsis">
-      Data Source: Considered alternatives
+      Explanation (1)
     </span>
   </a>
   
@@ -389,50 +398,11 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#data-platform-grafana-alloy-loki-tempo-prometheus" class="md-nav__link">
+  <a href="#usage-1" class="md-nav__link">
     <span class="md-ellipsis">
-      Data Platform: Grafana Alloy, Loki, Tempo, Prometheus
+      Usage (1)
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="Data Platform: Grafana Alloy, Loki, Tempo, Prometheus">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#data-platform-considered-alternatives" class="md-nav__link">
-    <span class="md-ellipsis">
-      Data Platform: considered alternatives
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#consumption-grafana" class="md-nav__link">
-    <span class="md-ellipsis">
-      Consumption: Grafana
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Consumption: Grafana">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#consumption-considered-alternatives" class="md-nav__link">
-    <span class="md-ellipsis">
-      Consumption: Considered alternatives
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
         
@@ -442,20 +412,62 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#conclusion" class="md-nav__link">
+  <a href="#workflow-2-pull-request-labeler" class="md-nav__link">
     <span class="md-ellipsis">
-      Conclusion
+      Workflow (2): Pull Request Labeler
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Workflow (2): Pull Request Labeler">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#purpose-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Purpose (2)
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#references" class="md-nav__link">
+        
+          <li class="md-nav__item">
+  <a href="#trigger-2" class="md-nav__link">
     <span class="md-ellipsis">
-      References
+      Trigger (2)
     </span>
   </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#steps-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Steps (2)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuration (2)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usage-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Usage (2)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -477,253 +489,172 @@
   
 
 
-<h1 id="adr-018-observability-management">ADR-018 : Observability Management</h1>
-<h2 id="executive-summary">Executive Summary</h2>
-<p>We have decided to implement a comprehensive observability stack for our
-applications hosted on Azure Kubernetes Service (AKS) using OpenTelemetry,
-Grafana Alloy, and various Grafana components (Loki, Tempo, Prometheus). This
-decision aims to enhance our visibility into system performance, improve
-monitoring of critical services, and provide a vendor-neutral, open-source
-solution that aligns with our agency’s requirements.</p>
-<p><img alt="monitoring-stack" src="../../img/monitoring-stack.png" /></p>
-<h2 id="background">Background</h2>
-<p>At the Canadian Food Inspection Agency, we faced significant challenges in
-monitoring and understanding the performance of our applications and system
-services on Azure Kubernetes Service (AKS). Despite achieving high availability
-and automation with AKS, we lacked contextualized data to diagnose issues and
-monitor the health of our nodes and services like ArgoCD and NGINX Ingress, as
-well as our client applications.</p>
-<p>We sought a solution that would provide centralized and open-source monitoring,
-offering insights into activity, traffic, and engagement with our applications.
-Our goal was to implement a generic, vendor-neutral solution for collecting and
-displaying telemetry data (logs, traces, and metrics) across our applications.
-After evaluating various options, we chose OpenTelemetry for data collection,
-Grafana Alloy as the collector, and Grafana’s suite of tools (Loki, Tempo,
-Prometheus) for log, trace, and metric management.</p>
-<h2 id="decision">Décision</h2>
-<h3 id="data-source-opentelemetry">Data Source: OpenTelemetry</h3>
-<p>We chose OpenTelemetry as our primary data source for telemetry collection due
-to its vendor-neutral nature and consistent APIs/SDKs across multiple
-programming languages. This choice aligns well with our agency’s diverse
-technological landscape and ensures broad compatibility and scalability.</p>
-<h4 id="data-source-considered-alternatives">Data Source: Considered alternatives</h4>
-<ol>
-<li><strong>Jaeger:</strong></li>
-<li><strong>Advantages:</strong> Excellent tracing capabilities, integration with various
-     backend storage systems.</li>
-<li>
-<p><strong>Disadvantages:</strong> Primarily focused on tracing, less support for metrics
-     and logs compared to OpenTelemetry.</p>
-</li>
-<li>
-<p><strong>Zipkin:</strong></p>
-</li>
-<li><strong>Advantages:</strong> Simple and easy to deploy, good tracing support.</li>
-<li><strong>Disadvantages:</strong> Limited support for metrics and logs, less flexibility
-     than OpenTelemetry.</li>
-</ol>
-<h3 id="data-platform-grafana-alloy-loki-tempo-prometheus">Data Platform: Grafana Alloy, Loki, Tempo, Prometheus</h3>
-<p>We decided to use Grafana Alloy as our OpenTelemetry collector, leveraging its
-vendor-neutral stance and seamless integration with other Grafana components.
-The primary allure of Grafana Alloy lies in its promise to provide a unified
-observability platform, akin to having a master key for various locks. This
-allows seamless integration with tools like Prometheus for metrics, Loki for
-logs, and many others. Alloy simplifies the observability stack, making it more
-accessible and manageable.</p>
-<p>For data sources, we selected Grafana Loki for logs, Grafana Tempo for traces,
-and Prometheus for metrics.</p>
-<ol>
-<li>
-<p><strong>Alloy:</strong></p>
+<h1 id="create-release-and-label-pull-request">Create release and label pull request</h1>
+<p>This document explains the purpose, functionality, and usage of the two GitHub
+workflows provided. The workflows automate the process of creating releases
+and labeling pull requests.</p>
+<h2 id="workflow-1-create-release-build-and-push-to-ghcr-with-specific-tag">Workflow (1): Create Release, Build and Push to GHCR with Specific Tag</h2>
+<h3 id="purpose-1">Purpose (1)</h3>
+<p>This workflow automates the following steps:</p>
 <ul>
-<li><strong>Advantages:</strong> Unified observability platform, vendor-neutral, seamless
-integration with other Grafana components.</li>
-<li><strong>Disadvantages:</strong> Complexity in setting up and managing large-scale log
-storage solutions.</li>
+<li><strong>Create a GitHub Release:</strong> It generates a release based on a tag pushed
+to the repository.</li>
+<li><strong>Generate Changelog:</strong> It uses the labels of merged pull requests to generate
+a changelog.</li>
+<li><strong>Build and Push Docker Image:</strong> It builds a Docker image and pushes it to
+GitHub Container Registry (GHCR).</li>
 </ul>
-</li>
-<li>
-<p><strong>Loki:</strong></p>
+<h3 id="trigger-1">Trigger (1)</h3>
+<p>The workflow is triggered manually via workflow_call with two required inputs:</p>
 <ul>
-<li><strong>Advantages:</strong> Highly efficient log aggregation, scalable storage, and
-integration with Grafana for seamless visualization.</li>
-<li><strong>Disadvantages:</strong> Complexity in setting up and managing large-scale log
-storage solutions.</li>
+<li><code>artifact-name</code>: Name of the artifact to be created.</li>
+<li><code>registry</code>: Registry where the Docker image will be pushed.</li>
 </ul>
-</li>
-<li>
-<p><strong>Tempo:</strong></p>
+<p>Dans la majorite des cas, le worklfow_call se fait comme suit:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">on</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">push</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">tags</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&#39;v[0-9]+.[0-9]+.[0-9]+&#39;</span>
+</code></pre></div>
+<h3 id="steps-1">Steps (1)</h3>
 <ul>
-<li><strong>Advantages:</strong> Efficient, scalable distributed tracing, integrates well
-with Grafana dashboards.</li>
-<li><strong>Disadvantages:</strong> Can be resource-intensive, requires proper
-configuration for optimal performance.</li>
+<li><strong>Checkout Repository:</strong> Clones the repository.</li>
+<li><strong>Extract Tag Name:</strong> Extracts the current tag name from the GitHub reference.</li>
+<li><strong>Generate Changelog:</strong> Generates a changelog using merged pull requests.</li>
+<li><strong>Create Release:</strong> Creates a GitHub release using the extracted tag and
+generated changelog.</li>
+<li><strong>Upload Release Asset:</strong> Zips the repository and uploads it as a release
+asset.</li>
+<li><strong>Set up Docker Buildx:</strong> Sets up Docker Buildx for building multi-platform
+images.</li>
+<li><strong>Log in to GHCR:</strong> Logs in to the GitHub Container Registry.</li>
+<li><strong>Cache Docker Layers:</strong> Caches Docker layers to speed up the build process.</li>
+<li><strong>Build and Push Docker Image:</strong> Builds and pushes the Docker image to GHCR.</li>
+<li><strong>Refresh Cache:</strong> Refreshes the Docker cache.</li>
+<li><strong>Output Image Digest:</strong> Outputs the image digest if the event is not a merged
+pull request.</li>
 </ul>
-</li>
-<li>
-<p><strong>Prometheus:</strong></p>
+<h3 id="configuration-1">Configuration (1)</h3>
+<p>The Generate changelog step uses the
+<code>mikepenz/release-changelog-builder-action@v5</code> action to create a changelog based
+on pull requests merged since the previous tag. This step categorizes pull
+requests into different sections based on their labels.</p>
+<div class="highlight"><pre><span></span><code><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Generate changelog</span>
+<span class="w">  </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">changelog</span>
+<span class="w">  </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mikepenz/release-changelog-builder-action@v5</span>
+<span class="w">  </span><span class="nt">with</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">configurationJson</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">      </span><span class="no">{</span>
+<span class="w">          </span><span class="no">&quot;categories&quot;: [</span>
+<span class="w">              </span><span class="no">{</span>
+<span class="w">                  </span><span class="no">&quot;title&quot;: &quot;## User stories 👑&quot;,</span>
+<span class="w">                  </span><span class="no">&quot;labels&quot;: [&quot;epic&quot;]</span>
+<span class="w">              </span><span class="no">},</span>
+<span class="w">              </span><span class="no">{</span>
+<span class="w">                  </span><span class="no">&quot;title&quot;: &quot;## New features 🎉&quot;,</span>
+<span class="w">                  </span><span class="no">&quot;labels&quot;: [&quot;feature&quot;]</span>
+<span class="w">              </span><span class="no">},</span>
+<span class="w">              </span><span class="no">{</span>
+<span class="w">                  </span><span class="no">&quot;title&quot;: &quot;## Bug fixes 🐛&quot;,</span>
+<span class="w">                  </span><span class="no">&quot;labels&quot;: [&quot;bug&quot;]</span>
+<span class="w">              </span><span class="no">},</span>
+<span class="w">              </span><span class="no">{</span>
+<span class="w">                  </span><span class="no">&quot;title&quot;: &quot;## Documentation 📄&quot;,</span>
+<span class="w">                  </span><span class="no">&quot;labels&quot;: [&quot;documentation&quot;]</span>
+<span class="w">              </span><span class="no">},</span>
+<span class="w">              </span><span class="no">{</span>
+<span class="w">                  </span><span class="no">&quot;title&quot;: &quot;## Other Changes 💬&quot;,</span>
+<span class="w">                  </span><span class="no">&quot;labels&quot;: [&quot;*&quot;]</span>
+<span class="w">              </span><span class="no">}</span>
+<span class="w">          </span><span class="no">],</span>
+<span class="w">          </span><span class="no">&quot;template&quot;: &quot;#{{CHANGELOG}}\n\nContributors:\n#{{CONTRIBUTORS}}&quot;,</span>
+<span class="w">          </span><span class="no">&quot;max_pull_requests&quot;: 1000,</span>
+<span class="w">          </span><span class="no">&quot;max_back_track_time_days&quot;: 1000</span>
+<span class="w">      </span><span class="no">}</span>
+<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ github.repository_owner }}</span>
+<span class="w">    </span><span class="nt">repo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ github.event.repository.name }}</span>
+<span class="w">    </span><span class="nt">toTag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ env.TAG_NAME }}</span>
+<span class="w">    </span><span class="nt">token</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ secrets.GITHUB_TOKEN }}</span>
+</code></pre></div>
+<h4 id="explanation-1">Explanation (1)</h4>
 <ul>
-<li><strong>Advantages:</strong> Robust metric collection and querying capabilities, strong
-ecosystem support, and alert management.</li>
-<li><strong>Disadvantages:</strong> Can be resource-intensive, particularly at scale, and
-requires significant setup and maintenance.</li>
+<li><strong>Categories:</strong> Defines the sections in the changelog, each with a title and
+associated labels. Pull requests are grouped under these sections based on
+their labels.</li>
+<li><strong>User stories:</strong> Includes pull requests labeled epic.</li>
+<li><strong>New features:</strong> Includes pull requests labeled feature.</li>
+<li><strong>Bug fixes:</strong> Includes pull requests labeled bug.</li>
+<li><strong>Documentation:</strong> Includes pull requests labeled documentation.</li>
+<li><strong>Other Changes:</strong> Includes pull requests labeled with any other labels.</li>
+<li><strong>template:</strong> Defines the format of the changelog.</li>
+<li><strong>max_pull_requests:</strong> The maximum number of pull requests to include in the
+changelog.</li>
+<li><strong>max_back_track_time_days:</strong> The maximum number of days to look back for
+pull requests.</li>
 </ul>
-</li>
-</ol>
-<h4 id="data-platform-considered-alternatives">Data Platform: considered alternatives</h4>
-<ol>
-<li>
-<p><strong>Native OpenTelemetry collector:</strong></p>
+<p>When the workflow is triggered, this step compares the previous tag with the new
+tag and generates a changelog for all pull requests merged between the two tags.
+Each pull request is added to the appropriate section based on its labels.</p>
+<h3 id="usage-1">Usage (1)</h3>
+<p>To use this workflow, call it from another workflow or manually with the
+required inputs. For example:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">jobs</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">call-release-workflow</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">your-repo/.github/workflows/create-release.yml</span>
+<span class="w">    </span><span class="nt">with</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">artifact-name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my-artifact</span>
+<span class="w">      </span><span class="nt">registry</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ghcr.io/my-org</span>
+</code></pre></div>
+<p><strong>Ensure that a tag is pushed to the repository to trigger the release creation.</strong></p>
+<h2 id="workflow-2-pull-request-labeler">Workflow (2): Pull Request Labeler</h2>
+<h3 id="purpose-2">Purpose (2)</h3>
+<p>This workflow automatically labels pull requests based on their branch name or
+modified files. It uses a configuration file to determine the labels to apply.</p>
+<h3 id="trigger-2">Trigger (2)</h3>
+<p>The workflow is triggered manually via workflow_call.</p>
+<h3 id="steps-2">Steps (2)</h3>
 <ul>
-<li><strong>Advantages:</strong><ul>
-<li><strong>Direct integration:</strong> Direct support for OpenTelemetry protocols
-ensures seamless data collection and export.</li>
-<li><strong>Highly customizable:</strong> Provides extensive customization options to
-tailor the observability pipeline to specific needs.</li>
+<li>Checkout Repository: Checks out the repository containing the <code>labeler.yml</code>
+configuration file.</li>
+<li>Label Pull Request: Uses the <code>actions/labeler</code> action to apply labels to
+the pull request based on the configuration.</li>
 </ul>
-</li>
-<li><strong>Disadvantages:</strong><ul>
-<li><strong>Complex configuration:</strong> Requires significant configuration and
-setup effort, which can be time-consuming.</li>
-<li><strong>Lack of integrated dashboards:</strong> Does not offer built-in
-visualization tools, requiring additional integrations for dashboards.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Azure Monitor:</strong></p>
+<h3 id="configuration-2">Configuration (2)</h3>
+<p>The labeler.yml file defines rules for labeling pull requests:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">documentation</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">any</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">changed-files</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">any-glob-to-any-file</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&#39;docs/**&#39;</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&#39;**/*.md&#39;</span>
+
+<span class="nt">tests</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">any</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">changed-files</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">any-glob-to-any-file</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tests/**</span>
+
+<span class="nt">feature</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">head-branch</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&#39;^feature&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;feature&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;^feat&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;feat&#39;</span><span class="p p-Indicator">]</span>
+
+<span class="nt">bug</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">head-branch</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&#39;^bug&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;bug&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;^fix&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;fix&#39;</span><span class="p p-Indicator">]</span>
+
+<span class="nt">epic</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">head-branch</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&#39;^epic&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;epic&#39;</span><span class="p p-Indicator">]</span>
+</code></pre></div>
+<h3 id="usage-2">Usage (2)</h3>
 <ul>
-<li><strong>Advantages:</strong><ul>
-<li><strong>Native Azure integration:</strong> Seamless integration with Azure services
-and resources, simplifying setup and management.</li>
-<li><strong>Comprehensive monitoring:</strong> Offers a wide range of monitoring and
-observability features, including logs, metrics, and traces.</li>
+<li>A pull request with the branch name <code>feature/new-feature</code> will be labeled as
+<strong>feature</strong>.</li>
+<li>A pull request that modifies files in the <code>docs/</code> directory will be labeled as
+<strong>documentation</strong>.</li>
+<li>A pull request with the branch name <code>bug/fix-issue</code> will be labeled as
+<strong>bug</strong>.</li>
+<li>A pull request with the branch name <code>epic/new-epic</code> will be labeled as
+<strong>epic</strong>.</li>
 </ul>
-</li>
-<li><strong>Disadvantages:</strong><ul>
-<li><strong>Vendor lock-in:</strong> Tied to the Azure ecosystem, limiting flexibility
-and portability.</li>
-<li><strong>Costly at scale:</strong> Costs can escalate quickly, especially with large
-volumes of data.</li>
-<li><strong>Configuration limitations:</strong> Limited ability to configure as code,
-  potentially hindering automation and version control efforts.</li>
-<li><strong>Limited community support:</strong> Relatively limited community compared
-to open-source solutions, potentially limiting resources and support.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>ClickHouse</strong></p>
-<ul>
-<li><strong>Advantages:</strong><ul>
-<li><strong>High performance:</strong> Exceptional performance in handling large
-volumes of data, suitable for intensive analytics.</li>
-<li><strong>Scalable:</strong> Scales efficiently to handle growing data needs without
-significant performance degradation.</li>
-</ul>
-</li>
-<li><strong>Disadvantages:</strong><ul>
-<li><strong>Complex setup:</strong> Requires a complex setup and configuration process,
-making it challenging for smaller teams.</li>
-<li><strong>Additional tooling needed:</strong> Needs additional tools for
-visualization and integration, increasing the overall complexity of the
-stack.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Elasticsearch</strong></p>
-<ul>
-<li><strong>Advantages:</strong><ul>
-<li><strong>Powerful search capabilities:</strong> Offers robust search and analytics
-capabilities, making it ideal for log management.</li>
-<li><strong>Wide adoption:</strong> Widely adopted with a large community, providing
-extensive resources and support.</li>
-</ul>
-</li>
-<li><strong>Disadvantages:</strong><ul>
-<li><strong>Resource-intensive:</strong> Can be resource-intensive, requiring
-substantial infrastructure to run efficiently.</li>
-<li><strong>Costly at scale:</strong> Costs can escalate quickly, especially when
-dealing with large volumes of data.</li>
-</ul>
-</li>
-</ul>
-</li>
-</ol>
-<h3 id="consumption-grafana">Consumption: Grafana</h3>
-<p>For data visualization and dashboarding, we chose Grafana due to its robust
-support for diverse data sources, extensive community, and powerful dashboard
-capabilities. Grafana allows us to create custom dashboards to monitor various
-aspects of our system, including application activity, traffic, and performance
-metrics.</p>
-<h4 id="consumption-considered-alternatives">Consumption: Considered alternatives</h4>
-<ol>
-<li><strong>Kibana:</strong></li>
-<li><strong>Advantages:</strong> Excellent for visualizing data stored in Elasticsearch,
-     powerful search and analytics capabilities.</li>
-<li>
-<p><strong>Disadvantages:</strong> Primarily tied to the Elasticsearch ecosystem, less
-     flexibility with other data sources.</p>
-</li>
-<li>
-<p><strong>Azure Log Analytics:</strong></p>
-</li>
-<li><strong>Advantages:</strong> Native integration with Azure services, comprehensive
-     monitoring capabilities.</li>
-<li>
-<p><strong>Disadvantages:</strong> Vendor lock-in, limited support for non-Azure data
-     sources.</p>
-</li>
-<li>
-<p><strong>DataDog:</strong></p>
-</li>
-<li><strong>Advantages:</strong> Comprehensive monitoring and observability platform, strong
-     integrations.</li>
-<li>
-<p><strong>Disadvantages:</strong> Proprietary, can be expensive, less flexibility for
-     open-source integrations.</p>
-</li>
-<li>
-<p><strong>Prometheus UI:</strong></p>
-</li>
-<li><strong>Advantages:</strong> Native support for Prometheus metrics, simple to use.</li>
-<li><strong>Disadvantages:</strong> Limited visualization capabilities compared to Grafana,
-     primarily focused on metrics.</li>
-</ol>
-<h2 id="conclusion">Conclusion</h2>
-<p>Implementing OpenTelemetry for data collection, Grafana Alloy for data
-processing, and Grafana for visualization provides a fully open-source,
-vendor-neutral observability stack. This approach enhances our ability to
-monitor and troubleshoot our applications and services effectively. The chosen
-solutions offer scalability, flexibility, and robust community support, ensuring
-we can meet our current and future observability needs. Furthermore,
-OpenTelemetry is a widely adopted standard in the market, empowering our
-developers to work with industry norms. Since we are in the early development
-stages of our prototypes, this is a perfect opportunity to provide
-instrumentation by design and ensure visibility over performance from the
-outset. This proactive approach will help us optimize our applications'
-performance and reliability in the early stages of development.</p>
-<h2 id="references">References</h2>
-<ul>
-<li><a href="https://learn.microsoft.com/en-us/azure/azure-monitor/app/opentelemetry-enable?tabs=python#why-is-microsoft-azure-monitor-investing-in-opentelemetry">Microsoft Azure Monitor and
-  OpenTelemetry</a></li>
-<li><a href="https://grafana.com/oss/alloy-opentelemetry-collector/">Grafana Alloy</a></li>
-<li><a href="https://grafana.com/oss/loki/">Grafana Loki</a></li>
-<li><a href="https://grafana.com/oss/tempo/">Grafana Tempo</a></li>
-<li><a href="https://prometheus.io/">Prometheus</a></li>
-<li><a href="https://opentelemetry.io/docs/">OpenTelemetry documentation</a></li>
-<li><a href="https://www.jaegertracing.io/">Jaeger</a></li>
-<li><a href="https://zipkin.io/">Zipkin</a></li>
-<li><a href="https://clickhouse.tech/">ClickHouse</a></li>
-<li><a href="https://www.elastic.co/elasticsearch/">Elasticsearch</a></li>
-<li><a href="https://www.elastic.co/kibana/">Kibana</a></li>
-<li><a href="https://docs.datadoghq.com/">DataDog documentation</a></li>
-<li><a href="https://prometheus.io/docs/visualization/browser/">Prometheus UI</a></li>
-</ul>
+<p>By using these workflows, you can streamline the process of managing releases
+and labeling pull requests in your repository.</p>
 
 
 
