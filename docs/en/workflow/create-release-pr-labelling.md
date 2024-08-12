@@ -24,7 +24,7 @@ The workflow is triggered manually via workflow_call with two required inputs:
 - `artifact-name`: Name of the artifact to be created.
 - `registry`: Registry where the Docker image will be pushed.
 
-Dans la majorite des cas, le worklfow_call se fait comme suit:
+In most cases, the `workflow_call` is called as follows:
 
 ```yaml
 on:
