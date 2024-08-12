@@ -94,7 +94,7 @@ spec:
                 registry: docker.io
                 repository: oneuptime
                 pullPolicy: Always
-                tag: release
+                tag: 7.0.2936
                 restartPolicy: Always
               autoscaling:
                 enabled: false
