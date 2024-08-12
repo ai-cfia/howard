@@ -32,6 +32,8 @@ postgresql:
     database: oneuptimedb
   architecture: standalone
   primary:
+    configuration: |
+      local all all trust
     service:
       ports:
         postgresql: "5432"
