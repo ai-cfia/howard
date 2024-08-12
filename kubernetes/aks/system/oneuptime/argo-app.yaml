@@ -12,8 +12,6 @@ spec:
     server: https://kubernetes.default.svc
   sources:
     - chart: oneuptime
-      helm:
-        releaseName: oneuptime
       repoURL: https://helm-chart.oneuptime.com
       targetRevision: 7.0.2936
       plugin:
