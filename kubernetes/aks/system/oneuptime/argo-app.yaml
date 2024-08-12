@@ -94,7 +94,7 @@ spec:
                 registry: ghcr.io
                 repository: oneuptime
                 pullPolicy: Always
-                tag: 7.0.2936
+                tag: 7.0.2118
                 restartPolicy: Always
               autoscaling:
                 enabled: false
@@ -128,7 +128,7 @@ spec:
               incidents:
                 disableAutomaticCreation: false
               statusPage:
-                cnameRecord: "status.ailab.inspection.alpha.canada.ca"
+                cnameRecord: "oneuptime.inspection.alpha.canada.ca"
               probes:
                 one:
                   name: "Probe"
@@ -157,7 +157,7 @@ spec:
                 endpoint: "http://alloy.monitoring.svc.cluster.local:4317"
               containerSecurityContext: {}
               podSecurityContext: {}
-              logLevel: INFO
+              logLevel: DEBUG
               letsEncrypt:
                 accountKey: "<path:kv/data/oneuptime/letsencrypt#accountKey>"
                 email: "<path:kv/data/oneuptime/letsencrypt#email>"
