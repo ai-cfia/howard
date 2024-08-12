@@ -127,8 +127,6 @@ spec:
                 name: ""
               incidents:
                 disableAutomaticCreation: false
-              statusPage:
-                cnameRecord: "oneuptime.inspection.alpha.canada.ca"
               probes:
                 one:
                   name: "Probe"
@@ -158,9 +156,6 @@ spec:
               containerSecurityContext: {}
               podSecurityContext: {}
               logLevel: DEBUG
-              letsEncrypt:
-                accountKey: "<path:kv/data/oneuptime/letsencrypt#accountKey>"
-                email: "<path:kv/data/oneuptime/letsencrypt#email>"
     - repoURL: https://github.com/ai-cfia/howard.git
       path: kubernetes/aks/system/oneuptime/base
       targetRevision: HEAD
