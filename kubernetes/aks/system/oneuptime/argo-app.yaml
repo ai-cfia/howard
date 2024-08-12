@@ -72,6 +72,7 @@ spec:
                   size: 25Gi
                 auth:
                   username: oneuptime
+                  password: "<path:kv/data/oneuptime/clickhouse#password>"
                 initdbScripts:
                   db-init.sql: |
                     CREATE DATABASE oneuptime;
