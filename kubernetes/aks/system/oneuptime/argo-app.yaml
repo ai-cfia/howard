@@ -21,28 +21,23 @@ spec:
               global:
                 storageClass: managed-csi
                 clusterDomain: &global-cluster-domain cluster.local
-              # Please change this to the domain name / IP where OneUptime server is hosted on.
-              host: status.inspection.alpha.canada.ca
-              httpProtocol: https
-              # (Optional): You usually do not need to set this if you're self hosting. If you do set it, set it to a long random value.
-              oneuptimeSecret:
-              encryptionSecret:
-              # (Optional): You usually do not need to set this if you're self hosting.
-              openTelemetryCollectorHost:
-              fluentdHost:
+                host: status.inspection.alpha.canada.ca
+                httpProtocol: https
+                oneuptimeSecret: ""
+                encryptionSecret: ""
+                openTelemetryCollectorHost: ""
+                fluentdHost: ""
               deployment:
                 replicaCount: 1
               metalLb:
                 enabled: false
                 ipAdddressPool:
                   enabled: false
-                  addresses:
-                  # - 51.158.55.153/32 # List of IP addresses of all the servers in the cluster.
+                  addresses: []
               ingress:
                 service:
                   type: ClusterIP
-                  externalIPs:
-                  # - 51.158.55.153 # Please make sure this is the same as the one in metalLb.ipAdddressPool.addresses
+                  externalIPs: []
               postgresql:
                 image:
                   tag: 15-debian-11
@@ -56,11 +51,11 @@ spec:
                   service:
                     ports:
                       postgresql: "5432"
-                  terminationGracePeriodSeconds: 0  # We do this because we do not want to wait for the pod to terminate in case of node failure. https://medium.com/tailwinds-navigator/kubernetes-tip-how-statefulsets-behave-differently-than-deployments-when-node-fails-d29e36bca7d5
+                  terminationGracePeriodSeconds: 0
                   persistence:
                     size: 25Gi
                 readReplicas:
-                  terminationGracePeriodSeconds: 0  # We do this because we do not want to wait for the pod to terminate in case of node failure. https://medium.com/tailwinds-navigator/kubernetes-tip-how-statefulsets-behave-differently-than-deployments-when-node-fails-d29e36bca7d5
+                  terminationGracePeriodSeconds: 0
                   persistence:
                     size: 25Gi
               clickhouse:
@@ -70,7 +65,7 @@ spec:
                     http: "8123"
                 shards: 1
                 replicaCount: 1
-                terminationGracePeriodSeconds: 0  # We do this because we do not want to wait for the pod to terminate in case of node failure. https://medium.com/tailwinds-navigator/kubernetes-tip-how-statefulsets-behave-differently-than-deployments-when-node-fails-d29e36bca7d5
+                terminationGracePeriodSeconds: 0
                 zookeeper:
                   enabled: false
                 persistence:
@@ -87,13 +82,13 @@ spec:
                   enabled: true
                 master:
                   persistence:
-                    enabled: false  # We dont need redis persistence, because we dont do anything with it.
+                    enabled: false
                 replica:
                   persistence:
-                    enabled: false  # We dont need redis persistence, because we dont do anything with it.
+                    enabled: false
                 commonConfiguration: |-
-                appendonly no
-                save ""
+                  appendonly no
+                  save ""
               image:
                 registry: docker.io
                 repository: oneuptime
@@ -109,47 +104,38 @@ spec:
               nodeEnvironment: production
               billing:
                 enabled: false
-                publicKey:
-                privateKey:
-                smsDefaultValueInCents:
-                callDefaultValueInCentsPerMinute:
-                smsHighRiskValueInCents:
-                callHighRiskValueInCentsPerMinute:
+                publicKey: ""
+                privateKey: ""
+                smsDefaultValueInCents: ""
+                callDefaultValueInCentsPerMinute: ""
+                smsHighRiskValueInCents: ""
+                callHighRiskValueInCentsPerMinute: ""
               subscriptionPlan:
-                basic:
-                growth:
-                scale:
-                enterprise:
+                basic: ""
+                growth: ""
+                scale: ""
+                enterprise: ""
               analytics:
-                host:
-                key:
+                host: ""
+                key: ""
               internalSmtp:
-                sendingDomain:
-                dkimPrivateKey:
-                dkimPublicKey:
-                email:
-                name:
+                sendingDomain: ""
+                dkimPrivateKey: ""
+                dkimPublicKey: ""
+                email: ""
+                name: ""
               incidents:
                 disableAutomaticCreation: false
-
               statusPage:
                 cnameRecord: "status.ailab.inspection.alpha.canada.ca"
-
               probes:
                 one:
                   name: "Probe"
                   description: "Probe"
                   monitoringWorkers: 3
                   monitorFetchLimit: 10
-                  key:
+                  key: ""
                   replicaCount: 1
-                  # two:
-                  #   name: "Probe 2"
-                  #   description: "Probe 2"
-                  #   monitoringWorkers: 3
-                  #   monitorFetchLimit: 10
-                  #   key:
-                  #   replicaCount: 1
               port:
                 app: 3002
                 ingestor: 3400
@@ -168,17 +154,15 @@ spec:
                 enabled: false
               openTelemetryExporter:
                 endpoint: "http://alloy.monitoring.svc.cluster.local:4317"
-              containerSecurityContext:
-              podSecurityContext:
-              # This can be one of the following: DEBUG, INFO, WARN, ERROR
+              containerSecurityContext: {}
+              podSecurityContext: {}
               logLevel: INFO
-
               letsEncrypt:
                 accountKey: "<path:kv/data/oneuptime/letsencrypt#accountKey>"
                 email: "<path:kv/data/oneuptime/letsencrypt#email>"
   syncPolicy:
-      automated:
-        prune: true
-        selfHeal: true
-      syncOptions:
-        - CreateNamespace=true
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
