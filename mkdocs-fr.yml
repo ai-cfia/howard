@@ -29,6 +29,7 @@ nav:
   - Accueil: index.md
   - ADR: adr.md
   - Configuration / Implémentation: configuration.md
+  - Github workflow: workflow.md
 
 markdown_extensions:
   - pymdownx.snippets:
