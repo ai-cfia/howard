@@ -161,6 +161,9 @@ spec:
               letsEncrypt:
                 accountKey: "<path:kv/data/oneuptime/letsencrypt#accountKey>"
                 email: "<path:kv/data/oneuptime/letsencrypt#email>"
+    - repoURL: https://github.com/ai-cfia/howard.git
+      path: kubernetes/aks/system/oneuptime/base
+      targetRevision: HEAD
   syncPolicy:
     automated:
       prune: true
