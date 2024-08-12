@@ -91,7 +91,7 @@ spec:
                   appendonly no
                   save ""
               image:
-                registry: docker.io
+                registry: ghcr.io
                 repository: oneuptime
                 pullPolicy: Always
                 tag: 7.0.2936
