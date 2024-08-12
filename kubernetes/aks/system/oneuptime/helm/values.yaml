@@ -30,13 +30,9 @@ postgresql:
   auth:
     username: postgres
     database: oneuptimedb
+    password: "<path:kv/data/oneuptime/postgresql#password>"
   architecture: standalone
   primary:
-    # pgHbaConfiguration: |-
-    #   local all all trust
-    #   host all all 127.0.0.1/32 trust
-    #   host all all 0.0.0.0/0 md5
-    #   host all all ::/0 md5
     service:
       ports:
         postgresql: "5432"
@@ -75,6 +71,10 @@ redis:
   replica:
     persistence:
       enabled: false  # We dont need redis persistence, because we dont do anything with it.
+  commonConfiguration: |-
+   appendonly no
+   save ""
+
 image:
   registry: docker.io
   repository: oneuptime
@@ -112,8 +112,11 @@ internalSmtp:
   name:
 incidents:
   disableAutomaticCreation: false
+
 statusPage:
-  cnameRecord:
+  cnameRecord: "status.ailab.inspection.alpha.canada.ca"
+
+
 probes:
   one:
     name: "Probe"
@@ -146,17 +149,12 @@ port:
 testServer:
   enabled: false
 openTelemetryExporter:
-  endpoint:
-    server:
-    client:
-  headers:
-    app:
-    dashboard:
-    accounts:
-    statusPage:
-    probe:
-    adminDashboard:
+  endpoint: "http://alloy.monitoring.svc.cluster.local:4317"
 containerSecurityContext:
 podSecurityContext:
 # This can be one of the following: DEBUG, INFO, WARN, ERROR
-logLevel: ERROR
+logLevel: INFO
+
+letsEncrypt:
+  accountKey: "<path:kv/data/oneuptime/letsencrypt#accountKey>"
+  email: "<path:kv/data/oneuptime/letsencrypt#email>"
