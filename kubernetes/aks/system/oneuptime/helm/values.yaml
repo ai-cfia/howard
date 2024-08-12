@@ -32,7 +32,7 @@ postgresql:
     database: oneuptimedb
   architecture: standalone
   primary:
-    configuration: |
+    pgHbaConfiguration: |-
       local all all trust
     service:
       ports:
