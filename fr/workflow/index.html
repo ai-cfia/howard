@@ -9,18 +9,20 @@
       
       
       
+        <link rel="prev" href="../configuration/">
       
       
-      <link rel="icon" href="../../assets/images/favicon.png">
+      
+      <link rel="icon" href="../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.31">
     
     
       
-        <title>ADR-014 : Conteneurisation - Howard</title>
+        <title>Github workflow - Howard</title>
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.3cba04c6.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.3cba04c6.min.css">
       
       
 
@@ -39,7 +41,7 @@
       
     
     
-    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -58,7 +60,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#adr-014-conteneurisation" class="md-skip">
+        <a href="#github-workflows" class="md-skip">
           Aller au contenu
         </a>
       
@@ -74,7 +76,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="En-tête">
-    <a href="../.." title="Howard" class="md-header__button md-logo" aria-label="Howard" data-md-component="logo">
+    <a href=".." title="Howard" class="md-header__button md-logo" aria-label="Howard" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -94,7 +96,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              ADR-014 : Conteneurisation
+              Github workflow
             
           </span>
         </div>
@@ -207,7 +209,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../.." title="Howard" class="md-nav__button md-logo" aria-label="Howard" data-md-component="logo">
+    <a href=".." title="Howard" class="md-nav__button md-logo" aria-label="Howard" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
@@ -237,7 +239,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../.." class="md-nav__link">
+      <a href=".." class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -257,7 +259,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
+      <a href="../adr/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -277,7 +279,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../configuration/" class="md-nav__link">
+      <a href="../configuration/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -294,10 +296,19 @@
       
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../workflow/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -306,6 +317,7 @@
   
 
       </a>
+      
     </li>
   
 
@@ -330,92 +342,6 @@
     
   
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table des matières
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#resume-executif" class="md-nav__link">
-    <span class="md-ellipsis">
-      Résumé exécutif
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#contexte" class="md-nav__link">
-    <span class="md-ellipsis">
-      Contexte
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#decision" class="md-nav__link">
-    <span class="md-ellipsis">
-      Décision
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#alternatives-considerees" class="md-nav__link">
-    <span class="md-ellipsis">
-      Alternatives Considérées
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Alternatives Considérées">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#docker-swarm" class="md-nav__link">
-    <span class="md-ellipsis">
-      Docker Swarm
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#nomad" class="md-nav__link">
-    <span class="md-ellipsis">
-      Nomad
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#conclusion" class="md-nav__link">
-    <span class="md-ellipsis">
-      Conclusion
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#references" class="md-nav__link">
-    <span class="md-ellipsis">
-      Références
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
 </nav>
                   </div>
                 </div>
@@ -432,119 +358,12 @@
   
 
 
-<h1 id="adr-014-conteneurisation">ADR-014 : Conteneurisation</h1>
-<h2 id="resume-executif">Résumé exécutif</h2>
-<p>L'utilisation de conteneurs et de Kubernetes s'est avérée efficace pour la
-gestion et le déploiement de nos applications. Cette approche offre plusieurs
-avantages, notamment la portabilité, qui permet aux conteneurs de s'exécuter
-de manière cohérente sur différents environnements, simplifiant ainsi le
-développement et le déploiement. L'évolutivité est également un point fort,
-car Kubernetes permet de faire évoluer facilement les applications en fonction
-de la demande. En termes de fiabilité, les conteneurs et Kubernetes offrent une
-meilleure résistance aux pannes et une haute disponibilité. Enfin, l'efficacité
-est améliorée grâce à l'utilisation de conteneurs qui optimisent l'utilisation
-des ressources et réduit les coûts.</p>
-<h2 id="contexte">Contexte</h2>
-<p>Auparavant, nous déployions manuellement chaque Dockerfile sur Google Cloud Run.
-Cette approche nous demandait un investissement de temps considérable,
-car chaque déploiement nécessitait une intervention manuelle pour la
-construction et la mise en ligne des conteneurs. Malgré la présence
-systématique de Dockerfiles dans nos répertoires, le processus de
-développement et de déploiement restait relativement peu automatisé.</p>
-<h2 id="decision">Décision</h2>
-<p>Pour pallier ces limitations, nous avons décidé d'adopter Kubernetes pour
-l'orchestration des conteneurs. Cette transition nous permet de bénéficier d'une
-gestion plus robuste et évolutive de nos applications. Cependant, le
-déploiement n'est pas entièrement automatisé ; les manifestes Kubernetes
-doivent être créés pour ensuite être déployés via ArgoCD, offrant ainsi un
-niveau supplémentaire de contrôle et de validation avant le déploiement final.</p>
-<p>En ce qui concerne les images Docker, nous avons mis en place un flux de travail
-GitHub qui automatise le processus de construction, de "tagging" et de mise en
-ligne. Cette automatisation nous permet de garantir la cohérence et la fiabilité
-de nos déploiements tout en réduisant la charge de travail manuelle
-et les risques d'erreurs.</p>
-<h2 id="alternatives-considerees">Alternatives Considérées</h2>
-<h3 id="docker-swarm">Docker Swarm</h3>
-<p>Avantages:</p>
+<h1 id="github-workflows">Github workflows</h1>
+<p>Workflow GitHub utilisé au sein de l'organisation AI-CFIA. Chaque workflow peut
+être trouvé à l'adresse suivante <a href="https://github.com/ai-cfia/github-workflows">https://github.com/ai-cfia/github-workflows</a></p>
 <ul>
-<li>
-<p><strong>Intégration native avec Docker:</strong> Docker Swarm est étroitement intégré
-à Docker et utilise le Docker API, ce qui rend la mise en place et la gestion
-plus simple pour les équipes déjà habituées à Docker.</p>
-</li>
-<li>
-<p><strong>Facilité de déploiement:</strong> Docker Swarm est plus simple à configurer et à
-gérer par rapport à Kubernetes, ce qui peut être bénéfique pour les petites ou
-moyennes infrastructures sans besoins complexes.</p>
-</li>
-<li>
-<p><strong>Performances:</strong> Docker Swarm a souvent montré des performances meilleures en
-termes de temps de démarrage des conteneurs et d’utilisation des ressources.</p>
-</li>
+<li><a href="create-release-pr-labelling/">Créer une version et étiqueter la pull request</a></li>
 </ul>
-<p>Inconvénients:</p>
-<ul>
-<li>
-<p><strong>Scalabilité limitée:</strong> Docker Swarm est moins adapté pour les grands
-clusters que Kubernetes. Kubernetes excelle dans la gestion de clusters de
-grande taille et complexes.</p>
-</li>
-<li>
-<p><strong>Fonctionnalités moins robustes:</strong> Par rapport à Kubernetes, Docker Swarm
-offre moins de fonctionnalités avancées comme les stratégies de déploiement
-sophistiquées, la gestion avancée des volumes, et le support extensif pour
-les outils de CI/CD.</p>
-</li>
-<li>
-<p><strong>Communauté plus petite:</strong> La communauté autour de Docker Swarm est moins
-active que celle de Kubernetes, ce qui peut impacter le support et le
-développement de nouvelles fonctionnalités.</p>
-</li>
-</ul>
-<h3 id="nomad">Nomad</h3>
-<p>Avantages:</p>
-<ul>
-<li>
-<p><strong>Simplicité et flexibilité:</strong> Nomad est réputé pour sa simplicité et sa
-flexibilité. Cela rend l'orchestrateur idéal pour les applications non
-conteneurisées ainsi que pour les conteneurs.</p>
-</li>
-<li>
-<p><strong>Ressources hétérogènes et multi-région:</strong> Nomad peut gérer des charges de
-travail sur différents types de serveurs, y compris des environnements bare
-metal, VMs ou conteneurisés, et peut gérer des clusters multi-région facilement.</p>
-</li>
-<li>
-<p><strong>Haute performance et efficacité:</strong> Nomad est conçu pour être performant à
-grande échelle, offrant un démarrage rapide des tâches et une surcharge
-minimale.</p>
-</li>
-</ul>
-<p>Inconvénients:</p>
-<ul>
-<li>
-<p><strong>Moins de fonctionnalités que certains concurrents:</strong> Bien que Nomad soit
-apprécié pour sa simplicité, il peut manquer de certaines fonctionnalités
-avancées présentes dans d'autres orchestrateurs, comme Kubernetes.</p>
-</li>
-<li>
-<p><strong>Écosystème plus restreint:</strong> L'écosystème autour de Nomad est moins
-développé comparativement à celui de solutions plus mûres comme Kubernetes.
-Ceci peut se traduire par une offre plus limitée en termes d'outils tiers,
-de plugins ou d'intégrations, rendant certaines tâches plus complexes
-à mettre en œuvre et à maintenir.</p>
-</li>
-</ul>
-<h2 id="conclusion">Conclusion</h2>
-<p>L'adoption de Kubernetes s'est avérée être une décision judicieuse pour
-la gestion et le déploiement de nos applications conteneurisées.
-Cette approche a permis d'améliorer la portabilité, l'évolutivité,
-la fiabilité ainsi que l'efficacité de nos applications.</p>
-<h2 id="references">Références</h2>
-<p><a href="https://kubernetes.io/">Kubernetes</a></p>
-<p><a href="https://www.docker.com/">Docker</a></p>
-<p><a href="https://docs.docker.com/engine/swarm/">Docker swarm</a></p>
-<p><a href="https://www.nomadproject.io/">Nomad</a></p>
 
 
 
@@ -591,10 +410,10 @@ la fiabilité ainsi que l'efficacité de nos applications.</p>
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "header.autohide"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copi\u00e9 dans le presse-papier", "clipboard.copy": "Copier dans le presse-papier", "search.result.more.one": "1 de plus sur cette page", "search.result.more.other": "# de plus sur cette page", "search.result.none": "Aucun document trouv\u00e9", "search.result.one": "1 document trouv\u00e9", "search.result.other": "# documents trouv\u00e9s", "search.result.placeholder": "Taper pour d\u00e9marrer la recherche", "search.result.term.missing": "Non trouv\u00e9", "select.version": "S\u00e9lectionner la version"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.instant", "header.autohide"], "search": "../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copi\u00e9 dans le presse-papier", "clipboard.copy": "Copier dans le presse-papier", "search.result.more.one": "1 de plus sur cette page", "search.result.more.other": "# de plus sur cette page", "search.result.none": "Aucun document trouv\u00e9", "search.result.one": "1 document trouv\u00e9", "search.result.other": "# documents trouv\u00e9s", "search.result.placeholder": "Taper pour d\u00e9marrer la recherche", "search.result.term.missing": "Non trouv\u00e9", "select.version": "S\u00e9lectionner la version"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.fe8b6f2b.min.js"></script>
+      <script src="../assets/javascripts/bundle.fe8b6f2b.min.js"></script>
       
     
   </body>
