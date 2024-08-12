@@ -24,11 +24,6 @@ spec:
         runAsUser: 1000
         runAsGroup: 3000
         fsGroup: 2000
-        allowPrivilegeEscalation: false
-        readOnlyRootFilesystem: true
-        capabilities:
-          drop:
-            - ALL
       affinity:
         podAntiAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
@@ -71,6 +66,12 @@ spec:
             limits:
               cpu: "500m"
               memory: "2Gi"
+          securityContext:
+            readOnlyRootFilesystem: true
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
 
 ---
 apiVersion: policy/v1
