@@ -169,7 +169,7 @@ spec:
                 tls:
                   enabled: true
                   hosts:
-                    - oneuptime.inspection.alpha.canada.ca
+                    - host: oneuptime.inspection.alpha.canada.ca
                       secretName: status-https-cert
     - repoURL: https://github.com/ai-cfia/howard.git
       path: kubernetes/aks/system/oneuptime/base
