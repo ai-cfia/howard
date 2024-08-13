@@ -23,5 +23,5 @@ spec:
               service:
                 name: oneuptime-nginx
                 port:
-                  name: "oneuptime-http"
+                  name: http
             pathType: Prefix
