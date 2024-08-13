@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: oneuptime-probe
-          image: ghcr.io/oneuptime/probe:7.0.2936
+          image: ghcr.io/oneuptime/probe:7.0.1989
           env:
             - name: PROBE_KEY
               valueFrom:
@@ -46,7 +46,7 @@ metadata:
   name: oneuptime-probe-secrets
   annotations:
     avp.kubernetes.io/path: "kv/data/system/oneuptime/probe-0"
-    avp.kubernetes.io/secret-version: "2"
+    avp.kubernetes.io/secret-version: "3"
 stringData:
   PROBE_KEY: <PROBE_KEY>
   PROBE_ID: <PROBE_ID>

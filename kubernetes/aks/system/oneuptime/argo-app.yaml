@@ -13,7 +13,7 @@ spec:
   sources:
     - chart: oneuptime
       repoURL: https://helm-chart.oneuptime.com
-      targetRevision: 7.0.2936
+      targetRevision: 7.0.1989
       plugin:
         env:
           - name: HELM_VALUES
