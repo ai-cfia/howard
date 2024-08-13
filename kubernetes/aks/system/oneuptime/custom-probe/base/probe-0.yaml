@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: oneuptime-probe
-          image: ghcr.io/oneuptime/probe:7.0.1978
+          image: ghcr.io/oneuptime/probe:7.0.868
           env:
             - name: PROBE_KEY
               valueFrom:
