@@ -21,7 +21,7 @@ spec:
               global:
                 storageClass: managed-csi
                 clusterDomain: &global-cluster-domain cluster.local
-                host: oneuptime.inspection.alpha.canada.ca
+                host: 4.172.120.55
                 httpProtocol: https
                 oneuptimeSecret: ""
                 encryptionSecret: ""
