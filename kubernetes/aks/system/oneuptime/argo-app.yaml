@@ -21,7 +21,7 @@ spec:
               global:
                 storageClass: managed-csi
                 clusterDomain: &global-cluster-domain cluster.local
-                host: status.inspection.alpha.canada.ca
+                host: oneuptime.inspection.alpha.canada.ca
                 httpProtocol: https
                 oneuptimeSecret: ""
                 encryptionSecret: ""
@@ -94,7 +94,7 @@ spec:
                 registry: ghcr.io
                 repository: oneuptime
                 pullPolicy: Always
-                tag: 7.0.2118
+                tag: 7.0.2936
                 restartPolicy: Always
               autoscaling:
                 enabled: false
@@ -155,6 +155,8 @@ spec:
                 endpoint: "http://alloy.monitoring.svc.cluster.local:4317"
               containerSecurityContext: {}
               podSecurityContext: {}
+              statusPage:
+                cnameRecord: status.inspection.alpha.canada.ca
               logLevel: DEBUG
     - repoURL: https://github.com/ai-cfia/howard.git
       path: kubernetes/aks/system/oneuptime/base

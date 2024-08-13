@@ -12,10 +12,10 @@ spec:
   ingressClassName: nginx
   tls:
     - hosts:
-        - status.inspection.alpha.canada.ca
+        - oneuptime.inspection.alpha.canada.ca
       secretName: status-https-cert
   rules:
-    - host: status.inspection.alpha.canada.ca
+    - host: oneuptime.inspection.alpha.canada.ca
       http:
         paths:
           - path: /

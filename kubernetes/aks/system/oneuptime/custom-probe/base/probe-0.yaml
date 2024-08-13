@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: oneuptime-probe
-          image: oneuptime/probe:release
+          image: ghcr.io/oneuptime/probe:7.0.2936
           env:
             - name: PROBE_KEY
               valueFrom:
@@ -27,7 +27,7 @@ spec:
                   name: oneuptime-probe-secrets
                   key: PROBE_ID
             - name: ONEUPTIME_URL
-              value: "https://status.inspection.alpha.canada.ca"
+              value: "https://oneuptime.inspection.alpha.canada.ca"
           resources:
             requests:
               memory: "256Mi"
