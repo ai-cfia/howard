@@ -22,8 +22,8 @@ resources:
   - ../../system/cloudnativepg/
   - ../../system/vouch-proxy/
   - ../../system/trivy/
-  - ../../system/oneuptime/
-  - ../../system/oneuptime/custom-probe/
+  # - ../../system/oneuptime/
+  # - ../../system/oneuptime/custom-probe/
   - ../../system/falco/
   # - ../../system/istio/
 
