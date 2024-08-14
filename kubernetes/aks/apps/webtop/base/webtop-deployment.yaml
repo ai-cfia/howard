@@ -14,16 +14,12 @@ spec:
     spec:
       containers:
       - name: webtop
-        image: linuxserver/webtop:latest
+        image: linuxserver/webtop:ubuntu-kde
         ports:
-        - containerPort: 3000
-        env:
-        - name: PUID
-          value: "1000"
-        - name: PGID
-          value: "1000"
-        - name: TZ
-          value: "America/Toronto"
+        - containerPort: 3001
+        envFrom:
+        - secretRef:
+          name: webtop-secrets
         volumeMounts:
         - name: config
           mountPath: /config
@@ -43,8 +39,8 @@ spec:
     app: webtop
   ports:
   - protocol: TCP
-    port: 3000
-    targetPort: 3000
+    port: 3001
+    targetPort: 3001
 
 ---
 apiVersion: v1
