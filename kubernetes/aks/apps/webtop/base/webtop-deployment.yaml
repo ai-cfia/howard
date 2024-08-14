@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webtop
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: webtop
+  template:
+    metadata:
+      labels:
+        app: webtop
+    spec:
+      containers:
+      - name: webtop
+        image: linuxserver/webtop:ubuntu-kde
+        ports:
+        - containerPort: 3001
+        envFrom:
+        - secretRef:
+          name: webtop-secrets
+        volumeMounts:
+        - name: config
+          mountPath: /config
+      volumes:
+      - name: config
+        persistentVolumeClaim:
+          claimName: webtop-config-pvc
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: webtop-service
+spec:
+  type: ClusterIP
+  selector:
+    app: webtop
+  ports:
+  - protocol: TCP
+    port: 3001
+    targetPort: 3001
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: webtop-config-pvc
+  namespace: htpc
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi

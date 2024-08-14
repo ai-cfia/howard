@@ -11,6 +11,7 @@ resources:
   - ../librechat/
   - ../ailab/
   - ../fertiscan/
+  - ../webtop/
 
   # System applications
   - ../../system/cert-manager/
