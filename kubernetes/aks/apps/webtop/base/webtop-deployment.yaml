@@ -19,7 +19,7 @@ spec:
         - containerPort: 3001
         envFrom:
         - secretRef:
-          name: webtop-secrets
+            name: webtop-secrets
         volumeMounts:
         - name: config
           mountPath: /config
