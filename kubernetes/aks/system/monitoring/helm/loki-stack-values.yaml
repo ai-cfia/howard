@@ -27,7 +27,12 @@ loki:
     - ReadWriteOnce
     annotations: {}
     enabled: true
-    size: 10Gi
+    size: 20Gi
+  compactor:
+    # Activate custom retention (default=false)
+    retention_enabled: true
+  limits_config:
+    retention_period: 740h
 
 promtail:
   enabled: true
