@@ -13,10 +13,6 @@ spec:
       labels:
         app: fertiscan-backend
     spec:
-      securityContext:
-        runAsUser: 1000
-        runAsGroup: 1000
-        fsGroup: 1000
       affinity:
         podAntiAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
@@ -57,6 +53,8 @@ spec:
             - name: tmp
               mountPath: /cachedir_joblib
           securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
             runAsNonRoot: true
             readOnlyRootFilesystem: true
             allowPrivilegeEscalation: false
