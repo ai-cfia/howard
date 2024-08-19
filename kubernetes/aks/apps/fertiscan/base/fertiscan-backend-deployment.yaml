@@ -48,8 +48,8 @@ spec:
           volumeMounts:
             - name: tmp
               mountPath: /cachedir_joblib
-        - name: app-volume
-          mountPath: /app
+            - name: app-volume
+              mountPath: /app
           securityContext:
             readOnlyRootFilesystem: true
             allowPrivilegeEscalation: false
