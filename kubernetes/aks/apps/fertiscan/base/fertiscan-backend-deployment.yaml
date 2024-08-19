@@ -31,13 +31,6 @@ spec:
                     operator: In
                     values:
                       - agent
-      initContainers:
-        - name: init-permissions
-          image: busybox
-          command: ["sh", "-c", "mkdir -p /app && chmod -R 777 /app"]
-          volumeMounts:
-            - name: app-volume
-              mountPath: /app
       containers:
         - name: fertiscan-backend
           image: ghcr.io/ai-cfia/fertiscan-backend:98-add-user-and-group-to-dockerfile
@@ -48,8 +41,10 @@ spec:
           ports:
             - containerPort: 5000
           volumeMounts:
-            - name: app-volume
-              mountPath: /app
+            - name: logs
+              mountPath: /app/logs
+            - name: uploads
+              mountPath: /app/uploads
             - name: tmp
               mountPath: /cachedir_joblib
           securityContext:
@@ -64,7 +59,9 @@ spec:
       volumes:
         - name: tmp
           emptyDir: {}
-        - name: app-volume
+        - name: logs
+          emptyDir: {}
+        - name: uploads
           emptyDir: {}
           # resources:
           #   requests:
