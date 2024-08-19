@@ -53,6 +53,8 @@ spec:
           ports:
             - containerPort: 5000
           volumeMounts:
+            - name: app-volume
+              mountPath: /app
             - name: tmp
               mountPath: /cachedir_joblib
           securityContext:
@@ -63,6 +65,8 @@ spec:
                 - ALL
       volumes:
         - name: tmp
+          emptyDir: {}
+        - name: app-volume
           emptyDir: {}
           # resources:
           #   requests:
