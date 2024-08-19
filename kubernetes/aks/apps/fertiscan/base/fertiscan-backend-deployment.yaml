@@ -53,8 +53,12 @@ spec:
           volumeMounts:
             - name: tmp
               mountPath: /cachedir_joblib
+        - name: app-volume
+          mountPath: /app
       volumes:
         - name: tmp
+          emptyDir: {}
+        - name: app-volume
           emptyDir: {}
           # resources:
           #   requests:
