@@ -39,7 +39,10 @@ spec:
       initContainers:
         - name: init-permissions
           image: busybox
-          command: ["sh", "-c", "chmod -R 777 /app"]
+          command: ["sh", "-c", "mkdir -p /app && chmod -R 777 /app"]
+          volumeMounts:
+            - name: app-volume
+              mountPath: /app
       containers:
         - name: fertiscan-backend
           image: ghcr.io/ai-cfia/fertiscan-backend:98-add-user-and-group-to-dockerfile
