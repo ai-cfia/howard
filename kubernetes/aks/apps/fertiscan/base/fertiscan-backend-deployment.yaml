@@ -33,7 +33,7 @@ spec:
                       - agent
       containers:
         - name: fertiscan-backend
-          image: ghcr.io/ai-cfia/fertiscan-backend:98-add-user-and-group-to-dockerfile
+          image: ghcr.io/ai-cfia/fertiscan-backend:fix-docs
           imagePullPolicy: Always
           envFrom:
             - secretRef:
