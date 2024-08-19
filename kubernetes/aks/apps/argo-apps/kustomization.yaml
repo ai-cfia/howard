@@ -11,6 +11,7 @@ resources:
   - ../librechat/
   - ../ailab/
   - ../fertiscan/
+  - ../webtop/
 
   # System applications
   - ../../system/cert-manager/
@@ -22,8 +23,8 @@ resources:
   - ../../system/cloudnativepg/
   - ../../system/vouch-proxy/
   - ../../system/trivy/
-  - ../../system/oneuptime/
-  - ../../system/oneuptime/custom-probe/
+  # - ../../system/oneuptime/
+  # - ../../system/oneuptime/custom-probe/
   - ../../system/falco/
   # - ../../system/istio/
 
