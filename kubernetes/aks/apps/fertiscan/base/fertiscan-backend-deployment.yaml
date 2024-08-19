@@ -18,11 +18,6 @@ spec:
         runAsGroup: 1000
         fsGroup: 1000
         runAsNonRoot: true
-        allowPrivilegeEscalation: false
-        readOnlyRootFilesystem: true
-        capabilities:
-          drop:
-            - ALL
       affinity:
         podAntiAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
@@ -53,6 +48,12 @@ spec:
           volumeMounts:
             - name: tmp
               mountPath: /cachedir_joblib
+          securityContext:
+            readOnlyRootFilesystem: true
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
       volumes:
         - name: tmp
           emptyDir: {}
