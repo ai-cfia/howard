@@ -38,7 +38,7 @@ spec:
                       - agent
       containers:
         - name: fertiscan-frontend
-          image: ghcr.io/ai-cfia/fertiscan-frontend:main
+          image: ghcr.io/ai-cfia/fertiscan-frontend:218-save-and-list-inspections-auth
           imagePullPolicy: Always
           envFrom:
             - secretRef:
