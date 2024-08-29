@@ -94,7 +94,7 @@ data:
           - "[BODY] == pat(*<html>*)"
 
       - name: "Vouch endpoint"
-        url: https://vouch.inspection.alpha.canada.ca/
+        url: https://vouch.inspection.alpha.canada.ca/healthcheck
         interval: 2m
         conditions:
           - "[STATUS] == 200"
