@@ -1,0 +1,110 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: gatus
+data:
+  config.yaml: |
+    metrics: true
+    ui:
+      title: "Health Dashboard | AI-Lab | CFIA"
+      header: "AI-Lab Web Hosted Apps"
+      logo: "https://raw.githubusercontent.com/ai-cfia/finesse-frontend/main/src/assets/CFIA_Banner.png"
+    storage:
+      type: sqlite
+      path: /data/data.db
+    endpoints:
+      - name: "AI-Lab website"
+        url: https://ailab.inspection.alpha.canada.ca/
+        interval: 2m
+        conditions:
+          - "[STATUS] == 200"
+          - "len([BODY]) > 0"
+          - "[BODY] == pat(*<html>*)"
+
+      - name: "Fertiscan website"
+        url: https://fertiscan.inspection.alpha.canada.ca/
+        interval: 2m
+        conditions:
+          - "[STATUS] == 200"
+          - "len([BODY]) > 0"
+          - "[BODY] == pat(*<html>*)"
+
+      - name: "Nachet website"
+        url: https://nachet.inspection.alpha.canada.ca/
+        interval: 2m
+        conditions:
+          - "[STATUS] == 200"
+          - "len([BODY]) > 0"
+          - "[BODY] == pat(*<html>*)"
+
+      - name: "Finesse website"
+        url: https://finesse.inspection.alpha.canada.ca/
+        interval: 2m
+        conditions:
+          - "[STATUS] == 200"
+          - "len([BODY]) > 0"
+          - "[BODY] == pat(*<html>*)"
+
+      - name: "Finesse internal website"
+        url: https://finesse-internal.inspection.alpha.canada.ca/
+        interval: 2m
+        conditions:
+          - "[STATUS] == 200"
+          - "len([BODY]) > 0"
+          - "[BODY] == pat(*<html>*)"
+
+      - name: "Louis website"
+        url: https://louis.inspection.alpha.canada.ca/
+        interval: 2m
+        conditions:
+          - "[STATUS] == 200"
+          - "len([BODY]) > 0"
+          - "[BODY] == pat(*<html>*)"
+
+      - name: "Librechat website"
+        url: https://librechat.inspection.alpha.canada.ca/
+        interval: 2m
+        conditions:
+          - "[STATUS] == 200"
+          - "len([BODY]) > 0"
+          - "[BODY] == pat(*<html>*)"
+
+      - name: "ArgoCD website"
+        url: https://argocd.inspection.alpha.canada.ca/
+        interval: 2m
+        conditions:
+          - "[STATUS] == 200"
+          - "len([BODY]) > 0"
+          - "[BODY] == pat(*<html>*)"
+
+      - name: "Grafana website"
+        url: https://grafana.inspection.alpha.canada.ca/
+        interval: 2m
+        conditions:
+          - "[STATUS] == 200"
+          - "len([BODY]) > 0"
+          - "[BODY] == pat(*<html>*)"
+
+      - name: "Bytebase website"
+        url: https://bytebase.inspection.alpha.canada.ca/
+        interval: 2m
+        conditions:
+          - "[STATUS] == 200"
+          - "len([BODY]) > 0"
+          - "[BODY] == pat(*<html>*)"
+
+      - name: "Vouch endpoint"
+        url: https://vouch.inspection.alpha.canada.ca/
+        interval: 2m
+        conditions:
+          - "[STATUS] == 200"
+          - "len([BODY]) > 0"
+          - "[BODY] == pat(*<html>*)"
+
+      - name: "Vault website"
+        url: https://vault.inspection.alpha.canada.ca/
+        interval: 2m
+        conditions:
+          - "[STATUS] == 200"
+          - "len([BODY]) > 0"
+          - "[BODY] == pat(*<html>*)"

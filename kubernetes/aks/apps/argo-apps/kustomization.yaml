@@ -27,6 +27,7 @@ resources:
   # - ../../system/oneuptime/custom-probe/
   - ../../system/falco/
   # - ../../system/istio/
+  - ../../system/gatus/
 
 patches:
   - patch: |-
