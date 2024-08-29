@@ -99,7 +99,7 @@ data:
         conditions:
           - "[STATUS] == 200"
           - "len([BODY]) > 0"
-          - "[BODY] == pat(*<html>*)"
+          - "[BODY] == pat(*{ "ok": true }*)"
 
       - name: "Vault website"
         url: https://vault.inspection.alpha.canada.ca/
