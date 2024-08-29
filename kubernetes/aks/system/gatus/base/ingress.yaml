@@ -1,26 +1,28 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: librechat-ingress
+  name: gatus
   annotations:
-    nginx.ingress.kubernetes.io/whitelist-source-range: 205.194.32.0/24,10.244.0.0/16
+    nginx.ingress.kubernetes.io/whitelist-source-range: 205.194.32.0/24
     external-dns.alpha.kubernetes.io/target: inspection.alpha.canada.ca
     cert-manager.io/cluster-issuer: letsencrypt-prod
+    nginx.ingress.kubernetes.io/add-base-url: "true"
+    ingress.kubernetes.io/force-ssl-redirect: "true"
     kubernetes.io/tls-acme: "true"
 spec:
   ingressClassName: nginx
   tls:
     - hosts:
-        - librechat.inspection.alpha.canada.ca
-      secretName: aciacfia-tls
+        - status.inspection.alpha.canada.ca
+      secretName: geloso-tls
   rules:
-    - host: librechat.inspection.alpha.canada.ca
+    - host: status.inspection.alpha.canada.ca
       http:
         paths:
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: librechat
+                name: gatus
                 port:
-                  number: 3080
+                  number: 8080
