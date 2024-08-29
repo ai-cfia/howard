@@ -48,17 +48,17 @@ spec:
           successThreshold: 1
           failureThreshold: 5
         volumeMounts:
-          - mountPath: /config
-            name: gatus-config
-          - mountPath: /data
-            name: gatus-db
+        - mountPath: /config
+          name: gatus-config
+        - mountPath: /data
+          name: gatus-db
       volumes:
-        - name: gatus-config
-          configMap:
-            name: gatus
-        - name: gatus-db
-          persistentVolumeClaim:
-           claimName: gatus
+      - name: gatus-config
+        configMap:
+          name: gatus
+      - name: gatus-db
+        persistentVolumeClaim:
+          claimName: gatus
 ---
 apiVersion: v1
 kind: Service
@@ -66,9 +66,9 @@ metadata:
   name: gatus
 spec:
   ports:
-    - name: http
-      port: 8080
-      protocol: TCP
-      targetPort: 8080
+  - name: http
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
   selector:
     app: gatus
