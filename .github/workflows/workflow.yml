@@ -30,6 +30,10 @@ jobs:
     with:
       config-file-path: '.tflint.hcl'
 
+  pr-labelling:
+    uses: ai-cfia/github-workflows/.github/workflows/workflow-pr-labelling.yml@main
+    secrets: inherit
+
   mkdocs-gh-pages-deployment:
     runs-on: ubuntu-latest
     steps:
