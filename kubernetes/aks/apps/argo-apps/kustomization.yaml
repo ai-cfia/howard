@@ -12,6 +12,7 @@ resources:
   - ../ailab/
   - ../fertiscan/
   - ../webtop/
+  - ../landing/
 
   # System applications
   - ../../system/cert-manager/

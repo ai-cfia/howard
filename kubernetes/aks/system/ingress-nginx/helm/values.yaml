@@ -54,6 +54,10 @@ controller:
     force-ssl-redirect: "true"
     server-snippet: |
       add_header X-Robots-Tag "noindex,nofollow";
+      error_page 403 = @error403;
+      location @error403 {
+        return 301 https://landing.inspection.alpha.canada.ca;
+      }
       ssl_conf_command CipherSuites TLS_AES_128_GCM_SHA256:TLS_AES_256_GCM_SHA384;
   # -- Annotations to be added to the controller config configuration configmap.
   configAnnotations: {}
