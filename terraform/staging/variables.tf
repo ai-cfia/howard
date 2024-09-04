@@ -14,11 +14,6 @@ variable "resource_group" {
   type        = string
 }
 
-variable "resource_group_id" {
-  description = "The ID of the resource group in which the managed cluster is created."
-  type        = string
-}
-
 variable "environment" {
   type        = string
   description = "Name of the deployment environment"
@@ -198,12 +193,6 @@ variable "azure_backup_redundancy" {
 variable "azure_backuppolicy_name" {
   description = "Azure Backup Policy name"
   type        = string
-}
-
-variable "azure_backup_extension_type" {
-  description = "Type of the AKS Cluster Extension."
-  type        = string
-  default     = "microsoft.dataprotection.kubernetes"
 }
 
 variable "backup_excluded_namespaces" {
