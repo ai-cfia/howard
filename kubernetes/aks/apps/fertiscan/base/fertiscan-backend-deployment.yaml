@@ -33,7 +33,7 @@ spec:
                       - agent
       containers:
         - name: fertiscan-backend
-          image: ghcr.io/ai-cfia/fertiscan-backend:pydantic-schema
+          image: ghcr.io/ai-cfia/fertiscan-backend:main
           imagePullPolicy: Always
           envFrom:
             - secretRef:
