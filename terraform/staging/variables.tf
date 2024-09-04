@@ -14,6 +14,11 @@ variable "resource_group" {
   type        = string
 }
 
+variable "resource_group_id" {
+  description = "The ID of the resource group in which the managed cluster is created."
+  type        = string
+}
+
 variable "environment" {
   type        = string
   description = "Name of the deployment environment"
@@ -173,6 +178,62 @@ variable "dns_a_record_name" {
 variable "dns_a_records" {
   description = "DNS A records list"
   type        = list(string)
+}
+
+variable "azure_backup_vault_name" {
+  description = "Azure Backup Vault name"
+  type        = string
+}
+
+variable "azure_backup_datastore_type" {
+  description = "Azure Backup Datastore type"
+  type        = string
+}
+
+variable "azure_backup_redundancy" {
+  description = "Azure Backup Redundancy"
+  type        = string
+}
+
+variable "azure_backuppolicy_name" {
+  description = "Azure Backup Policy name"
+  type        = string
+}
+
+variable "azure_backup_extension_type" {
+  description = "Type of the AKS Cluster Extension."
+  type        = string
+  default     = "microsoft.dataprotection.kubernetes"
+}
+
+variable "backup_excluded_namespaces" {
+  description = "K8s Namespaces to exclude from backup."
+  type        = list(string)
+  default     = []
+}
+
+variable "backup_excluded_resource_types" {
+  description = "K8s Resource Types to exclude from backup."
+  type        = list(string)
+  default     = []
+}
+
+variable "backup_included_namespaces" {
+  description = "K8s Namespaces to include in backup."
+  type        = list(string)
+  default     = []
+}
+
+variable "backup_included_resource_types" {
+  description = "K8s Resource Types to include in backup."
+  type        = list(string)
+  default     = []
+}
+
+variable "backup_label_selectors" {
+  description = "K8s Label Selectors to include in backup."
+  type        = list(string)
+  default     = []
 }
 
 # variable "vm_rg_name" {

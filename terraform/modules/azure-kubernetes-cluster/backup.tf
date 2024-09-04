@@ -96,7 +96,7 @@ resource "azurerm_role_assignment" "vault_msi_read_on_cluster" {
 
 #Assign Role to Backup Vault over Snapshot Resource Group
 resource "azurerm_role_assignment" "vault_msi_read_on_snap_rg" {
-  scope                = azurerm_resource_group.backuprg.id
+  scope                = var.resource_group_id
   role_definition_name = "Reader"
   principal_id         = azurerm_data_protection_backup_vault.aks-backup-vault.identity[0].principal_id
   depends_on           = [azurerm_kubernetes_cluster.k8s]
@@ -104,7 +104,7 @@ resource "azurerm_role_assignment" "vault_msi_read_on_snap_rg" {
 
 #Assign Role to AKS Cluster over Snapshot Resource Group
 resource "azurerm_role_assignment" "cluster_msi_contributor_on_snap_rg" {
-  scope                = azurerm_resource_group.backuprg.id
+  scope                = var.resource_group_id
   role_definition_name = "Contributor"
   principal_id         = try(azurerm_kubernetes_cluster.k8s.identity[0].principal_id, null)
   depends_on           = [azurerm_kubernetes_cluster.k8s]
