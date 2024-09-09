@@ -19,6 +19,8 @@ metadata:
       auth_request_set $auth_resp_jwt $upstream_http_x_vouch_jwt;
       auth_request_set $auth_resp_err $upstream_http_x_vouch_err;
       auth_request_set $auth_resp_failcount $upstream_http_x_vouch_failcount;
+    nginx.ingress.kubernetes.io/custom-http-errors: "403"
+    nginx.ingress.kubernetes.io/default-backend: "default-backend" # Overrides the global default backend
 spec:
   ingressClassName: nginx
   tls:
@@ -58,6 +60,8 @@ metadata:
       auth_request_set $auth_resp_jwt $upstream_http_x_vouch_jwt;
       auth_request_set $auth_resp_err $upstream_http_x_vouch_err;
       auth_request_set $auth_resp_failcount $upstream_http_x_vouch_failcount;
+    nginx.ingress.kubernetes.io/custom-http-errors: "403"
+    nginx.ingress.kubernetes.io/default-backend: "default-nginx-backend"
 spec:
   ingressClassName: nginx
   tls:
