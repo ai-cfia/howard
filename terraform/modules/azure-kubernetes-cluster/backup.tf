@@ -38,8 +38,8 @@ resource "azurerm_data_protection_backup_policy_kubernetes_cluster" "policy" {
 
 # Create a Trusted Access Role Binding between AKS Cluster and Backup Vault
 resource "azurerm_kubernetes_cluster_trusted_access_role_binding" "trustedaccess" {
-  kubernetes_cluster_id = azurerm_kubernetes_cluster.k8s.id
   name                  = "${local.prefix}-backup-trusted-access"
+  kubernetes_cluster_id = azurerm_kubernetes_cluster.k8s.id
   roles                 = ["Microsoft.DataProtection/backupVaults/backup-operator"]
   source_resource_id    = azurerm_data_protection_backup_vault.aks-backup-vault.id
   depends_on            = [azurerm_data_protection_backup_vault.aks-backup-vault, azurerm_kubernetes_cluster.k8s]
@@ -47,7 +47,7 @@ resource "azurerm_kubernetes_cluster_trusted_access_role_binding" "trustedaccess
 
 # Create a Backup Storage Account provided in input for Backup Extension Installation
 resource "azurerm_storage_account" "backupsa" {
-  name                     = "${local.prefix}-tfaksbackup1604"
+  name                     = var.azure_backup_storage_account_name
   resource_group_name      = var.resource_group
   location                 = var.location
   account_tier             = "Standard"
@@ -57,7 +57,7 @@ resource "azurerm_storage_account" "backupsa" {
 
 # Create a Blob Container where backup items will stored
 resource "azurerm_storage_container" "backupcontainer" {
-  name                  = "${local.prefix}-tfbackup"
+  name                  = var.azure_backup_storage_container_name
   storage_account_name  = azurerm_storage_account.backupsa.name
   container_access_type = "private"
   depends_on            = [azurerm_storage_account.backupsa]

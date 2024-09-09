@@ -114,11 +114,13 @@ module "aks-cluster-0" {
   sku_tier = var.sku_tier
 
   # Backup's configuration
-  resource_group_id           = azurerm_resource_group.rg.id
-  azure_backup_vault_name     = var.azure_backup_vault_name
-  azure_backup_datastore_type = var.azure_backup_datastore_type
-  azure_backup_redundancy     = var.azure_backup_redundancy
-  azure_backuppolicy_name     = var.azure_backuppolicy_name
+  resource_group_id                   = azurerm_resource_group.rg.id
+  azure_backup_vault_name             = var.azure_backup_vault_name
+  azure_backup_datastore_type         = var.azure_backup_datastore_type
+  azure_backup_redundancy             = var.azure_backup_redundancy
+  azure_backuppolicy_name             = var.azure_backuppolicy_name
+  azure_backup_storage_account_name   = var.azure_backup_storage_account_name
+  azure_backup_storage_container_name = var.azure_backup_storage_container_name
 
   backup_excluded_namespaces     = var.backup_excluded_namespaces
   backup_excluded_resource_types = var.backup_excluded_resource_types

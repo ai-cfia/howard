@@ -201,6 +201,16 @@ variable "azure_backuppolicy_name" {
   type        = string
 }
 
+variable "azure_backup_storage_account_name" {
+  description = "Azure backup storage account name"
+  type        = string
+}
+
+variable "azure_backup_storage_container_name" {
+  description = "Azure backup storage container name"
+  type        = string
+}
+
 variable "azure_backup_extension_type" {
   description = "Type of the AKS Cluster Extension."
   type        = string

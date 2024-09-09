@@ -195,6 +195,16 @@ variable "azure_backuppolicy_name" {
   type        = string
 }
 
+variable "azure_backup_storage_account_name" {
+  description = "Azure backup storage account name"
+  type        = string
+}
+
+variable "azure_backup_storage_container_name" {
+  description = "Azure backup storage container name"
+  type        = string
+}
+
 variable "backup_excluded_namespaces" {
   description = "K8s Namespaces to exclude from backup."
   type        = list(string)
