@@ -44,7 +44,7 @@ spec:
                       - agent
       containers:
         - name: nachet-frontend
-          image: ghcr.io/ai-cfia/nachet-frontend:main
+          image: ghcr.io/ai-cfia/nachet-frontend:189-fix-faviconcio-redirection
           imagePullPolicy: Always
           command: ["/bin/sh", "-c"]
           args: [serve -s build]
