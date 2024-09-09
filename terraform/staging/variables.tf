@@ -175,6 +175,56 @@ variable "dns_a_records" {
   type        = list(string)
 }
 
+variable "azure_backup_vault_name" {
+  description = "Azure Backup Vault name"
+  type        = string
+}
+
+variable "azure_backup_datastore_type" {
+  description = "Azure Backup Datastore type"
+  type        = string
+}
+
+variable "azure_backup_redundancy" {
+  description = "Azure Backup Redundancy"
+  type        = string
+}
+
+variable "azure_backuppolicy_name" {
+  description = "Azure Backup Policy name"
+  type        = string
+}
+
+variable "backup_excluded_namespaces" {
+  description = "K8s Namespaces to exclude from backup."
+  type        = list(string)
+  default     = []
+}
+
+variable "backup_excluded_resource_types" {
+  description = "K8s Resource Types to exclude from backup."
+  type        = list(string)
+  default     = []
+}
+
+variable "backup_included_namespaces" {
+  description = "K8s Namespaces to include in backup."
+  type        = list(string)
+  default     = []
+}
+
+variable "backup_included_resource_types" {
+  description = "K8s Resource Types to include in backup."
+  type        = list(string)
+  default     = []
+}
+
+variable "backup_label_selectors" {
+  description = "K8s Label Selectors to include in backup."
+  type        = list(string)
+  default     = []
+}
+
 # variable "vm_rg_name" {
 #   type        = string
 #   description = "The resource group name for each vm's"
