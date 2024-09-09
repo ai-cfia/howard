@@ -23,7 +23,7 @@ spec:
       volumes:
         - name: html-volume
           configMap:
-            name: landing-page-content
+            name: landing-403-nachet-page-content
 ---
 apiVersion: v1
 kind: ConfigMap
