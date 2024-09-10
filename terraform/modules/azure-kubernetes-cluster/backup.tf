@@ -38,7 +38,7 @@ resource "azurerm_data_protection_backup_policy_kubernetes_cluster" "policy" {
 
 # Create a Trusted Access Role Binding between AKS Cluster and Backup Vault
 resource "azurerm_kubernetes_cluster_trusted_access_role_binding" "trustedaccess" {
-  name                  = "${local.prefix}-backup-trusted-access"
+  name                  = var.azure_backup_trusted_access
   kubernetes_cluster_id = azurerm_kubernetes_cluster.k8s.id
   roles                 = ["Microsoft.DataProtection/backupVaults/backup-operator"]
   source_resource_id    = azurerm_data_protection_backup_vault.aks-backup-vault.id
@@ -90,7 +90,7 @@ resource "azurerm_role_assignment" "extensionrole" {
 resource "azurerm_role_assignment" "vault_msi_read_on_cluster" {
   scope                = azurerm_kubernetes_cluster.k8s.id
   role_definition_name = "Reader"
-  principal_id         = azurerm_data_protection_backup_vault.aks-backup-vault.identity[0].principal_id
+  principal_id         = azurerm_kubernetes_cluster.k8s.identity[0].principal_id
   depends_on           = [azurerm_kubernetes_cluster.k8s]
 }
 
@@ -98,7 +98,7 @@ resource "azurerm_role_assignment" "vault_msi_read_on_cluster" {
 resource "azurerm_role_assignment" "vault_msi_read_on_snap_rg" {
   scope                = var.resource_group_id
   role_definition_name = "Reader"
-  principal_id         = azurerm_data_protection_backup_vault.aks-backup-vault.identity[0].principal_id
+  principal_id         = azurerm_kubernetes_cluster.k8s.identity[0].principal_id
   depends_on           = [azurerm_kubernetes_cluster.k8s]
 }
 

@@ -121,6 +121,7 @@ module "aks-cluster-0" {
   azure_backuppolicy_name             = var.azure_backuppolicy_name
   azure_backup_storage_account_name   = var.azure_backup_storage_account_name
   azure_backup_storage_container_name = var.azure_backup_storage_container_name
+  azure_backup_trusted_access         = var.azure_backup_trusted_access
 
   backup_excluded_namespaces     = var.backup_excluded_namespaces
   backup_excluded_resource_types = var.backup_excluded_resource_types

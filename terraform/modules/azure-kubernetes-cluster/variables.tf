@@ -217,6 +217,11 @@ variable "azure_backup_extension_type" {
   default     = "microsoft.dataprotection.kubernetes"
 }
 
+variable "azure_backup_trusted_access" {
+  description = "Azure backup trusted access role binding"
+  type        = string
+}
+
 variable "backup_excluded_namespaces" {
   description = "K8s Namespaces to exclude from backup."
   type        = list(string)
