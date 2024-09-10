@@ -3,7 +3,7 @@
 data "azurerm_client_config" "current" {
 }
 
-#Create a Backup Vault
+# Create a Backup Vault
 resource "azurerm_data_protection_backup_vault" "aks-backup-vault" {
   name                = var.azure_backup_vault_name
   resource_group_name = var.resource_group
@@ -94,7 +94,7 @@ resource "azurerm_role_assignment" "vault_msi_read_on_cluster" {
   depends_on           = [azurerm_kubernetes_cluster.k8s]
 }
 
-# Assign Role to Backup Vault over Snapshot Resource Group
+# Assign Role to Backup Vault over AKS Staging Resource Group
 resource "azurerm_role_assignment" "vault_msi_read_on_snap_rg" {
   scope                = var.resource_group_id
   role_definition_name = "Reader"
@@ -102,7 +102,7 @@ resource "azurerm_role_assignment" "vault_msi_read_on_snap_rg" {
   depends_on           = [azurerm_kubernetes_cluster.k8s]
 }
 
-# Assign Role to AKS Cluster over Snapshot Resource Group
+# Assign Role to AKS Cluster over AKS Staging Resource Group
 resource "azurerm_role_assignment" "cluster_msi_contributor_on_snap_rg" {
   scope                = var.resource_group_id
   role_definition_name = "Contributor"
