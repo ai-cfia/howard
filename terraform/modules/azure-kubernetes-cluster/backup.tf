@@ -131,10 +131,6 @@ resource "azurerm_data_protection_backup_instance_kubernetes_cluster" "akstfbi" 
 
   depends_on = [
     azurerm_data_protection_backup_vault.aks-backup-vault,
-    azurerm_data_protection_backup_policy_kubernetes_cluster.policy,
-    azurerm_role_assignment.extensionrole,
-    azurerm_role_assignment.vault_msi_read_on_cluster,
-    azurerm_role_assignment.vault_msi_read_on_snap_rg,
-    azurerm_role_assignment.cluster_msi_contributor_on_snap_rg
+    azurerm_data_protection_backup_policy_kubernetes_cluster.policy
   ]
 }
