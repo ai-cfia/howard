@@ -60,7 +60,7 @@ controller:
         add_header Cache-Control "no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0";
         add_header Pragma "no-cache";
         add_header Expires "0";
-        return 301 https://landing.inspection.alpha.canada.ca?redirect=$escaped_request_uri;
+        return 301 https://landing.inspection.alpha.canada.ca?redirect=https://$host$request_uri;
       }
       ssl_conf_command CipherSuites TLS_AES_128_GCM_SHA256:TLS_AES_256_GCM_SHA384;
   # -- Annotations to be added to the controller config configuration configmap.
