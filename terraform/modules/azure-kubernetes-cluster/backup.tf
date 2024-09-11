@@ -79,36 +79,36 @@ resource "azurerm_kubernetes_cluster_extension" "dataprotection" {
 }
 
 # Assign Role to Extension Identity over Storage Account
-resource "azurerm_role_assignment" "extensionrole" {
-  scope                = azurerm_storage_account.backupsa.id
-  role_definition_name = "Storage Blob Data Contributor"
-  principal_id         = azurerm_kubernetes_cluster_extension.dataprotection.aks_assigned_identity[0].principal_id
-  depends_on           = [azurerm_kubernetes_cluster_extension.dataprotection]
-}
+# resource "azurerm_role_assignment" "extensionrole" {
+#   scope                = azurerm_storage_account.backupsa.id
+#   role_definition_name = "Storage Blob Data Contributor"
+#   principal_id         = azurerm_kubernetes_cluster_extension.dataprotection.aks_assigned_identity[0].principal_id
+#   depends_on           = [azurerm_kubernetes_cluster_extension.dataprotection]
+# }
 
 # Assign Role to Backup Vault over AKS Cluster
-resource "azurerm_role_assignment" "vault_msi_read_on_cluster" {
-  scope                = azurerm_kubernetes_cluster.k8s.id
-  role_definition_name = "Reader"
-  principal_id         = azurerm_data_protection_backup_vault.aks-backup-vault.identity[0].principal_id
-  depends_on           = [azurerm_kubernetes_cluster.k8s]
-}
+# resource "azurerm_role_assignment" "vault_msi_read_on_cluster" {
+#   scope                = azurerm_kubernetes_cluster.k8s.id
+#   role_definition_name = "Reader"
+#   principal_id         = azurerm_data_protection_backup_vault.aks-backup-vault.identity[0].principal_id
+#   depends_on           = [azurerm_kubernetes_cluster.k8s]
+# }
 
 # Assign Role to Backup Vault over AKS Staging Resource Group
-resource "azurerm_role_assignment" "vault_msi_read_on_snap_rg" {
-  scope                = var.resource_group_id
-  role_definition_name = "Reader"
-  principal_id         = azurerm_data_protection_backup_vault.aks-backup-vault.identity[0].principal_id
-  depends_on           = [azurerm_kubernetes_cluster.k8s]
-}
+# resource "azurerm_role_assignment" "vault_msi_read_on_snap_rg" {
+#   scope                = var.resource_group_id
+#   role_definition_name = "Reader"
+#   principal_id         = azurerm_data_protection_backup_vault.aks-backup-vault.identity[0].principal_id
+#   depends_on           = [azurerm_kubernetes_cluster.k8s]
+# }
 
 # Assign Role to AKS Cluster over AKS Staging Resource Group
-resource "azurerm_role_assignment" "cluster_msi_contributor_on_snap_rg" {
-  scope                = var.resource_group_id
-  role_definition_name = "Contributor"
-  principal_id         = try(azurerm_kubernetes_cluster.k8s.identity[0].principal_id, null)
-  depends_on           = [azurerm_kubernetes_cluster.k8s]
-}
+# resource "azurerm_role_assignment" "cluster_msi_contributor_on_snap_rg" {
+#   scope                = var.resource_group_id
+#   role_definition_name = "Contributor"
+#   principal_id         = try(azurerm_kubernetes_cluster.k8s.identity[0].principal_id, null)
+#   depends_on           = [azurerm_kubernetes_cluster.k8s]
+# }
 
 # Create Backup Instance for AKS Cluster
 resource "azurerm_data_protection_backup_instance_kubernetes_cluster" "akstfbi" {
