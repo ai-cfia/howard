@@ -56,6 +56,9 @@ controller:
       add_header X-Robots-Tag "noindex,nofollow";
       error_page 403 = @error403;
       location @error403 {
+        add_header Cache-Control "no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0";
+        add_header Pragma "no-cache";
+        add_header Expires "0";
         return 301 https://landing.inspection.alpha.canada.ca;
       }
       ssl_conf_command CipherSuites TLS_AES_128_GCM_SHA256:TLS_AES_256_GCM_SHA384;
