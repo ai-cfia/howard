@@ -52,6 +52,7 @@ controller:
     ssl-ciphers: "ECDHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-AES128-GCM-SHA256"
     ssl-ecdh-curve: "secp256r1:secp384r1:secp521r1"
     force-ssl-redirect: "true"
+    use-forwarded-headers: "true"
     server-snippet: |
       add_header X-Robots-Tag "noindex,nofollow";
       error_page 403 = @error403;

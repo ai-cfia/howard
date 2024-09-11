@@ -45,6 +45,16 @@ data:
       ---
       <h1>Veuillez activer le VPN</h1>
       <p>Veuillez vous connecter à votre VPN avant d'accéder à cette application.</p>
+
+      <script>
+        const params = new URLSearchParams(window.location.search);
+        const redirectUrl = params.get('redirect');
+        const isConnectedToVPN = true;
+
+        if (isConnectedToVPN && redirectUrl) {
+          window.location.href = redirectUrl;
+        }
+      </script>
     </body>
     </html>
 ---
