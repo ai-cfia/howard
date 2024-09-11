@@ -40,19 +40,24 @@ data:
     </head>
     <body>
       <h1>Remember to Activate VPN</h1>
-      <p>Please connect to your VPN before accessing this application.</p>
+      <p>Please connect to your VPN before accessing this application. Once connected, you can retry accessing the application.</p>
       <br>
-      ---
+      <a href="#" id="redirect-link-en">Retry accessing the app</a>
+
+      <hr>
+
       <h1>Veuillez activer le VPN</h1>
-      <p>Veuillez vous connecter à votre VPN avant d'accéder à cette application.</p>
+      <p>Veuillez vous connecter à votre VPN avant d'accéder à cette application. Une fois connecté, vous pouvez réessayer d'accéder à l'application.</p>
+      <br>
+      <a href="#" id="redirect-link-fr">Réessayer d'accéder à l'application</a>
 
       <script>
         const params = new URLSearchParams(window.location.search);
         const redirectUrl = params.get('redirect');
-        const isConnectedToVPN = true;
 
-        if (isConnectedToVPN && redirectUrl) {
-          window.location.href = redirectUrl;
+        if (redirectUrl) {
+          document.getElementById('redirect-link-en').href = redirectUrl;
+          document.getElementById('redirect-link-fr').href = redirectUrl;
         }
       </script>
     </body>
