@@ -29,7 +29,7 @@ resources:
   - ../../system/falco/
   # - ../../system/istio/
   - ../../system/gatus/
-  - ../../system/github-runner/
+  - ../../system/gh-runner/
 
 patches:
   - patch: |-
