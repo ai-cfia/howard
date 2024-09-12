@@ -2,8 +2,8 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: gh-runner
-  namespace: gh-runner
+  name: github-runner
+  namespace: github-runner
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
@@ -16,14 +16,14 @@ spec:
       helm:
         releaseName: actions-runner-controller
         valueFiles:
-          - $values/kubernetes/aks/system/gh-runner/helm/values.yaml
+          - $values/kubernetes/aks/system/github-runner/helm/values.yaml
       repoURL: https://actions-runner-controller.github.io/actions-runner-controller
       targetRevision: 0.23.7
     - repoURL: https://github.com/ai-cfia/howard.git
       targetRevision: HEAD
       ref: values
     - repoURL: https://github.com/ai-cfia/howard.git
-      path: kubernetes/aks/system/gh-runner/base
+      path: kubernetes/aks/system/github-runner/base
       targetRevision: HEAD
   syncPolicy:
     automated:
