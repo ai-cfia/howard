@@ -29,6 +29,7 @@ resources:
   - ../../system/falco/
   # - ../../system/istio/
   - ../../system/gatus/
+  - ../../system/gh-runner/
 
 patches:
   - patch: |-
