@@ -12,7 +12,7 @@ spec:
     namespace: gh-runner
     server: https://kubernetes.default.svc
   sources:
-    - chart: arc
+    - chart: gha-runner-scale-set-controller
       helm:
         valueFiles:
           - $values/kubernetes/aks/system/gh-runner/helm/values.yaml
