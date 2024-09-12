@@ -1,0 +1,34 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: gh-runner
+  namespace: gh-runner
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  destination:
+    namespace: gh-runner
+    server: https://kubernetes.default.svc
+  sources:
+    - chart: actions-runner-controller
+      helm:
+        releaseName: actions-runner-controller
+        valueFiles:
+          - $values/kubernetes/aks/system/gh-runner/helm/values.yaml
+      repoURL: https://actions-runner-controller.github.io/actions-runner-controller
+      targetRevision: 0.23.7
+    - repoURL: https://github.com/ai-cfia/howard.git
+      targetRevision: HEAD
+      ref: values
+    - repoURL: https://github.com/ai-cfia/howard.git
+      path: kubernetes/aks/system/gh-runner/base
+      targetRevision: HEAD
+  syncPolicy:
+    automated:
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
