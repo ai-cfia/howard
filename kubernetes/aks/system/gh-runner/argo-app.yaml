@@ -4,8 +4,6 @@ kind: Application
 metadata:
   name: gh-runner
   namespace: gh-runner
-  annotations:
-    argocd.argoproj.io/sync-wave: "0"
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
