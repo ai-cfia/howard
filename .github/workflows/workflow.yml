@@ -36,7 +36,7 @@ jobs:
     secrets: inherit
 
   mkdocs-gh-pages-deployment:
-    runs-on: self-hosted-ubuntu-20.04
+    runs-on: self-hosted
     steps:
       - uses: actions/checkout@v4
       - name: Configure Git Credentials
