@@ -3,8 +3,9 @@ kind: RunnerDeployment
 metadata:
   name: self-hosted-runner-deployment-ubuntu-20.04
 spec:
+  replicas: 1
   template:
-    Spec:
+    spec:
       labels:
         - self-hosted-ubuntu-20.04
       image: summerwind/actions-runner:ubuntu-20.04
