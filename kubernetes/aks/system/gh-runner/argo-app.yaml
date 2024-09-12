@@ -17,7 +17,8 @@ spec:
         releaseName: actions-runner-controller
         valueFiles:
           - $values/kubernetes/aks/system/gh-runner/helm/values.yaml
-      oci: oci://ghcr.io/actions/actions-runner-controller-charts/gha-runner-scale-set-controller
+      repoURL: ghcr.io/actions/actions-runner-controller-charts/gha-runner-scale-set-controller
+      path: actions
     - repoURL: https://github.com/ai-cfia/howard.git
       targetRevision: HEAD
       ref: values
