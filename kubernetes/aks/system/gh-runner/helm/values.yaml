@@ -13,15 +13,15 @@ defaultScaleDownDelay: 10m
 enableLeaderElection: true
 # Specifies the controller id for leader election.
 # Must be unique if more than one controller installed onto the same namespace.
-#leaderElectionId: "actions-runner-controller"
+# leaderElectionId: "actions-runner-controller"
 
 # The URL of your GitHub Enterprise server, if you're using one.
-#githubEnterpriseServerURL: https://github.example.com
+# githubEnterpriseServerURL: https://github.example.com
 
 # Override GitHub URLs in case of using proxy APIs
-#githubURL: ""
-#githubUploadURL: ""
-#runnerGithubURL: ""
+# githubURL: ""
+# githubUploadURL: ""
+# runnerGithubURL: ""
 
 # Only 1 authentication method can be deployed at a time
 # Uncomment the configuration you are applying and fill in the details
@@ -38,14 +38,14 @@ authSecret:
   annotations: {}
   ### GitHub Apps Configuration
   ## NOTE: IDs MUST be strings, use quotes
-  #github_app_id: ""
-  #github_app_installation_id: ""
-  #github_app_private_key: |
+  # github_app_id: ""
+  # github_app_installation_id: ""
+  # github_app_private_key: |
   ### GitHub PAT Configuration
-  #github_token: ""
+  # github_token: ""
   ### Basic auth for github API proxy
-  #github_basicauth_username: ""
-  #github_basicauth_password: ""
+  # github_basicauth_username: ""
+  # github_basicauth_password: ""
 
 # http(s) should be specified for dockerRegistryMirror, e.g.: dockerRegistryMirror="https://<your-docker-registry-mirror>"
 dockerRegistryMirror: ""
@@ -201,7 +201,7 @@ logFormat: text
 
 # enable setting the docker group id for the runner container
 # https://github.com/actions/actions-runner-controller/pull/2499
-#dockerGID: 121
+# dockerGID: 121
 
 githubWebhookServer:
   enabled: true
@@ -217,11 +217,11 @@ githubWebhookServer:
     github_webhook_secret_token: ""
     ### GitHub Apps Configuration
     ## NOTE: IDs MUST be strings, use quotes
-    #github_app_id: ""
-    #github_app_installation_id: ""
-    #github_app_private_key: |
+    # github_app_id: ""
+    # github_app_installation_id: ""
+    # github_app_private_key: |
     ### GitHub PAT Configuration
-    #github_token: ""
+    # github_token: ""
   imagePullSecrets: []
   nameOverride: ""
   fullnameOverride: ""
@@ -251,7 +251,7 @@ githubWebhookServer:
         targetPort: http
         protocol: TCP
         name: http
-        #nodePort: someFixedPortForUseWithTerraformCdkCfnEtc
+        # nodePort: someFixedPortForUseWithTerraformCdkCfnEtc
     loadBalancerSourceRanges: []
   ingress:
     enabled: true
@@ -354,9 +354,9 @@ actionsMetricsServer:
     github_webhook_secret_token: ""
     ### GitHub Apps Configuration
     ## NOTE: IDs MUST be strings, use quotes
-    #github_app_id: ""
-    #github_app_installation_id: ""
-    #github_app_private_key: |
+    # github_app_id: ""
+    # github_app_installation_id: ""
+    # github_app_private_key: |
     ### GitHub PAT Configuration
     #github_token: ""
   imagePullSecrets: []
