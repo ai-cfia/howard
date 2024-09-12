@@ -186,15 +186,15 @@ certManagerEnabled: true
 
 admissionWebHooks:
   {}
-  #caBundle: "Ci0tLS0tQk...<base64-encoded PEM bundle containing the CA that signed the webhook's serving certificate>...tLS0K"
+  # caBundle: "Ci0tLS0tQk...<base64-encoded PEM bundle containing the CA that signed the webhook's serving certificate>...tLS0K"
 
 # There may be alternatives to setting `hostNetwork: true`, see
 # https://github.com/actions/actions-runner-controller/issues/1005#issuecomment-993097155
-#hostNetwork: true
+# hostNetwork: true
 
 # If you use `hostNetwork: true`, then you need dnsPolicy: ClusterFirstWithHostNet
 # https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/#pod-s-dns-policy
-#dnsPolicy: ClusterFirst
+# dnsPolicy: ClusterFirst
 
 ## specify log format for actions runner controller.  Valid options are "text" and "json"
 logFormat: text
@@ -358,7 +358,7 @@ actionsMetricsServer:
     # github_app_installation_id: ""
     # github_app_private_key: |
     ### GitHub PAT Configuration
-    #github_token: ""
+    # github_token: ""
   imagePullSecrets: []
   nameOverride: ""
   fullnameOverride: ""
@@ -388,7 +388,7 @@ actionsMetricsServer:
         targetPort: http
         protocol: TCP
         name: http
-        #nodePort: someFixedPortForUseWithTerraformCdkCfnEtc
+        # nodePort: someFixedPortForUseWithTerraformCdkCfnEtc
     loadBalancerSourceRanges: []
   ingress:
     enabled: false
