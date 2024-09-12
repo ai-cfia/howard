@@ -263,7 +263,7 @@ githubWebhookServer:
       - host: aks-staging-gh-runner.inspection.alpha.canada.ca
         paths:
           - path: /
-            pathType: ImplementationSpecific
+            pathType: Prefix
         # Extra paths that are not automatically connected to the server. This is useful when working with annotation based services.
         extraPaths: []
         # - path: /*
@@ -278,10 +278,10 @@ githubWebhookServer:
         #       name: ssl-redirect
         #       port:
         #         name: use-annotation
-    tls: []
-    #  - secretName: chart-example-tls
-    #    hosts:
-    #      - chart-example.local
+    tls:
+      - hosts:
+          - aks-staging-gh-runner.inspection.alpha.canada.ca
+        secretName: aks-staging-gh-runner-tls
 
   # Only one of minAvailable or maxUnavailable can be set
   podDisruptionBudget:
