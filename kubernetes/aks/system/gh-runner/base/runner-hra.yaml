@@ -1,14 +1,14 @@
-apiVersion: actions.summerwind.dev/v1alpha1
-kind: HorizontalRunnerAutoscaler
-metadata:
-  name: self-hosted-runner-deployment-autoscaler
-spec:
-  maxReplicas: 10
-  minReplicas: 0
-  scaleTargetRef:
-    kind: RunnerDeployment
-    name: self-hosted-runner-deployment-ubuntu-20.04
-  scaleUpTriggers:
-  - duration: 30m
-    githubEvent:
-      workflowJob: {}
+# apiVersion: actions.summerwind.dev/v1alpha1
+# kind: HorizontalRunnerAutoscaler
+# metadata:
+#   name: self-hosted-runner-deployment-autoscaler
+# spec:
+#   maxReplicas: 10
+#   minReplicas: 0
+#   scaleTargetRef:
+#     kind: RunnerDeployment
+#     name: self-hosted-runner-deployment-ubuntu-20.04
+#   scaleUpTriggers:
+#   - duration: 30m
+#     githubEvent:
+#       workflowJob: {}
