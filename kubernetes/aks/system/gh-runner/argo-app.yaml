@@ -12,13 +12,12 @@ spec:
     namespace: gh-runner
     server: https://kubernetes.default.svc
   sources:
-    - chart: actions-runner-controller
+    - chart: arc
       helm:
-        releaseName: actions-runner-controller
         valueFiles:
           - $values/kubernetes/aks/system/gh-runner/helm/values.yaml
-      repoURL: ghcr.io/actions/actions-runner-controller-charts/gha-runner-scale-set-controller
-      path: actions
+      repoURL: ghcr.io/actions/actions-runner-controller-charts
+      path: gha-runner-scale-set-controller
       targetRevision: 0.9.3
     - repoURL: https://github.com/ai-cfia/howard.git
       targetRevision: HEAD
