@@ -4,7 +4,7 @@ kind: Ingress
 metadata:
   name: finesse-backend-ingress
   annotations:
-    nginx.ingress.kubernetes.io/whitelist-source-range: 205.194.32.0/24,10.244.0.0/16
+    nginx.ingress.kubernetes.io/whitelist-source-range: 205.194.32.0/24,10.244.0.0/16,192.197.71.0/24
     external-dns.alpha.kubernetes.io/target: inspection.alpha.canada.ca
     cert-manager.io/cluster-issuer: letsencrypt-prod
     nginx.ingress.kubernetes.io/use-regex: "true"
@@ -35,7 +35,7 @@ kind: Ingress
 metadata:
   name: finesse-frontend-ingress
   annotations:
-    nginx.ingress.kubernetes.io/whitelist-source-range: 205.194.32.0/24,10.244.0.0/16
+    nginx.ingress.kubernetes.io/whitelist-source-range: 205.194.32.0/24,10.244.0.0/16,192.197.71.0/24
     external-dns.alpha.kubernetes.io/target: inspection.alpha.canada.ca
     cert-manager.io/cluster-issuer: letsencrypt-prod
     kubernetes.io/tls-acme: "true"
