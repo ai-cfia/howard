@@ -30,11 +30,6 @@ variable "resource_group" {
   type        = string
 }
 
-variable "resource_group_id" {
-  description = "The ID of the resource group in which the managed cluster is created."
-  type        = string
-}
-
 variable "network_resource_group" {
   description = "(Required) Name of the resource group that contains the virtual network"
   type        = string

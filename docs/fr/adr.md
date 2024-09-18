@@ -9,6 +9,7 @@
 - [Réseautique](adr/016-networking.fr-ca.md)
 - [Sécurité](adr/017-security.fr-ca.md)
 - [Gestion de l'observabilité](adr/018-monitoring.fr-ca.md)
+- [Sauvegarde](adr/019-backup.fr-ca.md)
 
 ## Plus de configuration / implementation
 
