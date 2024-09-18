@@ -1,0 +1,38 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: gh-runner
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  destination:
+    namespace: gh-runner
+    server: https://kubernetes.default.svc
+  sources:
+    - chart: gha-runner-scale-set-controller
+      helm:
+        valueFiles:
+          - $values/kubernetes/aks/system/gh-runner/helm/values.controller.yaml
+      repoURL: ghcr.io/actions/actions-runner-controller-charts
+      targetRevision: 0.9.3
+    - chart: gha-runner-scale-set
+      helm:
+        valueFiles:
+          - $values/kubernetes/aks/system/gh-runner/helm/values.scaleset.yaml
+      repoURL: ghcr.io/actions/actions-runner-controller-charts
+      targetRevision: 0.9.3
+    - repoURL: https://github.com/ai-cfia/howard.git
+      targetRevision: HEAD
+      ref: values
+    - repoURL: https://github.com/ai-cfia/howard.git
+      path: kubernetes/aks/system/gh-runner/base
+      targetRevision: HEAD
+  syncPolicy:
+    automated:
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - Replace=true
