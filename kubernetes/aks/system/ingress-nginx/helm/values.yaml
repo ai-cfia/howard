@@ -53,7 +53,6 @@ controller:
     ssl-ecdh-curve: "secp256r1:secp384r1:secp521r1"
     force-ssl-redirect: "true"
     use-forwarded-headers: "true"
-    whitelist-source-range: 205.194.32.0/24,10.244.0.0/16,192.197.71.0/24
     server-snippet: |
       add_header X-Robots-Tag "noindex,nofollow";
       error_page 403 = @error403;
