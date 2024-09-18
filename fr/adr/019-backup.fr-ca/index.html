@@ -9,22 +9,18 @@
       
       
       
-        <link rel="prev" href="..">
       
       
-        <link rel="next" href="../configuration/">
-      
-      
-      <link rel="icon" href="../assets/images/favicon.png">
+      <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.35">
     
     
       
-        <title>ADR - Howard</title>
+        <title>ADR-019: Gestion des sauvegardes - Howard</title>
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.35f28582.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.35f28582.min.css">
       
       
 
@@ -43,7 +39,7 @@
       
     
     
-    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -62,7 +58,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#architectural-decision-records-adr" class="md-skip">
+        <a href="#adr-019-gestion-des-sauvegardes" class="md-skip">
           Aller au contenu
         </a>
       
@@ -78,7 +74,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="En-tête">
-    <a href=".." title="Howard" class="md-header__button md-logo" aria-label="Howard" data-md-component="logo">
+    <a href="../.." title="Howard" class="md-header__button md-logo" aria-label="Howard" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -98,7 +94,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              ADR
+              ADR-019: Gestion des sauvegardes
             
           </span>
         </div>
@@ -211,7 +207,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href=".." title="Howard" class="md-nav__button md-logo" aria-label="Howard" data-md-component="logo">
+    <a href="../.." title="Howard" class="md-nav__button md-logo" aria-label="Howard" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -241,7 +237,7 @@
   
   
     <li class="md-nav__item">
-      <a href=".." class="md-nav__link">
+      <a href="../.." class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -258,30 +254,10 @@
       
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  <span class="md-ellipsis">
-    ADR
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -290,35 +266,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table des matières">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table des matières
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#plus-de-configuration-implementation" class="md-nav__link">
-    <span class="md-ellipsis">
-      Plus de configuration / implementation
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -330,7 +277,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../configuration/" class="md-nav__link">
+      <a href="../../configuration/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -350,7 +297,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../workflow/" class="md-nav__link">
+      <a href="../../workflow/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -390,9 +337,87 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#plus-de-configuration-implementation" class="md-nav__link">
+  <a href="#resume-executif" class="md-nav__link">
     <span class="md-ellipsis">
-      Plus de configuration / implementation
+      Résumé Exécutif
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#contexte" class="md-nav__link">
+    <span class="md-ellipsis">
+      Contexte
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#decision" class="md-nav__link">
+    <span class="md-ellipsis">
+      Décision
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#alternatives-considerees" class="md-nav__link">
+    <span class="md-ellipsis">
+      Alternatives Considérées
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Alternatives Considérées">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#velero" class="md-nav__link">
+    <span class="md-ellipsis">
+      Velero
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#restic-avec-stash" class="md-nav__link">
+    <span class="md-ellipsis">
+      Restic avec Stash
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#justification-du-choix-dazure-backup" class="md-nav__link">
+    <span class="md-ellipsis">
+      Justification du Choix d'Azure Backup
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conclusion
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      Références
     </span>
   </a>
   
@@ -416,22 +441,119 @@
   
 
 
-<h1 id="architectural-decision-records-adr">Architectural decision records (ADR)</h1>
+<h1 id="adr-019-gestion-des-sauvegardes">ADR-019: Gestion des sauvegardes</h1>
+<h2 id="resume-executif">Résumé Exécutif</h2>
+<p>Nous avons décidé de mettre en œuvre Azure Backup pour gérer les sauvegardes
+de nos applications hébergées sur Azure Kubernetes Service (AKS). Cette
+décision est motivée par la facilité d'intégration, le jeu de fonctionnalités
+complet et la simplicité opérationnelle offerts par Azure Backup dans notre
+écosystème Azure existant. En tirant parti d'Azure Backup avec des politiques
+définies, nous visons à protéger nos clusters Kubernetes contre la perte de
+données et à assurer une récupération rapide en cas d'incidents.</p>
+<h2 id="contexte">Contexte</h2>
+<p>À l'Agence canadienne d'inspection des aliments, assurer la résilience des
+données et leur disponibilité est primordial en raison de la nature critique
+de nos applications et services. Nos applications sont hébergées sur Azure
+Kubernetes Service (AKS), offrant une solution d'orchestration de conteneurs
+hautement disponible et automatisée. Cependant, pour atténuer les risques
+associés à la perte de données, à la corruption ou aux suppressions
+involontaires, nous avons besoin d'une solution de sauvegarde.</p>
+<p>Notre objectif était d'identifier une solution de gestion des sauvegardes
+capable de s'intégrer de manière transparente à notre infrastructure Azure
+existante, de prendre en charge les charges de travail Kubernetes et de fournir
+des capacités de sauvegarde et de récupération efficaces basées sur des
+politiques. Après avoir évalué diverses options, nous avons déterminé
+qu'Azure Backup répondait le mieux à nos exigences grâce à sa simplicité
+d'utilisation, sa scalabilité et sa profonde intégration avec les
+services Azure.</p>
+<h2 id="decision">Décision</h2>
+<p>Nous avons choisi Azure Backup pour la gestion des sauvegardes Kubernetes
+car il s'intègre parfaitement avec AKS, soutenant notre objectif d'une
+stratégie de sauvegarde rationalisée et efficace. Azure Backup offre des
+politiques de sauvegarde automatisées, un stockage évolutif et des capacités
+de restauration rapide qui correspondent à nos besoins opérationnels.</p>
+<h2 id="alternatives-considerees">Alternatives Considérées</h2>
+<h3 id="velero">Velero</h3>
+<p><strong>Avantages :</strong></p>
 <ul>
-<li><a href="010-infrastructure.fr-ca/">Infrastructure</a></li>
-<li><a href="011-gitops.fr-ca/">GitOps</a></li>
-<li><a href="012-secret-management.fr-ca/">Gestion des secrets</a></li>
-<li><a href="013-IaC-tool.fr-ca/">Infrastructure en code</a></li>
-<li><a href="014-containers.fr-ca/">Conteneurs</a></li>
-<li><a href="015-authentication-management.fr-ca/">Gestion de l'authentification</a></li>
-<li><a href="016-networking.fr-ca/">Réseautique</a></li>
-<li><a href="017-security.fr-ca/">Sécurité</a></li>
-<li><a href="018-monitoring.fr-ca/">Gestion de l'observabilité</a></li>
-<li><a href="019-backup.fr-ca/">Sauvegarde</a></li>
+<li><strong>Open-source :</strong> Rentable et supporté par la communauté.</li>
+<li><strong>Support multi-cloud :</strong> Fonctionne avec divers fournisseurs
+cloud et environnements sur site.</li>
+<li><strong>Flexibilité :</strong> Offre des horaires et des politiques de
+sauvegarde personnalisables.</li>
 </ul>
-<h2 id="plus-de-configuration-implementation">Plus de configuration / implementation</h2>
+<p><strong>Inconvénients :</strong></p>
 <ul>
-<li><a href="../ansible/">Ansible</a></li>
+<li><strong>Complexité de configuration :</strong> Nécessite des efforts supplémentaires
+de configuration et mise en place.</li>
+<li><strong>Moins intégré à Azure :</strong> Manque certaines intégrations natives
+et fonctionnalités par rapport à Azure Backup.</li>
+</ul>
+<h3 id="restic-avec-stash">Restic avec Stash</h3>
+<p><strong>Avantages :</strong></p>
+<ul>
+<li><strong>Open-source :</strong> Pas de coûts de licence, développement communautaire.</li>
+<li><strong>Support des politiques :</strong> Prend en charge les sauvegardes programmées
+et les politiques.</li>
+<li><strong>Flexibilité :</strong> Solutions de sauvegarde hautement personnalisables.</li>
+</ul>
+<p><strong>Inconvénients :</strong></p>
+<ul>
+<li><strong>Configuration et gestion :</strong> Nécessite une configuration initiale
+significative et une gestion continue.</li>
+<li><strong>Moins mature :</strong> Comparé à d'autres solutions de sauvegarde Kubernetes
+dédiées comme Azure Backup.</li>
+</ul>
+<h2 id="justification-du-choix-dazure-backup">Justification du Choix d'Azure Backup</h2>
+<p><strong>Facilité d'intégration :</strong></p>
+<ul>
+<li><strong>Avantages :</strong> Azure Backup s'intègre de manière native avec AKS,
+simplifiant la configuration et la gestion.</li>
+<li><strong>Inconvénients :</strong> Verrouillage avec le fournisseur Microsoft Azure.</li>
+</ul>
+<p><strong>Politiques automatisées :</strong></p>
+<ul>
+<li><strong>Avantages :</strong> Simplifie la gestion des sauvegardes avec une automatisation
+basée sur des politiques, garantissant des sauvegardes cohérentes et fiables.</li>
+<li><strong>Inconvénients :</strong> Flexibilité limitée par rapport à certaines alternatives
+open-source.</li>
+</ul>
+<p><strong>Scalabilité :</strong></p>
+<ul>
+<li><strong>Avantages :</strong> Gère efficacement les besoins croissants en données sans
+dégradation significative des performances, en tirant parti de
+l'infrastructure évolutive d'Azure.</li>
+<li><strong>Inconvénients :</strong> Les coûts peuvent augmenter avec une utilisation accrue
+du stockage, nécessitant un suivi et une optimisation.</li>
+</ul>
+<p><strong>Capacités de récupération :</strong></p>
+<ul>
+<li><strong>Avantages :</strong> Fournit une récupération rapide et efficace des données,
+minimisant les temps d'arrêt et les pertes de données en cas d'incidents.</li>
+<li><strong>Inconvénients :</strong> La vitesse de récupération peut dépendre du volume
+de données et des performances du réseau Azure.</li>
+</ul>
+<h2 id="conclusion">Conclusion</h2>
+<p>La mise en œuvre d'Azure Backup pour nos clusters Kubernetes dans AKS offre une
+solution intégrée et transparente qui exploite notre infrastructure Azure
+existante. Ce choix simplifie la gestion des sauvegardes grâce à des politiques
+automatisées, un stockage évolutif et des processus de récupération efficaces.
+Bien que des alternatives comme Velero et Restic avec Stash offrent des options
+open-source viables, elles introduisent une complexité supplémentaire et
+nécessitent un effort d'intégration plus important avec les services Azure.</p>
+<p>L'intégration native d'Azure Backup avec AKS assure des opérations plus
+fluides, une réduction des charges de gestion et des capacités de récupération
+rapide, en faisant un choix optimal pour notre stratégie de sauvegarde. Cette
+approche proactive améliore notre résilience des données, protégeant nos
+applications et services contre la perte de données et assurant la
+continuité en cas d'incidents.</p>
+<h2 id="references">Références</h2>
+<ul>
+<li><a href="https://azure.microsoft.com/en-us/products/backup/">Microsoft Azure Backup</a></li>
+<li><a href="https://azure.microsoft.com/en-us/products/kubernetes-service">Azure Kubernetes Service (AKS)</a></li>
+<li><a href="https://github.com/vmware-tanzu/velero">Velero</a></li>
+<li><a href="https://github.com/restic/restic">Restic</a></li>
+<li><a href="https://github.com/stashed/stash">Stash</a></li>
 </ul>
 
 
@@ -479,10 +601,10 @@
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.instant", "header.autohide"], "search": "../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copi\u00e9 dans le presse-papier", "clipboard.copy": "Copier dans le presse-papier", "search.result.more.one": "1 de plus sur cette page", "search.result.more.other": "# de plus sur cette page", "search.result.none": "Aucun document trouv\u00e9", "search.result.one": "1 document trouv\u00e9", "search.result.other": "# documents trouv\u00e9s", "search.result.placeholder": "Taper pour d\u00e9marrer la recherche", "search.result.term.missing": "Non trouv\u00e9", "select.version": "S\u00e9lectionner la version"}}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "header.autohide"], "search": "../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copi\u00e9 dans le presse-papier", "clipboard.copy": "Copier dans le presse-papier", "search.result.more.one": "1 de plus sur cette page", "search.result.more.other": "# de plus sur cette page", "search.result.none": "Aucun document trouv\u00e9", "search.result.one": "1 document trouv\u00e9", "search.result.other": "# documents trouv\u00e9s", "search.result.placeholder": "Taper pour d\u00e9marrer la recherche", "search.result.term.missing": "Non trouv\u00e9", "select.version": "S\u00e9lectionner la version"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.56dfad97.min.js"></script>
+      <script src="../../assets/javascripts/bundle.56dfad97.min.js"></script>
       
     
   </body>
