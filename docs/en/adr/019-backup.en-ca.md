@@ -1,6 +1,7 @@
 # ADR-019: Kubernetes Backup Management
 
 ## Executive Summary
+
 We have decided to implement Azure Backup to manage backups for our applications
 hosted on Azure Kubernetes Service (AKS). This decision is motivated by the
 integration ease, comprehensive feature set, and operational simplicity offered
@@ -15,7 +16,7 @@ availability is paramount due to the critical nature of our applications
 and services. Our applications are hosted on Azure Kubernetes Service (AKS),
 providing a highly available and automated container orchestration solution.
 However, to mitigate risks associated with data loss, corruption,
-or unintentional deletions, we need a robust backup solution.
+or unintentional deletions, we need a backup solution.
 
 Our goal was to identify a backup management solution that could
 seamlessly integrate with our existing Azure infrastructure, support
@@ -38,7 +39,6 @@ rapid restoration capabilities that align with our operational needs.
 **Advantages:**
 
 - **Open-source:** Cost-effective and community-supported.
-
 - **Multi-cloud support:** Works with various cloud providers and on-prem
     environments.
 - **Flexibility:** Offers customizable backup schedules and policies.
@@ -46,7 +46,6 @@ rapid restoration capabilities that align with our operational needs.
 **Disadvantages:**
 
 - **Setup complexity:** Requires additional setup and configuration efforts.
-
 - **Less Azure integration:** Lacks some native integrations and features
     compared to Azure Backup.
 
@@ -55,16 +54,13 @@ rapid restoration capabilities that align with our operational needs.
 **Advantages:**
 
 - **Open-source:** No licensing costs, community-driven development.
-
 - **Policy support:** Supports scheduled backups and policies.
-
 - **Flexibility:** Highly customizable backup solutions.
 
 **Disadvantages:**
 
 - **Setup and management:** Requires significant initial setup and
 ongoing management.
-
 - **Less mature:** Compared to other dedicated Kubernetes backup solutions
 like Azure Backup.
 
