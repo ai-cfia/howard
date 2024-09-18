@@ -36,7 +36,7 @@ jobs:
     secrets: inherit
 
   mkdocs-gh-pages-deployment:
-    runs-on: gh-runner
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - name: Configure Git Credentials
