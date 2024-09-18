@@ -7,7 +7,6 @@ on:
       - opened
       - closed
       - synchronize
-  push:
 
 jobs:
   markdown-check:
