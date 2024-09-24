@@ -33,7 +33,7 @@ spec:
                       - agent
       containers:
         - name: fertiscan-backend
-          image: ghcr.io/ai-cfia/fertiscan-backend:main
+          image: ghcr.io/ai-cfia/fertiscan-backend:136-as-a-dev-i-want-to-fix-the-swagger-on-the-deployment
           imagePullPolicy: Always
           envFrom:
             - secretRef:
