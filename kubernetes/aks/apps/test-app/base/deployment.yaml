@@ -1,0 +1,72 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test-app
+spec:
+  replicas: 2
+  revisionHistoryLimit: 2
+  selector:
+    matchLabels:
+      app: test-app
+  template:
+    metadata:
+      labels:
+        app: test-app
+    spec:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: app
+                    operator: In
+                    values:
+                      - test-app
+              topologyKey: "kubernetes.io/hostname"
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/role
+                    operator: In
+                    values:
+                      - agent
+      containers:
+        - name: test-app
+          image: ghcr.io/ai-cfia/howard:374
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 5000
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+            runAsNonRoot: false
+            readOnlyRootFilesystem: false
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: test-app-pdb
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app: test-app
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: test-app-svc
+spec:
+  clusterIP: None
+  selector:
+    app: test-app
+  ports:
+    - protocol: TCP
+      port: 5000
