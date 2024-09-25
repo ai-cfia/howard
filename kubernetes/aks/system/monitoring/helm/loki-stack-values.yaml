@@ -17,7 +17,7 @@ loki:
     max_concurrent: 4
   auth_enabled: false
 
-#gateway:
+# gateway:
 #  ingress:
 #    enabled: true
 #    hosts:
