@@ -1,6 +1,4 @@
 loki:
-  image:
-    tag: 2.9.3
   schemaConfig:
     configs:
       - from: 2024-04-01
