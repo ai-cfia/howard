@@ -1,0 +1,6 @@
+flask
+opentelemetry-api
+opentelemetry-sdk
+opentelemetry-instrumentation-flask
+python-logging-loki
+python-dotenv
