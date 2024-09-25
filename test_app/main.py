@@ -37,7 +37,6 @@ request_counter = meter.create_counter(
 loki_handler = logging_loki.LokiHandler(
     url=LOKI_ENDPOINT,
     tags={"application": "test-app"},
-    auth=("admin", "admin"),
     version="1",
 )
 logger = logging.getLogger("flask-app")
