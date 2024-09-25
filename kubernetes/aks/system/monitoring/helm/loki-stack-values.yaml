@@ -19,7 +19,7 @@ loki:
   image:
     registry: docker.io
     repository: grafana/loki
-    tag: latest
+    tag: 2.9.8
     digest: null
     pullPolicy: IfNotPresent
 
