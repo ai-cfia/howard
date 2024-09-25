@@ -21,4 +21,4 @@ COPY test_app/ .
 
 EXPOSE 5000
 
-CMD ["python", "app.py"]
+CMD ["python", "main.py"]
