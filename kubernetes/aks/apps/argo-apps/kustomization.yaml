@@ -13,6 +13,7 @@ resources:
   - ../fertiscan/
   - ../webtop/
   - ../landing/
+  - ../test-app/
 
   # System applications
   - ../../system/cert-manager/
