@@ -12,13 +12,13 @@ spec:
     namespace: monitoring
     server: https://kubernetes.default.svc
   sources:
-    - chart: loki-stack
+    - chart: loki
       helm:
         releaseName: loki
         valueFiles:
           - $values/kubernetes/aks/system/monitoring/helm/loki-stack-values.yaml
       repoURL: https://grafana.github.io/helm-charts
-      targetRevision: 2.10.2
+      targetRevision: 6.12.0
     - repoURL: https://github.com/ai-cfia/howard.git
       targetRevision: HEAD
       ref: values

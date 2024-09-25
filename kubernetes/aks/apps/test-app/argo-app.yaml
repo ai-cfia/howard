@@ -12,7 +12,7 @@ spec:
   project: default
   destination:
     server: https://kubernetes.default.svc
-    namespace: fertiscan
+    namespace: test-app
   source:
     repoURL: https://github.com/ai-cfia/howard.git
     path: kubernetes/aks/apps/test-app/base
