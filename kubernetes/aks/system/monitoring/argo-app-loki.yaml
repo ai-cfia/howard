@@ -18,7 +18,7 @@ spec:
         valueFiles:
           - $values/kubernetes/aks/system/monitoring/helm/loki-stack-values.yaml
       repoURL: https://grafana.github.io/helm-charts
-      targetRevision: 2.10.2
+      targetRevision: 3.1.1
     - repoURL: https://github.com/ai-cfia/howard.git
       targetRevision: HEAD
       ref: values

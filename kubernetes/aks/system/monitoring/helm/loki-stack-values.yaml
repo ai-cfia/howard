@@ -7,7 +7,7 @@ loki:
   enabled: true
   isDefault: true
   image:
-    tag: 3.2.0
+    tag: null
   url: http://{{(include "loki.serviceName" .)}}:{{ .Values.loki.service.port }}
   readinessProbe:
     httpGet:
