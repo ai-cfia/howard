@@ -7,7 +7,6 @@ metadata:
     external-dns.alpha.kubernetes.io/target: inspection.alpha.canada.ca
     cert-manager.io/cluster-issuer: letsencrypt-prod
     nginx.ingress.kubernetes.io/use-regex: "true"
-    nginx.ingress.kubernetes.io/rewrite-target: /$2  # https://kubernetes.github.io/ingress-nginx/examples/rewrite/
     nginx.ingress.kubernetes.io/client_max_body_size: "200m"
     nginx.ingress.kubernetes.io/proxy-read-timeout: "120"
     kubernetes.io/tls-acme: "true"
@@ -28,6 +27,8 @@ spec:
                 name: fertiscan-backend-svc
                 port:
                   number: 5000
+            annotations:
+              nginx.ingress.kubernetes.io/rewrite-target: /$2
           - path: /swagger(/|$)(.*)
             pathType: ImplementationSpecific
             backend:
