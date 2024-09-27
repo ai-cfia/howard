@@ -17,14 +17,27 @@ loki:
     max_concurrent: 4
   auth_enabled: false
 
-# gateway:
-#  ingress:
-#    enabled: true
-#    hosts:
-#      - host: FIXME
-#        paths:
-#          - path: /
-#            pathType: Prefix
+ruler:
+  enabled: true
+  replicas: 1
+  persistence:
+    enabled: true
+    size: 5Gi
+    storageClass: default
+  directories:
+    tenant_foo:
+      test-app-alert.txt: |
+        groups:
+          - name: test_app_critical
+            rules:
+              - alert: CriticalLogDetected
+                expr: count_over_time({application="test-app", severity="critical"}[1m]) > 0
+                for: 1m
+                labels:
+                  severity: critical
+                annotations:
+                  summary: "Critical log found in test-app"
+                  description: "Log entry with severity `critical` detected in test-app."
 
 deploymentMode: SimpleScalable
 
