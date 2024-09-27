@@ -25,7 +25,7 @@ ruler:
     size: 5Gi
     storageClass: default
   directories:
-    tenant_foo:
+    alertmanager:
       test-app-alert.txt: |
         groups:
           - name: test_app_critical
@@ -39,7 +39,7 @@ ruler:
                   summary: "Critical log found in test-app"
                   description: "Log entry with severity `critical` detected in test-app."
 
-deploymentMode: SimpleScalable
+deploymentMode: Distributed
 
 backend:
   replicas: 3
