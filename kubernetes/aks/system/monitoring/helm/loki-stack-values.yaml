@@ -26,18 +26,14 @@ ruler:
     storageClass: default
   directories:
     alertmanager:
-      test-app-alert.txt: |
-        groups:
-          - name: test_app_critical
-            rules:
-              - alert: CriticalLogDetected
-                expr: count_over_time({application="test-app", severity="critical"}[1m]) > 0
-                for: 1m
-                labels:
-                  severity: critical
-                annotations:
-                  summary: "Critical log found in test-app"
-                  description: "Log entry with severity `critical` detected in test-app."
+      test-app-alert.txt: /etc/rules/test-app-alert.txt
+  extraVolumeMounts:
+    - name: rules-volume
+      mountPath: /etc/rules
+  extraVolumes:
+    - name: rules-volume
+      configMap:
+        name: ruler-rules
 
 deploymentMode: Distributed # Microservices
 

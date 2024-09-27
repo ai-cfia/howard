@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ruler-rules
+data:
+  test-app-alert.txt: |
+    groups:
+      - name: test_app_critical
+        rules:
+          - alert: CriticalLogDetected
+            expr: count_over_time({application="test-app", severity="critical"}[1m]) > 0
+            for: 1m
+            labels:
+              severity: critical
+            annotations:
+              summary: "Critical log found in test-app"
+              description: "Log entry with severity `critical` detected in test-app."
