@@ -16,8 +16,14 @@ loki:
     rule_path: /var/loki/rules-temp
     alertmanager_url: http://kube-prometheus-stack-alertmanager:9093
     enable_alertmanager_v2: true
+    external_labels:
+      origin: loki
     wal:
       dir: /var/loki/ruler-wal
+  sidecar:
+    rules:
+      searchNamespace: ALL
+      folder: /var/loki/rules-temp
   ingester:
     chunk_encoding: snappy
   tracing:
