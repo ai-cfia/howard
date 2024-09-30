@@ -36,7 +36,7 @@ ruler:
     storageClass: default
   directories:
     alertmanager:
-      test-app-alert.txt: |
+      test-app-alert.yaml: |
         groups:
           - name: test_app_critical
             rules:
