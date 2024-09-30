@@ -334,6 +334,9 @@ alertmanager:
         - receiver: 'null'
           matchers:
             - alertname = "Watchdog"
+        - receiver: "discord"
+          matchers:
+            - severity = critical
     receivers:
       - name: 'null'
     templates:

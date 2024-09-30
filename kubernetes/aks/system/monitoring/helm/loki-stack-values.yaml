@@ -15,7 +15,6 @@ loki:
         directory: /var/loki/rules
     rule_path: /var/loki/rules/alertmanager
     alertmanager_url: http://kube-prometheus-stack-alertmanager:9093
-    enable_alertmanager_v2: true
     external_labels:
       origin: loki
   sidecar:
