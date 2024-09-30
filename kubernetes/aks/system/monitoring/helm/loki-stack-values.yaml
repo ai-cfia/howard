@@ -20,10 +20,10 @@ loki:
       origin: loki
     wal:
       dir: /var/loki/wal
-  sidecar:
-    rules:
-      searchNamespace: monitoring
-      folder: /etc/loki/rules/alertmanager
+  # sidecar:
+  #   rules:
+  #     searchNamespace: monitoring
+  #     folder: /etc/loki/rules/alertmanager
   ingester:
     chunk_encoding: snappy
   tracing:
