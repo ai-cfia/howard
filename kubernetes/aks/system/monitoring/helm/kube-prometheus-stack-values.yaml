@@ -334,11 +334,12 @@ alertmanager:
         - receiver: 'null'
           matchers:
             - alertname = "Watchdog"
-        - receiver: "discord"
+        - receiver: 'discord'
           matchers:
             - severity = critical
     receivers:
       - name: 'null'
+      - name: 'discord'
     templates:
       - '/etc/alertmanager/config/*.tmpl'
 
