@@ -12,15 +12,16 @@ loki:
     storage:
       type: local
       local:
-        directory: /var/loki/rules
-    rule_path: /var/loki/rules/alertmanager
+        directory: /etc/loki/rules
+    rule_path: /etc/loki/rules/alertmanager
+    external_url: "http://grafana:80"
     alertmanager_url: http://kube-prometheus-stack-alertmanager:9093
     external_labels:
       origin: loki
   sidecar:
     rules:
-      searchNamespace: ALL
-      folder: /var/loki/rules/alertmanager
+      searchNamespace: monitoring
+      folder: /etc/loki/rules/alertmanager
   ingester:
     chunk_encoding: snappy
   tracing:
