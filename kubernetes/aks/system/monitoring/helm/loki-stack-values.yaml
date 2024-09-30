@@ -13,8 +13,8 @@ loki:
       type: local
       local:
         directory: /etc/loki/rules
-    # rule_path: /etc/loki/rules/alertmanager
-    external_url: "http://grafana:80"
+    rule_path: /tmp/loki/scratch
+    external_url: http://kube-prometheus-stack-alertmanager:9093
     alertmanager_url: http://kube-prometheus-stack-alertmanager:9093
     enable_alertmanager_v2: true
     external_labels:
