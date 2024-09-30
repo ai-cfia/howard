@@ -18,6 +18,8 @@ loki:
     alertmanager_url: http://kube-prometheus-stack-alertmanager:9093
     external_labels:
       origin: loki
+    wal:
+      /var/loki/wal
   sidecar:
     rules:
       searchNamespace: monitoring
