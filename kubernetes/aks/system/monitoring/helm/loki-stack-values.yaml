@@ -19,7 +19,7 @@ loki:
     external_labels:
       origin: loki
     wal:
-      /var/loki/wal
+      dir: /var/loki/wal
   sidecar:
     rules:
       searchNamespace: monitoring
