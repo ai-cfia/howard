@@ -14,7 +14,7 @@ spec:
   tls:
     - hosts:
         - alertmanager.inspection.alpha.canada.ca
-      secretName: argocd-secret
+      secretName: alertmanager-secret
   rules:
     - host: alertmanager.inspection.alpha.canada.ca
       http:
