@@ -10,7 +10,7 @@ data:
       - name: test_app_critical
         rules:
           - alert: CriticalLogDetected
-            expr: count_over_time({application="test-app", severity="critical"}[1m]) > 0
+            expr: count_over_time({application="test-app", severity="critical"} | logfmt [1m]) > 0
             for: 1m
             labels:
               severity: critical
