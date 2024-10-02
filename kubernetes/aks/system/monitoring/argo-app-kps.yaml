@@ -22,9 +22,6 @@ spec:
     - repoURL: https://github.com/ai-cfia/howard.git
       targetRevision: HEAD
       ref: values
-    - repoURL: https://github.com/ai-cfia/howard.git
-      path: kubernetes/aks/system/monitoring/base
-      targetRevision: HEAD
   syncPolicy:
     automated:
       selfHeal: true

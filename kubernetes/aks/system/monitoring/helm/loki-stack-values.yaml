@@ -12,20 +12,13 @@ loki:
     storage:
       type: local
       local:
-        directory: /etc/loki/rules
-    rule_path: /tmp/loki/rules/alertmanager
-    external_url: http://_http-web._tcp.kube-prometheus-stack-alertmanager.monitoring.svc.cluster.local:9093
-    alertmanager_url: http://_http-web._tcp.kube-prometheus-stack-alertmanager.monitoring.svc.cluster.local:9093
-    enable_alertmanager_discovery: true
+        directory: /var/loki/rulestorage
+    rule_path: "/var/loki/rules-temp"
+    ring:
+      kvstore:
+        store: inmemory
+    alertmanager_url: http://alertmanager-operated.monitoring:9093
     enable_alertmanager_v2: true
-    external_labels:
-      origin: loki
-    # wal:
-    #   dir: /var/loki/wal
-  # sidecar:
-  #   rules:
-  #     searchNamespace: monitoring
-  #     folder: /etc/loki/rules/alertmanager
   ingester:
     chunk_encoding: snappy
   tracing:
@@ -35,63 +28,45 @@ loki:
     max_concurrent: 4
   auth_enabled: false
 
-ruler:
-  enabled: true
-  replicas: 1
-  persistence:
-    enabled: true
-    size: 5Gi
-    storageClass: default
-  directories:
-    alertmanager:
-      test-app-alert.yaml: |
-        groups:
-          - name: test_app_critical
-            rules:
-              - alert: CriticalLogDetected
-                expr: count_over_time({application="test-app", severity="critical"}[1m]) > 0
-                for: 1m
-                labels:
-                  severity: critical
-                annotations:
-                  summary: "Critical log found in test-app"
-                  description: "Log entry with severity `critical` detected in test-app."
+deploymentMode: SimpleScalable # Microservices
 
-deploymentMode: Distributed # Microservices
-
-ingester:
+backend:
   replicas: 3
-querier:
+read:
   replicas: 3
-  maxUnavailable: 2
-queryFrontend:
-  replicas: 2
-  maxUnavailable: 1
-queryScheduler:
-  replicas: 2
-distributor:
+  extraVolumeMounts:
+    - name: rules
+      mountPath: "/var/loki/rulestorage/fake"
+  extraVolumes:
+    - name: rules
+      configMap:
+        name: loki-alerting-rules
+write:
   replicas: 3
-  maxUnavailable: 2
-compactor:
-  replicas: 1
-indexGateway:
-  replicas: 2
-  maxUnavailable: 1
 
-bloomCompactor:
-  replicas: 0
-bloomGateway:
-  replicas: 0
-
+# Enable minio for storage
 minio:
   enabled: true
 
-backend:
-  replicas: 0
-read:
-  replicas: 0
-write:
+# Zero out replica counts of other deployment modes
+singleBinary:
   replicas: 0
 
-singleBinary:
+ingester:
+  replicas: 0
+querier:
+  replicas: 0
+queryFrontend:
+  replicas: 0
+queryScheduler:
+  replicas: 0
+distributor:
+  replicas: 0
+compactor:
+  replicas: 0
+indexGateway:
+  replicas: 0
+bloomCompactor:
+  replicas: 0
+bloomGateway:
   replicas: 0
