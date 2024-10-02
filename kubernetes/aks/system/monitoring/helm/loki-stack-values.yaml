@@ -29,7 +29,7 @@ loki:
     max_concurrent: 4
   auth_enabled: false
 
-deploymentMode: SimpleScalable # Microservices
+deploymentMode: SimpleScalable
 
 backend:
   replicas: 3
