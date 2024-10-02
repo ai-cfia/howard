@@ -13,7 +13,7 @@ loki:
       type: local
       local:
         directory: /var/loki/rulestorage
-    rule_path: "/var/loki/rules-temp"
+    rule_path: /var/loki/rules-temp
     ring:
       kvstore:
         store: inmemory
