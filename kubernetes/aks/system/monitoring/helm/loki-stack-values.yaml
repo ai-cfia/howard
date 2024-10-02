@@ -12,8 +12,8 @@ loki:
     storage:
       type: local
       local:
-        directory: /tmp/rules
-    rule_path: /tmp/scratch
+        directory: /var/loki/rulestorage
+    rule_path: /var/loki/rules-temp
     ring:
       kvstore:
         store: inmemory
@@ -36,7 +36,7 @@ read:
   replicas: 3
   extraVolumeMounts:
     - name: rules
-      mountPath: "/tmp/rules"
+      mountPath: "/var/loki/rulestorage/fake"
   extraVolumes:
     - name: rules
       configMap:
