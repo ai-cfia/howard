@@ -17,7 +17,7 @@ loki:
     ring:
       kvstore:
         store: inmemory
-    alertmanager_url: http://kube-prometheus-stack-alertmanager.monitoring:9093
+    alertmanager_url: http://alertmanager-operated.monitoring:9093
     enable_alertmanager_v2: true
     enable_api: true
   ingester:
