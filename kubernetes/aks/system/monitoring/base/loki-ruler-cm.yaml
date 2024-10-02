@@ -17,13 +17,13 @@ data:
             annotations:
                 summary: Loki info warning per minute rate > 0
                 message: 'Loki warning per minute rate > 0 container:"{{`{{`}} $labels.container {{`}}`}}"'
-      # - name: test_app_critical
-      #   rules:
-      #     - alert: CriticalLogDetected
-      #       expr: count_over_time({application="test-app", severity="critical"}[1m]) > 0
-      #       for: 1m
-      #       labels:
-      #         severity: critical
-      #       annotations:
-      #         summary: "Critical log found in test-app"
-      #         description: "Log entry with severity `critical` detected in test-app."
+      - name: test_app_critical
+        rules:
+          - alert: CriticalLogDetected
+            expr: count_over_time({application="test-app", severity="critical"}[1m]) > 0
+            for: 1m
+            labels:
+              severity: critical
+            annotations:
+              summary: "Critical log found in test-app"
+              description: "Log entry with severity `critical` detected in test-app."
