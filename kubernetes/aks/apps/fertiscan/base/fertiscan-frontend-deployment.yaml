@@ -38,7 +38,7 @@ spec:
                       - agent
       containers:
         - name: fertiscan-frontend
-          image: ghcr.io/ai-cfia/fertiscan-frontend:251
+          image: ghcr.io/ai-cfia/fertiscan-frontend:259-display-label-details
           imagePullPolicy: Always
           envFrom:
             - secretRef:
