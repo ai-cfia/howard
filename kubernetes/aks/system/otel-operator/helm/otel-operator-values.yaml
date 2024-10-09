@@ -20,7 +20,7 @@ manager:
     repository: ghcr.io/open-telemetry/opentelemetry-operator/opentelemetry-operator
     tag: ""
   collectorImage:
-    repository: ""
+    repository: "otel/opentelemetry-collector-k8s"
     tag: 0.108.0
   opampBridgeImage:
     repository: ""
