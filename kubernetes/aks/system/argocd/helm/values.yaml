@@ -1214,7 +1214,7 @@ redis:
       # -- Repository to use for the redis-exporter
       repository: public.ecr.aws/bitnami/redis-exporter
       # -- Tag to use for the redis-exporter
-      tag: 1.59.0
+      tag: 1.64.1
       # -- Image pull policy for the redis-exporter
       # @default -- `""` (defaults to global.image.imagePullPolicy)
       imagePullPolicy: ""
