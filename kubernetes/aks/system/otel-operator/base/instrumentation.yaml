@@ -10,9 +10,8 @@ spec:
     - baggage
     - b3
   sampler:
-    type: parentbased_traceidratio
-    argument: "0.25"
+    type: always_on
   python:
     env:
       - name: OTEL_EXPORTER_OTLP_ENDPOINT
-        value: http://alloy.monitoring.svc.cluster.local:4318
+        value: http://alloy.monitoring.svc.cluster.local:4317
