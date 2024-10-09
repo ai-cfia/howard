@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: otel-auto
-          image: ghcr.io/ai-cfia/otel-auto:0.0.1
+          image: ghcr.io/ai-cfia/otel-app:0.0.1
           ports:
             - containerPort: 8080
           env:
