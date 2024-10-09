@@ -32,6 +32,7 @@ resources:
   # - ../../system/istio/
   - ../../system/gatus/
   - ../../system/gh-runner/
+  - ../../system/otel-operator/
 
 patches:
   - patch: |-

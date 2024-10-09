@@ -9,19 +9,22 @@ metadata:
 spec:
   project: default
   destination:
-    namespace: monitoring
+    namespace: otel-operator
     server: https://kubernetes.default.svc
   sources:
     - chart: opentelemetry-operator
       helm:
         releaseName: opentelemetry-operator
         valueFiles:
-          - $values/kubernetes/aks/system/monitoring/helm/otel-operator-values.yaml
+          - $values/kubernetes/aks/system/otel-operator/helm/otel-operator-values.yaml
       repoURL: https://open-telemetry.github.io/opentelemetry-helm-charts
       targetRevision: 0.69.0
     - repoURL: https://github.com/ai-cfia/howard.git
       targetRevision: HEAD
       ref: values
+    - repoURL: https://github.com/ai-cfia/howard.git
+      path: kubernetes/aks/system/otel-operator/base
+      targetRevision: HEAD
   syncPolicy:
     automated:
       selfHeal: true
