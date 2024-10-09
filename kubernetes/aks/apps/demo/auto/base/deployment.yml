@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: otel-auto-deployment
+  annotations:
+    instrumentation.opentelemetry.io/inject-python: "true"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: otel-auto
+  template:
+    metadata:
+      labels:
+        app: otel-auto
+    spec:
+      containers:
+        - name: otel-auto
+          image: ghcr.io/ai-cfia/otel-auto:0.0.1
+          ports:
+            - containerPort: 8080
+          env:
+            - name: OTEL_EXPORTER_OTLP_ENDPOINT
+              value: "http://alloy.monitoring.svc.cluster.local:4317"
+            - name: OTEL_PYTHON_LOG_CORRELATION
+              value: "true"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: otel-auto
+spec:
+  clusterIP: None
+  selector:
+    app: otel-auto
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: otel-auto-ingress
+  annotations:
+    external-dns.alpha.kubernetes.io/target: inspection.alpha.canada.ca
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    kubernetes.io/tls-acme: "true"
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - otel-auto.inspection.alpha.canada.ca
+      secretName: aciacfia-tls
+  rules:
+    - host: otel-auto.inspection.alpha.canada.ca
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: otel-auto
+                port:
+                  number: 8080
