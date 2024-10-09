@@ -14,6 +14,7 @@ resources:
   - ../webtop/
   - ../landing/
   - ../test-app/
+  - ../demo/auto/
 
   # System applications
   - ../../system/cert-manager/
