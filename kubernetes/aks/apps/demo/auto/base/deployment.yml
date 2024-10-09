@@ -15,7 +15,6 @@ spec:
         app: otel-auto
       annotations:
         instrumentation.opentelemetry.io/inject-python: "true"
-        sidecar.opentelemetry.io/inject: 'true'
     spec:
       containers:
         - name: otel-auto
