@@ -12,6 +12,8 @@ spec:
     metadata:
       labels:
         app: fertiscan-backend
+      annotations:
+        instrumentation.opentelemetry.io/inject-python: "true"
     spec:
       affinity:
         podAntiAffinity:
@@ -33,11 +35,18 @@ spec:
                       - agent
       containers:
         - name: fertiscan-backend
-          image: ghcr.io/ai-cfia/fertiscan-backend:136-as-a-dev-i-want-to-fix-the-swagger-on-the-deployment
+          image: ghcr.io/ai-cfia/fertiscan-backend:169-as-a-devops-i-want-to-enable-the-team-with-better-observability-over-the-product-performance
           imagePullPolicy: Always
           envFrom:
             - secretRef:
                 name: fertiscan-backend-secrets
+          env:
+            - name: OTEL_EXPORTER_OTLP_ENDPOINT
+              value: "http://alloy.monitoring.svc.cluster.local:4318"
+            - name: OTEL_TRACES_EXPORTER
+              value: "otlp"
+            - name: OTEL_METRICS_EXPORTER
+              value: "otlp"
           ports:
             - containerPort: 5000
           volumeMounts:
