@@ -18,14 +18,16 @@ spec:
     spec:
       containers:
         - name: otel-auto
-          image: ghcr.io/ai-cfia/otel-auto:0.0.1
+          image: ghcr.io/ai-cfia/otel-auto:0.0.2
           ports:
             - containerPort: 8080
           env:
             - name: OTEL_EXPORTER_OTLP_ENDPOINT
-              value: "http://alloy.monitoring.svc.cluster.local:4317"
+              value: "http://alloy.monitoring.svc.cluster.local:4318"
             - name: OTEL_PYTHON_LOG_CORRELATION
               value: "true"
+            - name: OTEL_TRACES_SAMPLER
+              value: "always_on"
 ---
 apiVersion: v1
 kind: Service

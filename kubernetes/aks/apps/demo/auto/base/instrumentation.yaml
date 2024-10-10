@@ -4,7 +4,7 @@ metadata:
   name: otel-auto-instrumentation
 spec:
   exporter:
-    endpoint: http://alloy.monitoring.svc.cluster.local:4317
+    endpoint: http://alloy.monitoring.svc.cluster.local:4318
   propagators:
     - tracecontext
     - baggage
@@ -14,4 +14,4 @@ spec:
   python:
     env:
       - name: OTEL_EXPORTER_OTLP_ENDPOINT
-        value: http://alloy.monitoring.svc.cluster.local:4317
+        value: http://alloy.monitoring.svc.cluster.local:4318
