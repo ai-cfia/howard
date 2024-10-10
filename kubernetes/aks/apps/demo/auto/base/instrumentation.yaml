@@ -1,0 +1,17 @@
+apiVersion: opentelemetry.io/v1alpha1
+kind: Instrumentation
+metadata:
+  name: otel-auto-instrumentation
+spec:
+  exporter:
+    endpoint: http://alloy.monitoring.svc.cluster.local:4317
+  propagators:
+    - tracecontext
+    - baggage
+    - b3
+  sampler:
+    type: always_on
+  python:
+    env:
+      - name: OTEL_EXPORTER_OTLP_ENDPOINT
+        value: http://alloy.monitoring.svc.cluster.local:4317
