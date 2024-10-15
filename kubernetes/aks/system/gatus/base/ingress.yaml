@@ -14,7 +14,7 @@ spec:
   tls:
     - hosts:
         - status.inspection.alpha.canada.ca
-      secretName: geloso-tls
+      secretName: aciacfia-tls
   rules:
     - host: status.inspection.alpha.canada.ca
       http:

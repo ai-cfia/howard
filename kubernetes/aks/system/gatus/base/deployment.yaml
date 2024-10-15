@@ -17,13 +17,19 @@ spec:
       serviceAccountName: gatus
       terminationGracePeriodSeconds: 5
       containers:
-      - image: twinproduction/gatus
+      - image: ghcr.io/ai-cfia/gatus:master
         imagePullPolicy: IfNotPresent
         name: gatus
         ports:
         - containerPort: 8080
           name: http
           protocol: TCP
+        env:
+        - name: DISCORD_WEBHOOK_URL
+          valueFrom:
+            secretKeyRef:
+              name: gatus-secret
+              key: DISCORD_WEBHOOK_URL
         resources:
           limits:
             cpu: 250m

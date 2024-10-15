@@ -12,6 +12,9 @@ data:
     storage:
       type: sqlite
       path: /data/data.db
+    alerting:
+      discord:
+        webhook-url: $DISCORD_WEBHOOK_URL
     endpoints:
       - name: "AI-Lab website"
         url: https://ailab.inspection.alpha.canada.ca/
@@ -20,6 +23,10 @@ data:
           - "[STATUS] == 200"
           - "len([BODY]) > 0"
           - "[BODY] == pat(*<html>*)"
+        alerts:
+          - type: discord
+            description: "AI-Lab website healthcheck failed"
+            send-on-resolved: true
 
       - name: "Fertiscan website"
         url: https://fertiscan.inspection.alpha.canada.ca/
@@ -28,6 +35,10 @@ data:
           - "[STATUS] == 200"
           - "len([BODY]) > 0"
           - "[BODY] == pat(*<html>*)"
+        alerts:
+          - type: discord
+            description: "Fertiscan website healthcheck failed"
+            send-on-resolved: true
 
       - name: "Nachet website"
         url: https://nachet.inspection.alpha.canada.ca/
@@ -36,6 +47,10 @@ data:
           - "[STATUS] == 200"
           - "len([BODY]) > 0"
           - "[BODY] == pat(*<html>*)"
+        alerts:
+          - type: discord
+            description: "Nachet website healthcheck failed"
+            send-on-resolved: true
 
       - name: "Finesse website"
         url: https://finesse.inspection.alpha.canada.ca/
@@ -44,6 +59,10 @@ data:
           - "[STATUS] == 200"
           - "len([BODY]) > 0"
           - "[BODY] == pat(*<html>*)"
+        alerts:
+          - type: discord
+            description: "Finesse website healthcheck failed"
+            send-on-resolved: true
 
       - name: "Finesse internal website"
         url: https://finesse-internal.inspection.alpha.canada.ca/
@@ -52,6 +71,10 @@ data:
           - "[STATUS] == 200"
           - "len([BODY]) > 0"
           - "[BODY] == pat(*<html>*)"
+        alerts:
+          - type: discord
+            description: "Finesse internal website healthcheck failed"
+            send-on-resolved: true
 
       - name: "Louis website"
         url: https://louis.inspection.alpha.canada.ca/
@@ -60,6 +83,10 @@ data:
           - "[STATUS] == 200"
           - "len([BODY]) > 0"
           - "[BODY] == pat(*<html>*)"
+        alerts:
+          - type: discord
+            description: "Louis website healthcheck failed"
+            send-on-resolved: true
 
       - name: "Librechat website"
         url: https://librechat.inspection.alpha.canada.ca/
@@ -68,6 +95,10 @@ data:
           - "[STATUS] == 200"
           - "len([BODY]) > 0"
           - "[BODY] == pat(*<html>*)"
+        alerts:
+          - type: discord
+            description: "Librechat website healthcheck failed"
+            send-on-resolved: true
 
       - name: "ArgoCD website"
         url: https://argocd.inspection.alpha.canada.ca/
@@ -76,6 +107,10 @@ data:
           - "[STATUS] == 200"
           - "len([BODY]) > 0"
           - "[BODY] == pat(*<html>*)"
+        alerts:
+          - type: discord
+            description: "Argocd website healthcheck failed"
+            send-on-resolved: true
 
       - name: "Grafana website"
         url: https://grafana.inspection.alpha.canada.ca/
@@ -84,6 +119,10 @@ data:
           - "[STATUS] == 200"
           - "len([BODY]) > 0"
           - "[BODY] == pat(*<html>*)"
+        alerts:
+          - type: discord
+            description: "Grafana website healthcheck failed"
+            send-on-resolved: true
 
       - name: "Bytebase website"
         url: https://bytebase.inspection.alpha.canada.ca/
@@ -92,6 +131,10 @@ data:
           - "[STATUS] == 200"
           - "len([BODY]) > 0"
           - "[BODY] == pat(*<html>*)"
+        alerts:
+          - type: discord
+            description: "Bytebase website healthcheck failed"
+            send-on-resolved: true
 
       - name: "Vouch endpoint"
         url: https://vouch.inspection.alpha.canada.ca/healthcheck
@@ -99,6 +142,10 @@ data:
         conditions:
           - "[STATUS] == 200"
           - "len([BODY]) > 0"
+        alerts:
+          - type: discord
+            description: "Vouch website healthcheck failed"
+            send-on-resolved: true
 
       - name: "Vault website"
         url: https://vault.inspection.alpha.canada.ca/
@@ -107,3 +154,7 @@ data:
           - "[STATUS] == 200"
           - "len([BODY]) > 0"
           - "[BODY] == pat(*<html>*)"
+        alerts:
+          - type: discord
+            description: "Vault website healthcheck failed"
+            send-on-resolved: true
