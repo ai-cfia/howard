@@ -158,3 +158,15 @@ data:
           - type: discord
             description: "Vault website healthcheck failed"
             send-on-resolved: true
+
+      - name: "test-app website"
+        url: https://test-app.inspection.alpha.canada.ca/error
+        interval: 2m
+        conditions:
+          - "[STATUS] == 200"
+          - "len([BODY]) > 0"
+          - "[BODY] == pat(*<html>*)"
+        alerts:
+          - type: discord
+            description: "test-app website healthcheck failed"
+            send-on-resolved: true
