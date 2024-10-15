@@ -176,8 +176,6 @@ data:
         interval: 2m
         conditions:
           - "[STATUS] == 200"
-          - "len([BODY]) > 0"
-          - "[BODY] == pat(*<html>*)"
         alerts:
           - type: discord
             description: "test-app website healthcheck failed"
