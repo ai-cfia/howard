@@ -27,6 +27,7 @@ data:
           - type: discord
             description: "AI-Lab website healthcheck failed"
             send-on-resolved: true
+            failure-threshold: 1
 
       - name: "Fertiscan website"
         url: https://fertiscan.inspection.alpha.canada.ca/
@@ -39,6 +40,7 @@ data:
           - type: discord
             description: "Fertiscan website healthcheck failed"
             send-on-resolved: true
+            failure-threshold: 1
 
       - name: "Nachet website"
         url: https://nachet.inspection.alpha.canada.ca/
@@ -51,6 +53,7 @@ data:
           - type: discord
             description: "Nachet website healthcheck failed"
             send-on-resolved: true
+            failure-threshold: 1
 
       - name: "Finesse website"
         url: https://finesse.inspection.alpha.canada.ca/
@@ -63,6 +66,7 @@ data:
           - type: discord
             description: "Finesse website healthcheck failed"
             send-on-resolved: true
+            failure-threshold: 1
 
       - name: "Finesse internal website"
         url: https://finesse-internal.inspection.alpha.canada.ca/
@@ -75,6 +79,7 @@ data:
           - type: discord
             description: "Finesse internal website healthcheck failed"
             send-on-resolved: true
+            failure-threshold: 1
 
       - name: "Louis website"
         url: https://louis.inspection.alpha.canada.ca/
@@ -87,6 +92,7 @@ data:
           - type: discord
             description: "Louis website healthcheck failed"
             send-on-resolved: true
+            failure-threshold: 1
 
       - name: "Librechat website"
         url: https://librechat.inspection.alpha.canada.ca/
@@ -99,6 +105,7 @@ data:
           - type: discord
             description: "Librechat website healthcheck failed"
             send-on-resolved: true
+            failure-threshold: 1
 
       - name: "ArgoCD website"
         url: https://argocd.inspection.alpha.canada.ca/
@@ -111,6 +118,7 @@ data:
           - type: discord
             description: "Argocd website healthcheck failed"
             send-on-resolved: true
+            failure-threshold: 1
 
       - name: "Grafana website"
         url: https://grafana.inspection.alpha.canada.ca/
@@ -123,6 +131,7 @@ data:
           - type: discord
             description: "Grafana website healthcheck failed"
             send-on-resolved: true
+            failure-threshold: 1
 
       - name: "Bytebase website"
         url: https://bytebase.inspection.alpha.canada.ca/
@@ -135,6 +144,7 @@ data:
           - type: discord
             description: "Bytebase website healthcheck failed"
             send-on-resolved: true
+            failure-threshold: 1
 
       - name: "Vouch endpoint"
         url: https://vouch.inspection.alpha.canada.ca/healthcheck
@@ -146,6 +156,7 @@ data:
           - type: discord
             description: "Vouch website healthcheck failed"
             send-on-resolved: true
+            failure-threshold: 1
 
       - name: "Vault website"
         url: https://vault.inspection.alpha.canada.ca/
@@ -158,9 +169,10 @@ data:
           - type: discord
             description: "Vault website healthcheck failed"
             send-on-resolved: true
+            failure-threshold: 1
 
       - name: "test-app website"
-        url: https://test-app.inspection.alpha.canada.ca/error
+        url: https://test-app.inspection.alpha.canada.ca/ok
         interval: 2m
         conditions:
           - "[STATUS] == 200"
@@ -170,3 +182,4 @@ data:
           - type: discord
             description: "test-app website healthcheck failed"
             send-on-resolved: true
+            failure-threshold: 1
