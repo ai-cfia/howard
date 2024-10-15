@@ -47,6 +47,8 @@ spec:
               value: "otlp"
             - name: OTEL_METRICS_EXPORTER
               value: "otlp"
+            - name: OTEL_PYTHON_LOG_CORRELATION
+              value: "true"
           ports:
             - containerPort: 5000
           volumeMounts:
