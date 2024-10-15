@@ -15,3 +15,7 @@ spec:
     env:
       - name: OTEL_EXPORTER_OTLP_ENDPOINT
         value: http://alloy.monitoring.svc.cluster.local:4318
+      - name: OTEL_LOGS_EXPORTER
+        value: otlp_proto_http
+      - name: OTEL_PYTHON_LOGGING_AUTO_INSTRUMENTATION_ENABLED
+        value: 'true'
