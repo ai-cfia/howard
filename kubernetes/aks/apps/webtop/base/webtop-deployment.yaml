@@ -17,21 +17,32 @@ spec:
         image: linuxserver/webtop:ubuntu-kde
         ports:
         - containerPort: 3000
+        env:
+        - name: DOCKER_HOST
+          value: "tcp://localhost:2375"
         envFrom:
         - secretRef:
             name: webtop-secrets
         volumeMounts:
         - name: config
           mountPath: /config
-        - name: docker-socket
-          mountPath: /var/run/docker.sock
+      - name: docker-dind
+        image: docker:dind
+        securityContext:
+          privileged: true
+        ports:
+        - containerPort: 2375
+        args:
+        - "--host=tcp://0.0.0.0:2375"
+        volumeMounts:
+        - name: docker-graph-storage
+          mountPath: /var/lib/docker
       volumes:
       - name: config
         persistentVolumeClaim:
           claimName: webtop-config-pvc
-      - name: docker-socket
-        hostPath:
-          path: /var/run/docker.sock
+      - name: docker-graph-storage
+        emptyDir: {}
 
 ---
 apiVersion: v1
