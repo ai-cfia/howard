@@ -27,7 +27,7 @@ spec:
             name: webtop-secrets
         volumeMounts:
         - name: config
-          mountPath: /config
+          mountPath: /
       - name: docker-dind
         image: docker:dind
         securityContext:
