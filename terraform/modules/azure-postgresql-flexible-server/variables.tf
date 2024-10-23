@@ -58,5 +58,5 @@ variable "postgresql_version" {
 }
 
 variable "postgresql_public_network_access_enabled" {
-  type    = bool
+  type = bool
 }
