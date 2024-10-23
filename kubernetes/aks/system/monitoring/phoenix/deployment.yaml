@@ -29,6 +29,8 @@ spec:
               value: /mnt/data
             - name: PHOENIX_PORT
               value: "6006"
+            - name: PHOENIX_ENABLE_PROMETHEUS
+              value: true
             - name: PHOENIX_SQL_DATABASE_URL
               valueFrom:
                 secretKeyRef:
