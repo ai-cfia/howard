@@ -10,6 +10,11 @@ variable "postgresql_rg_name" {
   type = string
 }
 
+variable "postgresql_zone" {
+  type    = string
+  default = "1"
+}
+
 variable "postgresql_sku_name" {
   type = string
 }
@@ -19,7 +24,7 @@ variable "postgresql_storage_mb" {
   default = 640000
 }
 
-variable "postgresql_backup_auto_grow" {
+variable "postgresql_auto_grow" {
   type    = bool
   default = false
 }
@@ -34,20 +39,19 @@ variable "postgresql_backup_geo_redundant" {
   default = false
 }
 
-variable "postgresql_backup_admin_login" {
+variable "postgresql_admin_login" {
   type = string
 }
 
-variable "postgresql_backup_admin_password" {
+variable "postgresql_admin_password" {
   type = string
 }
 
-variable "postgresql_backup_version" {
+variable "postgresql_version" {
   type    = string
-  default = "11"
+  default = "12"
 }
 
-variable "postgresql_backup_ssl_enforcement_enabled" {
-  type    = bool
-  default = true
+variable "postgresql_public_network_access_enabled" {
+  type = bool
 }
