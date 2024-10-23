@@ -1,0 +1,63 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: phoenix
+  annotations:
+    nginx.ingress.kubernetes.io/whitelist-source-range: 205.194.32.0/24,192.197.71.0/24
+    external-dns.alpha.kubernetes.io/target: inspection.alpha.canada.ca
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    nginx.ingress.kubernetes.io/add-base-url: "true"
+    ingress.kubernetes.io/force-ssl-redirect: "true"
+    kubernetes.io/tls-acme: "true"
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - phoenix.inspection.alpha.canada.ca
+      secretName: aciacfia-tls
+  rules:
+    - host: phoenix.inspection.alpha.canada.ca
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: phoenix
+                port:
+                  number: 6006
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: phoenix
+spec:
+    ports:
+        - name: phoenix
+          port: 6006
+          targetPort: 6006
+        - name: metrics
+          port: 9090
+          targetPort: 9090
+    selector:
+        app: phoenix
+    type: ClusterIP
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: phoenix
+  namespace: monitoring
+  labels:
+    release: kube-prometheus-stack
+spec:
+    selector:
+        matchLabels:
+            app.kubernetes.io/name: phoenix
+    endpoints:
+    - port: metrics
+      interval: 30s
+      path: /metrics
+    namespaceSelector:
+      matchNames:
+      - phoenix
