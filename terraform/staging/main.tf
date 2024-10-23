@@ -186,14 +186,16 @@ module "vault" {
 }
 
 module "fertiscan-postgresql-server" {
-  source                 = "../modules/azure-postgresql-server"
+  source                 = "../modules/azure-postgresql-flexible-server"
   postgresql_server_name = var.postgresql_server_name
   postgresql_rg_location = var.postgresql_rg_location
   postgresql_rg_name     = var.postgresql_rg_name
 
-  postgresql_sku_name              = var.postgresql_sku_name
-  postgresql_backup_admin_login    = var.postgresql_backup_admin_login
-  postgresql_backup_admin_password = var.postgresql_backup_admin_password
+  postgresql_sku_name       = var.postgresql_sku_name
+  postgresql_admin_login    = var.postgresql_admin_login
+  postgresql_admin_password = var.postgresql_admin_password
+
+  postgresql_public_network_access_enabled = var.postgresql_public_network_access_enabled
 }
 
 # Subnet dedicated to provide internal access From Finesse to protected services from Dev

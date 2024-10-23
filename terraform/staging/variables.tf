@@ -256,12 +256,16 @@ variable "postgresql_sku_name" {
   type = string
 }
 
-variable "postgresql_backup_admin_login" {
+variable "postgresql_admin_login" {
   type = string
 }
 
-variable "postgresql_backup_admin_password" {
+variable "postgresql_admin_password" {
   type = string
+}
+
+variable "postgresql_public_network_access_enabled" {
+  type = bool
 }
 
 # variable "vm_rg_name" {
