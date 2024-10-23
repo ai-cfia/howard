@@ -21,7 +21,7 @@ metadata:
   name: phoenix-pgsql-secret
   annotations:
     avp.kubernetes.io/path: "kv/data/phoenix"
-    avp.kubernetes.io/secret-version: "1"
+    avp.kubernetes.io/secret-version: "3"
 type: kubernetes.io/basic-auth
 stringData:
   password: <USER_PASSWORD>
@@ -33,7 +33,7 @@ metadata:
   name: superuser-secret
   annotations:
     avp.kubernetes.io/path: "kv/data/phoenix"
-    avp.kubernetes.io/secret-version: "1"
+    avp.kubernetes.io/secret-version: "3"
 type: kubernetes.io/basic-auth
 stringData:
   password: <SUPERUSER_PASSWORD>

@@ -62,7 +62,7 @@ metadata:
   name: phoenix-app
   annotations:
     avp.kubernetes.io/path: "kv/data/phoenix"
-    avp.kubernetes.io/secret-version: "2"
+    avp.kubernetes.io/secret-version: "3"
 type: Opaque
 stringData:
   pgurl: <PGURL>
