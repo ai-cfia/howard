@@ -240,6 +240,30 @@ variable "backup_label_selectors" {
   default     = []
 }
 
+variable "postgresql_server_name" {
+  type = string
+}
+
+variable "postgresql_rg_location" {
+  type = string
+}
+
+variable "postgresql_rg_name" {
+  type = string
+}
+
+variable "postgresql_sku_name" {
+  type = string
+}
+
+variable "postgresql_backup_admin_login" {
+  type = string
+}
+
+variable "postgresql_backup_admin_password" {
+  type = string
+}
+
 # variable "vm_rg_name" {
 #   type        = string
 #   description = "The resource group name for each vm's"

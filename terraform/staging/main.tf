@@ -114,7 +114,6 @@ module "aks-cluster-0" {
   sku_tier = var.sku_tier
 
   # Backup's configuration
-  resource_group_id                   = azurerm_resource_group.rg.id
   azure_backup_vault_name             = var.azure_backup_vault_name
   azure_backup_datastore_type         = var.azure_backup_datastore_type
   azure_backup_redundancy             = var.azure_backup_redundancy
@@ -184,6 +183,17 @@ module "vault" {
   providers = {
     kubernetes = kubernetes
   }
+}
+
+module "fertiscan-postgresql-server" {
+  source                 = "../modules/azure-postgresql-server"
+  postgresql_server_name = var.postgresql_server_name
+  postgresql_rg_location = var.postgresql_rg_location
+  postgresql_rg_name     = var.postgresql_rg_name
+
+  postgresql_sku_name              = var.postgresql_sku_name
+  postgresql_backup_admin_login    = var.postgresql_backup_admin_login
+  postgresql_backup_admin_password = var.postgresql_backup_admin_password
 }
 
 # Subnet dedicated to provide internal access From Finesse to protected services from Dev
