@@ -62,7 +62,7 @@ metadata:
   name: phoenix-app
   annotations:
     avp.kubernetes.io/path: "kv/data/phoenix"
-    avp.kubernetes.io/secret-version: "1"
+    avp.kubernetes.io/secret-version: "2"
 type: kubernetes.io/basic-auth
 stringData:
   pgurl: <PGURL>
