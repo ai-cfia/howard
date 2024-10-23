@@ -267,7 +267,6 @@ variable "postgresql_admin_password" {
 variable "postgresql_public_network_access_enabled" {
   type = bool
 }
-
 # variable "vm_rg_name" {
 #   type        = string
 #   description = "The resource group name for each vm's"
