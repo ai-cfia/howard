@@ -30,7 +30,7 @@ spec:
             - name: PHOENIX_PORT
               value: "6006"
             - name: PHOENIX_SQL_DATABASE_URL
-              from:
+              valueFrom:
                 secretKeyRef:
                   key: pgurl
                   name: phoenix-app
