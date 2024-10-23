@@ -8,3 +8,4 @@ resources:
   - argo-app-alloy.yaml
   - argo-app-loki.yaml
   - argo-app-tempo.yaml
+  - argo-app-phoenix.yaml

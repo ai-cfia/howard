@@ -1,0 +1,40 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: phoenix-pgsql
+spec:
+  instances: 1
+  superuserSecret:
+    name: superuser-secret
+  bootstrap:
+    initdb:
+      database: phoenix
+      owner: phoenix
+      secret:
+        name: phoenix-pgsql-secret
+  storage:
+    size: 8Gi
+---
+kind: Secret
+apiVersion: v1
+metadata:
+  name: phoenix-pgsql-secret
+  annotations:
+    avp.kubernetes.io/path: "kv/data/phoenix"
+    avp.kubernetes.io/secret-version: "1"
+type: kubernetes.io/basic-auth
+stringData:
+  password: <USER_PASSWORD>
+  username: <USER_USERNAME>
+---
+kind: Secret
+apiVersion: v1
+metadata:
+  name: superuser-secret
+  annotations:
+    avp.kubernetes.io/path: "kv/data/phoenix"
+    avp.kubernetes.io/secret-version: "1"
+type: kubernetes.io/basic-auth
+stringData:
+  password: <SUPERUSER_PASSWORD>
+  username: <SUPERUSER_USERNAME>
