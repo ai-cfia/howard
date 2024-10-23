@@ -21,7 +21,7 @@ variable "postgresql_sku_name" {
 
 variable "postgresql_storage_mb" {
   type    = number
-  default = 640000
+  default = 32768
 }
 
 variable "postgresql_auto_grow" {
