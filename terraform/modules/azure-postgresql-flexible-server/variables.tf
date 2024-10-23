@@ -24,11 +24,6 @@ variable "postgresql_storage_mb" {
   default = 640000
 }
 
-variable "postgresql_storage_tier" {
-  type    = string
-  default = "P30"
-}
-
 variable "postgresql_auto_grow" {
   type    = bool
   default = false
