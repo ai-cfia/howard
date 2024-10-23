@@ -63,6 +63,6 @@ metadata:
   annotations:
     avp.kubernetes.io/path: "kv/data/phoenix"
     avp.kubernetes.io/secret-version: "2"
-type: kubernetes.io/basic-auth
+type: Opaque
 stringData:
   pgurl: <PGURL>
