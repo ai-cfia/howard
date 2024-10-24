@@ -84,13 +84,12 @@ spec:
             - name: uploads
               mountPath: /srv/uploads
             - name: filebrowser-db
-              mountPath: /database.db
-              subPath: database.db
+              mountPath: /db
           command:
             - "/bin/sh"
             - "-c"
             - |
-              [ ! -f /database.db ] && touch /database.db && \
+              [ ! -f /db/database.db ] && touch /db/database.db && \
               /filebrowser config set --auth.method=proxy --auth.header=X-Vouch-Token && \
               /filebrowser -r /srv -d /database.db
       volumes:
