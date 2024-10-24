@@ -83,16 +83,13 @@ spec:
               mountPath: /srv/logs
             - name: uploads
               mountPath: /srv/uploads
-            - name: filebrowser-config
-              mountPath: /.filebrowser.json
             - name: filebrowser-db
               mountPath: /database.db
+              subPath: database.db
           command:
             - "/bin/sh"
             - "-c"
             - |
-              # Configure File Browser with proxy authentication
-              filebrowser config set --auth.method=proxy --auth.header=X-Vouch-Token && \
               filebrowser -r /srv -d /database.db
       volumes:
         - name: tmp
@@ -103,8 +100,6 @@ spec:
         - name: uploads
           persistentVolumeClaim:
             claimName: fertiscan-uploads-pvc
-        - name: filebrowser-config
-          emptyDir: {}
         - name: filebrowser-db
           emptyDir: {}
 ---
