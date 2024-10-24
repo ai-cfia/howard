@@ -103,7 +103,7 @@ spec:
             claimName: fertiscan-uploads-pvc
         - name: filebrowser-db
           persistentVolumeClaim:
-            claimName: fertiscan-db-pvc
+            claimName: filebrowser-db-pvc
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -131,7 +131,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: fertiscan-db-pvc
+  name: filebrowser-db-pvc
 spec:
   accessModes:
     - ReadWriteOnce
