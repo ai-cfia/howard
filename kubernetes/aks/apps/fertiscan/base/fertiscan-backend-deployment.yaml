@@ -114,7 +114,7 @@ metadata:
   name: fertiscan-logs-pvc
 spec:
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
   resources:
     requests:
       storage: 2Gi
@@ -126,7 +126,7 @@ metadata:
   name: fertiscan-uploads-pvc
 spec:
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
   resources:
     requests:
       storage: 2Gi
