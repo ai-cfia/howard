@@ -103,7 +103,8 @@ spec:
           persistentVolumeClaim:
             claimName: fertiscan-uploads-pvc
         - name: filebrowser-db
-          emptyDir: {}
+          persistentVolumeClaim:
+            claimName: fertiscan-db-pvc
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -127,7 +128,17 @@ spec:
   resources:
     requests:
       storage: 2Gi
-
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: fertiscan-db-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
 ---
 apiVersion: policy/v1
 kind: PodDisruptionBudget
