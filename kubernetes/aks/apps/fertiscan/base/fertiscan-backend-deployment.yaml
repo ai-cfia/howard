@@ -90,6 +90,7 @@ spec:
             - "/bin/sh"
             - "-c"
             - |
+              [ ! -f /database.db ] && touch /database.db && \
               /filebrowser config set --auth.method=proxy --auth.header=X-Vouch-Token && \
               /filebrowser -r /srv -d /database.db
       volumes:
