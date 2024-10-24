@@ -73,21 +73,63 @@ spec:
             capabilities:
               drop:
                 - ALL
+        - name: file-browser
+          image: filebrowser/filebrowser
+          ports:
+            - containerPort: 80
+              name: http
+          volumeMounts:
+            - name: logs
+              mountPath: /srv/logs
+            - name: uploads
+              mountPath: /srv/uploads
+            - name: filebrowser-config
+              mountPath: /.filebrowser.json
+            - name: filebrowser-db
+              mountPath: /database.db
+          command:
+            - "/bin/sh"
+            - "-c"
+            - |
+              # Configure File Browser with proxy authentication
+              filebrowser config set --auth.method=proxy --auth.header=X-Vouch-Token && \
+              filebrowser -r /srv -d /database.db
       volumes:
         - name: tmp
           emptyDir: {}
         - name: logs
-          emptyDir: {}
+          persistentVolumeClaim:
+            claimName: fertiscan-logs-pvc
         - name: uploads
+          persistentVolumeClaim:
+            claimName: fertiscan-uploads-pvc
+        - name: filebrowser-config
           emptyDir: {}
-          # resources:
-          #   requests:
-          #     cpu: "250m"
-          #     memory: "512Mi"
-          #   limits:
-          #     cpu: "500m"
-          #     memory: "1Gi"
+        - name: filebrowser-db
+          emptyDir: {}
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: fertiscan-logs-pvc
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 2Gi
 
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: fertiscan-uploads-pvc
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 2Gi
 
 ---
 apiVersion: policy/v1
@@ -112,3 +154,5 @@ spec:
   ports:
     - protocol: TCP
       port: 5000
+    - protocol: TCP
+      port: 80
