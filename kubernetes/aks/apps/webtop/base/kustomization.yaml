@@ -12,5 +12,4 @@ resources:
   - ../users/stavakoli/
   - ../users/tcardin/
   - ../users/wlemire/
-
   - tcardin-webtop-secrets.yaml
