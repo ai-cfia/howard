@@ -3,38 +3,12 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 resources:
-  - andjeutcha/andjeutcha-webtop-deployment.yaml
-  - andjeutcha/andjeutcha-webtop-ingress.yaml
-  - andjeutcha/andjeutcha-webtop-secrets.yaml
-
-  - gallagbe/gallagbe-webtop-deployment.yaml
-  - gallagbe/gallagbe-webtop-ingress.yaml
-  - gallagbe/gallagbe-webtop-secrets.yaml
-
-  - jbarbier/jbarbier-webtop-deployment.yaml
-  - jbarbier/jbarbier-webtop-ingress.yaml
-  - jbarbier/jbarbier-webtop-secrets.yaml
-
-  - jsantos/jsantos-webtop-deployment.yaml
-  - jsantos/jsantos-webtop-ingress.yaml
-  - jsantos/jsantos-webtop-secrets.yaml
-
-  - jtalbi/jtalbi-webtop-deployment.yaml
-  - jtalbi/jtalbi-webtop-ingress.yaml
-  - jtalbi/jtalbi-webtop-secrets.yaml
-
-  - spevraire/spevraire-webtop-deployment.yaml
-  - spevraire/spevraire-webtop-ingress.yaml
-  - spevraire/spevraire-webtop-secrets.yaml
-
-  - stavakoli/stavakoli-webtop-deployment.yaml
-  - stavakoli/stavakoli-webtop-ingress.yaml
-  - stavakoli/stavakoli-webtop-secrets.yaml
-
-  - tcardin/tcardin-webtop-deployment.yaml
-  - tcardin/tcardin-webtop-ingress.yaml
-  - tcardin/tcardin-webtop-secrets.yaml
-
-  - wlemire/wlemire-webtop-deployment.yaml
-  - wlemire/wlemire-webtop-ingress.yaml
-  - wlemire/wlemire-webtop-secrets.yaml
+  - ../users/andjeutcha/
+  - ../users/gallagbe/
+  - ../users/jbarbier/
+  - ../users/jsantos/
+  - ../users/jtalbi/
+  - ../users/spevraire/
+  - ../users/stavakoli/
+  - ../users/tcardin/
+  - ../users/wlemire/
