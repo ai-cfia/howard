@@ -17,16 +17,38 @@ spec:
         image: linuxserver/webtop:ubuntu-kde
         ports:
         - containerPort: 3000
+        env:
+        - name: DOCKER_HOST
+          value: "tcp://localhost:2375"
+        - name: DOCKER_TLS_CERTDIR
+          value: ""
         envFrom:
         - secretRef:
             name: fwerbrouck-webtop-secrets
         volumeMounts:
         - name: config
           mountPath: /config
+      - name: docker-dind
+        image: docker:dind
+        securityContext:
+          privileged: true
+        ports:
+        - containerPort: 2375
+        env:
+        - name: DOCKER_TLS_CERTDIR
+          value: ""
+        args:
+        - "--host=tcp://0.0.0.0:2375"
+        - "--tls=false"
+        volumeMounts:
+        - name: docker-graph-storage
+          mountPath: /var/lib/docker
       volumes:
       - name: config
         persistentVolumeClaim:
           claimName: fwerbrouck-webtop-config-pvc
+      - name: docker-graph-storage
+        emptyDir: {}
 
 ---
 apiVersion: v1

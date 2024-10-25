@@ -17,16 +17,38 @@ spec:
         image: ghcr.io/ai-cfia/webtop-ubuntu-kde:main
         ports:
         - containerPort: 3000
+        env:
+        - name: DOCKER_HOST
+          value: "tcp://localhost:2375"
+        - name: DOCKER_TLS_CERTDIR
+          value: ""
         envFrom:
         - secretRef:
             name: jtalbi-webtop-secrets
         volumeMounts:
         - name: config
           mountPath: /config
+      - name: docker-dind
+        image: docker:dind
+        securityContext:
+          privileged: true
+        ports:
+        - containerPort: 2375
+        env:
+        - name: DOCKER_TLS_CERTDIR
+          value: ""
+        args:
+        - "--host=tcp://0.0.0.0:2375"
+        - "--tls=false"
+        volumeMounts:
+        - name: docker-graph-storage
+          mountPath: /var/lib/docker
       volumes:
       - name: config
         persistentVolumeClaim:
           claimName: jtalbi-webtop-config-pvc
+      - name: docker-graph-storage
+        emptyDir: {}
 
 ---
 apiVersion: v1
