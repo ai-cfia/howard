@@ -18,7 +18,7 @@ spec:
   tls:
     - hosts:
         - tcardin-webtop.inspection.alpha.canada.ca
-      secretName: webtop-tls
+      secretName: tcardin-webtop-tls
   rules:
     - host: tcardin-webtop.inspection.alpha.canada.ca
       http:

@@ -18,7 +18,7 @@ spec:
   tls:
     - hosts:
         - jtalbi-webtop.inspection.alpha.canada.ca
-      secretName: webtop-tls
+      secretName: jtalbi-webtop-tls
   rules:
     - host: jtalbi-webtop.inspection.alpha.canada.ca
       http:

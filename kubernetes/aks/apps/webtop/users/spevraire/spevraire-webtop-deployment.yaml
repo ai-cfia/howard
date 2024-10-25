@@ -26,7 +26,7 @@ spec:
       volumes:
       - name: config
         persistentVolumeClaim:
-          claimName: webtop-config-pvc
+          claimName: spevraire-webtop-config-pvc
 
 ---
 apiVersion: v1

@@ -18,7 +18,7 @@ spec:
   tls:
     - hosts:
         - spevraire-webtop.inspection.alpha.canada.ca
-      secretName: webtop-tls
+      secretName: spevraire-webtop-tls
   rules:
     - host: spevraire-webtop.inspection.alpha.canada.ca
       http:

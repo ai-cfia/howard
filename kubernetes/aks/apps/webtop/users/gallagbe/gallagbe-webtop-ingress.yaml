@@ -18,7 +18,7 @@ spec:
   tls:
     - hosts:
         - gallagbe-webtop.inspection.alpha.canada.ca
-      secretName: webtop-tls
+      secretName: gallagbe-webtop-tls
   rules:
     - host: gallagbe-webtop.inspection.alpha.canada.ca
       http:

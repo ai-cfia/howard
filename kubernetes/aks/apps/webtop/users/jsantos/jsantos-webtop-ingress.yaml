@@ -18,7 +18,7 @@ spec:
   tls:
     - hosts:
         - jsantos-webtop.inspection.alpha.canada.ca
-      secretName: webtop-tls
+      secretName: jsantos-webtop-tls
   rules:
     - host: jsantos-webtop.inspection.alpha.canada.ca
       http:

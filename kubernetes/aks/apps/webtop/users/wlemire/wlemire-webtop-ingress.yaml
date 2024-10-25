@@ -18,7 +18,7 @@ spec:
   tls:
     - hosts:
         - wlemire-webtop.inspection.alpha.canada.ca
-      secretName: webtop-tls
+      secretName: wlemire-webtop-tls
   rules:
     - host: wlemire-webtop.inspection.alpha.canada.ca
       http:
