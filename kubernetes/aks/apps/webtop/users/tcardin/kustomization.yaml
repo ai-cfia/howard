@@ -5,3 +5,4 @@ kind: Kustomization
 resources:
   - tcardin-webtop-deployment.yaml
   - tcardin-webtop-ingress.yaml
+  - tcardin-webtop-secrets.yaml
