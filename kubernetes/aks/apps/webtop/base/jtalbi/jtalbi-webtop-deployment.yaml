@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jtalbi-webtop
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jtalbi-webtop
+  template:
+    metadata:
+      labels:
+        app: jtalbi-webtop
+    spec:
+      containers:
+      - name: webtop
+        image: linuxserver/webtop:ubuntu-kde
+        ports:
+        - containerPort: 3000
+        envFrom:
+        - secretRef:
+            name: jtalbi-webtop-secrets
+        volumeMounts:
+        - name: config
+          mountPath: /config
+      volumes:
+      - name: config
+        persistentVolumeClaim:
+          claimName: webtop-config-pvc
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: jtalbi-webtop-service
+spec:
+  type: ClusterIP
+  selector:
+    app: webtop
+  ports:
+  - protocol: TCP
+    port: 3000
+    targetPort: 3000
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: jtalbi-webtop-config-pvc
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
