@@ -3,12 +3,12 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 resources:
-  - ../users/andjeutcha/
-  - ../users/gallagbe/
-  - ../users/jbarbier/
-  - ../users/jsantos/
-  - ../users/jtalbi/
-  - ../users/spevraire/
-  - ../users/stavakoli/
-  - ../users/tcardin/
-  - ../users/wlemire/
+  - andjeutcha/
+  - gallagbe/
+  - jbarbier/
+  - jsantos/
+  - jtalbi/
+  - spevraire/
+  - stavakoli/
+  - tcardin/
+  - wlemire/
