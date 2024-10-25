@@ -36,7 +36,7 @@ metadata:
 spec:
   type: ClusterIP
   selector:
-    app: webtop
+    app: spevraire-webtop
   ports:
   - protocol: TCP
     port: 3000
