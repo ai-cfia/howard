@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: webtop
-        image: linuxserver/webtop:ubuntu-kde
+        image: ghcr.io/ai-cfia/webtop-ubuntu-kde:main
         ports:
         - containerPort: 3000
         envFrom:
