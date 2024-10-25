@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fwerbrouck-webtop
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fwerbrouck-webtop
+  template:
+    metadata:
+      labels:
+        app: fwerbrouck-webtop
+    spec:
+      containers:
+      - name: webtop
+        image: linuxserver/webtop:ubuntu-kde
+        ports:
+        - containerPort: 3000
+        envFrom:
+        - secretRef:
+            name: fwerbrouck-webtop-secrets
+        volumeMounts:
+        - name: config
+          mountPath: /config
+      volumes:
+      - name: config
+        persistentVolumeClaim:
+          claimName: fwerbrouck-webtop-config-pvc
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: fwerbrouck-webtop-service
+spec:
+  type: ClusterIP
+  selector:
+    app: fwerbrouck-webtop
+  ports:
+  - protocol: TCP
+    port: 3000
+    targetPort: 3000
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: fwerbrouck-webtop-config-pvc
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi

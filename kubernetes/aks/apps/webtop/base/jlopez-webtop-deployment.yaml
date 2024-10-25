@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jlopez-webtop
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jlopez-webtop
+  template:
+    metadata:
+      labels:
+        app: jlopez-webtop
+    spec:
+      containers:
+      - name: webtop
+        image: linuxserver/webtop:ubuntu-kde
+        ports:
+        - containerPort: 3000
+        envFrom:
+        - secretRef:
+            name: jlopez-webtop-secrets
+        volumeMounts:
+        - name: config
+          mountPath: /config
+      volumes:
+      - name: config
+        persistentVolumeClaim:
+          claimName: jlopez-webtop-config-pvc
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: jlopez-webtop-service
+spec:
+  type: ClusterIP
+  selector:
+    app: jlopez-webtop
+  ports:
+  - protocol: TCP
+    port: 3000
+    targetPort: 3000
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: jlopez-webtop-config-pvc
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
