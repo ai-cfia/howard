@@ -50,8 +50,9 @@ spec:
             - "/bin/sh"
             - "-c"
             - |
-              /filebrowser -r /srv -d /db/database.db && \
-              /filebrowser config set --auth.method=proxy --auth.header=X-Vouch-Token
+              /filebrowser config set --auth.method=proxy --auth.header=X-Vouch-Token -d /db/database.db \
+              /filebrowser -r /srv -d /db/database.db
+
       volumes:
         - name: shared-db
           emptyDir: {}
