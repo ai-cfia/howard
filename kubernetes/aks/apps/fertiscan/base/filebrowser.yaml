@@ -21,11 +21,16 @@ spec:
             - "/bin/sh"
             - "-c"
             - |
-              echo "Initializing Filebrowser database";
-              /filebrowser config init -d /db/database.db
+              if [ ! -f /shared/database.db ]; then
+                echo "Initializing Filebrowser database";
+                filebrowser config init -d /shared/database.db
+                echo "Database initialization completed."
+              else
+                echo "Database already initialized."
+              fi
           volumeMounts:
-            - name: filebrowser-db
-              mountPath: /db
+            - name: shared-db
+              mountPath: /shared
       containers:
         - name: file-browser
           image: filebrowser/filebrowser
@@ -33,14 +38,14 @@ spec:
             - containerPort: 80
               name: http
           volumeMounts:
+            - name: shared-db
+              mountPath: /db
             - name: logs
               mountPath: /srv/logs
               readOnly: true
             - name: uploads
               mountPath: /srv/uploads
               readOnly: true
-            - name: filebrowser-db
-              mountPath: /db
           command:
             - "/bin/sh"
             - "-c"
@@ -48,27 +53,14 @@ spec:
               /filebrowser config set --auth.method=proxy --auth.header=X-Vouch-Token && \
               /filebrowser -r /srv -d /db/database.db
       volumes:
+        - name: shared-db
+          emptyDir: {}
         - name: logs
           persistentVolumeClaim:
             claimName: fertiscan-logs-pvc
         - name: uploads
           persistentVolumeClaim:
             claimName: fertiscan-uploads-pvc
-        - name: filebrowser-db
-          persistentVolumeClaim:
-            claimName: filebrowser-db-pvc
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: filebrowser-db-pvc
-spec:
-  storageClassName: azurefile
-  accessModes:
-    - ReadWriteMany
-  resources:
-    requests:
-      storage: 1Gi
 ---
 apiVersion: v1
 kind: Service
