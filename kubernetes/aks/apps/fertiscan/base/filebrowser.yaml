@@ -50,7 +50,7 @@ spec:
             - "/bin/sh"
             - "-c"
             - |
-              /filebrowser config set --auth.method=proxy --auth.header=X-Vouch-Token -d /db/database.db \
+              /filebrowser -d /db/database.db config set --auth.method=proxy --auth.header=X-Vouch-Token  \
               /filebrowser -r /srv -d /db/database.db
 
       volumes:
