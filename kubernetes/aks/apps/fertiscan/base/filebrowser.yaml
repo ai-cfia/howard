@@ -14,19 +14,6 @@ spec:
       labels:
         app: filebrowser
     spec:
-      initContainers:
-        - name: init-db
-          image: alpine
-          command:
-            - "/bin/sh"
-            - "-c"
-            - |
-              if [ ! -f /db/database.db ]; then
-                touch /db/database.db && echo "Database file created";
-              fi
-          volumeMounts:
-            - name: filebrowser-db
-              mountPath: /db
       containers:
         - name: file-browser
           image: filebrowser/filebrowser
@@ -46,6 +33,10 @@ spec:
             - "/bin/sh"
             - "-c"
             - |
+              if [ ! -f /db/database.db ]; then
+                touch /db/database.db && echo "Database file created";
+                filebrowser config init
+              fi
               /filebrowser config set --auth.method=proxy --auth.header=X-Vouch-Token && \
               /filebrowser -r /srv -d /db/database.db
       volumes:
