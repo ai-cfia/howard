@@ -16,7 +16,7 @@ spec:
         instrumentation.opentelemetry.io/inject-python: "true"
     spec:
       affinity:
-        podAffinity:
+        podAntiAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
             - labelSelector:
                 matchExpressions:
@@ -88,20 +88,21 @@ kind: PersistentVolumeClaim
 metadata:
   name: fertiscan-logs-pvc
 spec:
+  storageClassName: azurefile
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   resources:
     requests:
       storage: 2Gi
-
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: fertiscan-uploads-pvc
 spec:
+  storageClassName: azurefile
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   resources:
     requests:
       storage: 2Gi
