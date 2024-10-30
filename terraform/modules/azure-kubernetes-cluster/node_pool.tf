@@ -7,7 +7,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "aks" {
   name                  = substr(each.key, 0, 12)
   vm_size               = each.value.vm_size
   os_disk_size_gb       = each.value.os_disk_size_gb
-  enable_auto_scaling   = each.value.enable_auto_scaling
+  auto_scaling_enabled  = each.value.enable_auto_scaling
   zones                 = each.value.zones
   node_count            = each.value.node_count
   min_count             = each.value.min_count
