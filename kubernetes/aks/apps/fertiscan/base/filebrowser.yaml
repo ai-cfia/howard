@@ -22,7 +22,7 @@ spec:
             - "-c"
             - |
               echo "Initializing Filebrowser database";
-              filebrowser config init -d /db/database.db
+              /filebrowser config init -d /db/database.db
           volumeMounts:
             - name: filebrowser-db
               mountPath: /db
