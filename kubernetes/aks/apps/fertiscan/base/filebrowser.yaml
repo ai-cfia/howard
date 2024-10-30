@@ -98,7 +98,7 @@ spec:
   tls:
     - hosts:
         - filebrowser.inspection.alpha.canada.ca
-      secretName: aciacfia-tls
+      secretName: filebrowser-aciacfia-tls
   rules:
     - host: filebrowser.inspection.alpha.canada.ca
       http:
