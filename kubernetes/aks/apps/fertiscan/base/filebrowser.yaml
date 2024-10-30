@@ -21,19 +21,6 @@ spec:
                 matchLabels:
                   app: fertiscan-backend
               topologyKey: "kubernetes.io/hostname"
-      initContainers:
-        - name: init-db
-          image: alpine
-          command:
-            - "/bin/sh"
-            - "-c"
-            - |
-              if [ ! -f /db/database.db ]; then
-                touch /db/database.db && echo "Database file created";
-              fi
-          volumeMounts:
-            - name: filebrowser-db
-              mountPath: /db
       containers:
         - name: file-browser
           image: filebrowser/filebrowser
