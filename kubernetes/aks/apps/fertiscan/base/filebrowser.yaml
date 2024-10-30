@@ -14,6 +14,15 @@ spec:
       labels:
         app: filebrowser
     spec:
+      affinity:
+        podAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: app
+                    operator: In
+                    values:
+                      - fertiscan-backend
       initContainers:
         - name: init-db
           image: alpine
