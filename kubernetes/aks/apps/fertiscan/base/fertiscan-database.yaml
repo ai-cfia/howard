@@ -20,7 +20,6 @@ spec:
     name: fertiscan-pgsql-superuser
 
   storage:
-    storageClassName: default
     size: 20Gi
 
   # TODO: Configure backup
