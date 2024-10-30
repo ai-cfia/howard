@@ -16,6 +16,14 @@ spec:
         instrumentation.opentelemetry.io/inject-python: "true"
     spec:
       affinity:
+        podAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: app
+                    operator: In
+                    values:
+                      - fertiscan-backend
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
