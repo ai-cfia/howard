@@ -110,6 +110,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: fertiscan-backend-svc
+                name: filebrowser-svc
                 port:
                   number: 80
