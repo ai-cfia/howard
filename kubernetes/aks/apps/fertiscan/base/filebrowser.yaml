@@ -14,6 +14,20 @@ spec:
       labels:
         app: filebrowser
     spec:
+      initContainers:
+        - name: init-filebrowser-db
+          image: filebrowser/filebrowser
+          command:
+            - "/bin/sh"
+            - "-c"
+            - |
+              if [ ! -f /db/database.db ]; then
+                echo "Initializing Filebrowser database";
+                filebrowser config init -d /db/database.db
+              fi
+          volumeMounts:
+            - name: filebrowser-db
+              mountPath: /db
       containers:
         - name: file-browser
           image: filebrowser/filebrowser
@@ -33,10 +47,6 @@ spec:
             - "/bin/sh"
             - "-c"
             - |
-              if [ ! -f /db/database.db ]; then
-                touch /db/database.db && echo "Database file created";
-                filebrowser config init
-              fi
               /filebrowser config set --auth.method=proxy --auth.header=X-Vouch-Token && \
               /filebrowser -r /srv -d /db/database.db
       volumes:
