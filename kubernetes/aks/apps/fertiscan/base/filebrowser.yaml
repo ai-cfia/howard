@@ -18,11 +18,9 @@ spec:
         podAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
             - labelSelector:
-                matchExpressions:
-                  - key: app
-                    operator: In
-                    values:
-                      - fertiscan-backend
+                matchLabels:
+                  app: fertiscan-backend
+              topologyKey: "kubernetes.io/hostname"
       initContainers:
         - name: init-db
           image: alpine
