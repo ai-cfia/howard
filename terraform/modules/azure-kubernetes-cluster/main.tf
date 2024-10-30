@@ -8,19 +8,18 @@ resource "azurerm_kubernetes_cluster" "k8s" {
   private_cluster_enabled = var.k8s_private_cluster_enabled
 
   default_node_pool {
-    name                = "main"
-    vm_size             = var.vm_size
-    vnet_subnet_id      = local.subnet_id
-    enable_auto_scaling = var.auto_scaling_default_node
-    zones               = var.zones
-    node_count          = var.node_count
-    min_count           = var.node_min_count
-    max_count           = var.node_max_count
-    max_pods            = var.max_pods
+    name                 = "main"
+    vm_size              = var.vm_size
+    vnet_subnet_id       = local.subnet_id
+    auto_scaling_enabled = var.auto_scaling_default_node
+    zones                = var.zones
+    node_count           = var.node_count
+    min_count            = var.node_min_count
+    max_count            = var.node_max_count
+    max_pods             = var.max_pods
   }
 
   azure_active_directory_role_based_access_control {
-    managed                = var.managed
     admin_group_object_ids = var.aks_admin_group_object_ids
     azure_rbac_enabled     = var.rbac_enabled
   }
