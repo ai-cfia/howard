@@ -24,8 +24,7 @@ spec:
               if [ ! -f /shared/database.db ]; then
                 echo "Initializing Filebrowser database";
                 /filebrowser config init -d /shared/database.db
-                sleep 15
-                /filebrowser config set --auth.method=proxy --auth.header=X-Vouch-Token -d /db/database.db
+                /filebrowser config set --auth.method=proxy --auth.header=X-Vouch-Token -d /shared/database.db
                 echo "Database initialization completed."
               else
                 echo "Database already initialized."
