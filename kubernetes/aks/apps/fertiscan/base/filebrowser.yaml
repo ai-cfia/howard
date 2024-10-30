@@ -34,14 +34,6 @@ spec:
             - name: uploads
               mountPath: /srv/uploads
               readOnly: true
-            - name: filebrowser-db
-              mountPath: /db
-          command:
-            - "/bin/sh"
-            - "-c"
-            - |
-              /filebrowser config set --auth.method=proxy --auth.header=X-Vouch-Token && \
-              /filebrowser -r /srv -d /db/database.db
       volumes:
         - name: logs
           persistentVolumeClaim:
@@ -49,21 +41,6 @@ spec:
         - name: uploads
           persistentVolumeClaim:
             claimName: fertiscan-uploads-pvc
-        - name: filebrowser-db
-          persistentVolumeClaim:
-            claimName: filebrowser-db-pvc
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: filebrowser-db-pvc
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 1Gi
-
 ---
 apiVersion: v1
 kind: Service
