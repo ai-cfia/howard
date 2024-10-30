@@ -64,12 +64,12 @@ kind: PersistentVolumeClaim
 metadata:
   name: filebrowser-db-pvc
 spec:
+  storageClassName: azurefile
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   resources:
     requests:
       storage: 1Gi
-
 ---
 apiVersion: v1
 kind: Service
