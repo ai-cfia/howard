@@ -1,0 +1,133 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fertiscan-backend-preview
+spec:
+  replicas: 2
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: fertiscan-backend-preview
+  template:
+    metadata:
+      labels:
+        app: fertiscan-backend-preview
+      annotations:
+        instrumentation.opentelemetry.io/inject-python: "true"
+    spec:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: app
+                    operator: In
+                    values:
+                      - fertiscan-backend-preview
+              topologyKey: "kubernetes.io/hostname"
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/role
+                    operator: In
+                    values:
+                      - agent
+      containers:
+        - name: fertiscan-backend-preview
+          image: ghcr.io/ai-cfia/fertiscan-backend:172-redirect-home-to-docs-fastapi
+          imagePullPolicy: Always
+          envFrom:
+            - secretRef:
+                name: fertiscan-backend-preview-secrets
+          env:
+            - name: OTEL_EXPORTER_OTLP_ENDPOINT
+              value: "http://alloy.monitoring.svc.cluster.local:4318"
+            - name: OTEL_TRACES_EXPORTER
+              value: "otlp"
+            - name: OTEL_METRICS_EXPORTER
+              value: "otlp"
+            - name: OTEL_PYTHON_LOG_CORRELATION
+              value: "true"
+            - name: OTEL_TRACES_SAMPLER
+              value: "always_on"
+            - name: OTEL_TRACES_SAMPLER_ARG
+              value: "1"
+            - name: OTEL_LOGS_EXPORTER
+              value: "otlp"
+          ports:
+            - containerPort: 5000
+          volumeMounts:
+            - name: logs
+              mountPath: /app/logs
+            - name: uploads
+              mountPath: /app/uploads
+            - name: tmp
+              mountPath: /cachedir_joblib
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+            runAsNonRoot: false
+            readOnlyRootFilesystem: false
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+      volumes:
+        - name: tmp
+          emptyDir: {}
+        - name: logs
+          persistentVolumeClaim:
+            claimName: fertiscan-logs-pvc
+        - name: uploads
+          persistentVolumeClaim:
+            claimName: fertiscan-uploads-pvc
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: fertiscan-logs-pvc
+spec:
+  storageClassName: azurefile
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 2Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: fertiscan-uploads-pvc
+spec:
+  storageClassName: azurefile
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 2Gi
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: fertiscan-backend-preview-pdb
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app: fertiscan-backend-preview
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: fertiscan-backend-preview-svc
+spec:
+  clusterIP: None
+  selector:
+    app: fertiscan-backend-preview
+  ports:
+    - protocol: TCP
+      port: 5000
+      targetPort: 5000
+      name: api

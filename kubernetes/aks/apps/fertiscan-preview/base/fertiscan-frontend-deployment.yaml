@@ -1,0 +1,90 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fertiscan-frontend-preview
+spec:
+  replicas: 2
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: fertiscan-frontend-preview
+  template:
+    metadata:
+      labels:
+        app: fertiscan-frontend-preview
+    spec:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 3000
+        fsGroup: 2000
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: app
+                    operator: In
+                    values:
+                      - fertiscan-frontend-preview
+              topologyKey: "kubernetes.io/hostname"
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/role
+                    operator: In
+                    values:
+                      - agent
+      containers:
+        - name: fertiscan-frontend-preview
+          image: ghcr.io/ai-cfia/fertiscan-frontend:v1.0.0
+          imagePullPolicy: Always
+          envFrom:
+            - secretRef:
+                name: fertiscan-frontend-preview-secrets
+          ports:
+            - containerPort: 3000
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 3000
+            initialDelaySeconds: 60
+            periodSeconds: 10
+          securityContext:
+            readOnlyRootFilesystem: true
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+          # resources:
+          #   requests:
+          #     cpu: "250m"
+          #     memory: "512Mi"
+          #   limits:
+          #     cpu: "500m"
+          #     memory: "1Gi"
+
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: fertiscan-frontend-preview-pdb
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app: fertiscan-frontend-preview
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: fertiscan-frontend-preview-svc
+spec:
+  clusterIP: None
+  selector:
+    app: fertiscan-frontend-preview
+  ports:
+    - protocol: TCP
+      port: 3000

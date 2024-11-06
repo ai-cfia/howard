@@ -11,6 +11,7 @@ resources:
   - ../librechat/
   - ../ailab/
   - ../fertiscan/
+  - ../fertiscan-preview/
   - ../webtop/
   - ../landing/
   - ../test-app/

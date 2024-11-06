@@ -1,0 +1,74 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: fertiscan-backend-preview-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/whitelist-source-range: 205.194.32.0/24,10.244.0.0/16,192.197.71.0/24
+    external-dns.alpha.kubernetes.io/target: inspection.alpha.canada.ca
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /$2  # https://kubernetes.github.io/ingress-nginx/examples/rewrite/
+    nginx.ingress.kubernetes.io/client_max_body_size: "200m"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "120"
+    kubernetes.io/tls-acme: "true"
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - fertiscan-preview.inspection.alpha.canada.ca
+      secretName: aciacfia-tls
+  rules:
+    - host: fertiscan-preview.inspection.alpha.canada.ca
+      http:
+        paths:
+          - path: /api(/|$)(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: fertiscan-backend-preview-svc
+                port:
+                  number: 5000
+---
+# For more information check https://github.com/nginxinc/kubernetes-ingress/issues/323
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: fertiscan-frontend-preview-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/whitelist-source-range: 205.194.32.0/24,10.244.0.0/16,192.197.71.0/24
+    external-dns.alpha.kubernetes.io/target: inspection.alpha.canada.ca
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    nginx.ingress.kubernetes.io/add-base-url: "true"
+    nginx.ingress.kubernetes.io/client_max_body_size: "200m"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "120"
+    kubernetes.io/tls-acme: "true"
+    # nginx.ingress.kubernetes.io/auth-url: https://vouch.inspection.alpha.canada.ca/validate
+    # nginx.ingress.kubernetes.io/auth-snippet: |
+    #   # these return values are used by the @error401 call
+    #   auth_request_set $auth_resp_jwt $upstream_http_x_vouch_jwt;
+    #   auth_request_set $auth_resp_err $upstream_http_x_vouch_err;
+    #   auth_request_set $auth_resp_failcount $upstream_http_x_vouch_failcount;
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - fertiscan-preview.inspection.alpha.canada.ca
+      secretName: fertiscan-tls
+  rules:
+    - host: fertiscan-preview.inspection.alpha.canada.ca
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: fertiscan-frontend-preview-svc
+                port:
+                  number: 3000
+          - path: /swagger(/|$)(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: fertiscan-backend-preview-svc
+                port:
+                  number: 5000
