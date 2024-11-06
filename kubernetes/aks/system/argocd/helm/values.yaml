@@ -320,6 +320,12 @@ configs:
       p, role:fertiscan, applications, sync, default/fertiscan, allow
       p, role:fertiscan, applications, override, default/fertiscan, allow
 
+      p, role:fertiscan, applications, create, default/fertiscan-preview, allow
+      p, role:fertiscan, applications, update, default/fertiscan-preview, allow
+      p, role:fertiscan, applications, delete, default/fertiscan-preview, allow
+      p, role:fertiscan, applications, sync, default/fertiscan-preview, allow
+      p, role:fertiscan, applications, override, default/fertiscan-preview, allow
+
       g, ai-cfia:devops, role:admin
       g, ai-cfia:finesse, role:finesse
       g, ai-cfia:nachet, role:nachet
