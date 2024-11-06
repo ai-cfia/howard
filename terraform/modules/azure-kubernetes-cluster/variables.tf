@@ -71,12 +71,6 @@ variable "k8s_version" {
   default     = "1.28"
 }
 
-variable "managed" {
-  description = "(Optional) Is this a managed Kubernetes Cluster? Default is true."
-  type        = bool
-  default     = true
-}
-
 variable "rbac_enabled" {
   description = "(Required) Is Role Based Access Control Enabled? Changing this forces a new resource to be created."
   type        = bool
