@@ -97,10 +97,10 @@ spec:
   ingressClassName: nginx
   tls:
     - hosts:
-        - filebrowser-preview.inspection.alpha.canada.ca
+        - filebrowser.inspection.alpha.canada.ca
       secretName: filebrowser-aciacfia-tls
   rules:
-    - host: filebrowser-preview.inspection.alpha.canada.ca
+    - host: filebrowser.inspection.alpha.canada.ca
       http:
         paths:
           - path: /
