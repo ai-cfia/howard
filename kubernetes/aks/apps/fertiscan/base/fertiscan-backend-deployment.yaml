@@ -35,7 +35,7 @@ spec:
                       - agent
       containers:
         - name: fertiscan-backend
-          image: ghcr.io/ai-cfia/fertiscan-backend:185-as-a-devops-i-want-to-make-sure-auto-instrumentation-is-fully-functional
+          image: ghcr.io/ai-cfia/fertiscan-backend:97090f718a56df3ffa276822b008864268965e62
           imagePullPolicy: Always
           envFrom:
             - secretRef:
