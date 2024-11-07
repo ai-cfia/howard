@@ -437,8 +437,7 @@ proved tedious. To overcome this challenge, we decided to adopt Infrastructure
 as Code (IaC) using Terraform. This approach allows us to manage and provision
 our cloud infrastructures via codified configuration files, thus eliminating the
 need for ClickOps and significantly reducing human errors.</p>
-<p>Regarding security, we initially adopted <a href="https://azure.microsoft.com/en-us/products/key-vault/">Azure Key
-Vault</a> for the manual
+<p>Regarding security, we initially adopted Azure Key Vault for the manual
 retrieval of environment variable values. However, recognizing the need for a
 more robust and versatile solution for secret management, we have evolved
 towards maintaining a HashiCorp Vault instance. This transition enables
