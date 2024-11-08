@@ -1,0 +1,16 @@
+name: Issue status
+
+on:
+  issues:
+    types: [opened, edited]
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
+  issue_comment:
+    types: [created, edited]
+  schedule:
+    - cron: '0 0 * * *'
+
+jobs:
+  issue-status:
+    uses: ai-cfia/github-workflows/.github/workflows/workflow-issue-status.yml@160-is-it-possible-to-automate-issue-statuses-in-the-project-boards
+    secrets: inherit
