@@ -1,29 +1,38 @@
----
 apiVersion: argoproj.io/v1alpha1
-kind: Application
+kind: ApplicationSet
 metadata:
-  name: vikunja
+  name: vikunja-appset
   namespace: argocd
-  finalizers:
-    - resources-finalizer.argocd.argoproj.io
 spec:
-  project: default
-  destination:
-    namespace: vikunja
-    server: https://kubernetes.default.svc
-  sources:
-    - chart: vikunja
-      helm:
-        releaseName: vikunja
-        valueFiles:
-          - $values/kubernetes/aks/apps/vikunja/helm/values.yaml
-      repoURL: oci://kolaente.dev/vikunja/vikunja
-      targetRevision: 0.4.3
-    - repoURL: https://github.com/ai-cfia/howard.git
-      targetRevision: HEAD
-      ref: values
-  syncPolicy:
-    automated:
-      selfHeal: true
-    syncOptions:
-      - CreateNamespace=true
+  generators:
+    - git:
+        repoURL: 'https://github.com/ai-cfia/howard.git'
+        revision: HEAD
+        files:
+          - path: "kubernetes/aks/apps/vikunja/helm/values.yaml"
+  template:
+    metadata:
+      name: 'vikunja-{{ path.basename }}'
+    spec:
+      project: default
+      destination:
+        namespace: vikunja
+        server: https://kubernetes.default.svc
+      sources:
+        - chart: vikunja
+          repoURL: oci://kolaente.dev/vikunja
+          targetRevision: 0.4.3
+          helm:
+            releaseName: vikunja
+            valueFiles:
+              - $values/kubernetes/aks/apps/vikunja/helm/values.yaml
+        - repoURL: 'https://github.com/ai-cfia/howard.git'
+          targetRevision: HEAD
+          ref: values
+      syncPolicy:
+        automated:
+          selfHeal: true
+          prune: true
+        syncOptions:
+          - CreateNamespace=true
+          - Replace=true
