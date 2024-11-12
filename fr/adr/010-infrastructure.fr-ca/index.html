@@ -441,13 +441,12 @@ décidé d'adopter l'Infrastructure as Code (IaC) en utilisant Terraform. Cette
 approche nous permet de gérer et de provisionner nos infrastructures cloud via
 des fichiers de configuration codifiés, éliminant ainsi le besoin de ClickOps et
 réduisant significativement les erreurs humaines.</p>
-<p>En ce qui concerne la sécurité, nous avions initialement adopté <a href="https://azure.microsoft.com/en-us/products/key-vault/">Azure Key
-Vault</a>  pour la
-récupération manuelle des valeurs des variables d'environnement. Cependant,
-reconnaissant la nécessité d'une solution plus robuste et polyvalente pour la
-gestion des secrets, nous avons évolué vers le maintien d'une instance de
-HashiCorp Vault. Cette transition permet une gestion centralisée des secrets et
-des identifiants à travers différents environnements et plateformes.</p>
+<p>En ce qui concerne la sécurité, nous avions initialement adopté Azure Key Vault
+pour la récupération manuelle des valeurs des variables d'environnement.
+Cependant, reconnaissant la nécessité d'une solution plus robuste et polyvalente
+pour la gestion des secrets, nous avons évolué vers le maintien d'une instance
+de HashiCorp Vault. Cette transition permet une gestion centralisée des secrets
+et des identifiants à travers différents environnements et plateformes.</p>
 <p>La mise à l'echelle de nos applications n'est pas actuellement une priorité, car
 nous avons une visibilité fixe sur le nombre d'utilisateurs. Cependant, nous
 n'avons pas encore mis en oeuvre de solution de mise à l'échelle.</p>
