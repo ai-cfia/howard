@@ -17,7 +17,7 @@ spec:
         releaseName: vikunja
         valueFiles:
           - $values/kubernetes/aks/apps/vikunja/helm/values.yaml
-      repoURL: oci://kolaente.dev/vikunja/vikunja
+      repoURL: kolaente.dev/vikunja/vikunja
       targetRevision: 0.4.3
     - repoURL: https://github.com/ai-cfia/howard.git
       targetRevision: HEAD
