@@ -42,9 +42,9 @@ api:
           paths:
             - path: "/api/v1"
       tls:
-      - hosts:
-          - vikunja.inspection.alpha.canada.ca
-        secretName: aciacfia-tls
+        - hosts:
+            - vikunja.inspection.alpha.canada.ca
+          secretName: aciacfia-tls
   configMaps:
     # The configuration for Vikunja's api.
     # https://vikunja.io/docs/config-options/
@@ -107,12 +107,12 @@ frontend:
           paths:
             - path: "/"
       tls:
-      - hosts:
-          - todo.inspection.alpha.canada.ca
-        secretName: aciacfia-tls
+        - hosts:
+            - todo.inspection.alpha.canada.ca
+          secretName: aciacfia-tls
   # You only need to provide the URL to the API as environment variable here if you deviate from the "built-in" ingress in the api section.
   env:
-   VIKUNJA_API_URL: https://todo.inspection.alpha.canada.ca/api
+    VIKUNJA_API_URL: https://todo.inspection.alpha.canada.ca/api
 
 ##########################
 # END VIKUNJA COMPONENTS #
