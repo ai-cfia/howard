@@ -122,7 +122,7 @@ continuité en cas d'incidents.
 ## Références
 
 - [Microsoft Azure Backup](https://azure.microsoft.com/en-us/products/backup/)
-- [Azure Kubernetes Service (AKS)](https://azure.microsoft.com/en-us/products/kubernetes-service)
+- Azure Kubernetes Service (AKS):<https://azure.microsoft.com/en-us/products/kubernetes-service>
 - [Velero](https://github.com/vmware-tanzu/velero)
 - [Restic](https://github.com/restic/restic)
 - [Stash](https://github.com/stashed/stash)

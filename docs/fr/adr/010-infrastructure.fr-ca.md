@@ -37,13 +37,12 @@ approche nous permet de gérer et de provisionner nos infrastructures cloud via
 des fichiers de configuration codifiés, éliminant ainsi le besoin de ClickOps et
 réduisant significativement les erreurs humaines.
 
-En ce qui concerne la sécurité, nous avions initialement adopté [Azure Key
-Vault](https://azure.microsoft.com/en-us/products/key-vault/)  pour la
-récupération manuelle des valeurs des variables d'environnement. Cependant,
-reconnaissant la nécessité d'une solution plus robuste et polyvalente pour la
-gestion des secrets, nous avons évolué vers le maintien d'une instance de
-HashiCorp Vault. Cette transition permet une gestion centralisée des secrets et
-des identifiants à travers différents environnements et plateformes.
+En ce qui concerne la sécurité, nous avions initialement adopté Azure Key Vault
+pour la récupération manuelle des valeurs des variables d'environnement.
+Cependant, reconnaissant la nécessité d'une solution plus robuste et polyvalente
+pour la gestion des secrets, nous avons évolué vers le maintien d'une instance
+de HashiCorp Vault. Cette transition permet une gestion centralisée des secrets
+et des identifiants à travers différents environnements et plateformes.
 
 La mise à l'echelle de nos applications n'est pas actuellement une priorité, car
 nous avons une visibilité fixe sur le nombre d'utilisateurs. Cependant, nous
