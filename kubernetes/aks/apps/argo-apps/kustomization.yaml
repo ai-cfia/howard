@@ -16,6 +16,7 @@ resources:
   - ../landing/
   - ../test-app/
   - ../demo/auto/
+  - ../vikunja/
 
   # System applications
   - ../../system/cert-manager/
