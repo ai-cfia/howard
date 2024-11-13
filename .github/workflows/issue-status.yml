@@ -2,11 +2,19 @@ name: Issue status
 
 on:
   issues:
-    types: [opened, edited]
+    types:
+      - opened
+      - edited
+      - closed
+      - deleted
   pull_request:
-    types: [opened, synchronize, reopened, closed]
-  issue_comment:
-    types: [created, edited]
+    types:
+      - opened
+      - synchronize
+      - reopened
+      - closed
+      - ready_for_review
+      - converted_to_draft
 
 jobs:
   issue-status:
