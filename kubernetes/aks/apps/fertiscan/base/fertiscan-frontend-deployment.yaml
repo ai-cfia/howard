@@ -63,7 +63,7 @@ spec:
           #     memory: "512Mi"
           #   limits:
           #     cpu: "500m"
-          #     memory: "1Gi"
+          #     memory: "1024Mi"
 
 ---
 apiVersion: policy/v1
