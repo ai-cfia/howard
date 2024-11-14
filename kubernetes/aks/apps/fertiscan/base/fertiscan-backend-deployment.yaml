@@ -87,7 +87,6 @@ spec:
             capabilities:
               drop:
                 - ALL
-          re
       volumes:
         - name: tmp
           emptyDir: {}
