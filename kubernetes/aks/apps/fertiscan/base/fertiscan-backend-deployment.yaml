@@ -35,7 +35,7 @@ spec:
                       - agent
       containers:
         - name: fertiscan-backend
-          image: ghcr.io/ai-cfia/fertiscan-backend:97090f718a56df3ffa276822b008864268965e62
+          image: ghcr.io/ai-cfia/fertiscan-backend:200-as-a-developer-i-would-like-to-test-instrumentation-with-local-environment-setup
           imagePullPolicy: Always
           envFrom:
             - secretRef:
