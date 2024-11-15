@@ -1,4 +1,4 @@
-name: Issue status
+name: Project issue status workflow
 
 on:
   issues:
@@ -15,5 +15,5 @@ on:
 
 jobs:
   issue-status:
-    uses: ai-cfia/github-workflows/.github/workflows/workflow-issue-status.yml@160-is-it-possible-to-automate-issue-statuses-in-the-project-boards
+    uses: ai-cfia/github-workflows/.github/workflows/workflow-issue-status.yml@main
     secrets: inherit
