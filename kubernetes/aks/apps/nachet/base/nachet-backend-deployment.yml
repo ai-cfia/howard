@@ -44,7 +44,7 @@ spec:
                       - agent
       containers:
         - name: nachet-backend
-          image: ghcr.io/ai-cfia/nachet-backend:main
+          image: ghcr.io/ai-cfia/nachet-backend:129-Autologin-uuid
           imagePullPolicy: Always
           command: ["/bin/sh", "-c"]
           args: ['hypercorn -b :8080 app:app']

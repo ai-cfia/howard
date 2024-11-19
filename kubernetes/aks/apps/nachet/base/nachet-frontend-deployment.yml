@@ -44,7 +44,7 @@ spec:
                       - agent
       containers:
         - name: nachet-frontend
-          image: ghcr.io/ai-cfia/nachet-frontend:191-User-Autologin
+          image: ghcr.io/ai-cfia/nachet-frontend:193-autologin-uuid-b
           imagePullPolicy: Always
           command: ["/bin/sh", "-c"]
           args: [serve -s build]
