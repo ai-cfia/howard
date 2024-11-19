@@ -47,16 +47,16 @@ spec:
           image: ghcr.io/ai-cfia/nachet-model:29-Model-SelfServe-Flask  # This is a placeholder
           imagePullPolicy: Always
           command: ["/bin/sh", "-c"]
-          args: ['hypercorn -b :8080 app:app']
+          args: ['azmlinfsrv --entry_script /app/scoring_file_v_1_0_0.py']
           envFrom:
             - secretRef:
                 name: nachet-rcnn-detector-secrets
           ports:
-            - containerPort: 8080
+            - containerPort: 12389
           livenessProbe:
             httpGet:
-              path: /health
-              port: 8080
+              path: /score
+              port: 12380
             initialDelaySeconds: 60
             periodSeconds: 10
           resources:
