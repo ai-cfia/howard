@@ -4,7 +4,7 @@ metadata:
   name: nachet-rcnn-detector
   namespace: nachet
 spec:
-  replicas: 2
+  replicas: 1
   revisionHistoryLimit: 3
   selector:
     matchLabels:
@@ -44,7 +44,7 @@ spec:
                       - agent
       containers:
         - name: nachet-rcnn-detector
-          image: ghcr.io/ai-cfia/nachet-backend:129-Autologin-uuid # This is a placeholder
+          image: ghcr.io/ai-cfia/nachet-model:129-Autologin-uuid  # This is a placeholder
           imagePullPolicy: Always
           command: ["/bin/sh", "-c"]
           args: ['hypercorn -b :8080 app:app']
