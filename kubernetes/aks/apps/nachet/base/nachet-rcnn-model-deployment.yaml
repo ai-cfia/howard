@@ -44,7 +44,7 @@ spec:
                       - agent
       containers:
         - name: nachet-rcnn-detector
-          image: ghcr.io/ai-cfia/nachet-model:29-Model-SelfServe-Flask  # This is a placeholder
+          image: ghcr.io/ai-cfia/nachet-model:29-azureml-seed-detector
           imagePullPolicy: Always
           command: ["/bin/sh", "-c"]
           args: ['azmlinfsrv --entry_script /app/scoring_file_v_1_0_0.py']
