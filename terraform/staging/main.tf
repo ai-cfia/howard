@@ -92,7 +92,6 @@ module "aks-cluster-0" {
   node_min_count            = var.node_min_count
   node_max_count            = var.node_max_count
 
-  managed                    = var.managed
   rbac_enabled               = var.rbac_enabled
   aks_admin_group_object_ids = var.aks_admin_group_object_ids
   # ad_groups                  = var.ad_groups
