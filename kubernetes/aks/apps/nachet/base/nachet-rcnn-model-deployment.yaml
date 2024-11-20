@@ -19,15 +19,6 @@ spec:
       labels:
         app: nachet-rcnn-detector
     spec:
-      securityContext:
-        runAsNonRoot: false
-        runAsUser: 1000
-        runAsGroup: 1000
-        readOnlyRootFilesystem: false
-        allowPrivilegeEscalation: false
-        capabilities:
-          drop:
-            - ALL
       affinity:
         podAntiAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
@@ -76,7 +67,10 @@ spec:
               cpu: "500m"
               memory: "2Gi"
           securityContext:
-            readOnlyRootFilesystem: true
+            runAsNonRoot: false
+            runAsUser: 1000
+            runAsGroup: 1000
+            readOnlyRootFilesystem: false
             allowPrivilegeEscalation: false
             capabilities:
               drop:
