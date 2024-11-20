@@ -52,11 +52,11 @@ spec:
             - secretRef:
                 name: nachet-rcnn-detector-secrets
           ports:
-            - containerPort: 12389
+            - containerPort: 5001
           livenessProbe:
             httpGet:
               path: /score
-              port: 12380
+              port: 5001
             initialDelaySeconds: 60
             periodSeconds: 10
           resources:
@@ -97,4 +97,4 @@ spec:
     app: nachet-rcnn-detector
   ports:
     - protocol: TCP
-      port: 8080
+      port: 5001
