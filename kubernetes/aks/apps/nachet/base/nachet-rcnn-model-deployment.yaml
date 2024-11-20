@@ -49,10 +49,10 @@ spec:
           ports:
             - containerPort: 5001
           volumeMounts:
-            # - name: logs
-            #   mountPath: /app/logs
+            - name: logs
+              mountPath: /app/logs
             - name: tmp
-              mountPath: /tmp
+              mountPath: /app/tmp
           livenessProbe:
             httpGet:
               path: /score
@@ -77,28 +77,17 @@ spec:
                 - ALL
       volumes:
         - name: tmp
+          emptyDir:
+            medium: Memory
+            sizeLimit: 500Mi
+        - name: logs
           persistentVolumeClaim:
-            claimName: nachet-tmp-pvc
-        # - name: logs
-        #   persistentVolumeClaim:
-        #     claimName: nachet-logs-pvc
-# ---
-# apiVersion: v1
-# kind: PersistentVolumeClaim
-# metadata:
-#   name: nachet-logs-pvc
-# spec:
-#   storageClassName: azurefile
-#   accessModes:
-#     - ReadWriteMany
-#   resources:
-#     requests:
-#       storage: 2Gi
+            claimName: nachet-logs-pvc
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: nachet-tmp-pvc
+  name: nachet-logs-pvc
 spec:
   storageClassName: azurefile
   accessModes:
@@ -106,6 +95,18 @@ spec:
   resources:
     requests:
       storage: 2Gi
+# ---
+# apiVersion: v1
+# kind: PersistentVolumeClaim
+# metadata:
+#   name: nachet-tmp-pvc
+# spec:
+#   storageClassName: azurefile
+#   accessModes:
+#     - ReadWriteMany
+#   resources:
+#     requests:
+#       storage: 2Gi
 ---
 apiVersion: policy/v1
 kind: PodDisruptionBudget
