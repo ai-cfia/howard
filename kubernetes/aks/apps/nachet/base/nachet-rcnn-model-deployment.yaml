@@ -20,10 +20,14 @@ spec:
         app: nachet-rcnn-detector
     spec:
       securityContext:
-        runAsNonRoot: true
+        runAsNonRoot: false
         runAsUser: 1000
-        runAsGroup: 3000
-        fsGroup: 2000
+        runAsGroup: 1000
+        readOnlyRootFilesystem: false
+        allowPrivilegeEscalation: false
+        capabilities:
+          drop:
+            - ALL
       affinity:
         podAntiAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
