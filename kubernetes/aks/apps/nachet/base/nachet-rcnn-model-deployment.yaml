@@ -51,7 +51,7 @@ spec:
           image: ghcr.io/ai-cfia/nachet-backend:29-azureml-seed-detector
           imagePullPolicy: Always
           command: ["/bin/sh", "-c"]
-          args: ['azmlinfsrv --entry_script /app/scoring_file_v_1_0_0.py']
+          args: ['cp -r /project/* /app/ && azmlinfsrv --entry_script /artifacts/scoring_file_v_1_0_0.py']
           envFrom:
             - secretRef:
                 name: nachet-rcnn-detector-secrets
@@ -61,7 +61,7 @@ spec:
             - name: logs
               mountPath: /app/logs
             - name: tmp
-              mountPath: /tmp
+              mountPath: /app
           livenessProbe:
             httpGet:
               path: /score
