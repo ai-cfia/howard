@@ -53,6 +53,9 @@ spec:
                 name: nachet-rcnn-detector-secrets
           ports:
             - containerPort: 5001
+          volumeMounts:
+            - name: tmp
+              mountPath: /tmp
           livenessProbe:
             httpGet:
               path: /score
@@ -72,7 +75,22 @@ spec:
             capabilities:
               drop:
                 - ALL
-
+      volumes:
+        - name: tmp
+          persistentVolumeClaim:
+            claimName: nachet-tmp-pvc
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nachet-tmp-pvc
+spec:
+  storageClassName: azurefile
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 2Gi
 ---
 apiVersion: policy/v1
 kind: PodDisruptionBudget
