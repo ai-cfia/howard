@@ -77,8 +77,20 @@ spec:
                 - ALL
       volumes:
         - name: tmp
-          emptyDir: {}
-
+          persistentVolumeClaim:
+            claimName: nachet-tmp-pvc
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nachet-tmp-pvc
+spec:
+  storageClassName: azurefile
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 2Gi
 ---
 apiVersion: policy/v1
 kind: PodDisruptionBudget
