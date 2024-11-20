@@ -196,8 +196,8 @@ template:
             cpu: "4"
             memory: "8Gi"
           limits:
-            cpu: "8"
-            memory: "16Gi"
+            cpu: "4"
+            memory: "8Gi"
 
 ## Optional controller service account that needs to have required Role and RoleBinding
 ## to operate this gha-runner-scale-set installation.
