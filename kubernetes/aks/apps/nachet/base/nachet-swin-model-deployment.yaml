@@ -82,12 +82,12 @@ spec:
             sizeLimit: 500Mi
         - name: logs
           persistentVolumeClaim:
-            claimName: nachet-logs-pvc
+            claimName: nachet-swin-logs-pvc
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: nachet-logs-pvc
+  name: nachet-swin-logs-pvc
 spec:
   storageClassName: azurefile
   accessModes:
