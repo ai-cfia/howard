@@ -55,7 +55,7 @@ spec:
             - containerPort: 5001
           volumeMounts:
             - name: tmp
-              mountPath: /tmp
+              mountPath: /app
           livenessProbe:
             httpGet:
               path: /score
