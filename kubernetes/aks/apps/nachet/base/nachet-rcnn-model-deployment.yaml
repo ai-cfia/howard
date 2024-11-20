@@ -56,6 +56,8 @@ spec:
           volumeMounts:
             - name: logs
               mountPath: /app/logs
+            - name: tmp
+              mountPath: /tmp
           livenessProbe:
             httpGet:
               path: /score
@@ -76,6 +78,9 @@ spec:
               drop:
                 - ALL
       volumes:
+        - name: tmp
+          persistentVolumeClaim:
+            claimName: nachet-tmp-pvc
         - name: logs
           persistentVolumeClaim:
             claimName: nachet-logs-pvc
@@ -84,6 +89,18 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: nachet-logs-pvc
+spec:
+  storageClassName: azurefile
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 2Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nachet-tmp-pvc
 spec:
   storageClassName: azurefile
   accessModes:
