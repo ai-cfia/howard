@@ -1,14 +1,14 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nachet-rcnn-detector
+  name: nachet-swin-classifier
   namespace: nachet
 spec:
   replicas: 1
   revisionHistoryLimit: 3
   selector:
     matchLabels:
-      app: nachet-rcnn-detector
+      app: nachet-swin-classifier
   strategy:
     type: RollingUpdate
     rollingUpdate:
@@ -17,7 +17,7 @@ spec:
   template:
     metadata:
       labels:
-        app: nachet-rcnn-detector
+        app: nachet-swin-classifier
     spec:
       affinity:
         podAntiAffinity:
@@ -27,7 +27,7 @@ spec:
                   - key: app
                     operator: In
                     values:
-                      - nachet-rcnn-detector
+                      - nachet-swin-classifier
               topologyKey: "kubernetes.io/hostname"
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
@@ -38,14 +38,14 @@ spec:
                     values:
                       - agent
       containers:
-        - name: nachet-rcnn-detector
-          image: ghcr.io/ai-cfia/nachet-backend:29-azureml-seed-detector
+        - name: nachet-swin-classifier
+          image: ghcr.io/ai-cfia/nachet-backend:29-azureml-swin-classifier
           imagePullPolicy: Always
           command: ["/bin/sh", "-c"]
           args: ['./startup.sh']
           envFrom:
             - secretRef:
-                name: nachet-rcnn-detector-secrets
+                name: nachet-swin-classifier-secrets
           ports:
             - containerPort: 5001
           volumeMounts:
@@ -99,23 +99,23 @@ spec:
 apiVersion: policy/v1
 kind: PodDisruptionBudget
 metadata:
-  name: nachet-rcnn-detector-pdb
+  name: nachet-swin-classifier-pdb
   namespace: nachet
 spec:
   minAvailable: 1
   selector:
     matchLabels:
-      app: nachet-rcnn-detector
+      app: nachet-swin-classifier
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: nachet-rcnn-detector-svc
+  name: nachet-swin-classifier-svc
   namespace: nachet
 spec:
   clusterIP: None
   selector:
-    app: nachet-rcnn-detector
+    app: nachet-swin-classifier
   ports:
     - protocol: TCP
       port: 5001
