@@ -42,7 +42,7 @@ spec:
           image: ghcr.io/ai-cfia/nachet-backend:29-azureml-seed-detector
           imagePullPolicy: Always
           command: ["/bin/sh", "-c"]
-          args: ['./startup.sh']
+          args: ['/project/./startup.sh']
           envFrom:
             - secretRef:
                 name: nachet-rcnn-detector-secrets
