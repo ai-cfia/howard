@@ -44,8 +44,7 @@ spec:
                       - agent
       containers:
         - name: nachet-backend
-          image: ghcr.io/ai-cfia/nachet-backend:129-Autologin-uuid
-          imagePullPolicy: Always
+          image: ghcr.io/ai-cfia/nachet-backend:138-handle-vouch-missing-email
           command: ["/bin/sh", "-c"]
           args: ['hypercorn -b :8080 app:app']
           envFrom:
