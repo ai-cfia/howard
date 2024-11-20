@@ -42,17 +42,17 @@ spec:
           image: ghcr.io/ai-cfia/nachet-backend:29-azureml-seed-detector
           imagePullPolicy: Always
           command: ["/bin/sh", "-c"]
-          args: ['azmlinfsrv --entry_script /app/artifacts/scoring_file_v_1_0_0.py']
+          args: ['./startup.sh']
           envFrom:
             - secretRef:
                 name: nachet-rcnn-detector-secrets
           ports:
             - containerPort: 5001
           volumeMounts:
-            - name: logs
-              mountPath: /app/logs
+            # - name: logs
+            #   mountPath: /app/logs
             - name: tmp
-              mountPath: /tmp
+              mountPath: /app
           livenessProbe:
             httpGet:
               path: /score
@@ -79,21 +79,21 @@ spec:
         - name: tmp
           persistentVolumeClaim:
             claimName: nachet-tmp-pvc
-        - name: logs
-          persistentVolumeClaim:
-            claimName: nachet-logs-pvc
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: nachet-logs-pvc
-spec:
-  storageClassName: azurefile
-  accessModes:
-    - ReadWriteMany
-  resources:
-    requests:
-      storage: 2Gi
+        # - name: logs
+        #   persistentVolumeClaim:
+        #     claimName: nachet-logs-pvc
+# ---
+# apiVersion: v1
+# kind: PersistentVolumeClaim
+# metadata:
+#   name: nachet-logs-pvc
+# spec:
+#   storageClassName: azurefile
+#   accessModes:
+#     - ReadWriteMany
+#   resources:
+#     requests:
+#       storage: 2Gi
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
