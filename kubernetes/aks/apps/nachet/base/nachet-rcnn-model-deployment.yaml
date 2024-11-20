@@ -54,8 +54,8 @@ spec:
           ports:
             - containerPort: 5001
           volumeMounts:
-            - name: tmp
-              mountPath: /app
+            - name: logs
+              mountPath: /app/logs
           livenessProbe:
             httpGet:
               path: /score
@@ -76,14 +76,14 @@ spec:
               drop:
                 - ALL
       volumes:
-        - name: tmp
+        - name: logs
           persistentVolumeClaim:
-            claimName: nachet-tmp-pvc
+            claimName: nachet-logs-pvc
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: nachet-tmp-pvc
+  name: nachet-logs-pvc
 spec:
   storageClassName: azurefile
   accessModes:
