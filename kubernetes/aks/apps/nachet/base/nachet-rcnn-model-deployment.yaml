@@ -52,7 +52,7 @@ spec:
             # - name: logs
             #   mountPath: /app/logs
             - name: tmp
-              mountPath: /app
+              mountPath: /tmp
           livenessProbe:
             httpGet:
               path: /score
