@@ -1,14 +1,14 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nachet-swin-classifier
+  name: nachet-swin-classifier-22-spp
   namespace: nachet
 spec:
   replicas: 2
   revisionHistoryLimit: 3
   selector:
     matchLabels:
-      app: nachet-swin-classifier
+      app: nachet-swin-classifier-22-spp
   strategy:
     type: RollingUpdate
     rollingUpdate:
@@ -17,7 +17,7 @@ spec:
   template:
     metadata:
       labels:
-        app: nachet-swin-classifier
+        app: nachet-swin-classifier-22-spp
     spec:
       affinity:
         podAntiAffinity:
@@ -27,7 +27,7 @@ spec:
                   - key: app
                     operator: In
                     values:
-                      - nachet-swin-classifier
+                      - nachet-swin-classifier-22-spp
               topologyKey: "kubernetes.io/hostname"
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
@@ -38,8 +38,8 @@ spec:
                     values:
                       - agent
       containers:
-        - name: nachet-swin-classifier
-          image: ghcr.io/ai-cfia/nachet-backend:29-azureml-swin-classifier
+        - name: nachet-swin-classifier-22-spp
+          image: ghcr.io/ai-cfia/nachet-backend:29-azureml-swin-classifier-22-spp
           imagePullPolicy: Always
           command: ["/bin/sh", "-c"]
           args: ['./startup.sh']
@@ -82,12 +82,12 @@ spec:
             sizeLimit: 500Mi
         - name: logs
           persistentVolumeClaim:
-            claimName: nachet-swin-logs-pvc
+            claimName: nachet-swin-22-spp-logs-pvc
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: nachet-swin-logs-pvc
+  name: nachet-swin-22-spp-logs-pvc
 spec:
   storageClassName: azurefile
   accessModes:
@@ -99,23 +99,23 @@ spec:
 apiVersion: policy/v1
 kind: PodDisruptionBudget
 metadata:
-  name: nachet-swin-classifier-pdb
+  name: nachet-swin-classifier-22-spp-pdb
   namespace: nachet
 spec:
   minAvailable: 1
   selector:
     matchLabels:
-      app: nachet-swin-classifier
+      app: nachet-swin-classifier-22-spp
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: nachet-swin-classifier-svc
+  name: nachet-swin-classifier-22-spp-svc
   namespace: nachet
 spec:
   clusterIP: None
   selector:
-    app: nachet-swin-classifier
+    app: nachet-swin-classifier-22-spp
   ports:
     - protocol: TCP
       port: 5001
