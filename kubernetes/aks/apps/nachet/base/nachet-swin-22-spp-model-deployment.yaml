@@ -42,7 +42,7 @@ spec:
           image: ghcr.io/ai-cfia/nachet-backend:29-azureml-swin-classifier-22-spp
           imagePullPolicy: Always
           command: ["/bin/sh", "-c"]
-          args: ['./startup.sh']
+          args: ['azmlinfsrv --entry_script /app/score.py']
           envFrom:
             - secretRef:
                 name: nachet-swin-classifier-secrets
