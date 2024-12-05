@@ -44,7 +44,7 @@ spec:
                       - agent
       containers:
         - name: nachet-backend
-          image: ghcr.io/ai-cfia/nachet-backend:138-handle-vouch-missing-email
+          image: ghcr.io/ai-cfia/nachet-backend:143-deploy-swin-22-spp
           command: ["/bin/sh", "-c"]
           args: ['hypercorn -b :8080 app:app']
           envFrom:
