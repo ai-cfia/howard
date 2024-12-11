@@ -36,7 +36,7 @@ spec:
                 secretKeyRef:
                   key: pgurl
                   name: phoenix-app
-          image: arizephoenix/phoenix:version-5.5.2
+          image: arizephoenix/phoenix:version-7.0.1
           name: phoenix
           ports:
             - containerPort: 6006
