@@ -55,11 +55,19 @@ The workflow is triggered on every `push` to any branch and can be called via
 This section documents the secrets used in all our GitHub workflows and the
 cluster.
 
-- **VAULT_TOKEN** : <https://developer.hashicorp.com/vault/docs/auth/github>
+- **VAULT_TOKEN** : Used by the detect secret leaks workflow. For more information
+on how to get the token, see
+<https://developer.hashicorp.com/vault/docs/auth/github>
 - **GH_WORKFLOW_APP_ID** and **GH_WORKFLOW_APP_PEM** : See information about the
-GitHub app GH app for workflows.
-- **DEVOPS_USER** and **DEVOPS_USER_TOKEN** : Must have the necessary permissions
-as required by the github-metrics workflow.
+GitHub app `GH app for workflows` inside the `ai-cfia` org.
+- **DEVOPS_USER** and **DEVOPS_USER_TOKEN** : Used by the
+<https://github.com/ai-cfia/devops/blob/main/.github/workflows/github-metrics-workflow.yml>
+workflow.
+- **GITHUB_GRAFANA_DASHBAORD** : Used by <https://grafana.inspection.alpha.canada.ca> for the
+github datasource.
+- **AILAB_OCTOKIT_ACCESS_TOKEN** : Used by the
+<https://github.com/ai-cfia/github-workflows/blob/main/.github/workflows/workflow-repo-standards-validation.yml>
+workflow.
 
 ### Usage
 

@@ -85,3 +85,7 @@ selon vos besoins.
 paramètres du dépôt pour une authentification sécurisée.
 - Le workflow dépend de scripts Python hébergés dans un dépôt, qui doivent
 être accessibles au workflow par le biais de permissions appropriées.
+
+### Liens
+
+<https://github.com/ai-cfia/devops/blob/main/.github/workflows/github-metrics-workflow.yml>

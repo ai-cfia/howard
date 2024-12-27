@@ -201,3 +201,7 @@ comme **epic**.
 
 En utilisant ces workflows, vous pouvez simplifier le processus de gestion des
 releases et de l'étiquetage des pull requests dans votre dépôt.
+
+### Liens
+
+<https://github.com/ai-cfia/github-workflows/blob/main/.github/workflows/workflow-create-release.yml>

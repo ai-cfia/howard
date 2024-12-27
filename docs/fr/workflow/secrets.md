@@ -60,11 +60,18 @@ peut être appelé via `workflow_call`.
 Cette section documente les secrets utilisés dans tous nos workflows GitHub et
 cluster.
 
-- **VAULT_TOKEN** : <https://developer.hashicorp.com/vault/docs/auth/github>
-- **GH_WORKFLOW_APP_ID** et **GH_WORKFLOW_APP_PEM** : Voir les informations sur
-l'application github `GH app for workflows`.
-- **DEVOPS_USER** et **DEVOPS_USER_TOKEN** : Doit avoir les permissions
-necessaires pour ce que le `github-metrics` workflow demande.
+- **VAULT_TOKEN** : Utilisé par le workflow de détection de fuites de secrets. Pour
+plus d'informations sur la façon d'obtenir ce jeton, consultez
+<https://developer.hashicorp.com/vault/docs/auth/github>.
+- **GH_WORKFLOW_APP_ID** et **GH_WORKFLOW_APP_PEM** : Consultez les informations
+concernant l'application GitHub GH app for workflows au sein de
+l'organisation ai-cfia.
+- **DEVOPS_USER** et **DEVOPS_USER_TOKEN** : Utilisés par le workflow
+<https://github.com/ai-cfia/devops/blob/main/.github/workflows/github-metrics-workflow.yml>.
+- **GITHUB_GRAFANA_DASHBOARD** : Utilisé par
+<https://grafana.inspection.alpha.canada.ca> pour la source de données GitHub.
+- **AILAB_OCTOKIT_ACCESS_TOKEN** : Utilisé par le workflow
+<https://github.com/ai-cfia/github-workflows/blob/main/.github/workflows/workflow-repo-standards-validation.yml>.
 
 ### Utilisation
 

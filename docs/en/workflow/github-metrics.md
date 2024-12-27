@@ -85,3 +85,7 @@ repository settings for secure authentication.
 
 - The workflow relies on Python scripts hosted in a repository, which should be
 accessible to the workflow through appropriate permissions.
+
+### Links
+
+<https://github.com/ai-cfia/devops/blob/main/.github/workflows/github-metrics-workflow.yml>
