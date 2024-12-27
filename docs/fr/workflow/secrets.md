@@ -60,8 +60,8 @@ peut être appelé via `workflow_call`.
 Cette section documente les secrets utilisés dans tous nos workflows GitHub et
 cluster.
 
-- **VAULT_TOKEN** : Utilisé par le workflow de détection de fuites de secrets. Pour
-plus d'informations sur la façon d'obtenir ce jeton, consultez
+- **VAULT_TOKEN** : Utilisé par le workflow de détection de fuites de secrets.
+Pour plus d'informations sur la façon d'obtenir ce jeton, consultez
 <https://developer.hashicorp.com/vault/docs/auth/github>.
 - **GH_WORKFLOW_APP_ID** et **GH_WORKFLOW_APP_PEM** : Consultez les informations
 concernant l'application GitHub GH app for workflows au sein de

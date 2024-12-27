@@ -63,8 +63,8 @@ GitHub app `GH app for workflows` inside the `ai-cfia` org.
 - **DEVOPS_USER** and **DEVOPS_USER_TOKEN** : Used by the
 <https://github.com/ai-cfia/devops/blob/main/.github/workflows/github-metrics-workflow.yml>
 workflow.
-- **GITHUB_GRAFANA_DASHBAORD** : Used by <https://grafana.inspection.alpha.canada.ca> for the
-github datasource.
+- **GITHUB_GRAFANA_DASHBAORD** : Used by <https://grafana.inspection.alpha.canada.ca>
+for the github datasource.
 - **AILAB_OCTOKIT_ACCESS_TOKEN** : Used by the
 <https://github.com/ai-cfia/github-workflows/blob/main/.github/workflows/workflow-repo-standards-validation.yml>
 workflow.
