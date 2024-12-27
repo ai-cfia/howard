@@ -16,7 +16,7 @@
     
     
       
-        <title>Github metrics - Howard</title>
+        <title>GitHub Metrics Workflow - Howard</title>
       
     
     
@@ -57,6 +57,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#github-metrics-workflow" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -89,7 +94,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Github metrics
+              GitHub Metrics Workflow
             
           </span>
         </div>
@@ -322,6 +327,100 @@
   
   
   
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#workflow-generate-github-metrics-report" class="md-nav__link">
+    <span class="md-ellipsis">
+      Workflow: Generate GitHub Metrics Report
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Workflow: Generate GitHub Metrics Report">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#purpose" class="md-nav__link">
+    <span class="md-ellipsis">
+      Purpose
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trigger" class="md-nav__link">
+    <span class="md-ellipsis">
+      Trigger
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      Steps
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuration
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#environment-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      Environment Variables
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Usage
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Notes
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -339,9 +438,110 @@
   
 
 
-  <h1>Github metrics</h1>
-
-
+<h1 id="github-metrics-workflow">GitHub Metrics Workflow</h1>
+<p>This document provides an overview of the GitHub metrics workflow, including
+its purpose, functionality, and guidelines for usage. This workflow is designed
+to generate a report of GitHub metrics within a specified date range.</p>
+<h2 id="workflow-generate-github-metrics-report">Workflow: Generate GitHub Metrics Report</h2>
+<h3 id="purpose">Purpose</h3>
+<p>The workflow automates the process of generating a metrics report for selected
+GitHub repositories and members over a specified period. The generated report
+is uploaded as a PDF artifact.</p>
+<h3 id="trigger">Trigger</h3>
+<p>The workflow is executed manually via <code>workflow_dispatch</code>, which requires
+specific inputs:</p>
+<ul>
+<li><strong>start_date</strong> (string): The beginning of the date range for the report
+(format: yyyy-mm-dd).</li>
+<li><strong>end_date</strong> (string): The end of the date range for the report
+(format: yyyy-mm-dd).</li>
+<li><strong>selected_members</strong> (string): Comma-separated list of GitHub members to
+include in the report. Defaults to '*' (all members).</li>
+<li><strong>selected_repositories</strong> (string): Comma-separated list of repositories to
+include in the report. Defaults to '*' (all repositories).</li>
+</ul>
+<h3 id="steps">Steps</h3>
+<ol>
+<li><strong>Generate Token from GitHub Application</strong>:</li>
+<li>
+<p>Uses a GitHub app to create an authentication token for accessing
+   metrics data.</p>
+</li>
+<li>
+<p><strong>Checkout the Repository</strong>:</p>
+</li>
+<li>
+<p>Checks out the current repository to the workflow
+   runner.</p>
+</li>
+<li>
+<p><strong>Set Up Python Environment</strong>:</p>
+</li>
+<li>
+<p>Configures the Python environment with version 3.8 for running
+   the metrics script.</p>
+</li>
+<li>
+<p><strong>Install Custom Package</strong>:</p>
+</li>
+<li>
+<p>Installs a package from GitHub containing necessary scripts for
+   metrics extraction.</p>
+</li>
+<li>
+<p><strong>Access User Site-Packages</strong>:</p>
+</li>
+<li>
+<p>Determines the path to the Python site-packages directory for the
+   installed scripts.</p>
+</li>
+<li>
+<p><strong>Install Dependencies</strong>:</p>
+</li>
+<li>
+<p>Installs additional dependencies listed in <code>requirements.txt</code>.</p>
+</li>
+<li>
+<p><strong>Run GitHub Metrics Script</strong>:</p>
+</li>
+<li>
+<p>Executes the metrics script using environment variables configured with
+   the provided inputs.</p>
+</li>
+<li>
+<p><strong>Upload PDF Artifact</strong>:</p>
+</li>
+<li>Uploads the generated PDF report as an artifact, naming it based on the
+   specified date range.</li>
+</ol>
+<h3 id="configuration">Configuration</h3>
+<h4 id="environment-variables">Environment Variables</h4>
+<ul>
+<li><strong>GITHUB_ACCESS_TOKEN</strong>: Token generated for accessing GitHub data.</li>
+<li><strong>START_DATE</strong>: Start date input for the report.</li>
+<li><strong>END_DATE</strong>: End date input for the report.</li>
+<li><strong>SELECTED_REPOSITORIES</strong>: Repositories specified for metrics extraction.</li>
+<li><strong>SELECTED_MEMBERS</strong>: Members specified for metrics extraction.</li>
+</ul>
+<h3 id="usage">Usage</h3>
+<p>To use this workflow:</p>
+<ul>
+<li>Trigger it manually from the GitHub Actions tab.</li>
+<li>Provide the required inputs (<code>start_date</code>, <code>end_date</code>) and customize optional
+inputs (<code>selected_members</code>, <code>selected_repositories</code>) as needed.</li>
+</ul>
+<h3 id="notes">Notes</h3>
+<ul>
+<li>
+<p>Ensure that secrets for <code>GH_WORKFLOW_APP_ID</code>, <code>GH_WORKFLOW_APP_PEM</code>,
+<code>DEVOPS_USER</code>, and <code>DEVOPS_USER_TOKEN</code> are correctly configured in the
+repository settings for secure authentication.</p>
+</li>
+<li>
+<p>The workflow relies on Python scripts hosted in a repository, which should be
+accessible to the workflow through appropriate permissions.</p>
+</li>
+</ul>
 
 
 
