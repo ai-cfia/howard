@@ -1,0 +1,49 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: scale-down-nachet
+  namespace: nachet
+spec:
+  schedule: "0 2 * * *" # This schedule runs the job every day at 2 AM
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: kubectl
+            image: bitnami/kubectl:latest
+            command:
+            - /bin/sh
+            - -c
+            - |
+              kubectl scale deployment nachet-rcnn-detector --replicas=0 -n nachet
+              kubectl scale deployment nachet-backend --replicas=0 -n nachet
+              kubectl scale deployment nachet-frontend --replicas=0 -n nachet
+              kubectl scale deployment nachet-swin-classifier-22-spp --replicas=0 -n nachet
+              kubectl scale deployment nachet-swin-classifier --replicas=0 -n nachet
+          restartPolicy: OnFailure
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: scale-up-nachet
+  namespace: nachet
+spec:
+  schedule: "0 11 * * 1-5" # This schedule runs the job every day at 11 AM
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: kubectl
+            image: bitnami/kubectl:latest
+            command:
+            - /bin/sh
+            - -c
+            - |
+              kubectl scale deployment nachet-rcnn-detector --replicas=1 -n nachet
+              kubectl scale deployment nachet-backend --replicas=1 -n nachet
+              kubectl scale deployment nachet-frontend --replicas=1 -n nachet
+              kubectl scale deployment nachet-swin-classifier-22-spp --replicas=1 -n nachet
+              kubectl scale deployment nachet-swin-classifier --replicas=1 -n nachet
+          restartPolicy: OnFailure
