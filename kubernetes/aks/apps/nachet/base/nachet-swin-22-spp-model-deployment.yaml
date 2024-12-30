@@ -81,20 +81,9 @@ spec:
             medium: Memory
             sizeLimit: 500Mi
         - name: logs
-          persistentVolumeClaim:
-            claimName: nachet-swin-22-spp-logs-pvc
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: nachet-swin-22-spp-logs-pvc
-spec:
-  storageClassName: azurefile
-  accessModes:
-    - ReadWriteMany
-  resources:
-    requests:
-      storage: 2Gi
+          emptyDir:
+            medium: Memory
+            sizeLimit: 500Mi
 ---
 apiVersion: policy/v1
 kind: PodDisruptionBudget
