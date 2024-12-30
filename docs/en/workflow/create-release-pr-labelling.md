@@ -191,3 +191,7 @@ epic:
 
 By using these workflows, you can streamline the process of managing releases
 and labeling pull requests in your repository.
+
+### Links
+
+<https://github.com/ai-cfia/github-workflows/blob/main/.github/workflows/workflow-create-release.yml>
