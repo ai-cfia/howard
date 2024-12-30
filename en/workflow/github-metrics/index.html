@@ -16,7 +16,7 @@
     
     
       
-        <title>Create release and label pull request - Howard</title>
+        <title>GitHub Metrics Workflow - Howard</title>
       
     
     
@@ -58,7 +58,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#create-release-and-label-pull-request" class="md-skip">
+        <a href="#github-metrics-workflow" class="md-skip">
           Skip to content
         </a>
       
@@ -94,7 +94,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Create release and label pull request
+              GitHub Metrics Workflow
             
           </span>
         </div>
@@ -337,56 +337,56 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#workflow-1-create-release-build-and-push-to-ghcr-with-specific-tag" class="md-nav__link">
+  <a href="#workflow-generate-github-metrics-report" class="md-nav__link">
     <span class="md-ellipsis">
-      Workflow (1): Create Release, Build and Push to GHCR with Specific Tag
+      Workflow: Generate GitHub Metrics Report
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Workflow (1): Create Release, Build and Push to GHCR with Specific Tag">
+    <nav class="md-nav" aria-label="Workflow: Generate GitHub Metrics Report">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#purpose-1" class="md-nav__link">
+  <a href="#purpose" class="md-nav__link">
     <span class="md-ellipsis">
-      Purpose (1)
+      Purpose
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#trigger-1" class="md-nav__link">
+  <a href="#trigger" class="md-nav__link">
     <span class="md-ellipsis">
-      Trigger (1)
+      Trigger
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#steps-1" class="md-nav__link">
+  <a href="#steps" class="md-nav__link">
     <span class="md-ellipsis">
-      Steps (1)
+      Steps
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#configuration-1" class="md-nav__link">
+  <a href="#configuration" class="md-nav__link">
     <span class="md-ellipsis">
-      Configuration (1)
+      Configuration
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Configuration (1)">
+    <nav class="md-nav" aria-label="Configuration">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#explanation-1" class="md-nav__link">
+  <a href="#environment-variables" class="md-nav__link">
     <span class="md-ellipsis">
-      Explanation (1)
+      Environment Variables
     </span>
   </a>
   
@@ -398,69 +398,18 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#usage-1" class="md-nav__link">
+  <a href="#usage" class="md-nav__link">
     <span class="md-ellipsis">
-      Usage (1)
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#workflow-2-pull-request-labeler" class="md-nav__link">
-    <span class="md-ellipsis">
-      Workflow (2): Pull Request Labeler
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Workflow (2): Pull Request Labeler">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#purpose-2" class="md-nav__link">
-    <span class="md-ellipsis">
-      Purpose (2)
+      Usage
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#trigger-2" class="md-nav__link">
+  <a href="#notes" class="md-nav__link">
     <span class="md-ellipsis">
-      Trigger (2)
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#steps-2" class="md-nav__link">
-    <span class="md-ellipsis">
-      Steps (2)
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#configuration-2" class="md-nav__link">
-    <span class="md-ellipsis">
-      Configuration (2)
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#usage-2" class="md-nav__link">
-    <span class="md-ellipsis">
-      Usage (2)
+      Notes
     </span>
   </a>
   
@@ -498,174 +447,112 @@
   
 
 
-<h1 id="create-release-and-label-pull-request">Create release and label pull request</h1>
-<p>This document explains the purpose, functionality, and usage of the two GitHub
-workflows provided. The workflows automate the process of creating releases
-and labeling pull requests.</p>
-<h2 id="workflow-1-create-release-build-and-push-to-ghcr-with-specific-tag">Workflow (1): Create Release, Build and Push to GHCR with Specific Tag</h2>
-<h3 id="purpose-1">Purpose (1)</h3>
-<p>This workflow automates the following steps:</p>
+<h1 id="github-metrics-workflow">GitHub Metrics Workflow</h1>
+<p>This document provides an overview of the GitHub metrics workflow, including
+its purpose, functionality, and guidelines for usage. This workflow is designed
+to generate a report of GitHub metrics within a specified date range.</p>
+<h2 id="workflow-generate-github-metrics-report">Workflow: Generate GitHub Metrics Report</h2>
+<h3 id="purpose">Purpose</h3>
+<p>The workflow automates the process of generating a metrics report for selected
+GitHub repositories and members over a specified period. The generated report
+is uploaded as a PDF artifact.</p>
+<h3 id="trigger">Trigger</h3>
+<p>The workflow is executed manually via <code>workflow_dispatch</code>, which requires
+specific inputs:</p>
 <ul>
-<li><strong>Create a GitHub Release:</strong> It generates a release based on a tag pushed
-to the repository.</li>
-<li><strong>Generate Changelog:</strong> It uses the labels of merged pull requests to generate
-a changelog.</li>
-<li><strong>Build and Push Docker Image:</strong> It builds a Docker image and pushes it to
-GitHub Container Registry (GHCR).</li>
+<li><strong>start_date</strong> (string): The beginning of the date range for the report
+(format: yyyy-mm-dd).</li>
+<li><strong>end_date</strong> (string): The end of the date range for the report
+(format: yyyy-mm-dd).</li>
+<li><strong>selected_members</strong> (string): Comma-separated list of GitHub members to
+include in the report. Defaults to '*' (all members).</li>
+<li><strong>selected_repositories</strong> (string): Comma-separated list of repositories to
+include in the report. Defaults to '*' (all repositories).</li>
 </ul>
-<h3 id="trigger-1">Trigger (1)</h3>
-<p>The workflow is triggered manually via workflow_call with two required inputs:</p>
+<h3 id="steps">Steps</h3>
+<ol>
+<li><strong>Generate Token from GitHub Application</strong>:</li>
+<li>
+<p>Uses a GitHub app to create an authentication token for accessing
+   metrics data.</p>
+</li>
+<li>
+<p><strong>Checkout the Repository</strong>:</p>
+</li>
+<li>
+<p>Checks out the current repository to the workflow
+   runner.</p>
+</li>
+<li>
+<p><strong>Set Up Python Environment</strong>:</p>
+</li>
+<li>
+<p>Configures the Python environment with version 3.8 for running
+   the metrics script.</p>
+</li>
+<li>
+<p><strong>Install Custom Package</strong>:</p>
+</li>
+<li>
+<p>Installs a package from GitHub containing necessary scripts for
+   metrics extraction.</p>
+</li>
+<li>
+<p><strong>Access User Site-Packages</strong>:</p>
+</li>
+<li>
+<p>Determines the path to the Python site-packages directory for the
+   installed scripts.</p>
+</li>
+<li>
+<p><strong>Install Dependencies</strong>:</p>
+</li>
+<li>
+<p>Installs additional dependencies listed in <code>requirements.txt</code>.</p>
+</li>
+<li>
+<p><strong>Run GitHub Metrics Script</strong>:</p>
+</li>
+<li>
+<p>Executes the metrics script using environment variables configured with
+   the provided inputs.</p>
+</li>
+<li>
+<p><strong>Upload PDF Artifact</strong>:</p>
+</li>
+<li>Uploads the generated PDF report as an artifact, naming it based on the
+   specified date range.</li>
+</ol>
+<h3 id="configuration">Configuration</h3>
+<h4 id="environment-variables">Environment Variables</h4>
 <ul>
-<li><code>artifact-name</code>: Name of the artifact to be created.</li>
-<li><code>registry</code>: Registry where the Docker image will be pushed.</li>
+<li><strong>GITHUB_ACCESS_TOKEN</strong>: Token generated for accessing GitHub data.</li>
+<li><strong>START_DATE</strong>: Start date input for the report.</li>
+<li><strong>END_DATE</strong>: End date input for the report.</li>
+<li><strong>SELECTED_REPOSITORIES</strong>: Repositories specified for metrics extraction.</li>
+<li><strong>SELECTED_MEMBERS</strong>: Members specified for metrics extraction.</li>
 </ul>
-<p>In most cases, the <code>workflow_call</code> is called as follows:</p>
-<div class="highlight"><pre><span></span><code><span class="nt">on</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">push</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">tags</span><span class="p">:</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&#39;v[0-9]+.[0-9]+.[0-9]+&#39;</span>
-</code></pre></div>
-<h3 id="steps-1">Steps (1)</h3>
+<h3 id="usage">Usage</h3>
+<p>To use this workflow:</p>
 <ul>
-<li><strong>Checkout Repository:</strong> Clones the repository.</li>
-<li><strong>Extract Tag Name:</strong> Extracts the current tag name from the GitHub reference.</li>
-<li><strong>Generate Changelog:</strong> Generates a changelog using merged pull requests.</li>
-<li><strong>Create Release:</strong> Creates a GitHub release using the extracted tag and
-generated changelog.</li>
-<li><strong>Upload Release Asset:</strong> Zips the repository and uploads it as a release
-asset.</li>
-<li><strong>Set up Docker Buildx:</strong> Sets up Docker Buildx for building multi-platform
-images.</li>
-<li><strong>Log in to GHCR:</strong> Logs in to the GitHub Container Registry.</li>
-<li><strong>Cache Docker Layers:</strong> Caches Docker layers to speed up the build process.</li>
-<li><strong>Build and Push Docker Image:</strong> Builds and pushes the Docker image to GHCR.</li>
-<li><strong>Refresh Cache:</strong> Refreshes the Docker cache.</li>
-<li><strong>Output Image Digest:</strong> Outputs the image digest if the event is not a merged
-pull request.</li>
+<li>Trigger it manually from the GitHub Actions tab.</li>
+<li>Provide the required inputs (<code>start_date</code>, <code>end_date</code>) and customize optional
+inputs (<code>selected_members</code>, <code>selected_repositories</code>) as needed.</li>
 </ul>
-<h3 id="configuration-1">Configuration (1)</h3>
-<p>The Generate changelog step uses the
-<code>mikepenz/release-changelog-builder-action@v5</code> action to create a changelog based
-on pull requests merged since the previous tag. This step categorizes pull
-requests into different sections based on their labels.</p>
-<div class="highlight"><pre><span></span><code><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Generate changelog</span>
-<span class="w">  </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">changelog</span>
-<span class="w">  </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mikepenz/release-changelog-builder-action@v5</span>
-<span class="w">  </span><span class="nt">with</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">configurationJson</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
-<span class="w">      </span><span class="no">{</span>
-<span class="w">          </span><span class="no">&quot;categories&quot;: [</span>
-<span class="w">              </span><span class="no">{</span>
-<span class="w">                  </span><span class="no">&quot;title&quot;: &quot;## User stories 👑&quot;,</span>
-<span class="w">                  </span><span class="no">&quot;labels&quot;: [&quot;epic&quot;]</span>
-<span class="w">              </span><span class="no">},</span>
-<span class="w">              </span><span class="no">{</span>
-<span class="w">                  </span><span class="no">&quot;title&quot;: &quot;## New features 🎉&quot;,</span>
-<span class="w">                  </span><span class="no">&quot;labels&quot;: [&quot;feature&quot;]</span>
-<span class="w">              </span><span class="no">},</span>
-<span class="w">              </span><span class="no">{</span>
-<span class="w">                  </span><span class="no">&quot;title&quot;: &quot;## Bug fixes 🐛&quot;,</span>
-<span class="w">                  </span><span class="no">&quot;labels&quot;: [&quot;bug&quot;]</span>
-<span class="w">              </span><span class="no">},</span>
-<span class="w">              </span><span class="no">{</span>
-<span class="w">                  </span><span class="no">&quot;title&quot;: &quot;## Documentation 📄&quot;,</span>
-<span class="w">                  </span><span class="no">&quot;labels&quot;: [&quot;documentation&quot;]</span>
-<span class="w">              </span><span class="no">},</span>
-<span class="w">              </span><span class="no">{</span>
-<span class="w">                  </span><span class="no">&quot;title&quot;: &quot;## Other Changes 💬&quot;,</span>
-<span class="w">                  </span><span class="no">&quot;labels&quot;: [&quot;*&quot;]</span>
-<span class="w">              </span><span class="no">}</span>
-<span class="w">          </span><span class="no">],</span>
-<span class="w">          </span><span class="no">&quot;template&quot;: &quot;#{{CHANGELOG}}\n\nContributors:\n#{{CONTRIBUTORS}}&quot;,</span>
-<span class="w">          </span><span class="no">&quot;max_pull_requests&quot;: 1000,</span>
-<span class="w">          </span><span class="no">&quot;max_back_track_time_days&quot;: 1000</span>
-<span class="w">      </span><span class="no">}</span>
-<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ github.repository_owner }}</span>
-<span class="w">    </span><span class="nt">repo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ github.event.repository.name }}</span>
-<span class="w">    </span><span class="nt">toTag</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ env.TAG_NAME }}</span>
-<span class="w">    </span><span class="nt">token</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ secrets.GITHUB_TOKEN }}</span>
-</code></pre></div>
-<h4 id="explanation-1">Explanation (1)</h4>
+<h3 id="notes">Notes</h3>
 <ul>
-<li><strong>Categories:</strong> Defines the sections in the changelog, each with a title and
-associated labels. Pull requests are grouped under these sections based on
-their labels.</li>
-<li><strong>User stories:</strong> Includes pull requests labeled epic.</li>
-<li><strong>New features:</strong> Includes pull requests labeled feature.</li>
-<li><strong>Bug fixes:</strong> Includes pull requests labeled bug.</li>
-<li><strong>Documentation:</strong> Includes pull requests labeled documentation.</li>
-<li><strong>Other Changes:</strong> Includes pull requests labeled with any other labels.</li>
-<li><strong>template:</strong> Defines the format of the changelog.</li>
-<li><strong>max_pull_requests:</strong> The maximum number of pull requests to include in the
-changelog.</li>
-<li><strong>max_back_track_time_days:</strong> The maximum number of days to look back for
-pull requests.</li>
+<li>
+<p>Ensure that secrets for <code>GH_WORKFLOW_APP_ID</code>, <code>GH_WORKFLOW_APP_PEM</code>,
+<code>DEVOPS_USER</code>, and <code>DEVOPS_USER_TOKEN</code> are correctly configured in the
+repository settings for secure authentication.</p>
+</li>
+<li>
+<p>The workflow relies on Python scripts hosted in a repository, which should be
+accessible to the workflow through appropriate permissions.</p>
+</li>
 </ul>
-<p>When the workflow is triggered, this step compares the previous tag with the new
-tag and generates a changelog for all pull requests merged between the two tags.
-Each pull request is added to the appropriate section based on its labels.</p>
-<h3 id="usage-1">Usage (1)</h3>
-<p>To use this workflow, call it from another workflow or manually with the
-required inputs. For example:</p>
-<div class="highlight"><pre><span></span><code><span class="nt">jobs</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">call-release-workflow</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">your-repo/.github/workflows/create-release.yml</span>
-<span class="w">    </span><span class="nt">with</span><span class="p">:</span>
-<span class="w">      </span><span class="nt">artifact-name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my-artifact</span>
-<span class="w">      </span><span class="nt">registry</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ghcr.io/my-org</span>
-</code></pre></div>
-<p>Ensure that a tag is pushed to the repository to trigger the release creation.</p>
-<h2 id="workflow-2-pull-request-labeler">Workflow (2): Pull Request Labeler</h2>
-<h3 id="purpose-2">Purpose (2)</h3>
-<p>This workflow automatically labels pull requests based on their branch name or
-modified files. It uses a configuration file to determine the labels to apply.</p>
-<h3 id="trigger-2">Trigger (2)</h3>
-<p>The workflow is triggered manually via workflow_call.</p>
-<h3 id="steps-2">Steps (2)</h3>
-<ul>
-<li>Checkout Repository: Checks out the repository containing the <code>labeler.yml</code>
-configuration file.</li>
-<li>Label Pull Request: Uses the <code>actions/labeler</code> action to apply labels to
-the pull request based on the configuration.</li>
-</ul>
-<h3 id="configuration-2">Configuration (2)</h3>
-<p>The labeler.yml file defines rules for labeling pull requests:</p>
-<div class="highlight"><pre><span></span><code><span class="nt">documentation</span><span class="p">:</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">any</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">changed-files</span><span class="p">:</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">any-glob-to-any-file</span><span class="p">:</span>
-<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&#39;docs/**&#39;</span>
-<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&#39;**/*.md&#39;</span>
-
-<span class="nt">tests</span><span class="p">:</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">any</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">changed-files</span><span class="p">:</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">any-glob-to-any-file</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tests/**</span>
-
-<span class="nt">feature</span><span class="p">:</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">head-branch</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&#39;^feature&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;feature&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;^feat&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;feat&#39;</span><span class="p p-Indicator">]</span>
-
-<span class="nt">bug</span><span class="p">:</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">head-branch</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&#39;^bug&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;bug&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;^fix&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;fix&#39;</span><span class="p p-Indicator">]</span>
-
-<span class="nt">epic</span><span class="p">:</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">head-branch</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&#39;^epic&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;epic&#39;</span><span class="p p-Indicator">]</span>
-</code></pre></div>
-<h3 id="usage-2">Usage (2)</h3>
-<ul>
-<li>A pull request with the branch name <code>feature/new-feature</code> will be labeled as
-<strong>feature</strong>.</li>
-<li>A pull request that modifies files in the <code>docs/</code> directory will be labeled as
-<strong>documentation</strong>.</li>
-<li>A pull request with the branch name <code>bug/fix-issue</code> will be labeled as
-<strong>bug</strong>.</li>
-<li>A pull request with the branch name <code>epic/new-epic</code> will be labeled as
-<strong>epic</strong>.</li>
-</ul>
-<p>By using these workflows, you can streamline the process of managing releases
-and labeling pull requests in your repository.</p>
 <h3 id="links">Links</h3>
-<p><a href="https://github.com/ai-cfia/github-workflows/blob/main/.github/workflows/workflow-create-release.yml">https://github.com/ai-cfia/github-workflows/blob/main/.github/workflows/workflow-create-release.yml</a></p>
+<p><a href="https://github.com/ai-cfia/devops/blob/main/.github/workflows/github-metrics-workflow.yml">https://github.com/ai-cfia/devops/blob/main/.github/workflows/github-metrics-workflow.yml</a></p>
 
 
 
