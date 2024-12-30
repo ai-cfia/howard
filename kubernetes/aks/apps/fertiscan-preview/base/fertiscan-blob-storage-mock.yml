@@ -1,0 +1,101 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fertiscan-azurite
+  # namespace: nachet
+spec:
+  replicas: 2
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: fertiscan-azurite
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  template:
+    metadata:
+      labels:
+        app: fertiscan-azurite
+    spec:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 3000
+        fsGroup: 2000
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: app
+                    operator: In
+                    values:
+                      - fertiscan-azurite
+              topologyKey: "kubernetes.io/hostname"
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/role
+                    operator: In
+                    values:
+                      - agent
+      containers:
+        - name: fertiscan-azurite
+          image: mcr.microsoft.com/azure-storage/azurite
+          command: ["/bin/sh", "-c"]
+          args: ['azurite --loose --blobHost 0.0.0.0 --blobPort 10000  --location /workspace --debug /workspace/debug.log']
+          ports:
+            - containerPort: 10000
+          # livenessProbe:
+          #   httpGet:
+          #     path: /health
+          #     port: 8080
+          #   initialDelaySeconds: 60
+          #   periodSeconds: 10
+          resources:
+            requests:
+              cpu: "250m"
+              memory: "1Gi"
+            limits:
+              cpu: "500m"
+              memory: "2Gi"
+          securityContext:
+            readOnlyRootFilesystem: true
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+      volumes:
+        - name: tmp
+          emptyDir:
+            medium: Memory
+            sizeLimit: 500Mi
+
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: fertiscan-azurite-pdb
+  # namespace: nachet
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app: fertiscan-azurite
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: fertiscan-azurite-svc
+  namespace: fertiscan
+spec:
+  clusterIP: None
+  selector:
+    app: fertiscan-azurite
+  ports:
+    - protocol: TCP
+      port: 10000
