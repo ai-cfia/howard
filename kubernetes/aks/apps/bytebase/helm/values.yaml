@@ -1,6 +1,6 @@
 ---
 bytebase:
-  version: 2.21.0
+  version: 2.23.0
   registryMirrorHost: ""
   option:
     port: 443
