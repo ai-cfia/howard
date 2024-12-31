@@ -18,7 +18,7 @@ spec:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
               - matchExpressions:
-                  - key: kubernetes.io/role
+                  - key: kubernetes.azure.com/role
                     operator: In
                     values:
                       - agent
