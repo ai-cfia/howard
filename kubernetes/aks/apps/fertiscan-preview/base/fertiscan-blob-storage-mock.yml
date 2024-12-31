@@ -33,12 +33,12 @@ spec:
                     operator: In
                     values:
                       - fertiscan-azurite
-              topologyKey: "kubernetes.io/hostname"
+              topologyKey: "kubernetes.azure.com/hostname"
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
               - matchExpressions:
-                  - key: kubernetes.io/role
+                  - key: kubernetes.azure.com/role
                     operator: In
                     values:
                       - agent
