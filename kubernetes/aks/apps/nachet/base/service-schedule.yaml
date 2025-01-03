@@ -21,6 +21,7 @@ spec:
               kubectl scale deployment nachet-frontend --replicas=0 -n nachet
               kubectl scale deployment nachet-swin-classifier-22-spp --replicas=0 -n nachet
               kubectl scale deployment nachet-swin-classifier --replicas=0 -n nachet
+              kubectl scale deployment nachet-azurite --replicas=0 -n nachet
           restartPolicy: OnFailure
 ---
 apiVersion: batch/v1
@@ -46,4 +47,5 @@ spec:
               kubectl scale deployment nachet-frontend --replicas=1 -n nachet
               kubectl scale deployment nachet-swin-classifier-22-spp --replicas=1 -n nachet
               kubectl scale deployment nachet-swin-classifier --replicas=1 -n nachet
+              kubectl scale deployment nachet-azurite --replicas=1 -n nachet
           restartPolicy: OnFailure
