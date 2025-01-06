@@ -27,36 +27,6 @@ module "cluster-network-0" {
   tags                    = var.tags
 }
 
-# module "cluster-network-1" {
-#   source              = "../modules/azure-cluster-network"
-#   location            = var.location_1
-#   resource_group_name = azurerm_resource_group.rg.name
-
-#   vnet_name   = "vnet-${var.aks_gpu_name}"
-#   subnet_name = "subnet-${var.aks_gpu_name}"
-
-#   address_space           = [var.second_virtual_network_address]
-#   subnet_address_prefixes = [var.second_subnet_address]
-#   tags                    = var.tags
-# }
-
-# module "peering-cluster-network-0-to-cluster-network-1" {
-#   source = "../modules/azure-vnet-peering"
-
-#   depends_on = [module.aks-cluster-0, module.aks-cluster-1]
-
-#   # principal_id_aks_cluster_0 = module.aks-cluster-0.cluster_principal_id
-#   # principal_id_aks_cluster_1 = module.aks-cluster-1.cluster_principal_id
-
-#   vnet_id_1   = module.cluster-network-0.virtual_network_id
-#   vnet_name_1 = module.cluster-network-0.virtual_network_name
-#   rg_vnet_1   = module.cluster-network-0.resource_group_name
-
-#   vnet_id_2   = module.cluster-network-1.virtual_network_id
-#   vnet_name_2 = module.cluster-network-1.virtual_network_name
-#   rg_vnet_2   = module.cluster-network-1.resource_group_name
-# }
-
 module "azure-dns-staging" {
   source = "../modules/azure-dns"
 
@@ -128,6 +98,114 @@ module "aks-cluster-0" {
   backup_label_selectors         = var.backup_label_selectors
 }
 
+module "vault" {
+  source         = "../modules/vault"
+  location       = var.location_1
+  resource_group = azurerm_resource_group.rg.name
+  prefix         = var.environment
+
+  cluster_principal_id    = module.aks-cluster-0.cluster_principal_id
+  ca_cluster              = module.aks-cluster-0.cluster_ca_certificate
+  kv_identity_resource_id = module.aks-cluster-0.kv_identity_resource_id
+
+  providers = {
+    kubernetes = kubernetes
+  }
+}
+
+module "fertiscan-postgresql-server" {
+  source                 = "../modules/azure-postgresql-flexible-server"
+  postgresql_server_name = var.postgresql_server_name
+  postgresql_rg_location = var.postgresql_rg_location
+  postgresql_rg_name     = var.postgresql_rg_name
+
+  postgresql_sku_name       = var.postgresql_sku_name
+  postgresql_admin_login    = var.postgresql_admin_login
+  postgresql_admin_password = var.postgresql_admin_password
+
+  postgresql_public_network_access_enabled = var.postgresql_public_network_access_enabled
+}
+
+module "archive-and-backup-storage-account" {
+  source = "../modules/azure-storage-account"
+
+  rg_name     = azurerm_resource_group.rg.name
+  rg_location = azurerm_resource_group.rg.location
+
+  azure_storage_account_name = var.azure_storage_archive_and_backup
+  firewall                   = var.firewall
+
+  tags = var.tags
+}
+
+# Subnet dedicated to provide internal access From Finesse to protected services from Dev
+resource "azurerm_subnet" "subnet_dev" {
+  name                 = "subnet-dev"
+  resource_group_name  = azurerm_resource_group.rg.name
+  virtual_network_name = module.cluster-network-0.virtual_network_name
+  address_prefixes     = [var.dev_subnet_address]
+}
+
+# module "vms" {
+#  source = "../modules/azure-vm"
+#
+#  vm_rg_name  = var.vm_rg_name
+#  vm_location = var.vm_location
+
+#  vm_virtual_network_name                    = var.vm_virtual_network_name
+#  vm_virtual_network_address_space           = var.vm_virtual_network_address_space
+#  vm_virtual_network_subnet_name             = var.vm_virtual_network_subnet_name
+#  vm_virtual_network_subnet_address_prefixes = var.vm_virtual_network_subnet_address_prefixes
+#  vm_public_ip_name                          = var.vm_public_ip_name
+#  vm_public_ip_allocation_method             = var.vm_public_ip_allocation_method
+
+#  bastion_virtual_network_subnet_name             = var.bastion_virtual_network_subnet_name
+#  bastion_virtual_network_subnet_address_prefixes = var.bastion_virtual_network_subnet_address_prefixes
+
+#  vm_network_interface_name                  = var.vm_network_interface_name
+#  vm_network_interface_ip_configuration_name = var.vm_network_interface_ip_configuration_name
+#  vm_network_interface_ip_configuration_type = var.vm_network_interface_ip_configuration_type
+
+#  bastion_public_ip_name              = var.bastion_public_ip_name
+#  bastion_public_ip_allocation_method = var.bastion_public_ip_allocation_method
+#  bastion_public_ip_sku               = var.bastion_public_ip_sku
+#  bastion_host_name                   = var.bastion_host_name
+#  bastion_host_ip_configuration_name  = var.bastion_host_ip_configuration_name
+
+#  linux-vms   = var.linux-vms
+#  windows-vms = var.windows-vms
+# }
+
+# module "cluster-network-1" {
+#   source              = "../modules/azure-cluster-network"
+#   location            = var.location_1
+#   resource_group_name = azurerm_resource_group.rg.name
+
+#   vnet_name   = "vnet-${var.aks_gpu_name}"
+#   subnet_name = "subnet-${var.aks_gpu_name}"
+
+#   address_space           = [var.second_virtual_network_address]
+#   subnet_address_prefixes = [var.second_subnet_address]
+#   tags                    = var.tags
+# }
+
+# module "peering-cluster-network-0-to-cluster-network-1" {
+#   source = "../modules/azure-vnet-peering"
+
+#   depends_on = [module.aks-cluster-0, module.aks-cluster-1]
+
+#   # principal_id_aks_cluster_0 = module.aks-cluster-0.cluster_principal_id
+#   # principal_id_aks_cluster_1 = module.aks-cluster-1.cluster_principal_id
+
+#   vnet_id_1   = module.cluster-network-0.virtual_network_id
+#   vnet_name_1 = module.cluster-network-0.virtual_network_name
+#   rg_vnet_1   = module.cluster-network-0.resource_group_name
+
+#   vnet_id_2   = module.cluster-network-1.virtual_network_id
+#   vnet_name_2 = module.cluster-network-1.virtual_network_name
+#   rg_vnet_2   = module.cluster-network-1.resource_group_name
+# }
+
 # module "aks-cluster-1" {
 #   depends_on = [module.cluster-network-1]
 
@@ -167,70 +245,4 @@ module "aks-cluster-0" {
 #   tags = var.tags
 
 #   sku_tier = var.sku_tier
-# }
-
-module "vault" {
-  source         = "../modules/vault"
-  location       = var.location_1
-  resource_group = azurerm_resource_group.rg.name
-  prefix         = var.environment
-
-  cluster_principal_id    = module.aks-cluster-0.cluster_principal_id
-  ca_cluster              = module.aks-cluster-0.cluster_ca_certificate
-  kv_identity_resource_id = module.aks-cluster-0.kv_identity_resource_id
-
-  providers = {
-    kubernetes = kubernetes
-  }
-}
-
-module "fertiscan-postgresql-server" {
-  source                 = "../modules/azure-postgresql-flexible-server"
-  postgresql_server_name = var.postgresql_server_name
-  postgresql_rg_location = var.postgresql_rg_location
-  postgresql_rg_name     = var.postgresql_rg_name
-
-  postgresql_sku_name       = var.postgresql_sku_name
-  postgresql_admin_login    = var.postgresql_admin_login
-  postgresql_admin_password = var.postgresql_admin_password
-
-  postgresql_public_network_access_enabled = var.postgresql_public_network_access_enabled
-}
-
-# Subnet dedicated to provide internal access From Finesse to protected services from Dev
-resource "azurerm_subnet" "subnet_dev" {
-  name                 = "subnet-dev"
-  resource_group_name  = azurerm_resource_group.rg.name
-  virtual_network_name = module.cluster-network-0.virtual_network_name
-  address_prefixes     = [var.dev_subnet_address]
-}
-
-# module "vms" {
-#  source = "../modules/azure-vm"
-#
-#  vm_rg_name  = var.vm_rg_name
-#  vm_location = var.vm_location
-
-#  vm_virtual_network_name                    = var.vm_virtual_network_name
-#  vm_virtual_network_address_space           = var.vm_virtual_network_address_space
-#  vm_virtual_network_subnet_name             = var.vm_virtual_network_subnet_name
-#  vm_virtual_network_subnet_address_prefixes = var.vm_virtual_network_subnet_address_prefixes
-#  vm_public_ip_name                          = var.vm_public_ip_name
-#  vm_public_ip_allocation_method             = var.vm_public_ip_allocation_method
-
-#  bastion_virtual_network_subnet_name             = var.bastion_virtual_network_subnet_name
-#  bastion_virtual_network_subnet_address_prefixes = var.bastion_virtual_network_subnet_address_prefixes
-
-#  vm_network_interface_name                  = var.vm_network_interface_name
-#  vm_network_interface_ip_configuration_name = var.vm_network_interface_ip_configuration_name
-#  vm_network_interface_ip_configuration_type = var.vm_network_interface_ip_configuration_type
-
-#  bastion_public_ip_name              = var.bastion_public_ip_name
-#  bastion_public_ip_allocation_method = var.bastion_public_ip_allocation_method
-#  bastion_public_ip_sku               = var.bastion_public_ip_sku
-#  bastion_host_name                   = var.bastion_host_name
-#  bastion_host_ip_configuration_name  = var.bastion_host_ip_configuration_name
-
-#  linux-vms   = var.linux-vms
-#  windows-vms = var.windows-vms
 # }

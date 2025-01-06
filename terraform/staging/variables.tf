@@ -261,6 +261,17 @@ variable "postgresql_admin_password" {
 variable "postgresql_public_network_access_enabled" {
   type = bool
 }
+
+variable "azure_storage_archive_and_backup" {
+  description = "Azure storage archive and backup account name"
+  type        = string
+}
+
+variable "firewall" {
+  description = "All IPs that can have access to a storage account"
+  type        = set(string)
+}
+
 # variable "vm_rg_name" {
 #   type        = string
 #   description = "The resource group name for each vm's"
