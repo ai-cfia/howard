@@ -539,27 +539,27 @@ cluster Kubernetes :</p>
 configurez vos applications pour utiliser les SDK OpenTelemetry et définissez le
 point de terminaison sur alloy.monitoring.svc.cluster.local.</p>
 <p>Exemple pour les métriques</p>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">opentelemetry</span> <span class="kn">import</span> <span class="n">metrics</span>
-<span class="kn">from</span> <span class="nn">opentelemetry.sdk.metrics</span> <span class="kn">import</span> <span class="n">MeterProvider</span>
-<span class="kn">from</span> <span class="nn">opentelemetry.exporter.otlp.proto.grpc.metric_exporter</span> <span class="kn">import</span> <span class="n">OtlpExporter</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">opentelemetry</span><span class="w"> </span><span class="kn">import</span> <span class="n">metrics</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">opentelemetry.sdk.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">MeterProvider</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">opentelemetry.exporter.otlp.proto.grpc.metric_exporter</span><span class="w"> </span><span class="kn">import</span> <span class="n">OtlpExporter</span>
 
 <span class="n">metrics</span><span class="o">.</span><span class="n">set_meter_provider</span><span class="p">(</span><span class="n">MeterProvider</span><span class="p">())</span>
 <span class="n">meter</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">get_meter</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 <span class="n">exporter</span> <span class="o">=</span> <span class="n">OtlpExporter</span><span class="p">(</span><span class="n">endpoint</span><span class="o">=</span><span class="s2">&quot;alloy.monitoring.svc.cluster.local:4317&quot;</span><span class="p">)</span>
 </code></pre></div>
 <p>Exemple pour les journaux</p>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">opentelemetry</span> <span class="kn">import</span> <span class="n">logs</span>
-<span class="kn">from</span> <span class="nn">opentelemetry.sdk.logs</span> <span class="kn">import</span> <span class="n">LogEmitterProvider</span>
-<span class="kn">from</span> <span class="nn">opentelemetry.exporter.otlp.proto.grpc.log_exporter</span> <span class="kn">import</span> <span class="n">OtlpExporter</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">opentelemetry</span><span class="w"> </span><span class="kn">import</span> <span class="n">logs</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">opentelemetry.sdk.logs</span><span class="w"> </span><span class="kn">import</span> <span class="n">LogEmitterProvider</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">opentelemetry.exporter.otlp.proto.grpc.log_exporter</span><span class="w"> </span><span class="kn">import</span> <span class="n">OtlpExporter</span>
 
 <span class="n">logs</span><span class="o">.</span><span class="n">set_log_emitter_provider</span><span class="p">(</span><span class="n">LogEmitterProvider</span><span class="p">())</span>
 <span class="n">emitter</span> <span class="o">=</span> <span class="n">logs</span><span class="o">.</span><span class="n">get_log_emitter</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 <span class="n">exporter</span> <span class="o">=</span> <span class="n">OtlpExporter</span><span class="p">(</span><span class="n">endpoint</span><span class="o">=</span><span class="s2">&quot;alloy.monitoring.svc.cluster.local:4317&quot;</span><span class="p">)</span>
 </code></pre></div>
 <p>Exemple pour les traces</p>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">opentelemetry</span> <span class="kn">import</span> <span class="n">trace</span>
-<span class="kn">from</span> <span class="nn">opentelemetry.sdk.trace</span> <span class="kn">import</span> <span class="n">TracerProvider</span>
-<span class="kn">from</span> <span class="nn">opentelemetry.exporter.otlp.proto.grpc.trace_exporter</span> <span class="kn">import</span> <span class="n">OtlpExporter</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">opentelemetry</span><span class="w"> </span><span class="kn">import</span> <span class="n">trace</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">opentelemetry.sdk.trace</span><span class="w"> </span><span class="kn">import</span> <span class="n">TracerProvider</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">opentelemetry.exporter.otlp.proto.grpc.trace_exporter</span><span class="w"> </span><span class="kn">import</span> <span class="n">OtlpExporter</span>
 
 <span class="n">trace</span><span class="o">.</span><span class="n">set_tracer_provider</span><span class="p">(</span><span class="n">TracerProvider</span><span class="p">())</span>
 <span class="n">tracer</span> <span class="o">=</span> <span class="n">trace</span><span class="o">.</span><span class="n">get_tracer</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
