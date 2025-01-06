@@ -35,8 +35,9 @@ variable "firewall" {
   type        = set(string)
 }
 
+# By using the network_rule block, it is possible to whitelist only the IPs mentioned in the firewall variable
 variable "public_network_access_enabled" {
   description = "Azure storage public network access enabled"
   type        = bool
-  default     = false
+  default     = true
 }
