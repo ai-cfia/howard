@@ -138,13 +138,14 @@ module "archive-and-backup-storage-account" {
   tags = var.tags
 }
 
-module "az-default-role" {
-  source = "../modules/azure-default-iam"
-
-  subscription_id = var.subscription_id
-  user_emails     = var.user_emails
-  role_actions    = var.role_actions
-}
+# Insufficient permissions at the moment; it has been completed manually
+# module "az-default-role" {
+#   source = "../modules/azure-default-iam"
+#
+#   subscription_id = var.subscription_id
+#   user_emails     = var.user_emails
+#   role_actions    = var.role_actions
+# }
 
 # Subnet dedicated to provide internal access From Finesse to protected services from Dev
 resource "azurerm_subnet" "subnet_dev" {
