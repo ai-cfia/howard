@@ -1,5 +1,5 @@
 data "azuread_user" "users" {
-  for_each            = { for email in var.var.user_emails : email => email }
+  for_each            = { for email in var.user_emails : email => email }
   user_principal_name = each.value
 }
 
