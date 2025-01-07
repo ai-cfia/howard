@@ -272,6 +272,21 @@ variable "firewall" {
   type        = set(string)
 }
 
+variable "subscription_id" {
+  description = "Azure Subscription ID"
+  type        = string
+}
+
+variable "user_emails" {
+  description = "User emails list"
+  type        = list(string)
+}
+
+variable "role_actions" {
+  description = "tf_default_ai_cfia_az_role role actions"
+  type        = list(string)
+}
+
 # variable "vm_rg_name" {
 #   type        = string
 #   description = "The resource group name for each vm's"

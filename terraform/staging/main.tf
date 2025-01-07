@@ -133,9 +133,17 @@ module "archive-and-backup-storage-account" {
   rg_location = azurerm_resource_group.rg.location
 
   azure_storage_account_name = var.azure_storage_archive_and_backup
-  firewall                   = var.firewall
+  # firewall                   = var.firewall
 
   tags = var.tags
+}
+
+module "az-default-role" {
+  source = "../modules/azure-default-iam"
+
+  subscription_id = var.subscription_id
+  user_emails     = var.user_emails
+  role_actions    = var.role_actions
 }
 
 # Subnet dedicated to provide internal access From Finesse to protected services from Dev

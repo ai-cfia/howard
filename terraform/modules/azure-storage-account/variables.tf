@@ -33,6 +33,7 @@ variable "account_replication_type" {
 variable "firewall" {
   description = "List of public IP whitelisted"
   type        = set(string)
+  default = [ "0.0.0.0/0" ]
 }
 
 # By using the network_rule block, it is possible to whitelist only the IPs mentioned in the firewall variable
