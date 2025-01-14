@@ -267,10 +267,10 @@ variable "azure_storage_archive_and_backup" {
   type        = string
 }
 
-variable "firewall" {
-  description = "All IPs that can have access to a storage account"
-  type        = set(string)
-}
+# variable "firewall" {
+#   description = "All IPs that can have access to a storage account"
+#   type        = set(string)
+# }
 
 variable "subscription_id" {
   description = "Azure Subscription ID"
