@@ -34,6 +34,10 @@ jobs:
     uses: ai-cfia/github-workflows/.github/workflows/workflow-pr-labelling.yml@main
     secrets: inherit
 
+  check-commit-author:
+    uses: ai-cfia/github-workflows/.github/workflows/workflow-check-author-email.yml@main
+    secrets: inherit
+
   deploy-to-ghcr:
     uses: ai-cfia/github-workflows/.github/workflows/workflow-build-push-container-github-registry.yml@main
     with:
