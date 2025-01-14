@@ -272,20 +272,21 @@ variable "azure_storage_archive_and_backup" {
 #   type        = set(string)
 # }
 
-variable "subscription_id" {
-  description = "Azure Subscription ID"
-  type        = string
-}
+# Insufficient permissions at the moment; it has been completed manually
+# variable "subscription_id" {
+#   description = "Azure Subscription ID"
+#   type        = string
+# }
 
-variable "user_emails" {
-  description = "User emails list"
-  type        = list(string)
-}
+# variable "user_emails" {
+#   description = "User emails list"
+#   type        = list(string)
+# }
 
-variable "role_actions" {
-  description = "tf_default_ai_cfia_az_role role actions"
-  type        = list(string)
-}
+# variable "role_actions" {
+#   description = "tf_default_ai_cfia_az_role role actions"
+#   type        = list(string)
+# }
 
 # variable "vm_rg_name" {
 #   type        = string
