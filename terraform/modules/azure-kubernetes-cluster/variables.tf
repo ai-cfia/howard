@@ -241,6 +241,12 @@ variable "backup_label_selectors" {
   default     = []
 }
 
+variable "automatic_upgrade_channel" {
+  description = "K8s upgrade channel"
+  type        = string
+  default     = "stable"
+}
+
 # variable "aks_service_mesh_profile" {
 #   description = "AKS Service mesh profile"
 #   default     = "Istio"
