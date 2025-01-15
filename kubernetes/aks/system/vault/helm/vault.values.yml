@@ -320,9 +320,9 @@ injector:
 
   # A disruption budget limits the number of pods of a replicated application
   # that are down simultaneously from voluntary disruptions
-  podDisruptionBudget: {}
-  # podDisruptionBudget:
-  #   maxUnavailable: 1
+  # podDisruptionBudget: {}
+  podDisruptionBudget:
+    maxUnavailable: 1
 
   # strategy for updating the deployment. This can be a multi-line string or a
   # YAML map.
