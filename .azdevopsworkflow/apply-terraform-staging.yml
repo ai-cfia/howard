@@ -44,7 +44,7 @@ stages:
 
                 az storage blob download `
                   --account-name $(storageAccountName) `
-                  --container-name $(containerName) `
+                  --container-name $(varsContainerName) `
                   --name 'terraform.exe' `
                   --file "$terraformDownloadPath\terraform.exe"
 
