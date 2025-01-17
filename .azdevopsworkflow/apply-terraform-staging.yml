@@ -40,18 +40,21 @@ stages:
 
           - powershell: |
               Write-Host "Logging into Azure CLI..."
-              az login --service-principal -u "$(servicePrincipalId)" -p "$(servicePrincipalKey)" --tenant "$(tenantId)"
+              az login --service-principal `
+                -u "$env:servicePrincipalId" `
+                -p "$env:servicePrincipalKey" `
+                --tenant "$env:tenantId"
               Write-Host "Successfully logged in to Azure CLI"
             displayName: "Azure CLI Login"
 
           - powershell: |
-              Write-Host "Configuring AKS credentials..."
+              Write-Host "Fetching AKS Credentials..."
               az aks get-credentials `
-                --name "$(aks-name)" `
-                --resource-group "$(aks-resource-group)" `
+                --name "$env:aks_name" `
+                --resource-group "$env:aks_resource_group" `
                 --admin `
-                --file "$env:USERPROFILE\.kube\config"
-              Write-Host "AKS credentials configured successfully."
+                --file "$HOME\.kube\config"
+              Write-Host "AKS credentials configured for kubectl"
             displayName: "Get AKS Credentials"
 
           - task: DownloadSecureFile@1
@@ -81,11 +84,6 @@ stages:
               workingDirectory: "$(System.DefaultWorkingDirectory)/terraform/staging"
               environmentServiceNameAzureRM: "$(serviceConnectionName)"
 
-          - powershell: |
-              Write-Host "Fetching agent IP address..."
-              ipconfig | findstr "IPv4 Address"
-            displayName: "Get Agent IP"
-
   - stage: Apply
     displayName: "Apply Terraform Plan"
     dependsOn: InitAndPlan
@@ -113,18 +111,21 @@ stages:
 
                 - powershell: |
                     Write-Host "Logging into Azure CLI..."
-                    az login --service-principal -u "$(servicePrincipalId)" -p "$(servicePrincipalKey)" --tenant "$(tenantId)"
+                    az login --service-principal `
+                      -u "$env:servicePrincipalId" `
+                      -p "$env:servicePrincipalKey" `
+                      --tenant "$env:tenantId"
                     Write-Host "Successfully logged in to Azure CLI"
                   displayName: "Azure CLI Login"
 
                 - powershell: |
-                    Write-Host "Configuring AKS credentials..."
+                    Write-Host "Fetching AKS Credentials..."
                     az aks get-credentials `
-                      --name "$(aks-name)" `
-                      --resource-group "$(aks-resource-group)" `
+                      --name "$env:aks_name" `
+                      --resource-group "$env:aks_resource_group" `
                       --admin `
-                      --file "$env:USERPROFILE\.kube\config"
-                    Write-Host "AKS credentials configured successfully."
+                      --file "$HOME\.kube\config"
+                    Write-Host "AKS credentials configured for kubectl"
                   displayName: "Get AKS Credentials"
 
                 - task: DownloadSecureFile@1
