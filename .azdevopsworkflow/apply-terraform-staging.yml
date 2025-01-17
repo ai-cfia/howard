@@ -51,7 +51,7 @@ stages:
             inputs:
               secureFile: "staging.tfvars"
 
-          - task: TerraformInstaller@0
+          - task: ms-devlabs.custom-terraform-tasks.custom-terraform-installer-task.TerraformInstaller@0
             displayName: "Install Terraform"
             inputs:
               terraformVersion: '1.7.2'
