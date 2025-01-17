@@ -22,14 +22,39 @@ stages:
       - job: TerraformInitPlan
         displayName: "Terraform Init and Plan"
         steps:
+          - script: |
+              $ipAddress = (Invoke-RestMethod -Uri 'http://ipinfo.io/json').ip
+              Write-Host "Agent's Public IP Address: $ipAddress"
+            displayName: "Check Agent IP Address"
+
           - task: AzureCLI@2
-            displayName: "Azure CLI Login"
+            displayName: "Azure CLI Login and download terraform"
             inputs:
               azureSubscription: $(serviceConnectionName)
               scriptType: "ps"
               scriptLocation: "inlineScript"
               inlineScript: |
                 echo "Successfully logged in with Azure CLI"
+
+                $terraformDownloadPath = "$(System.DefaultWorkingDirectory)\terraform\tools"
+                if (!(Test-Path -Path $terraformDownloadPath)) {
+                    New-Item -ItemType Directory -Path $terraformDownloadPath | Out-Null
+                }
+
+                az storage blob download `
+                  --account-name $(storageAccountName) `
+                  --container-name $(varsContainerName) `
+                  --name 'terraform.exe' `
+                  --file "$terraformDownloadPath\terraform.exe"
+
+                Write-Host "Terraform executable downloaded to $terraformDownloadPath"
+
+                # Ajoutez Terraform .exe au PATH
+                $env:PATH = "$($env:PATH);$terraformDownloadPath"
+
+          - script: |
+              terraform version
+            displayName: "Verify Terraform Installation"
 
           - task: AzureCLI@2
             displayName: "Get AKS Credentials"
@@ -50,16 +75,6 @@ stages:
             displayName: "Download staging.tfvars"
             inputs:
               secureFile: "staging.tfvars"
-
-          - script: |
-              $TerraformPath = "$(System.DefaultWorkingDirectory)\terraform\tools\terraform.exe"
-              if (!(Test-Path $TerraformPath)) {
-                  Write-Error "Terraform executable not found at $TerraformPath"
-                  exit 1
-              }
-              Write-Host "Terraform executable located at $TerraformPath"
-              $env:PATH = "$($env:PATH);$(System.DefaultWorkingDirectory)\terraform\tools"
-            displayName: "Add Terraform to PATH"
 
           - script: |
               terraform init `
