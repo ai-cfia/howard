@@ -51,31 +51,31 @@ stages:
             inputs:
               secureFile: "staging.tfvars"
 
-          - task: charleszipp.azure-pipelines-tasks-terraform.azure-pipelines-tasks-terraform-installer.TerraformInstaller@0
-            displayName: "Install Terraform"
-            inputs:
-              terraformVersion: '1.7.2'
+          - script: |
+              $TerraformPath = "$(System.DefaultWorkingDirectory)\terraform\tools\terraform.exe"
+              if (!(Test-Path $TerraformPath)) {
+                  Write-Error "Terraform executable not found at $TerraformPath"
+                  exit 1
+              }
+              Write-Host "Terraform executable located at $TerraformPath"
+              $env:PATH = "$($env:PATH);$(System.DefaultWorkingDirectory)\terraform\tools"
+            displayName: "Add Terraform to PATH"
 
-          - task: TerraformTaskV2@2
-            displayName: Terra Init
-            inputs:
-              provider: "azurerm"
-              command: "init"
-              workingDirectory: "$(System.DefaultWorkingDirectory)/terraform/staging"
-              backendServiceArm: "$(serviceConnectionName)"
-              backendAzureRmResourceGroupName: "$(resourceGroupName)"
-              backendAzureRmStorageAccountName: "$(storageAccountName)"
-              backendAzureRmContainerName: "$(containerName)"
-              backendAzureRmKey: "$(stateKey)"
+          - script: |
+              terraform init `
+                -backend-config="storage_account_name=$(storageAccountName)" `
+                -backend-config="container_name=$(containerName)" `
+                -backend-config="key=$(stateKey)" `
+                -backend-config="resource_group_name=$(resourceGroupName)"
+            displayName: "Terraform Init"
+            workingDirectory: "$(System.DefaultWorkingDirectory)/terraform/staging"
 
-          - task: TerraformTaskV2@2
-            displayName: Terra Plan
-            inputs:
-              provider: "azurerm"
-              command: "plan"
-              commandOptions: "-var-file=$(DownloadSecureVars.SecureFilePath)"
-              workingDirectory: "$(System.DefaultWorkingDirectory)/terraform/staging"
-              environmentServiceNameAzureRM: "$(serviceConnectionName)"
+          - script: |
+              terraform apply `
+                -var-file="$(DownloadSecureVars.SecureFilePath)" `
+                -auto-approve
+            displayName: "Terraform Apply"
+            workingDirectory: "$(System.DefaultWorkingDirectory)/terraform/staging"
 
   - stage: Apply
     displayName: "Apply Terraform Plan"
@@ -122,7 +122,7 @@ stages:
                   inputs:
                     secureFile: "staging.tfvars"
 
-                - task: charleszipp.azure-pipelines-tasks-terraform.azure-pipelines-tasks-terraform-installer.TerraformInstaller@0
+                - task: ms-devlabs.custom-terraform-tasks.custom-terraform-installer-task.TerraformInstaller@0
                   displayName: "Install Terraform"
                   inputs:
                     terraformVersion: '1.7.2'
