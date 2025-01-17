@@ -50,9 +50,13 @@ stages:
 
                 Write-Host "Terraform executable downloaded to $terraformDownloadPath"
 
-          - script: |
-              [System.Environment]::SetEnvironmentVariable("PATH", "$env:PATH;$(System.DefaultWorkingDirectory)\terraform\tools", [System.EnvironmentVariableTarget]::Process)
+          - task: PowerShell@2
             displayName: "Add Terraform to PATH"
+            inputs:
+              targetType: 'inline'
+              script: |
+                $terraformPath = "$(System.DefaultWorkingDirectory)\terraform\tools"
+                [System.Environment]::SetEnvironmentVariable("PATH", "$env:PATH;$terraformPath", [System.EnvironmentVariableTarget]::Process)
 
           - task: AzureCLI@2
             displayName: "Get AKS Credentials"
