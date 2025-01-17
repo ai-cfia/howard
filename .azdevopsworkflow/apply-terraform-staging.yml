@@ -50,6 +50,10 @@ stages:
 
                 Write-Host "Terraform executable downloaded to $terraformDownloadPath"
 
+          - script: |
+              [System.Environment]::SetEnvironmentVariable("PATH", "$env:PATH;$(System.DefaultWorkingDirectory)\terraform\tools", [System.EnvironmentVariableTarget]::Process)
+            displayName: "Add Terraform to PATH"
+
           - task: AzureCLI@2
             displayName: "Get AKS Credentials"
             inputs:
@@ -70,29 +74,26 @@ stages:
             inputs:
               secureFile: "staging.tfvars"
 
-          - task: PowerShell@2
-            displayName: "Terraform Init"
+          - task: TerraformTaskV2@2
+            displayName: Terra Init
             inputs:
-              targetType: 'inline'
-              script: |
-                $terraformExe = "$(System.DefaultWorkingDirectory)\terraform\tools\terraform.exe"
-                & $terraformExe init `
-                  -backend-config="storage_account_name=$(storageAccountName)" `
-                  -backend-config="container_name=$(containerName)" `
-                  -backend-config="key=$(stateKey)" `
-                  -backend-config="resource_group_name=$(resourceGroupName)"
+              provider: "azurerm"
+              command: "init"
               workingDirectory: "$(System.DefaultWorkingDirectory)/terraform/staging"
+              backendServiceArm: "$(serviceConnectionName)"
+              backendAzureRmResourceGroupName: "$(resourceGroupName)"
+              backendAzureRmStorageAccountName: "$(storageAccountName)"
+              backendAzureRmContainerName: "$(containerName)"
+              backendAzureRmKey: "$(stateKey)"
 
-          - task: PowerShell@2
-            displayName: "Terraform Apply"
+          - task: TerraformTaskV2@2
+            displayName: Terra Plan
             inputs:
-              targetType: 'inline'
-              script: |
-                $terraformExe = "$(System.DefaultWorkingDirectory)\terraform\tools\terraform.exe"
-                & $terraformExe apply `
-                  -var-file="$(DownloadSecureVars.SecureFilePath)" `
-                  -auto-approve
+              provider: "azurerm"
+              command: "plan"
+              commandOptions: "-var-file=$(DownloadSecureVars.SecureFilePath)"
               workingDirectory: "$(System.DefaultWorkingDirectory)/terraform/staging"
+              environmentServiceNameAzureRM: "$(serviceConnectionName)"
 
   - stage: Apply
     displayName: "Apply Terraform Plan"
