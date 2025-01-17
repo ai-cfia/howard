@@ -51,7 +51,7 @@ stages:
                 Write-Host "Terraform executable downloaded to $terraformDownloadPath"
 
           - script: |
-              terraform version
+              $(System.DefaultWorkingDirectory)\terraform\tools\terraform.exe version
             displayName: "Verify Terraform Installation"
 
           - task: AzureCLI@2
