@@ -22,10 +22,13 @@ stages:
       - job: TerraformInitPlan
         displayName: "Terraform Init and Plan"
         steps:
-          - script: |
-              $ipAddress = (Invoke-RestMethod -Uri 'http://ipinfo.io/json').ip
-              Write-Host "Agent's Public IP Address: $ipAddress"
+          - task: PowerShell@2
             displayName: "Check Agent IP Address"
+            inputs:
+              targetType: 'inline'
+              script: |
+                $ipAddress = (Invoke-RestMethod -Uri 'http://ipinfo.io/json').ip
+                Write-Host "Agent's Public IP Address: $ipAddress"
 
           - task: AzureCLI@2
             displayName: "Azure CLI Login and download terraform"
@@ -34,8 +37,6 @@ stages:
               scriptType: "ps"
               scriptLocation: "inlineScript"
               inlineScript: |
-                echo "Successfully logged in with Azure CLI"
-
                 $terraformDownloadPath = "$(System.DefaultWorkingDirectory)\terraform\tools"
                 if (!(Test-Path -Path $terraformDownloadPath)) {
                     New-Item -ItemType Directory -Path $terraformDownloadPath | Out-Null
@@ -43,14 +44,11 @@ stages:
 
                 az storage blob download `
                   --account-name $(storageAccountName) `
-                  --container-name $(varsContainerName) `
+                  --container-name $(containerName) `
                   --name 'terraform.exe' `
                   --file "$terraformDownloadPath\terraform.exe"
 
                 Write-Host "Terraform executable downloaded to $terraformDownloadPath"
-
-                # Ajoutez Terraform .exe au PATH
-                $env:PATH = "$($env:PATH);$terraformDownloadPath"
 
           - script: |
               terraform version
@@ -77,7 +75,7 @@ stages:
               secureFile: "staging.tfvars"
 
           - script: |
-              terraform init `
+              $(System.DefaultWorkingDirectory)\terraform\tools\terraform.exe init `
                 -backend-config="storage_account_name=$(storageAccountName)" `
                 -backend-config="container_name=$(containerName)" `
                 -backend-config="key=$(stateKey)" `
@@ -86,7 +84,7 @@ stages:
             workingDirectory: "$(System.DefaultWorkingDirectory)/terraform/staging"
 
           - script: |
-              terraform apply `
+              $(System.DefaultWorkingDirectory)\terraform\tools\terraform.exe apply `
                 -var-file="$(DownloadSecureVars.SecureFilePath)" `
                 -auto-approve
             displayName: "Terraform Apply"
