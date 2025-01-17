@@ -51,6 +51,11 @@ stages:
             inputs:
               secureFile: "staging.tfvars"
 
+          - task: TerraformInstaller@0
+            displayName: "Install Terraform"
+            inputs:
+              terraformVersion: '1.7.2'
+
           - task: TerraformTaskV2@2
             displayName: Terra Init
             inputs:
@@ -116,6 +121,11 @@ stages:
                   displayName: "Download staging.tfvars"
                   inputs:
                     secureFile: "staging.tfvars"
+
+                - task: TerraformInstaller@0
+                  displayName: "Install Terraform"
+                  inputs:
+                    terraformVersion: '1.7.2'
 
                 - task: TerraformTaskV2@2
                   displayName: Terra Init
