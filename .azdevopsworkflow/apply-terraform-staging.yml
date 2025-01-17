@@ -38,12 +38,12 @@ stages:
               scriptType: "ps"
               scriptLocation: "inlineScript"
               inlineScript: |
-                az aks get-credentials \
-                  --name $(aks-name) \
-                  --resource-group $(aks-resource-group) \
-                  --admin \
-                  --file ~/.kube/config
-                echo "AKS credentials configured for kubectl"
+                az aks get-credentials `
+                  --name "$(aks-name)" `
+                  --resource-group "$(aks-resource-group)" `
+                  --admin `
+                  --file "~/.kube/config"
+                Write-Host "AKS credentials configured for kubectl"
 
           - task: DownloadSecureFile@1
             name: DownloadSecureVars
@@ -104,12 +104,12 @@ stages:
                     scriptType: "ps"
                     scriptLocation: "inlineScript"
                     inlineScript: |
-                      az aks get-credentials \
-                        --name $(aks-name) \
-                        --resource-group $(aks-resource-group) \
-                        --admin \
-                        --file ~/.kube/config
-                      echo "AKS credentials configured for kubectl"
+                      az aks get-credentials `
+                        --name "$(aks-name)" `
+                        --resource-group "$(aks-resource-group)" `
+                        --admin `
+                        --file "~/.kube/config"
+                      Write-Host "AKS credentials configured for kubectl"
 
                 - task: DownloadSecureFile@1
                   name: DownloadSecureVars
