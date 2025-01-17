@@ -1,3 +1,4 @@
+---
 trigger:
   branches:
     include:
@@ -10,6 +11,7 @@ pool:
   demands:
     - Agent.Name -equals Agent1_C004
 
+
 variables:
   - group: terraform-backend-settings
 
@@ -20,42 +22,28 @@ stages:
       - job: TerraformInitPlan
         displayName: "Terraform Init and Plan"
         steps:
-          - task: UseDotNet@2
-            displayName: "Install .NET (required for Terraform)"
-            inputs:
-              packageType: sdk
-              version: 7.x
-
-          - powershell: |
-              Write-Host "Fetching agent IP address..."
-              ipconfig | findstr "IPv4 Address"
-            displayName: "Get Agent IP"
-
-          - powershell: |
-              Write-Host "Installing Azure CLI on Windows..."
-              Invoke-WebRequest -Uri https://aka.ms/installazurecliwindows -OutFile AzureCLI.msi
-              Start-Process msiexec.exe -ArgumentList '/I AzureCLI.msi /quiet' -Wait
-              az version
-            displayName: "Install Azure CLI"
-
-          - powershell: |
-              Write-Host "Logging into Azure CLI..."
-              az login --service-principal `
-                -u "$env:servicePrincipalId" `
-                -p "$env:servicePrincipalKey" `
-                --tenant "$env:tenantId"
-              Write-Host "Successfully logged in to Azure CLI"
+          - task: AzureCLI@2
             displayName: "Azure CLI Login"
+            inputs:
+              azureSubscription: $(serviceConnectionName)
+              scriptType: "ps"
+              scriptLocation: "inlineScript"
+              inlineScript: |
+                echo "Successfully logged in with Azure CLI"
 
-          - powershell: |
-              Write-Host "Fetching AKS Credentials..."
-              az aks get-credentials `
-                --name "$env:aks_name" `
-                --resource-group "$env:aks_resource_group" `
-                --admin `
-                --file "$HOME\.kube\config"
-              Write-Host "AKS credentials configured for kubectl"
+          - task: AzureCLI@2
             displayName: "Get AKS Credentials"
+            inputs:
+              azureSubscription: $(serviceConnectionName)
+              scriptType: "ps"
+              scriptLocation: "inlineScript"
+              inlineScript: |
+                az aks get-credentials \
+                  --name $(aks-name) \
+                  --resource-group $(aks-resource-group) \
+                  --admin \
+                  --file ~/.kube/config
+                echo "AKS credentials configured for kubectl"
 
           - task: DownloadSecureFile@1
             name: DownloadSecureVars
@@ -92,9 +80,7 @@ stages:
       - deployment: TerraformApply
         displayName: "Terraform Apply"
         pool:
-          name: "Azure_CFIA_Agents_for_IAAS"
-          demands:
-            - Agent.Name -equals Agent1_C004
+          vmImage: "ubuntu-latest"
         environment: "TFApproval"
         strategy:
           runOnce:
@@ -102,31 +88,28 @@ stages:
               steps:
                 - checkout: self
 
-                - powershell: |
-                    Write-Host "Installing Azure CLI on Windows..."
-                    Invoke-WebRequest -Uri https://aka.ms/installazurecliwindows -OutFile AzureCLI.msi
-                    Start-Process msiexec.exe -ArgumentList '/I AzureCLI.msi /quiet' -Wait
-                    az version
-                  displayName: "Install Azure CLI"
-
-                - powershell: |
-                    Write-Host "Logging into Azure CLI..."
-                    az login --service-principal `
-                      -u "$env:servicePrincipalId" `
-                      -p "$env:servicePrincipalKey" `
-                      --tenant "$env:tenantId"
-                    Write-Host "Successfully logged in to Azure CLI"
+                - task: AzureCLI@2
                   displayName: "Azure CLI Login"
+                  inputs:
+                    azureSubscription: $(serviceConnectionName)
+                    scriptType: "ps"
+                    scriptLocation: "inlineScript"
+                    inlineScript: |
+                      echo "Successfully logged in with Azure CLI"
 
-                - powershell: |
-                    Write-Host "Fetching AKS Credentials..."
-                    az aks get-credentials `
-                      --name "$env:aks_name" `
-                      --resource-group "$env:aks_resource_group" `
-                      --admin `
-                      --file "$HOME\.kube\config"
-                    Write-Host "AKS credentials configured for kubectl"
+                - task: AzureCLI@2
                   displayName: "Get AKS Credentials"
+                  inputs:
+                    azureSubscription: $(serviceConnectionName)
+                    scriptType: "ps"
+                    scriptLocation: "inlineScript"
+                    inlineScript: |
+                      az aks get-credentials \
+                        --name $(aks-name) \
+                        --resource-group $(aks-resource-group) \
+                        --admin \
+                        --file ~/.kube/config
+                      echo "AKS credentials configured for kubectl"
 
                 - task: DownloadSecureFile@1
                   name: DownloadSecureVars
@@ -147,7 +130,7 @@ stages:
                     backendAzureRmKey: "$(stateKey)"
 
                 - task: TerraformTaskV2@2
-                  displayName: Terra Apply
+                  displayName: "Terra Apply"
                   inputs:
                     provider: "azurerm"
                     command: "apply"
