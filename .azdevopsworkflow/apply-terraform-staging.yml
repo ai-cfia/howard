@@ -7,7 +7,7 @@ trigger:
 pr: none
 
 pool:
-  vmImage: "ubuntu-latest"
+  name: "Azure_CFIA_Agents_for_IAAS"
 
 variables:
   - group: terraform-backend-settings
