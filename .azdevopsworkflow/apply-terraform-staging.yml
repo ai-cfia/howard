@@ -7,10 +7,7 @@ trigger:
 pr: none
 
 pool:
-  name: "Azure_CFIA_Agents_for_IAAS"
-  demands:
-    - Agent.Name -equals Agent1_C004
-
+  vmImage: "ubuntu-latest"
 
 variables:
   - group: terraform-backend-settings
@@ -26,7 +23,7 @@ stages:
             displayName: "Azure CLI Login"
             inputs:
               azureSubscription: $(serviceConnectionName)
-              scriptType: "ps"
+              scriptType: "bash"
               scriptLocation: "inlineScript"
               inlineScript: |
                 echo "Successfully logged in with Azure CLI"
@@ -35,26 +32,21 @@ stages:
             displayName: "Get AKS Credentials"
             inputs:
               azureSubscription: $(serviceConnectionName)
-              scriptType: "ps"
+              scriptType: "bash"
               scriptLocation: "inlineScript"
               inlineScript: |
-                az aks get-credentials `
-                  --name "$(aks-name)" `
-                  --resource-group "$(aks-resource-group)" `
-                  --admin `
-                  --file "~/.kube/config"
-                Write-Host "AKS credentials configured for kubectl"
+                az aks get-credentials \
+                  --name $(aks-name) \
+                  --resource-group $(aks-resource-group) \
+                  --admin \
+                  --file ~/.kube/config
+                echo "AKS credentials configured for kubectl"
 
           - task: DownloadSecureFile@1
             name: DownloadSecureVars
             displayName: "Download staging.tfvars"
             inputs:
               secureFile: "staging.tfvars"
-
-          - task: TerraformInstaller@0
-            displayName: "Install Terraform"
-            inputs:
-              terraformVersion: '1.7.2'
 
           - task: TerraformTaskV2@2
             displayName: Terra Init
@@ -86,7 +78,7 @@ stages:
         displayName: "Terraform Apply"
         pool:
           vmImage: "ubuntu-latest"
-        environment: "TFApproval"
+        environment: "ProductionApproval"
         strategy:
           runOnce:
             deploy:
@@ -97,7 +89,7 @@ stages:
                   displayName: "Azure CLI Login"
                   inputs:
                     azureSubscription: $(serviceConnectionName)
-                    scriptType: "ps"
+                    scriptType: "bash"
                     scriptLocation: "inlineScript"
                     inlineScript: |
                       echo "Successfully logged in with Azure CLI"
@@ -106,26 +98,21 @@ stages:
                   displayName: "Get AKS Credentials"
                   inputs:
                     azureSubscription: $(serviceConnectionName)
-                    scriptType: "ps"
+                    scriptType: "bash"
                     scriptLocation: "inlineScript"
                     inlineScript: |
-                      az aks get-credentials `
-                        --name "$(aks-name)" `
-                        --resource-group "$(aks-resource-group)" `
-                        --admin `
-                        --file "~/.kube/config"
-                      Write-Host "AKS credentials configured for kubectl"
+                      az aks get-credentials \
+                        --name $(aks-name) \
+                        --resource-group $(aks-resource-group) \
+                        --admin \
+                        --file ~/.kube/config
+                      echo "AKS credentials configured for kubectl"
 
                 - task: DownloadSecureFile@1
                   name: DownloadSecureVars
                   displayName: "Download staging.tfvars"
                   inputs:
                     secureFile: "staging.tfvars"
-
-                - task: TerraformInstaller@0
-                  displayName: "Install Terraform"
-                  inputs:
-                    terraformVersion: '1.7.2'
 
                 - task: TerraformTaskV2@2
                   displayName: Terra Init
