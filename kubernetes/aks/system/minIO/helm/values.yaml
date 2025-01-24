@@ -1,5 +1,6 @@
 ## minio mode, i.e. standalone or distributed
-mode: distributed ##   other supported values are "standalone"
+## other supported values are "standalone"
+mode: distributed
 
 ## Internal port number for MinIO S3 API container
 ## Change service.port to change external port number
@@ -138,16 +139,13 @@ consoleService:
 buckets:
   # Name of the bucket
   - name: nachet
-    # Policy to be set on the
-    # bucket [none|download|upload|public]
+    # Policy to be set on the bucket [none|download|upload|public]
     policy: none
     # Purge if bucket exists already
     purge: false
-    # set versioning for
-    # bucket [true|false]
+    # set versioning for bucket [true|false]
     versioning: false #   remove this key if you do not want versioning feature
-    # set objectlocking for
-    # bucket [true|false] NOTE: versioning is enabled by default if you use locking
+    # set objectlocking for bucket [true|false] NOTE: versioning is enabled by default if you use locking
     objectlocking: false
   # - name: bucket2
   #   policy: none
