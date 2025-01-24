@@ -27,7 +27,7 @@ rootPassword: ""
 ## All mentioned variables will be ignored in values file.
 ## .data.rootUser and .data.rootPassword are mandatory,
 ## others depend on enabled status of corresponding sections.
-existingSecret: "minio_secret"
+existingSecret: "minio-secret"
 
 # Number of drives attached to a node
 drivesPerNode: 1
