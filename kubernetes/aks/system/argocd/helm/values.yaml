@@ -173,7 +173,7 @@ configs:
 
     # -- Enable exec feature in Argo UI
     ## Ref: https://argo-cd.readthedocs.io/en/latest/operator-manual/rbac/#exec-resource
-    exec.enabled: false
+    exec.enabled: true
 
     # -- Enable local admin user
     ## Ref: https://argo-cd.readthedocs.io/en/latest/faq/#how-to-disable-admin-user
@@ -326,6 +326,8 @@ configs:
       p, role:fertiscan, applications, sync, default/fertiscan-preview, allow
       p, role:fertiscan, applications, override, default/fertiscan-preview, allow
 
+      p, role:admin, exec, create, */*, allow
+      
       g, ai-cfia:devops, role:admin
       g, ai-cfia:finesse, role:finesse
       g, ai-cfia:nachet, role:nachet

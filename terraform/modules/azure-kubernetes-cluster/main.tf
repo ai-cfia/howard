@@ -22,6 +22,7 @@ resource "azurerm_kubernetes_cluster" "k8s" {
   azure_active_directory_role_based_access_control {
     admin_group_object_ids = var.aks_admin_group_object_ids
     azure_rbac_enabled     = var.rbac_enabled
+
   }
 
   identity {
@@ -45,6 +46,8 @@ resource "azurerm_kubernetes_cluster" "k8s" {
       default_node_pool
     ]
   }
+
+  automatic_upgrade_channel = var.automatic_upgrade_channel
 
   # service_mesh_profile {
   #   mode = var.aks_service_mesh_profile

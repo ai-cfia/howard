@@ -320,9 +320,9 @@ injector:
 
   # A disruption budget limits the number of pods of a replicated application
   # that are down simultaneously from voluntary disruptions
-  podDisruptionBudget: {}
-  # podDisruptionBudget:
-  #   maxUnavailable: 1
+  # podDisruptionBudget: {}
+  podDisruptionBudget:
+    maxUnavailable: 1
 
   # strategy for updating the deployment. This can be a multi-line string or a
   # YAML map.
@@ -840,7 +840,7 @@ server:
 
       # maxUnavailable will default to (n/2)-1 where n is the number of
       # replicas. If you'd like a custom value, you can specify an override here.
-      maxUnavailable: null
+      maxUnavailable: 1
 
   # Definition of the serviceAccount used to run Vault.
   # These options are also used when using an external Vault server to validate
