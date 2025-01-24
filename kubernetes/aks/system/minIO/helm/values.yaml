@@ -1,0 +1,157 @@
+## minio mode, i.e. standalone or distributed
+## other supported values are "standalone"
+mode: distributed
+
+## Internal port number for MinIO S3 API container
+## Change service.port to change external port number
+minioAPIPort: "9000"
+
+## Internal port number for MinIO Browser Console container
+## Change consoleService.port to change external port number
+minioConsolePort: "9001"
+
+## Set default rootUser, rootPassword
+## rootUser and rootPassword is generated when not set
+## Distributed MinIO ref: https://min.io/docs/minio/linux/operations/install-deploy-manage/deploy-minio-multi-node-multi-drive.html
+##
+rootUser: ""
+rootPassword: ""
+
+## Use existing Secret that store following variables:
+##
+## | Chart var             | .data.<key> in Secret    |
+## |:----------------------|:-------------------------|
+## | rootUser              | rootUser                 |
+## | rootPassword          | rootPassword             |
+##
+## All mentioned variables will be ignored in values file.
+## .data.rootUser and .data.rootPassword are mandatory,
+## others depend on enabled status of corresponding sections.
+existingSecret: "minio_secret"
+
+# Number of drives attached to a node
+drivesPerNode: 1
+# Number of MinIO containers running
+replicas: 8
+# Number of expanded MinIO clusters
+pools: 1
+
+## Enable persistence using Persistent Volume Claims
+## ref: http://kubernetes.io/docs/user-guide/persistent-volumes/
+##
+persistence:
+  enabled: true
+  annotations: {}
+
+  ## A manually managed Persistent Volume and Claim
+  ## Requires persistence.enabled: true
+  ## If defined, PVC must be created manually before volume will be bound
+  existingClaim: ""
+
+  ## minio data Persistent Volume Storage Class
+  ## If defined, storageClassName: <storageClass>
+  ## If set to "-", storageClassName: "", which disables dynamic provisioning
+  ## If undefined (the default) or set to null, no storageClassName spec is
+  ##   set, choosing the default provisioner.  (gp2 on AWS, standard on
+  ##   GKE, AWS & OpenStack)
+  ##
+  ## Storage class of PV to bind. By default it looks for standard storage class.
+  ## If the PV uses a different storage class, specify that here.
+  storageClass: ""
+  volumeName: "minio-pvc"
+  accessMode: ReadWriteOnce
+  size: 10Gi
+
+  ## If subPath is set mount a sub folder of a volume instead of the root of the volume.
+  ## This is especially handy for volume plugins that don't natively support sub mounting (like glusterfs).
+  ##
+  subPath: ""
+
+## Expose the MinIO service to be accessed from outside the cluster (LoadBalancer service).
+## or access it from within the cluster (ClusterIP service). Set the service type and the port to serve it.
+## ref: http://kubernetes.io/docs/user-guide/services/
+##
+service:
+  type: ClusterIP
+  clusterIP: ~
+  port: "9000"
+  nodePort: 32000
+  loadBalancerIP: ~
+  externalIPs: []
+  annotations: {}
+
+  ## service.loadBalancerSourceRanges Addresses that are allowed when service is LoadBalancer
+  ## https://kubernetes.io/docs/tasks/access-application-cluster/configure-cloud-provider-firewall/#restrict-access-for-loadbalancer-service
+  ##
+  # loadBalancerSourceRanges:
+  #   - 10.10.10.0/24
+  loadBalancerSourceRanges: []
+
+  ## service.externalTrafficPolicy minio service external traffic policy
+  ## ref http://kubernetes.io/docs/tasks/access-application-cluster/create-external-load-balancer/#preserving-the-client-source-ip
+  ##
+  externalTrafficPolicy: Cluster
+
+## Configure Ingress based on the documentation here: https://kubernetes.io/docs/concepts/services-networking/ingress/
+##
+ingress:
+  enabled: true
+  ingressClassName: nginx
+  annotations:
+    nginx.ingress.kubernetes.io/whitelist-source-range: 205.194.32.0/24,10.244.0.0/16,192.197.71.0/24
+    external-dns.alpha.kubernetes.io/target: inspection.alpha.canada.ca
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /$2  # https://kubernetes.github.io/ingress-nginx/examples/rewrite/
+    nginx.ingress.kubernetes.io/client_max_body_size: "200m"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "120"
+    kubernetes.io/tls-acme: "true"
+  path: /
+  hosts:
+    - minio.inspection.alpha.canada.ca
+  tls:
+    - secretName: minio-tls
+      hosts:
+        - minio.inspection.alpha.canada.ca
+
+consoleService:
+  type: ClusterIP
+  clusterIP: ~
+  port: "9001"
+  nodePort: 32001
+  loadBalancerIP: ~
+  externalIPs: []
+  annotations: {}
+  ## consoleService.loadBalancerSourceRanges Addresses that are allowed when service is LoadBalancer
+  ## https://kubernetes.io/docs/tasks/access-application-cluster/configure-cloud-provider-firewall/#restrict-access-for-loadbalancer-service
+  ##
+  # loadBalancerSourceRanges:
+  #   - 10.10.10.0/24
+  loadBalancerSourceRanges: []
+
+  ## servconsoleServiceice.externalTrafficPolicy minio service external traffic policy
+  ## ref http://kubernetes.io/docs/tasks/access-application-cluster/create-external-load-balancer/#preserving-the-client-source-ip
+  ##
+  externalTrafficPolicy: Cluster
+
+## List of buckets to be created after minio install
+##
+buckets:
+  # Name of the bucket
+  - name: nachet
+    # Policy to be set on the bucket [none|download|upload|public]
+    policy: none
+    # Purge if bucket exists already
+    purge: false
+    # set versioning for bucket [true|false]
+    # remove this key if you do not want versioning feature
+    versioning: false
+    # set objectlocking for bucket [true|false] NOTE: versioning is enabled by default if you use locking
+    objectlocking: false
+  # - name: bucket2
+  #   policy: none
+  #   purge: false
+  #   versioning: true
+  #   # set objectlocking for
+  #   # bucket [true|false] NOTE: versioning is enabled by default if you use locking
+  #   objectlocking: false
