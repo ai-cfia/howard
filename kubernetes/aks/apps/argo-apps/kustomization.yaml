@@ -31,6 +31,7 @@ resources:
   - ../../system/gatus/
   - ../../system/gh-runner/
   - ../../system/otel-operator/
+  - ../../system/minio/
 
 patches:
   - patch: |-
