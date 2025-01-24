@@ -6,17 +6,24 @@ metadata:
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
-  annotations:
-    argocd.argoproj.io/sync-wave: "0"
 spec:
   project: default
   destination:
-    server: https://kubernetes.default.svc
     namespace: minio
-  source:
-    repoURL: https://github.com/ai-cfia/howard.git
-    path: kubernetes/aks/system/minio/base
-    targetRevision: HEAD
+    server: https://kubernetes.default.svc
+  sources:
+    - chart: minio
+      helm:
+        valueFiles:
+          - $values/kubernetes/aks/system/minio/helm/values.yaml
+      repoURL: https://charts.min.io/
+      targetRevision: 5.4.0
+    - repoURL: https://github.com/ai-cfia/howard.git
+      targetRevision: HEAD
+      ref: values
+    - repoURL: https://github.com/ai-cfia/howard.git
+      path: kubernetes/aks/system/minio/base
+      targetRevision: HEAD
   syncPolicy:
     automated:
       selfHeal: true
