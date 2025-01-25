@@ -92,6 +92,11 @@ service:
   ##
   externalTrafficPolicy: Cluster
 
+# Requested memory
+resources:
+  requests:
+    memory: 1Gi
+
 ## Configure Ingress based on the documentation here: https://kubernetes.io/docs/concepts/services-networking/ingress/
 ##
 ingress:
