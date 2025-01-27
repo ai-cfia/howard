@@ -33,7 +33,7 @@ spec:
                       - agent
       containers:
         - name: test-app
-          image: ghcr.io/ai-cfia/howard:528
+          image: ghcr.io/ai-cfia/howard:529
           imagePullPolicy: Always
           ports:
             - containerPort: 5000
