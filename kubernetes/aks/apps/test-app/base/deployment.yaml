@@ -46,11 +46,19 @@ spec:
             capabilities:
               drop:
                 - ALL
-          envFrom:
+          env:
             - name: MINIO_URL
               value: "http://minio.minio.svc.cluster.local:9000"
-            - secretRef:
-                name: test-app-secrets
+            - name: MINIO_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: test-app-secrets
+                  key: MINIO_ACCESS_KEY
+            - name: MINIO_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: test-app-secrets
+                  key: MINIO_SECRET_KEY
 
 ---
 apiVersion: policy/v1
