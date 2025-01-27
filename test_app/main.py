@@ -104,16 +104,16 @@ def minio():
 
     try:
         if not client.bucket_exists(bucket_name):
-            print(f"info: the bucket name '{bucket_name}' doesn't exist.")
+            return jsonify({"error": f"Internal server error {bucket_name} doesn't exist"}), 500
 
         with open(file_name, "w") as file:
             file.write(file_content)
 
         client.fput_object(bucket_name, file_name, file_name)
-        print(f"info: file '{file_name}' uploaded to '{bucket_name}'.")
 
+        return jsonify({"message": f"ok, {file_name} uploaded to {bucket_name}"}), 200
     except S3Error as e:
-        print("error: S3:", e)
+        return jsonify({"error": f"Internal server error {e}"}), 500
 
 if __name__ == '__main__':
     load_dotenv()
