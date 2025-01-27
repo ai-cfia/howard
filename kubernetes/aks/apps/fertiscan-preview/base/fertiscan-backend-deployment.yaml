@@ -55,15 +55,10 @@ spec:
               value: "1"
             - name: OTEL_LOGS_EXPORTER
               value: "otlp"
+            - name: API_BASE_PATH
+              value: "/api"
           ports:
             - containerPort: 5000
-          volumeMounts:
-            - name: logs
-              mountPath: /app/logs
-            - name: uploads
-              mountPath: /app/uploads
-            - name: tmp
-              mountPath: /cachedir_joblib
           securityContext:
             runAsUser: 1000
             runAsGroup: 1000
@@ -73,15 +68,6 @@ spec:
             capabilities:
               drop:
                 - ALL
-      volumes:
-        - name: tmp
-          emptyDir: {}
-        - name: logs
-          persistentVolumeClaim:
-            claimName: fertiscan-logs-pvc
-        - name: uploads
-          persistentVolumeClaim:
-            claimName: fertiscan-uploads-pvc
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
