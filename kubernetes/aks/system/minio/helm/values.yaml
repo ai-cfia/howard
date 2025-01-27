@@ -113,11 +113,11 @@ ingress:
     kubernetes.io/tls-acme: "true"
   path: /
   hosts:
-    - minio.inspection.alpha.canada.ca
+    - minio-b.inspection.alpha.canada.ca
   tls:
-    - secretName: minio-tls
+    - secretName: minio-b-tls
       hosts:
-        - minio.inspection.alpha.canada.ca
+        - minio-b.inspection.alpha.canada.ca
 
 consoleService:
   type: ClusterIP

@@ -1,0 +1,28 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: minio-ui
+  annotations:
+    nginx.ingress.kubernetes.io/whitelist-source-range: 205.194.32.0/24,10.244.0.0/16,192.197.71.0/24
+    external-dns.alpha.kubernetes.io/target: inspection.alpha.canada.ca
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    ingress.kubernetes.io/force-ssl-redirect: "true"
+    kubernetes.io/tls-acme: "true"
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - "minio.inspection.alpha.canada.ca"
+      secretName: minio-ui
+  rules:
+    - host: "minio.inspection.alpha.canada.ca"
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: minio-console
+                port:
+                  number: 9001
