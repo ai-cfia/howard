@@ -2,6 +2,9 @@ import os
 import logging
 import logging_loki
 
+from minio import Minio
+from minio.error import S3Error
+
 from flask import Flask, jsonify, request
 from dotenv import load_dotenv
 
@@ -15,6 +18,10 @@ from opentelemetry.exporter.otlp.proto.grpc.metric_exporter import OTLPMetricExp
 
 OTEL_ENDPOINT = os.getenv("OTEL_ENDPOINT")
 LOKI_ENDPOINT = os.getenv("LOKI_ENDPOINT")
+
+MINIO_URL = os.getenv("MINIO_URL")
+MINIO_ACCESS_KEY = os.getenv("MINIO_ACCESS_KEY")
+MINIO_SECRET_KEY = os.getenv("MINIO_SECRET_KEY")
 
 # Tracer
 trace.set_tracer_provider(TracerProvider())
@@ -42,6 +49,14 @@ loki_handler = logging_loki.LokiHandler(
 logger = logging.getLogger("flask-app")
 logger.setLevel(logging.DEBUG)
 logger.addHandler(loki_handler)
+
+# minIO configuration
+client = Minio(
+    endpoint=MINIO_URL,
+    access_key=MINIO_ACCESS_KEY,
+    secret_key=MINIO_SECRET_KEY,
+    secure=False
+)
 
 app = Flask(__name__)
 FlaskInstrumentor().instrument_app(app)
@@ -80,6 +95,25 @@ def error():
     with tracer.start_as_current_span("500-response"):
         logger.critical("critical: /error endpoint")
         return jsonify({"error": "Internal server error"}), 500
+
+@app.route('/minio', methods=['GET'])
+def minio():
+    bucket_name = "howard-test-app"
+    file_name = "my_file.txt"
+    file_content = "Testing minIO with the howard test application."
+
+    try:
+        if not client.bucket_exists(bucket_name):
+            print(f"info: the bucket name '{bucket_name}' doesn't exist.")
+
+        with open(file_name, "w") as file:
+            file.write(file_content)
+
+        client.fput_object(bucket_name, file_name, file_name)
+        print(f"info: file '{file_name}' uploaded to '{bucket_name}'.")
+
+    except S3Error as e:
+        print("error: S3:", e)
 
 if __name__ == '__main__':
     load_dotenv()
