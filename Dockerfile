@@ -19,15 +19,17 @@ ENV MINIO_URL=${ARG_MINIO_URL:-minio.minio.svc.cluster.local:9000}
 ENV MINIO_ACCESS_KEY=${ARG_MINIO_ACCESS_KEY:-arg_minio_access_key}
 ENV MINIO_SECRET_KEY=${ARG_MINIO_SECRET_KEY:-arg_minio_secrey_key}
 
-RUN chown -R 1000:1000 /app
-
-USER 1000
-
 COPY test_app/requirements.txt .
 
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY test_app/ .
+
+RUN adduser --disabled-password --gecos "" --uid 1000 appuser
+
+RUN chown -R appuser:appuser /app
+
+USER appuser
 
 EXPOSE 5000
 
