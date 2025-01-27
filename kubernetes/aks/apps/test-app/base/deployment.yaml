@@ -48,7 +48,7 @@ spec:
                 - ALL
           env:
             - name: MINIO_URL
-              value: "http://minio.minio.svc.cluster.local:9000"
+              value: "minio.minio.svc.cluster.local:9000"
             - name: MINIO_ACCESS_KEY
               valueFrom:
                 secretKeyRef:
