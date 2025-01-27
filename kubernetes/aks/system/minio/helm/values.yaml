@@ -100,7 +100,7 @@ resources:
 ## Configure Ingress based on the documentation here: https://kubernetes.io/docs/concepts/services-networking/ingress/
 ##
 ingress:
-  enabled: true
+  enabled: false
   ingressClassName: nginx
   annotations:
     nginx.ingress.kubernetes.io/whitelist-source-range: 205.194.32.0/24,10.244.0.0/16,192.197.71.0/24
