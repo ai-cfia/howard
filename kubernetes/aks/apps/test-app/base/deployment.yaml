@@ -47,6 +47,8 @@ spec:
               drop:
                 - ALL
           envFrom:
+            - name: MINIO_URL
+              value: "http://minio.minio.svc.cluster.local:9000"
             - secretRef:
                 name: test-app-secrets
 
