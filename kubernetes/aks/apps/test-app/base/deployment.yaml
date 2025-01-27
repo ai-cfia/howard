@@ -46,6 +46,9 @@ spec:
             capabilities:
               drop:
                 - ALL
+          envFrom:
+            - secretRef:
+                name: test-app-secrets
 
 ---
 apiVersion: policy/v1
