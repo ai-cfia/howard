@@ -38,7 +38,7 @@ spec:
                       - agent
       containers:
         - name: fertiscan-frontend-preview
-          image: ghcr.io/ai-cfia/fertiscan-frontend:main
+          image: ghcr.io/ai-cfia/fertiscan-frontend:412-resolve-api-conflict
           imagePullPolicy: Always
           env:
             - name: NEXT_PUBLIC_DEBUG
