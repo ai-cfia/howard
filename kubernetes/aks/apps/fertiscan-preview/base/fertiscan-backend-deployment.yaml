@@ -16,15 +16,15 @@ spec:
         instrumentation.opentelemetry.io/inject-python: "true"
     spec:
       affinity:
-        podAntiAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            - labelSelector:
-                matchExpressions:
-                  - key: app
-                    operator: In
-                    values:
-                      - fertiscan-backend-preview
-              topologyKey: "kubernetes.io/hostname"
+        # podAntiAffinity:
+        #   requiredDuringSchedulingIgnoredDuringExecution:
+        #     - labelSelector:
+        #         matchExpressions:
+        #           - key: app
+        #             operator: In
+        #             values:
+        #               - fertiscan-backend-preview
+        #       topologyKey: "kubernetes.io/hostname"
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
@@ -74,13 +74,19 @@ spec:
       volumes:
         - name: tmp
           emptyDir: {}
+        - name: logs
+          persistentVolumeClaim:
+            claimName: fertiscan-preview-logs-pvc
+        - name: uploads
+          persistentVolumeClaim:
+            claimName: fertiscan-preview-uploads-pvc
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: fertiscan-logs-pvc
+  name: fertiscan-preview-logs-pvc
 spec:
-  storageClassName: azurefile
+  storageClassName: default
   accessModes:
     - ReadWriteMany
   resources:
@@ -90,24 +96,24 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: fertiscan-uploads-pvc
+  name: fertiscan-preview-uploads-pvc
 spec:
-  storageClassName: azurefile
+  storageClassName: default
   accessModes:
     - ReadWriteMany
   resources:
     requests:
       storage: 2Gi
 ---
-apiVersion: policy/v1
-kind: PodDisruptionBudget
-metadata:
-  name: fertiscan-backend-preview-pdb
-spec:
-  minAvailable: 1
-  selector:
-    matchLabels:
-      app: fertiscan-backend-preview
+# apiVersion: policy/v1
+# kind: PodDisruptionBudget
+# metadata:
+#   name: fertiscan-backend-preview-pdb
+# spec:
+#   minAvailable: 1
+#   selector:
+#     matchLabels:
+#       app: fertiscan-backend-preview
 
 ---
 apiVersion: v1

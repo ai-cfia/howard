@@ -16,15 +16,15 @@ spec:
         instrumentation.opentelemetry.io/inject-python: "true"
     spec:
       affinity:
-        podAntiAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            - labelSelector:
-                matchExpressions:
-                  - key: app
-                    operator: In
-                    values:
-                      - fertiscan-backend
-              topologyKey: "kubernetes.io/hostname"
+        # podAntiAffinity:
+        #   requiredDuringSchedulingIgnoredDuringExecution:
+        #     - labelSelector:
+        #         matchExpressions:
+        #           - key: app
+        #             operator: In
+        #             values:
+        #               - fertiscan-backend
+        #       topologyKey: "kubernetes.io/hostname"
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
@@ -102,7 +102,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: fertiscan-logs-pvc
 spec:
-  storageClassName: azurefile
+  storageClassName: default
   accessModes:
     - ReadWriteMany
   resources:
@@ -114,22 +114,22 @@ kind: PersistentVolumeClaim
 metadata:
   name: fertiscan-uploads-pvc
 spec:
-  storageClassName: azurefile
+  storageClassName: default
   accessModes:
     - ReadWriteMany
   resources:
     requests:
       storage: 2Gi
 ---
-apiVersion: policy/v1
-kind: PodDisruptionBudget
-metadata:
-  name: fertiscan-backend-pdb
-spec:
-  minAvailable: 1
-  selector:
-    matchLabels:
-      app: fertiscan-backend
+# apiVersion: policy/v1
+# kind: PodDisruptionBudget
+# metadata:
+#   name: fertiscan-backend-pdb
+# spec:
+#   minAvailable: 1
+#   selector:
+#     matchLabels:
+#       app: fertiscan-backend
 
 ---
 apiVersion: v1
