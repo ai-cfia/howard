@@ -72,10 +72,10 @@ spec:
           ports:
             - containerPort: 5000
           volumeMounts:
-            - name: logs
-              mountPath: /app/logs
-            - name: uploads
-              mountPath: /app/uploads
+            # - name: logs
+            #   mountPath: /app/logs
+            # - name: uploads
+            #   mountPath: /app/uploads
             - name: tmp
               mountPath: /cachedir_joblib
           securityContext:
