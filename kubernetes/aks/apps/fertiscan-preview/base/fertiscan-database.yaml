@@ -2,9 +2,9 @@
 apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
 metadata:
-  name: fertiscan-pgsql-cluster
+  name: fertiscan-preview-pgsql-cluster
 spec:
-  description: "Fertiscan PostgreSQL cluster"
+  description: "Fertiscan preview PostgreSQL cluster"
   imageName: ghcr.io/cloudnative-pg/postgresql:15.8
   instances: 3
   primaryUpdateStrategy: unsupervised
@@ -14,10 +14,10 @@ spec:
       database: fertiscan
       owner: app
       secret:
-        name: fertiscan-pgsql-app-user
+        name: fertiscan-preview-pgsql-app-user
 
   superuserSecret:
-    name: fertiscan-pgsql-superuser
+    name: fertiscan-preview-pgsql-superuser
 
   storage:
     size: 20Gi
