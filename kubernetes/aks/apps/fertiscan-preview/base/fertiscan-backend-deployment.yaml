@@ -86,7 +86,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: fertiscan-preview-logs-pvc
 spec:
-  storageClassName: default
+  storageClassName: azurefile
   accessModes:
     - ReadWriteMany
   resources:
@@ -98,7 +98,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: fertiscan-preview-uploads-pvc
 spec:
-  storageClassName: default
+  storageClassName: azurefile
   accessModes:
     - ReadWriteMany
   resources:
