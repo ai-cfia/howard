@@ -88,14 +88,14 @@ spec:
               drop:
                 - ALL
       volumes:
-        - name: tmp
-          emptyDir: {}
-        - name: logs
-          persistentVolumeClaim:
-            claimName: fertiscan-logs-pvc
-        - name: uploads
-          persistentVolumeClaim:
-            claimName: fertiscan-uploads-pvc
+        # - name: tmp
+        #   emptyDir: {}
+        # - name: logs
+        #   persistentVolumeClaim:
+        #     claimName: fertiscan-logs-pvc
+        # - name: uploads
+        #   persistentVolumeClaim:
+        #     claimName: fertiscan-uploads-pvc
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
