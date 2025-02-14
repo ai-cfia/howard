@@ -50,6 +50,8 @@ spec:
           envFrom:
             - secretRef:
                 name: nachet-backend-secrets
+            - secretRef:
+                name: nachet-backend-config
           ports:
             - containerPort: 8080
           livenessProbe:
