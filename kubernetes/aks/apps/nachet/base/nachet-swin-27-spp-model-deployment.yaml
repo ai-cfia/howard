@@ -39,18 +39,18 @@ spec:
                       - agent
       containers:
         - name: nachet-swin-classifier-27-spp
-          image: ghcr.io/ai-cfia/nachet-backend:29-azureml-swin-classifier-27-spp
+          image: ghcr.io/ai-cfia/nachet-model-ccds/gpu-classifier-27spp-model-1:2025030321
           imagePullPolicy: Always
           envFrom:
             - secretRef:
                 name: nachet-swin-classifier-secrets
           ports:
             - containerPort: 8080
-          volumeMounts:
-            - name: logs
-              mountPath: /app/logs
-            - name: tmp
-              mountPath: /tmp
+          # volumeMounts:
+          #   - name: logs
+          #     mountPath: /app/logs
+          #   - name: tmp
+          #     mountPath: /tmp
           # livenessProbe:
           #   httpGet:
           #     path: /
@@ -73,15 +73,15 @@ spec:
             capabilities:
               drop:
                 - ALL
-      volumes:
-        - name: tmp
-          emptyDir:
-            medium: Memory
-            sizeLimit: 500Mi
-        - name: logs
-          emptyDir:
-            medium: Memory
-            sizeLimit: 500Mi
+      # volumes:
+      #   - name: tmp
+      #     emptyDir:
+      #       medium: Memory
+      #       sizeLimit: 500Mi
+      #   - name: logs
+      #     emptyDir:
+      #       medium: Memory
+      #       sizeLimit: 500Mi
 ---
 apiVersion: policy/v1
 kind: PodDisruptionBudget
@@ -105,4 +105,4 @@ spec:
     app: nachet-swin-classifier-27-spp
   ports:
     - protocol: TCP
-      port: 5001
+      port: 8080

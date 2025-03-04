@@ -44,7 +44,7 @@ spec:
                       - agent
       containers:
         - name: nachet-backend
-          image: ghcr.io/ai-cfia/nachet-backend:143-deploy-swin-22-spp
+          image: ghcr.io/ai-cfia/nachet-backend:Issue-148-Update-Backend-to-use-27spp-models
           command: ["/bin/sh", "-c"]
           args: ['hypercorn -b :8080 app:app']
           envFrom:
