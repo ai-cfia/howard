@@ -44,7 +44,7 @@ spec:
                       - agent
       containers:
         - name: nachet-backend
-          image: ghcr.io/ai-cfia/nachet-backend:150-update-datastore-version
+          image: ghcr.io/ai-cfia/nachet-backend:152-Debug-Nachet-Datastore
           command: ["/bin/sh", "-c"]
           args: ['hypercorn -b :8080 app:app']
           envFrom:
