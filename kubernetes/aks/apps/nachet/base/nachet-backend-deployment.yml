@@ -47,6 +47,7 @@ spec:
           image: ghcr.io/ai-cfia/nachet-backend:152-Debug-Nachet-Datastore
           command: ["/bin/sh", "-c"]
           args: ['hypercorn -b :8080 app:app']
+          imagePullPolicy: Always
           envFrom:
             - secretRef:
                 name: nachet-backend-secrets
