@@ -44,7 +44,7 @@ spec:
                       - agent
       containers:
         - name: nachet-backend
-          image: ghcr.io/ai-cfia/nachet-backend:Issue-148-Update-Backend-to-use-27spp-models
+          image: ghcr.io/ai-cfia/nachet-backend:150-update-datastore-version
           command: ["/bin/sh", "-c"]
           args: ['hypercorn -b :8080 app:app']
           envFrom:
