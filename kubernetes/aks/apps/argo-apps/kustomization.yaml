@@ -4,14 +4,14 @@ kind: Kustomization
 
 resources:
   # User applications
-  - ../finesse/
+  # - ../finesse/
   - ../nachet/
   - ../bytebase/
   - ../louis/
   - ../librechat/
   - ../ailab/
-  - ../fertiscan/
-  - ../fertiscan-preview/
+  # - ../fertiscan/
+  # - ../fertiscan-preview/
   # - ../webtop/
   - ../landing/
   - ../test-app/
