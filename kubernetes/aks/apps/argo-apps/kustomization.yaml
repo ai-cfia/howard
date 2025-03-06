@@ -12,7 +12,7 @@ resources:
   - ../ailab/
   - ../fertiscan/
   - ../fertiscan-preview/
-  - ../webtop/
+  # - ../webtop/
   - ../landing/
   - ../test-app/
   - ../demo/auto/
