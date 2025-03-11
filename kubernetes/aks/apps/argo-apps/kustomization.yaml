@@ -8,8 +8,8 @@ resources:
   - ../nachet/
   - ../bytebase/
   # - ../louis/
-  - ../librechat/
-  - ../ailab/
+  # - ../librechat/
+  # - ../ailab/
   # - ../fertiscan/
   # - ../fertiscan-preview/
   # - ../webtop/
@@ -29,9 +29,9 @@ resources:
   - ../../system/vouch-proxy/
   # - ../../system/trivy/
   # - ../../system/gatus/
-  - ../../system/gh-runner/
+  # - ../../system/gh-runner/
   # - ../../system/otel-operator/
-  - ../../system/minio/
+  # - ../../system/minio/
 
 patches:
   - patch: |-
