@@ -6,7 +6,7 @@ resources:
   # User applications
   # - ../finesse/
   - ../nachet/
-  - ../bytebase/
+  # - ../bytebase/
   # - ../louis/
   # - ../librechat/
   # - ../ailab/
