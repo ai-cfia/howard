@@ -113,30 +113,30 @@ module "vault" {
   }
 }
 
-module "fertiscan-postgresql-server" {
-  source                 = "../modules/azure-postgresql-flexible-server"
-  postgresql_server_name = var.postgresql_server_name
-  postgresql_rg_location = var.postgresql_rg_location
-  postgresql_rg_name     = var.postgresql_rg_name
+# module "fertiscan-postgresql-server" {
+#   source                 = "../modules/azure-postgresql-flexible-server"
+#   postgresql_server_name = var.postgresql_server_name
+#   postgresql_rg_location = var.postgresql_rg_location
+#   postgresql_rg_name     = var.postgresql_rg_name
 
-  postgresql_sku_name       = var.postgresql_sku_name
-  postgresql_admin_login    = var.postgresql_admin_login
-  postgresql_admin_password = var.postgresql_admin_password
+#   postgresql_sku_name       = var.postgresql_sku_name
+#   postgresql_admin_login    = var.postgresql_admin_login
+#   postgresql_admin_password = var.postgresql_admin_password
 
-  postgresql_public_network_access_enabled = var.postgresql_public_network_access_enabled
-}
+#   postgresql_public_network_access_enabled = var.postgresql_public_network_access_enabled
+# }
 
-module "archive-and-backup-storage-account" {
-  source = "../modules/azure-storage-account"
+# module "archive-and-backup-storage-account" {
+#   source = "../modules/azure-storage-account"
 
-  rg_name     = azurerm_resource_group.rg.name
-  rg_location = azurerm_resource_group.rg.location
+#   rg_name     = azurerm_resource_group.rg.name
+#   rg_location = azurerm_resource_group.rg.location
 
-  azure_storage_account_name = var.azure_storage_archive_and_backup
-  # firewall                   = var.firewall
+#   azure_storage_account_name = var.azure_storage_archive_and_backup
+#   # firewall                   = var.firewall
 
-  tags = var.tags
-}
+#   tags = var.tags
+# }
 
 # Insufficient permissions at the moment; it has been completed manually
 # module "az-default-role" {
