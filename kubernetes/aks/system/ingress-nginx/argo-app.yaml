@@ -18,7 +18,7 @@ spec:
         valueFiles:
           - $values/kubernetes/aks/system/ingress-nginx/helm/values.yaml
       repoURL: https://kubernetes.github.io/ingress-nginx
-      targetRevision: 4.10.0
+      targetRevision: 4.12.1
     - repoURL: https://github.com/ai-cfia/howard.git
       targetRevision: HEAD
       ref: values
