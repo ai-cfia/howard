@@ -2324,7 +2324,7 @@ repoServer:
   extraContainers:
     - name: avp
       command: [/var/run/argocd/argocd-cmp-server]
-      image: quay.io/argoproj/argocd:v2.11.0
+      image: quay.io/argoproj/argocd:v2.14.10
       securityContext:
         runAsNonRoot: true
         runAsUser: 999
@@ -2356,7 +2356,7 @@ repoServer:
 
     - name: avp-helm
       command: [/var/run/argocd/argocd-cmp-server]
-      image: quay.io/argoproj/argocd:v2.11.0
+      image: quay.io/argoproj/argocd:v2.14.10
       securityContext:
         runAsNonRoot: true
         runAsUser: 999
