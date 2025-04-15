@@ -14,6 +14,13 @@ spec:
       labels:
         app: meilisearch
     spec:
+      initContainers:
+        - name: take-dir-ownership
+          image: alpine:3
+          command: ["sh", "-c", "chown -R 1000:3000 /meili_data"]
+          volumeMounts:
+            - name: storage
+              mountPath: /meili_data
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
@@ -35,6 +42,24 @@ spec:
           volumeMounts:
             - name: storage
               mountPath: /meili_data
+          resources:
+            requests:
+              cpu: "4"
+              memory: 8Gi
+            limits:
+              cpu: "4"
+              memory: 8Gi
+          securityContext:
+            allowPrivilegeEscalation: false
+            runAsNonRoot: true
+            runAsUser: 1000
+            runAsGroup: 3000
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop:
+                - ALL
+            seccompProfile:
+              type: RuntimeDefault
       volumes:
         - name: storage
           persistentVolumeClaim:
