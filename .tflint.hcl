@@ -17,6 +17,6 @@ plugin "aws" {
 
 plugin "google" {
     enabled = true
-    version = "0.28.0"
+    version = "0.32.0"
     source  = "github.com/terraform-linters/tflint-ruleset-google"
 }
